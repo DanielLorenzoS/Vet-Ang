@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -6,11 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email!: string;
+
+  constructor(private userService: LoginService, private router: Router) { }
+
+  username!: string;
   password!: string;
 
   onSubmit(): void {
-    console.log('Correo electrónico:', this.email);
-    console.log('Contraseña:', this.password);
+    this.userService.generateToken(this.username, this.password).subscribe(
+      (response: any) => {
+        
+        this.userService.login(response.token);
+        this.userService.getCurrentUser().subscribe((res: any) => {
+          this.router.navigate(['dashboard']);
+        });
+      },
+      (error: any) => {
+        console.log('algùn error ', error);
+      }
+    );
   }
 }
