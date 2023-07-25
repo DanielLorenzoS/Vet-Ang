@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatCardLgImage } from '@angular/material/card';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +11,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  generateToken(username: string, password: string) {
-
-    const user = {
-      username,
-      password
-    };
-
+  generateToken(user: any) {
+    console.log('user ', user);
     return this.http.post(`${this.url}/generate`, user);
   }
 

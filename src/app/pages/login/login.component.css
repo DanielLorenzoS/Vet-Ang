@@ -80,6 +80,21 @@
     border: thin solid #0035c5;
 }
 
+.btnDisabled {
+  cursor: not-allowed !important;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  border: thin solid #999;
+  border-radius: 0.30rem;
+  font-size: 1.1rem;
+  background-color: #999;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
 
 @media screen and (max-width: 980px) {
   .form {
