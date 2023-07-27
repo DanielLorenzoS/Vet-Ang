@@ -61,4 +61,8 @@ export class LoginService {
   getCurrentUser() {
     return this.http.get(`${this.url}/actual`);
   }
+
+  getEmailUser(username: String) {
+    return this.http.get(`${this.url}/actualuser/${username}`);
+  }
 }

@@ -9,38 +9,50 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements  OnInit {
+export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(private userService: LoginService, 
-              private router: Router,
-              private formBuilder: FormBuilder) { }
+  constructor(private userService: LoginService,
+    private router: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
   }
 
-  username!: string;
-  password!: string;
-  
   initializeForm(): FormGroup {
-    return this.formBuilder.group({ 
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]], 
+    return this.formBuilder.group({
+      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
       password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]]
     });
-  }  
+  }
 
   onSubmit(): void {
     this.userService.generateToken(this.loginForm.value).subscribe(
       (response: any) => {
-        console.log('response ', response);
         this.userService.login(response.token);
-        this.userService.getCurrentUser().subscribe((res: any) => {
-          this.router.navigate(['dashboard']);
-        });
+        this.userService.getCurrentUser().subscribe(
+          (res: any) => {
+            console.log('res ', res.authorities[0].authority);
+            if (res.authorities[0].authority === 'ROLE_USER') {
+              this.router.navigate(['/dashboard']);
+            } else if (res.authorities[0].authority === 'ROLE_INVITED') {
+              Swal.fire({
+                icon: 'error',
+                text: 'No has validado tu cuenta'
+              });
+              this.getEmailByUsername(this.loginForm.value.username);
+              this.router.navigate(['/registro2']);
+            }
+          },
+          (error: any) => {
+            console.log('error ', error);
+          }
+        );
       },
       (error: any) => {
+        console.log('error ', error);
         Swal.fire({
           icon: 'error',
           text: 'Usuario inexistente'
@@ -48,4 +60,15 @@ export class LoginComponent implements  OnInit {
       }
     );
   }
-}
+
+  getEmailByUsername(username: String) {
+    this.userService.getEmailUser(username).subscribe(
+      (res: any) => {
+        localStorage.setItem('email', res.email);
+      },
+      (error: any) => {
+        console.log('error email ', error);
+      }
+    );
+  }
+}  

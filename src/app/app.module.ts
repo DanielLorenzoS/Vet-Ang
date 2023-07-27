@@ -12,12 +12,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
+import { RegisterStep1Component } from './pages/register-step1/register-step1.component';
+import { RegisterStep2Component } from './pages/register-step2/register-step2.component';
+import { PhonePipe } from './pipes/phone.pipe';
+import { AdressPipe } from './pipes/adress.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegisterStep1Component,
+    RegisterStep2Component,
+    PhonePipe,
+    AdressPipe
   ],
   imports: [
     BrowserModule,

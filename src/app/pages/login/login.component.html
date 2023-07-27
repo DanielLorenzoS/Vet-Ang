@@ -16,7 +16,7 @@
                    <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">La contraseña es requerida</mat-error>
                    <mat-error *ngIf="loginForm.get('password')?.errors?.['pattern']">La contraseña tiene caracteres inválidos</mat-error>
             </div>
-            <a href="#" class="link">Registrarme</a>
+            <a routerLink="/registro1" class="link">Registrarme</a>
             <a href="#" class="link">Olvidé la contraseña</a>
             <div class="btnContainer">
                 <button [disabled]="!loginForm.valid" [ngClass]="{'btnSubmit': loginForm.valid, 'btnDisabled': !loginForm.valid}"
