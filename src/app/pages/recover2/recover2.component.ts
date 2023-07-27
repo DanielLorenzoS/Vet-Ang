@@ -6,16 +6,15 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-register-step2',
-  templateUrl: './register-step2.component.html',
-  styleUrls: ['./register-step2.component.css']
+  selector: 'app-recover2',
+  templateUrl: './recover2.component.html',
+  styleUrls: ['./recover2.component.css']
 })
-export class RegisterStep2Component implements OnInit {
-
+export class Recover2Component implements OnInit{
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private registerService: RegisterService,
-    private loadingIndicatorService: SpinnerService) { }
+              private router: Router,
+              private registerService: RegisterService,
+              private loadingIndicatorService: SpinnerService) { }
 
   tokenForm!: FormGroup;
 
@@ -45,7 +44,6 @@ export class RegisterStep2Component implements OnInit {
       (response: any) => {
         this.loadingIndicatorService.hideLoadingIndicator();
         if (response) {
-          localStorage.removeItem('email');
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -53,7 +51,7 @@ export class RegisterStep2Component implements OnInit {
             showConfirmButton: false,
             timer: 2000
           });
-          this.router.navigate(['/']);
+          this.router.navigate(['/recover3']);
         } else {
           Swal.fire({
             position: 'center',

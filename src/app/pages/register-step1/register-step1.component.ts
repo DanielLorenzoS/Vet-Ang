@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { RegisterService } from 'src/app/services/register.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,13 +18,14 @@ export class RegisterStep1Component implements OnInit {
   constructor(private userService: LoginService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private registerService: RegisterService) { }
+    private registerService: RegisterService,
+    private loadingIndicatorService: SpinnerService) { }
 
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
     localStorage.clear();
   }
-
+  
   initializeForm(): FormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^@.\n]*@[^@.\n]*\.[^@.\n]*$/)]],
@@ -34,9 +36,10 @@ export class RegisterStep1Component implements OnInit {
   }
 
   onSubmit(): void {
+    this.loadingIndicatorService.showLoadingIndicator();
     this.registerService.createUser(this.loginForm.value).subscribe(
       (response: any) => {
-        console.log('response ', response);
+        this.loadingIndicatorService.hideLoadingIndicator();
         Swal.fire({
           position: 'center',
           icon: 'info',
@@ -48,6 +51,7 @@ export class RegisterStep1Component implements OnInit {
         this.router.navigate(['/registro2']);
       },
       (error: any) => {
+        this.loadingIndicatorService.hideLoadingIndicator();
         console.log('error ', error);
         Swal.fire({
           position: 'center',

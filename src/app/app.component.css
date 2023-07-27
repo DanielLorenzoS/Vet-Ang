@@ -1,0 +1,18 @@
+.progress-container {
+    position: absolute;
+    opacity: .8;
+    width: 100%;
+    height: 100vh;
+    background: #bbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-container-hidden {
+    display: none;
+}
+
+.spinner {
+    opacity: 1;
+}

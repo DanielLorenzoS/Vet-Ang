@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SpinnerService } from './services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'veterinaria';
+  isLoading: boolean = false;
+
+  constructor(private loadingIndicatorService: SpinnerService) {
+    this.loadingIndicatorService.loadingState$.subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
+  }
 }

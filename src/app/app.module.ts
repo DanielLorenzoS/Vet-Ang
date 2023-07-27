@@ -16,6 +16,10 @@ import { RegisterStep1Component } from './pages/register-step1/register-step1.co
 import { RegisterStep2Component } from './pages/register-step2/register-step2.component';
 import { PhonePipe } from './pipes/phone.pipe';
 import { AdressPipe } from './pipes/adress.pipe';
+import { Recover1Component } from './pages/recover1/recover1.component';
+import { Recover2Component } from './pages/recover2/recover2.component';
+import { Recover3Component } from './pages/recover3/recover3.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,10 @@ import { AdressPipe } from './pipes/adress.pipe';
     RegisterStep1Component,
     RegisterStep2Component,
     PhonePipe,
-    AdressPipe
+    AdressPipe,
+    Recover1Component,
+    Recover2Component,
+    Recover3Component
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,8 @@ import { AdressPipe } from './pipes/adress.pipe';
     ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

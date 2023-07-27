@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<router-outlet>
+    <div [ngClass]="{'progress-container': isLoading, 'progress-container-hidden': !isLoading}"> 
+        <mat-progress-spinner class="spinner" mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>
+    </div>
+</router-outlet>
