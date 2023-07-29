@@ -1,9 +1,9 @@
 .container {
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem 0;
 }
 
 .form {
@@ -12,6 +12,7 @@
     padding: 2rem 1rem;
     border-radius: 6px;
     font-weight: 200;  
+    
 }
 
 .title {
@@ -27,6 +28,15 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1.5rem;
+}
+
+.street {
+  display: flex;
+  justify-content: space-between;
+}
+
+.municipio, .calle {
+  width: 45%;
 }
 
 .formB {

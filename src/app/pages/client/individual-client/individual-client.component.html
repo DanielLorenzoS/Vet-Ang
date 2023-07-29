@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="info">
+        <div class="client">
+            <h1>{{ user.username }}</h1>
+            <h3>{{ user.email }}</h3>
+            <h3>{{ user.phone }}</h3>
+            <h3>{{ user.direction }}</h3>
+        </div>
+        <div class="buttons">
+            <button class="update" (click)="goEditClient()">Editar cliente</button>
+            <button class="delete" (click)="goDeleteClient()">Eliminar cliente</button>
+        </div>
+        
+        <h2 class="nopets" *ngIf="pets.length === 0">El cliente no tiene mascotas registradas</h2>
+        <div class="pets-container">
+            <div class="client pet-content" *ngFor="let pet of pets" (click)="togglePetView(pet)"
+                [ngClass]="{ 'pet': !pet.view, 'pet-touched': pet.view }">
+                <div class="text">
+                    <h1><span [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Nombre: </span> {{ pet.name }}</h1>
+                    <h3><span [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Especie: </span> {{ pet.specie }}</h3>
+                    <h3><span [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Raza: </span> {{ pet.race }}</h3>
+                    <h3 [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Sexo: hembra</h3><br>
+                    <h3 [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Nacimiento: {{ pet.birthdate }}</h3><br>
+                    <h3 [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Tamaño: {{ pet.weight }}</h3>
+                </div>
+                <div [ngClass]="{ 'not': !pet.view, 'yes photo': pet.view }">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

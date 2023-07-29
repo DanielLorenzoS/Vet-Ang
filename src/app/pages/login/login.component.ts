@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private userService: LoginService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private loadingIndicatorService: SpinnerService) { }
+    private loadingIndicatorService: SpinnerService
+    ) { }
 
   ngOnInit(): void {
     this.loginForm = this.initializeForm();

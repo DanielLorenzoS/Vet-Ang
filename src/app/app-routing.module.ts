@@ -8,6 +8,9 @@ import { RegisterStep2Component } from './pages/register-step2/register-step2.co
 import { Recover1Component } from './pages/recover1/recover1.component';
 import { Recover2Component } from './pages/recover2/recover2.component';
 import { Recover3Component } from './pages/recover3/recover3.component';
+import { NewClientComponent } from './pages/client/new-client/new-client.component';
+import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
+import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,7 +19,14 @@ const routes: Routes = [
   { path: 'recover1', component: Recover1Component },
   { path: 'recover2', component: Recover2Component },
   { path: 'recover3', component: Recover3Component },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
+    children: [
+      { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
+      { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
+      { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] }
+    ]
+  },
   { path: '**', redirectTo: '/' }
 ];
 

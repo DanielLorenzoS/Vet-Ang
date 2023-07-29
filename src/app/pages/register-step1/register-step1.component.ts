@@ -25,13 +25,16 @@ export class RegisterStep1Component implements OnInit {
     this.loginForm = this.initializeForm();
     localStorage.clear();
   }
-  
+
   initializeForm(): FormGroup {
     return this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^@.\n]*@[^@.\n]*\.[^@.\n]*$/)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(10)]],
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(8)]],
+      city: ['', Validators.required],
+      municipality: ['', Validators.required],
+      street: ['', Validators.required],
     });
   }
 

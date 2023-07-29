@@ -20,6 +20,15 @@ import { Recover1Component } from './pages/recover1/recover1.component';
 import { Recover2Component } from './pages/recover2/recover2.component';
 import { Recover3Component } from './pages/recover3/recover3.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NewClientComponent } from './pages/client/new-client/new-client.component';
+import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
+import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +41,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AdressPipe,
     Recover1Component,
     Recover2Component,
-    Recover3Component
+    Recover3Component,
+    NavbarComponent,
+    NewClientComponent,
+    AllClientsComponent,
+    IndividualClientComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +57,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatButtonToggleModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

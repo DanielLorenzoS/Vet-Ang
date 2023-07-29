@@ -14,14 +14,14 @@ export class UserService {
 
     let emailData = {
       username: null,
-      email: email  
+      email: email
     }
 
     return this.http.post(`${this.url}/email/recover`, emailData);
   }
 
   validate(code: any) {
-    
+
     const codeData = {
       email: code.email,
       code: code.code
@@ -40,6 +40,24 @@ export class UserService {
     console.log(passwordData);
 
     return this.http.put(`${this.url}/update`, passwordData);
+  }
+
+  getAllUsers() {
+
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.get(`${this.url}/`, { headers });
+  }
+
+  getUserByUsername(username: string) {
+
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.get(`${this.url}/user/${username}`, { headers });
   }
 
 }
