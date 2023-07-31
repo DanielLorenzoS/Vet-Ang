@@ -14,7 +14,7 @@ export class RegisterService {
     const userData = {
       email: user.email,
       phone: user.phone,
-      direction: user.city + user.municipality + user.street,
+      direction: user.city + ' ' + user.municipality + ' ' + user.street,
       username: user.username,
       password: user.password,
       roles: [ "INVITED" ]

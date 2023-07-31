@@ -10,24 +10,21 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class NavbarComponent {
 
-  showNavbar!: boolean;
+  showNavbar: boolean = false;
 
   constructor(
     private loginService: LoginService,
     private router: Router,
     private dashboard: DashboardComponent
   ) { }
-
-  toggleNavbar() {
+  
+  toggleSideBar() {
+    this.dashboard.isDrawerOpen = !this.dashboard.isDrawerOpen;
     this.showNavbar = !this.showNavbar;
   }
 
-  toggleSideBar() {
-    this.dashboard.isDrawerOpen = !this.dashboard.isDrawerOpen;
-  }
-
   logout() {
-    this.loginService.logout();
+    this.loginService.logout2();
     this.router.navigate(['/']);
   }
 }

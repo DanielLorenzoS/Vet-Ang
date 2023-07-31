@@ -8,7 +8,8 @@
 
 .form {
     width: 30%;
-    background-color: #ddd;
+    background-color: #efefef;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
     padding: 2rem 1rem;
     border-radius: 6px;
     font-weight: 200;  
@@ -20,6 +21,7 @@
     font-size: 2rem;
     font-weight: 300;
     margin: 2rem;
+    margin-top: 0;
 }
 
 .form-group {

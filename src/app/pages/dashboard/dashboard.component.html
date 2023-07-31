@@ -9,6 +9,16 @@
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">
         <router-outlet>
+            <!-- <div style="font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 90vh; background-color: #f1f1f1;">
+                <div style="display: flex; justify-content: center; align-items: center; background-color: #ffffff; border: 1px solid #e1e1e1; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); padding: 20px; border-radius: 10px;">
+                    <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #1abc9c; transition: transform 0.2s;"></div>
+                    <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #3498db; transition: transform 0.2s;"></div>
+                    <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #9b59b6; transition: transform 0.2s;"></div>
+                    <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #e74c3c; transition: transform 0.2s;"></div>
+                    <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #f39c12; transition: transform 0.2s;"></div>
+                    <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #2ecc71; transition: transform 0.2s;"></div>
+                </div>
+            </div>  -->           
             <div [ngClass]="{'progress-container': isLoading, 'progress-container-hidden': !isLoading}">
                 <mat-progress-spinner class="spinner" mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>
             </div>

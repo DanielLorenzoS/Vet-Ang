@@ -4,13 +4,42 @@
     scroll-behavior: smooth;
 }
 
+.back img {
+    padding-left: 2rem;
+    padding-top: 1rem;
+    width: 40px;
+    opacity: .7;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+}
+
 .client {
     margin: auto;
     margin-top: 2rem;
     padding: 2rem 0;
     width: 80%;
     text-align: center;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px 0 #2e82d7;
+}
+
+.client-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.client-form input {
+    padding: .5rem 2rem;
+    width: 50%;
+    font-size: 20px;
+    margin-top: .5rem;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #0060b0;
+    /*2e82d7*/
 }
 
 .buttons {
@@ -30,19 +59,26 @@
     font-size: 1.2rem;
     font-weight: 300;
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
 }
 
-.delete {
+.delete:hover {
     background-color: #ff0000 !important;
+    color: #fff !important;
 }
 
-.update:hover {
+.update {
     background-color: #fff !important;
     color: #1e90ff !important;
     border: 1px solid #1e90ff !important;
 }
 
-.delete:hover {
+.update:hover {
+    background-color: #1e90ff !important;
+    color: #fff !important;
+}
+
+.delete {
     background-color: #fff !important;
     color: #ff0000 !important;
     border: 1px solid #ff0000 !important;
@@ -75,20 +111,22 @@
     justify-content: space-between;
     padding: 0 !important;
 }
+
 .text {
-    width: 50%;
+    width: 100%;
     padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .photo {
     width: 50%;
-    background-color: #aaa;
-}
-
-.photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    border-left: 8px double #2e82d7;
+    overflow: hidden;
 }
 
 
@@ -117,9 +155,44 @@
 
 .yes {
     display: inline-block;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.photo::-webkit-scrollbar {
+    width: 8px;
+    /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo del pulgar del scroll */
+.photo::-webkit-scrollbar-thumb {
+    background-color: #0060b0;
+    /* Color del pulgar */
+    border-radius: 6px;
+    /* Bordes redondeados del pulgar */
+}
+
+/* Estilo del fondo de la barra de desplazamiento */
+.photo::-webkit-scrollbar-track {
+    background-color: #4a90d6;
+    /* Color del fondo de la barra de desplazamiento */
 }
 
 .ml {
     margin-right: .5rem;
 
+}
+
+.buttons-pets {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+.btnPet {
+    margin: auto;
+    width: 50% !important;
+    margin-bottom: 1rem;
 }

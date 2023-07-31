@@ -28,7 +28,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NewClientComponent } from './pages/client/new-client/new-client.component';
 import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
 import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -61,9 +62,10 @@ import { IndividualClientComponent } from './pages/client/individual-client/indi
     MatSidenavModule,
     MatButtonToggleModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

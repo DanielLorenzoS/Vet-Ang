@@ -1,30 +1,38 @@
 <div class="container">
     <div class="info">
-        <div class="client">
+        <div class="back" (click)="back()">
+            <img src="../../../../assets/left-arrow.png" alt="">
+        </div>
+        <div class="client" *ngIf="!editMode">
             <h1>{{ user.username }}</h1>
             <h3>{{ user.email }}</h3>
             <h3>{{ user.phone }}</h3>
             <h3>{{ user.direction }}</h3>
         </div>
+        <form class="client client-form" *ngIf="editMode" [formGroup]="editForm">
+            <input type="text" name="username" placeholder="Nombre del cliente" formControlName="username">
+            <input type="text" name="email" placeholder="Email" formControlName="email">
+            <input type="text" name="phone" placeholder="Teléfono" formControlName="phone">
+            <input type="text" name="direction" placeholder="Dirección" formControlName="direction">
+        </form>
         <div class="buttons">
-            <button class="update" (click)="goEditClient()">Editar cliente</button>
-            <button class="delete" (click)="goDeleteClient()">Eliminar cliente</button>
+            <button *ngIf="!editMode" class="update" (click)="editMode = true">Editar cliente</button>
+            <button *ngIf="editMode" class="update" (click)="saveChanges()">Guardar cambios</button>
+            <button *ngIf="!editMode" class="delete" (click)="deleteClient()">Eliminar cliente</button>
+            <button *ngIf="editMode" class="delete" (click)="editMode = false">Cancelar cambios</button>
         </div>
-        
+
         <h2 class="nopets" *ngIf="pets.length === 0">El cliente no tiene mascotas registradas</h2>
         <div class="pets-container">
-            <div class="client pet-content" *ngFor="let pet of pets" (click)="togglePetView(pet)"
-                [ngClass]="{ 'pet': !pet.view, 'pet-touched': pet.view }">
+            <div class="client pet-content" *ngFor="let pet of pets">
                 <div class="text">
-                    <h1><span [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Nombre: </span> {{ pet.name }}</h1>
-                    <h3><span [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Especie: </span> {{ pet.specie }}</h3>
-                    <h3><span [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Raza: </span> {{ pet.race }}</h3>
-                    <h3 [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Sexo: hembra</h3><br>
-                    <h3 [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Nacimiento: {{ pet.birthdate }}</h3><br>
-                    <h3 [ngClass]="{ 'not': !pet.view, 'yes': pet.view }">Tamaño: {{ pet.weight }}</h3>
-                </div>
-                <div [ngClass]="{ 'not': !pet.view, 'yes photo': pet.view }">
-
+                    <h1> {{ pet.name }}</h1>
+                    <h3> {{ pet.specie }}</h3>
+                    <h3> {{ pet.race }}</h3>
+                    <div class="buttons buttons-pets">
+                        <button class="update btnPet" (click)="goEditClient()">Editar información</button>
+                        <button class="delete btnPet" (click)="deletePet(pet)">Eliminar mascota</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(private userService: LoginService,
+    private loginService: LoginService,
     private router: Router,
     private formBuilder: FormBuilder,
     private loadingIndicatorService: SpinnerService
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.loadingIndicatorService.showLoadingIndicator();
+    this.login();
+    /* this.loadingIndicatorService.showLoadingIndicator();
     this.userService.generateToken(this.loginForm.value).subscribe(
       (response: any) => {
         this.userService.login(response.token);
@@ -73,8 +75,25 @@ export class LoginComponent implements OnInit {
           text: 'Usuario inexistente'
         });
       }
-    );
+    ); */
   }
+
+  login() {
+    this.loadingIndicatorService.showLoadingIndicator();
+    this.loginService.login(this.loginForm.value).subscribe(() => {
+      this.loadingIndicatorService.hideLoadingIndicator();
+      this.loginService.setLoggedState("true"),
+      this.router.navigate(['/dashboard'])
+    }, (error: any) => {
+      this.loadingIndicatorService.hideLoadingIndicator();
+      console.log('error ', error);
+      Swal.fire({
+        icon: 'error',
+        text: 'Usuario inexistente'
+      });
+    });
+  }
+
 
   getEmailByUsername(username: String) {
     this.userService.getEmailUser(username).subscribe(

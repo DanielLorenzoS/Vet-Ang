@@ -8,7 +8,8 @@
 
 .form {
     width: 30%;
-    background-color: #ddd;
+    background-color: #fff;
+    box-shadow: 2px 2px 15px rgba(0, 9, 138, .5);
     padding: 2rem 1rem;
     border-radius: 6px;
     font-weight: 200;  
@@ -85,10 +86,10 @@
   margin: auto;
   margin-top: 1rem;
   padding: 0.6rem 1rem;
-  border: thin solid #999;
+  border: thin solid #2e82d7;
   border-radius: 0.30rem;
   font-size: 1.1rem;
-  background-color: #999;
+  background-color: #2e82d7;
   color: #fff;
   cursor: pointer;
   outline: none;

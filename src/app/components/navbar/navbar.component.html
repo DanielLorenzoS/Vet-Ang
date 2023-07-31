@@ -1,7 +1,11 @@
 <div class="nav-container">
     <div class="nav-logo">
         <button class="btnToggle" (click)="toggleSideBar()">
-            <img class="logo" src="../../../assets/huellita.ico" alt="logo" />
+            <div class="button-burguer">
+                <div [ngClass]="!showNavbar ? 'burguer1' : 'burguer1-active'"></div>
+                <div [ngClass]="!showNavbar ? 'burguer2' : 'burguer2-active'"></div>
+                <div [ngClass]="!showNavbar ? 'burguer3' : 'burguer3-active'"></div>
+            </div>
         </button>
     </div>
     <div class="nav-buttons">

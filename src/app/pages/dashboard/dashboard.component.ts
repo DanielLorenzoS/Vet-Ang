@@ -28,5 +28,6 @@ export class DashboardComponent {
 
   close(rout: string): void {
     this.router.navigate(['dashboard/'+rout]);
+    this.toggleDrawer();
   }
 }

@@ -51,13 +51,39 @@ export class UserService {
     return this.http.get(`${this.url}/`, { headers });
   }
 
-  getUserByUsername(username: string) {
+  getUserByRole(role: string) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.get(`${this.url}/user/${username}`, { headers });
+    return this.http.get(`${this.url}/roles/${role}`, { withCredentials: true });
   }
 
+  getUserByUsername(username: string) {
+
+    return this.http.get(`${this.url}/user/${username}`, { withCredentials: true });
+  }
+
+  createClient(user: any) {
+
+    const userData = {
+      email: user.email,
+      phone: user.phone,
+      direction: user.city + ' ' + user.municipality + ' ' + user.street,
+      username: user.username,
+      password: 'passwordClient',
+      roles: ["CLIENT"]
+    }
+
+    return this.http.post(`${this.url}/createuser`, userData, { withCredentials: true });
+  }
+
+  updateUser(userData: any) {
+
+    console.log(userData);
+
+    return this.http.put(`${this.url}/update/user`, userData, { withCredentials: true });
+  }
+
+  deleteUser(id: number) {
+
+    return this.http.delete(`${this.url}/deleteuser/${id}`, { withCredentials: true });
+  }
 }

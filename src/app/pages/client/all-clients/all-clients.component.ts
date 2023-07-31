@@ -23,7 +23,7 @@ export class AllClientsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(
+    this.userService.getUserByRole("CLIENT").subscribe(
       (res: any) => {
         this.usuarios = res;
         this.dataSource = new MatTableDataSource<any>(this.usuarios); // Asigna la respuesta a la fuente de datos de la tabla
