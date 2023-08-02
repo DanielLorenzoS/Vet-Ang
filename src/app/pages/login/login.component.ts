@@ -94,6 +94,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  logout() {
+    console.log(this.loginService.getState());
+  }
+
 
   getEmailByUsername(username: String) {
     this.userService.getEmailUser(username).subscribe(

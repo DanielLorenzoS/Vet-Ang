@@ -157,4 +157,8 @@ export class IndividualClientComponent implements OnInit {
   back() {
     this.router.navigate(['/dashboard/client'])
   }
+
+  goCreatePet() {
+    this.router.navigate([`/dashboard/addPet`])
+  }
 }

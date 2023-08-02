@@ -21,6 +21,9 @@
             <button *ngIf="!editMode" class="delete" (click)="deleteClient()">Eliminar cliente</button>
             <button *ngIf="editMode" class="delete" (click)="editMode = false">Cancelar cambios</button>
         </div>
+        <div class="buttons buttons-pets">
+            <button class="update addPet" (click)="goCreatePet()">Agregar mascota</button>
+        </div>
 
         <h2 class="nopets" *ngIf="pets.length === 0">El cliente no tiene mascotas registradas</h2>
         <div class="pets-container">

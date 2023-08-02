@@ -30,6 +30,7 @@ import { AllClientsComponent } from './pages/client/all-clients/all-clients.comp
 import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CookieService } from 'ngx-cookie-service';
+import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CookieService } from 'ngx-cookie-service';
     NavbarComponent,
     NewClientComponent,
     AllClientsComponent,
-    IndividualClientComponent
+    IndividualClientComponent,
+    AddPetComponent
   ],
   imports: [
     BrowserModule,

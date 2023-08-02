@@ -4,16 +4,6 @@
     scroll-behavior: smooth;
 }
 
-.back img {
-    padding-left: 2rem;
-    padding-top: 1rem;
-    width: 40px;
-    opacity: .7;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-}
-
 .client {
     margin: auto;
     margin-top: 2rem;
@@ -84,13 +74,6 @@
     border: 1px solid #ff0000 !important;
 }
 
-.subtitle {
-    font-size: 1.8rem;
-    font-weight: 300;
-    padding: 1rem 0;
-    text-align: center;
-}
-
 .nopets {
     font-size: 1.3rem;
     font-weight: 300;
@@ -149,16 +132,6 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
 
-.not {
-    display: none;
-}
-
-.yes {
-    display: inline-block;
-    padding: 0;
-    overflow-y: auto;
-}
-
 .photo::-webkit-scrollbar {
     width: 8px;
     /* Ancho de la barra de desplazamiento */
@@ -178,11 +151,6 @@
     /* Color del fondo de la barra de desplazamiento */
 }
 
-.ml {
-    margin-right: .5rem;
-
-}
-
 .buttons-pets {
     width: 100%;
     display: flex;
@@ -192,6 +160,13 @@
 }
 
 .btnPet {
+    margin: auto;
+    width: 50% !important;
+    margin-top: 0;
+}
+
+.addPet {
+    display: block;
     margin: auto;
     width: 50% !important;
     margin-bottom: 1rem;

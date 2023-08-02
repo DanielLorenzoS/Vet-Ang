@@ -11,6 +11,7 @@ import { Recover3Component } from './pages/recover3/recover3.component';
 import { NewClientComponent } from './pages/client/new-client/new-client.component';
 import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
 import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
+import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
     children: [
       { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
-      { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] }
+      { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] },
+      { path: 'addPet', component: AddPetComponent, canActivate: [authGuard] }
     ]
   },
   { path: '**', redirectTo: '/' }

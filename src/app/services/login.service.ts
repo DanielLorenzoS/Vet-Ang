@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +14,8 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
   generateToken(user: any) {
@@ -88,16 +90,16 @@ export class LoginService {
     this.router.navigate(['/login']);
   }
 
-  login(user: any):Observable<any> {
-    return this.http.post(`${this.url}/auth/login`, user, {withCredentials: true});
+  login(user: any): Observable<any> {
+    return this.http.post(`${this.url}/auth/login`, user, { withCredentials: true });
   }
 
-  getInfo():Observable<any> {
-    return this.http.get(`${this.url}/details`, {withCredentials: true});
+  getInfo(): Observable<any> {
+    return this.http.get(`${this.url}/details`, { withCredentials: true });
   }
 
-  logout2():Observable<any> {
-    return this.http.post(`${this.url}/logot`, {}, {withCredentials: true});
+  logout2(): Observable<any> {
+    return this.http.post(`${this.url}/logot`, {}, { withCredentials: true });
   }
 
 
