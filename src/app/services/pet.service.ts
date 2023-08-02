@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class PetService {
 
-  url = 'http://localhost:8080';
+  // url = 'http://localhost:8080';
+  url: string = 'https://spring-vet-production.up.railway.app';
+  
 
   constructor(
     private http: HttpClient

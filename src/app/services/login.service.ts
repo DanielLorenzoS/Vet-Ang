@@ -9,7 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  url: string = 'http://localhost:8080';
+  /* url: string = 'http://localhost:8080'; */
+  url: string = 'https://spring-vet-production.up.railway.app';
 
 
   constructor(
