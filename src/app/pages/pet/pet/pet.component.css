@@ -1,0 +1,83 @@
+.container {
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+.info {
+    margin: auto;
+    margin-top: 2rem;
+    padding: 2rem 0;
+    width: 80%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 0 8px 0 #7a00dd;
+}
+
+.info>* {
+    flex-basis: 30%;
+    padding: 0 10px;
+}
+
+
+.table-container {
+    margin: auto;
+    margin-top: 2rem;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 0 4px 0 #7a00dd;
+}
+
+.table-container h3 {
+    margin: 0;
+    padding: 2rem 0;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #000;
+    font-family: serif;
+}
+
+table {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+th {
+    border-bottom: thin solid black;
+}
+
+td,
+th {
+    color: #000;
+}
+
+tr.mar-mdc-row {
+    border-top: 1px solid #000 !important;
+}
+
+tr.mat-mdc-row:hover {
+    background-color: #dedede;
+    cursor: pointer;
+}
+
+mat-icon {
+    color: #7a00dd;
+}
+
+
+
+/* Ajustar estilos cuando la pantalla sea más pequeña */
+@media (max-width: 768px) {
+    .info {
+        flex-direction: column;
+    }
+
+    .info>* {
+        flex-basis: 100%;
+        /* Puedes ajustar el padding para dar un poco de espacio entre los elementos */
+        padding: 10px 0;
+    }
+}

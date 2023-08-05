@@ -26,16 +26,7 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.loginService.logout2().subscribe(
-      (response: any) => {
-        console.log(response);
-        localStorage.setItem('logged', 'false');
-        this.cookieService.deleteAll();
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+    this.loginService.logout();
     this.router.navigate(['/']);
   }
 }

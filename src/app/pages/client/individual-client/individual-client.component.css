@@ -10,7 +10,7 @@
     padding: 2rem 0;
     width: 80%;
     text-align: center;
-    box-shadow: 0 0 10px 0 #2e82d7;
+    box-shadow: 0 0 10px 0 #7a00dd;
 }
 
 .client-form {
@@ -34,12 +34,13 @@
 
 .buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 1.5rem;
     padding: 2rem 0;
 }
 
 .buttons button {
-    width: 30%;
+    width: 20%;
     height: 3rem;
     padding: 0.5rem;
     border-radius: 5px;
@@ -49,6 +50,9 @@
     font-size: 1.2rem;
     font-weight: 300;
     cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     transition: all 0.5s ease-in-out;
 }
 
@@ -162,7 +166,7 @@
 .btnPet {
     margin: auto;
     width: 50% !important;
-    margin-top: 0;
+    margin-top: 1rem;
 }
 
 .addPet {
@@ -170,4 +174,115 @@
     margin: auto;
     width: 50% !important;
     margin-bottom: 1rem;
+}
+
+
+.table-container {
+    margin: auto;
+    margin-top: 2rem;
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 0 4px 0 #7a00dd;
+}
+
+.table-container h3 {
+    margin: 0;
+    padding: 2rem 0;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #000;
+    font-family: serif;
+}
+
+table {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+th {
+    border-bottom: thin solid black;
+}
+
+td,
+th {
+    color: #000;
+}
+
+tr.mar-mdc-row {
+    border-top: 1px solid #000 !important;
+}
+
+tr.mat-mdc-row:hover {
+    background-color: #dedede;
+    cursor: pointer;
+}
+
+mat-icon {
+    color: #7a00dd;
+}
+
+.btnPet {
+    margin: 0;
+    width: 100%;
+}
+
+.btnPet mat-icon {
+    font-size: 28px;
+}
+
+.icon-pet {
+    padding-left: 0;
+}
+
+.mat-column-name,
+.mat-column-specie,
+.mat-column-race,
+.mat-column-actions {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 28% !important;
+    text-align: center !important;
+    width: 25% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    border-bottom: 1px solid grey;
+}
+
+.mat-column-actions {
+    flex: 0 0 10% !important;
+    width: 10% !important;
+    border-right: none;
+    text-align: left;
+}
+
+
+/* Ajustar estilos cuando la pantalla sea más pequeña */
+@media (max-width: 768px) {
+    .client {
+        flex-direction: column;
+    }
+
+    .client>* {
+        flex-basis: 100%;
+        /* Puedes ajustar el padding para dar un poco de espacio entre los elementos */
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 820px) {
+    .buttons {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttons button {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
 }

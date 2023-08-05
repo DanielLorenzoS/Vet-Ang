@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  /* url = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
+  /* private url: string = environment.url; */
+  url = 'http://localhost:8080';
+  /* url: string = 'https://spring-vet-production.up.railway.app'; */
 
   constructor(private http: HttpClient) { }
 
@@ -54,12 +56,20 @@ export class UserService {
 
   getUserByRole(role: string) {
 
-    return this.http.get(`${this.url}/roles/${role}`, { withCredentials: true });
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.get(`${this.url}/roles/${role}`, { headers });
   }
 
   getUserByUsername(username: string) {
 
-    return this.http.get(`${this.url}/user/${username}`, { withCredentials: true });
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.get(`${this.url}/user/${username}`, { headers });
   }
 
   createClient(user: any) {
@@ -73,18 +83,28 @@ export class UserService {
       roles: ["CLIENT"]
     }
 
-    return this.http.post(`${this.url}/createuser`, userData, { withCredentials: true });
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.post(`${this.url}/createuser`, userData, { headers });
   }
 
   updateUser(userData: any) {
 
-    console.log(userData);
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
 
-    return this.http.put(`${this.url}/update/user`, userData, { withCredentials: true });
+    return this.http.put(`${this.url}/update/user`, userData, { headers });
   }
 
   deleteUser(id: number) {
 
-    return this.http.delete(`${this.url}/deleteuser/${id}`, { withCredentials: true });
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.delete(`${this.url}/deleteuser/${id}`, { headers });
   }
 }

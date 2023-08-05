@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.login();
-    /* this.loadingIndicatorService.showLoadingIndicator();
+    this.loadingIndicatorService.showLoadingIndicator();
     this.userService.generateToken(this.loginForm.value).subscribe(
       (response: any) => {
+        this.loadingIndicatorService.hideLoadingIndicator();
         this.userService.login(response.token);
         this.userService.getCurrentUser().subscribe(
           (res: any) => {
@@ -75,10 +75,10 @@ export class LoginComponent implements OnInit {
           text: 'Usuario inexistente'
         });
       }
-    ); */
+    );
   }
 
-  login() {
+  /* login() {
     this.loadingIndicatorService.showLoadingIndicator();
     this.loginService.login(this.loginForm.value).subscribe(() => {
       this.loadingIndicatorService.hideLoadingIndicator();
@@ -92,10 +92,10 @@ export class LoginComponent implements OnInit {
         text: 'Usuario inexistente'
       });
     });
-  }
+  } */
 
   logout() {
-    console.log(this.loginService.getState());
+    console.log(this.loginService.logout());
   }
 
 

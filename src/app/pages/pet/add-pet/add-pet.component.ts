@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PetService } from 'src/app/services/pet.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-pet',
@@ -11,36 +13,62 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddPetComponent {
 
-  newclientForm!: FormGroup;
+  newPetForm!: FormGroup;
+  listClients!: any;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private loadingIndicatorService: SpinnerService
+    private petService: PetService,
+    private spinner: SpinnerService
   ) { }
 
   ngOnInit(): void {
-    this.newclientForm = this.initializeForm();
+    this.newPetForm = this.initializeForm();
+    this.getClients();
   }
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^@.\n]*@[^@.\n]*\.[^@.\n]*$/)]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(10)]],
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(6)]],
-      city: ['', Validators.required],
-      municipality: ['', Validators.required],
-      street: ['', Validators.required],
+      name: ['', [Validators.required]],
+      race: ['', [Validators.required]],
+      specie: ['', [Validators.required]],
+      sex: ['', [Validators.required]],
+      birthdate: ['', [Validators.required]],
+      weight: ['', [Validators.required]],
+      user: ['', [Validators.required]],
     });
   }
 
   onSubmit() {
-    console.log('Formulario enviado');
+    this.spinner.showLoadingIndicator();
+    this.petService.addPet(this.newPetForm.value).subscribe((data) => {
+      this.spinner.hideLoadingIndicator();
+      Swal.fire({
+        icon: 'success',
+        text: 'Mascota agregada correctamente',
+      });
+      this.router.navigate([`/dashboard/client`]);
+    }), (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        text: 'No se pudo agregar la mascota',
+      });
+      console.log(error);
+    }
   }
 
   back() {
     this.router.lastSuccessfulNavigation;
     console.log('Regresando');
+  }
+
+  getClients() {
+    this.spinner.showLoadingIndicator();
+    this.userService.getUserByRole('CLIENT').subscribe((data) => {
+      this.spinner.hideLoadingIndicator();
+      this.listClients = data;
+    });
   }
 }

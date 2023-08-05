@@ -31,6 +31,7 @@ import { IndividualClientComponent } from './pages/client/individual-client/indi
 import { MatIconModule } from '@angular/material/icon';
 import { CookieService } from 'ngx-cookie-service';
 import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
+import { PetComponent } from './pages/pet/pet/pet.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
     NewClientComponent,
     AllClientsComponent,
     IndividualClientComponent,
-    AddPetComponent
+    AddPetComponent,
+    PetComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
     MatButtonToggleModule,
     MatTableModule,
     MatPaginatorModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers: [authInterceptorProviders, CookieService ],
   bootstrap: [AppComponent]

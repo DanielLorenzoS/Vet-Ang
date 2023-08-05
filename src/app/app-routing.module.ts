@@ -12,6 +12,7 @@ import { NewClientComponent } from './pages/client/new-client/new-client.compone
 import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
 import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
 import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
+import { PetComponent } from './pages/pet/pet/pet.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
       { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] },
-      { path: 'addPet', component: AddPetComponent, canActivate: [authGuard] }
+      { path: 'addPet', component: AddPetComponent, canActivate: [authGuard] },
+      { path: 'pet/:id', component: PetComponent, canActivate: [authGuard] }
     ]
   },
   { path: '**', redirectTo: '/' }

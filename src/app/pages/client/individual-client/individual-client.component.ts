@@ -52,6 +52,7 @@ export class IndividualClientComponent implements OnInit {
 
 
   getUsersandPets() {
+    this.spinner.showLoadingIndicator();
     this.userService.getUserByUsername(this.route.snapshot.paramMap.get('username')!).subscribe(
       (res: any) => {
         this.user = res;
@@ -61,16 +62,18 @@ export class IndividualClientComponent implements OnInit {
           phone: this.user.phone,
           direction: this.user.direction
         });
-
         this.petsService.getPetsByUserId(res.id).subscribe(
           (res: any) => {
+            this.spinner.hideLoadingIndicator();
             this.pets = res.map((pet: any) => ({ ...pet, view: false })); // Agregar la propiedad 'view' a cada mascota
           }
         ), (err: any) => {
+          this.spinner.hideLoadingIndicator();
           console.log('error al traer las mascotas');
         }
       }
     ), (err: any) => {
+      this.spinner.hideLoadingIndicator();
       console.log('error al traer al usuario');
     }
   }
@@ -151,7 +154,44 @@ export class IndividualClientComponent implements OnInit {
   }
 
   deletePet(pet: any) {
-    console.log(pet.id);
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Se eliminará la mascota",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.deleteMascota(pet);
+      }
+    })
+  }
+
+  deleteMascota(pet: any) {
+    this.spinner.showLoadingIndicator();
+    this.petsService.deletePet(pet.id).subscribe(
+      (res: any) => {
+        this.spinner.hideLoadingIndicator();
+        console.log(res);
+        Swal.fire({
+          icon: 'success',
+          title: 'Mascota eliminada',
+          showConfirmButton: false,
+          timer: 1000
+        })
+        this.pets = this.pets.filter(p => p.id !== pet.id);
+      }, (err: any) => {
+        this.spinner.hideLoadingIndicator();
+        console.log('error al eliminar la mascota');
+        Swal.fire({
+          icon: 'error',
+          text: 'No se pudo eliminar la mascota',
+        })
+      }
+    )
   }
 
   back() {
@@ -160,5 +200,9 @@ export class IndividualClientComponent implements OnInit {
 
   goCreatePet() {
     this.router.navigate([`/dashboard/addPet`])
+  }
+
+  goEditPet(pet: any) {
+    this.router.navigate([`/dashboard/pet/${pet.id}`])
   }
 }

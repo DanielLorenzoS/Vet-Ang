@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
+  /* private url: string = environment.url; */
+  url: string = 'http://localhost:8080';
+  /* url: string = 'https://spring-vet-production.up.railway.app'; */
 
 
   constructor(
@@ -21,12 +23,12 @@ export class LoginService {
 
   generateToken(user: any) {
     console.log('user ', user);
-    return this.http.post(`${this.url}/generate`, user);
+    return this.http.post(`${this.url}/login`, user);
   }
 
-  /* login(token: any) {
+  login(token: any) {
     localStorage.setItem('token', token);
-  } */
+  }
 
   isLoggedIn() {
     let token = localStorage.getItem('token');
@@ -37,12 +39,12 @@ export class LoginService {
     }
   }
 
-  /* logout() {
+  logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     return true;
   }
- */
+
   getToken() {
     return localStorage.getItem('token');
   }
@@ -67,14 +69,19 @@ export class LoginService {
   }
 
   getCurrentUser() {
-    return this.http.get(`${this.url}/actual`);
+
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.get(`${this.url}/actual`, { headers });
   }
 
   getEmailUser(username: String) {
     return this.http.get(`${this.url}/actualuser/${username}`);
   }
 
-  public setLoggedState(logged: string) {
+  /* public setLoggedState(logged: string) {
     localStorage.setItem('logged', logged);
   }
 
@@ -101,7 +108,7 @@ export class LoginService {
 
   logout2(): Observable<any> {
     return this.http.post(`${this.url}/logot`, {}, { withCredentials: true });
-  }
+  } */
 
 
 }

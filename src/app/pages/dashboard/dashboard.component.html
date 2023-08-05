@@ -2,10 +2,19 @@
 <mat-drawer-container class="container">
     <mat-drawer class="side-container" mode="side" [opened]="isDrawerOpen">
         <mat-button-toggle-group class="toggle-group" name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">Dashboard</mat-button-toggle>
-            <mat-button-toggle (click)="close('client')" class="buttonSide" value="Client">Clientes</mat-button-toggle>
-            <mat-button-toggle (click)="close('')" class="buttonSide" value="underline">Underline</mat-button-toggle>
-          </mat-button-toggle-group>
+            <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
+                <mat-icon>dashboard</mat-icon>
+                <span>Dashboard</span>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="close('client')" class="buttonSide" value="Client">
+                <mat-icon>group</mat-icon>
+                <span>Clientes</span>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="close('')" class="buttonSide" value="underline">
+                <mat-icon>pets</mat-icon>
+                <span>Mascotas</span>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">
         <router-outlet>
@@ -18,10 +27,10 @@
                     <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #f39c12; transition: transform 0.2s;"></div>
                     <div style="width: 50px; height: 50px; margin: 10px; border-radius: 50%; cursor: pointer; background-color: #2ecc71; transition: transform 0.2s;"></div>
                 </div>
-            </div>  -->           
+            </div>  -->
             <div [ngClass]="{'progress-container': isLoading, 'progress-container-hidden': !isLoading}">
                 <mat-progress-spinner class="spinner" mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>
             </div>
         </router-outlet>
-    </mat-drawer-content>   
+    </mat-drawer-content>
 </mat-drawer-container>
