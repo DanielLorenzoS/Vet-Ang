@@ -96,6 +96,8 @@ export class UserService {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
 
+    console.log(userData);
+
     return this.http.put(`${this.url}/update/user`, userData, { headers });
   }
 

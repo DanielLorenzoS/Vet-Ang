@@ -13,6 +13,8 @@ import { IndividualClientComponent } from './pages/client/individual-client/indi
 import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
 import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
 import { PetComponent } from './pages/pet/pet/pet.component';
+import { GraphicsComponent } from './pages/graphics/graphics.component';
+import { AllPetsComponent } from './pages/pet/all-pets/all-pets.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,9 +26,11 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
     children: [
+      { path: '', component: GraphicsComponent, canActivate: [authGuard] },
       { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] },
+      { path: 'pets' , component: AllPetsComponent, canActivate: [authGuard]},
       { path: 'addPet', component: AddPetComponent, canActivate: [authGuard] },
       { path: 'pet/:id', component: PetComponent, canActivate: [authGuard] }
     ]

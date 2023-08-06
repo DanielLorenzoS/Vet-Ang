@@ -11,7 +11,7 @@ interface User {
   username: string;
   email: string;
   phone: string;
-  direction: string;
+  address: string;
 }
 
 @Component({
@@ -46,7 +46,7 @@ export class IndividualClientComponent implements OnInit {
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^@.\n]*@[^@.\n]*\.[^@.\n]*$/)]],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(10)]],
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(6)]],
-      direction: ['', Validators.required],
+      address: ['', Validators.required],
     });
   }
 
@@ -60,7 +60,7 @@ export class IndividualClientComponent implements OnInit {
           username: this.user.username,
           email: this.user.email,
           phone: this.user.phone,
-          direction: this.user.direction
+          address: this.user.address
         });
         this.petsService.getPetsByUserId(res.id).subscribe(
           (res: any) => {
@@ -89,7 +89,7 @@ export class IndividualClientComponent implements OnInit {
       username: this.editForm.value.username,
       email: this.editForm.value.email,
       phone: this.editForm.value.phone,
-      direction: this.editForm.value.direction
+      address: this.editForm.value.address
     }
     console.log(this.userToEdit);
     this.userService.updateUser(this.userToEdit).subscribe(

@@ -32,6 +32,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { CookieService } from 'ngx-cookie-service';
 import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
 import { PetComponent } from './pages/pet/pet/pet.component';
+import { GraphicsComponent } from './pages/graphics/graphics.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AllPetsComponent } from './pages/pet/all-pets/all-pets.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { PetComponent } from './pages/pet/pet/pet.component';
     AllClientsComponent,
     IndividualClientComponent,
     AddPetComponent,
-    PetComponent
+    PetComponent,
+    GraphicsComponent,
+    AllPetsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { PetComponent } from './pages/pet/pet/pet.component';
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    NgxChartsModule
   ],
   providers: [authInterceptorProviders, CookieService ],
   bootstrap: [AppComponent]

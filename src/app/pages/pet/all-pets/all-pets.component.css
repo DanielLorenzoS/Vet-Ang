@@ -128,9 +128,9 @@ tr.mat-mdc-row:hover {
 }
 
 .mat-column-id,
-.mat-column-username,
-.mat-column-email,
-.mat-column-phone {
+.mat-column-name,
+.mat-column-race,
+.mat-column-specie {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 28% !important;
@@ -152,7 +152,7 @@ tr.mat-mdc-row:hover {
     width: 10% !important;
 }
 
-.mat-column-phone {
+.mat-column-specie {
     border-right: 2px solid #0060b0;
 }
 

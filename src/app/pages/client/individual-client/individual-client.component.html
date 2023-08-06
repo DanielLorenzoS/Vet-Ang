@@ -1,13 +1,12 @@
 <div class="container">
     <div class="info">
-        <!-- <div class="back" (click)="back()">
-            <img src="../../../../assets/left-arrow.png" alt="">
-        </div> -->
         <div class="client" *ngIf="!editMode">
-            <h1>{{ user.username }}</h1>
-            <h3>{{ user.email }}</h3>
-            <h3>{{ user.phone }}</h3>
-            <h3>{{ user.direction }}</h3>
+            <div class="text">
+                <h1><span>Nombre: </span>{{ user.username }}</h1>
+                <h3><span>Correo electrónico: </span>{{ user.email }}</h3>
+                <h3><span>Celular: </span>{{ user.phone }}</h3>
+                <h3><span>Dirección: </span>{{ user.address }}</h3>
+            </div>
             <div class="buttons">
                 <button class="update" mat-icon-button (click)="editMode = true">
                     <span>Editar</span>
@@ -20,10 +19,12 @@
             </div>
         </div>
         <form class="client client-form" *ngIf="editMode" [formGroup]="editForm">
-            <input type="text" name="username" placeholder="Nombre del cliente" formControlName="username">
-            <input type="text" name="email" placeholder="Email" formControlName="email">
-            <input type="text" name="phone" placeholder="Teléfono" formControlName="phone">
-            <input type="text" name="direction" placeholder="Dirección" formControlName="direction">
+            <div class="form">
+                <input type="text" name="username" placeholder="Nombre del cliente" formControlName="username">
+                <input type="text" name="email" placeholder="Email" formControlName="email">
+                <input type="text" name="phone" placeholder="Teléfono" formControlName="phone">
+                <input type="text" name="address" placeholder="Dirección" formControlName="address">
+            </div>
             <div class="buttons" style="width: 100%;">
                 <button class="update" mat-icon-button (click)="saveChanges()">
                     <span>Guardar</span>
@@ -36,28 +37,9 @@
             </div>
         </form>
 
-        <!-- <div class="buttons buttons-pets">
-            <button class="update addPet" (click)="goCreatePet()">Agregar mascota</button>
-        </div> -->
-
-        <!-- <h2 class="nopets" *ngIf="pets.length === 0">El cliente no tiene mascotas registradas</h2>
-        <div class="pets-container">
-            <div class="client pet-content" *ngFor="let pet of pets">
-                <div class="text">
-                    <h1> {{ pet.name }}</h1>
-                    <h3> {{ pet.specie }}</h3>
-                    <h3> {{ pet.race }}</h3>
-                    <div class="buttons buttons-pets">
-                        <button class="update btnPet" (click)="goEditPet(pet)">Ver información</button>
-                        <button class="delete btnPet" (click)="deletePet(pet)">Eliminar mascota</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="table-container">
 
             <table mat-table [dataSource]="pets" class="mat-elevation-z8">
-                <!-- Columnas de la tabla -->
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Nombre </th>
                     <td mat-cell *matCellDef="let pet"> {{ pet.name }} </td>

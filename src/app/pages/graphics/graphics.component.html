@@ -1,0 +1,50 @@
+<div class="container">
+
+  <h1 class="graphics_title">Análisis de datos</h1>
+
+  <div class="graphics">
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Mascotas</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-bar-vertical [view]="[400, 300]" [scheme]="colorScheme" [results]="barChartData" [xAxis]="showXAxis"
+          [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-bar-vertical>
+      </div>
+    </div>
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Clientes</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-area-chart [view]="[400, 300]" [scheme]="colorScheme" [results]="areaChartData" [xAxis]="showXAxis"
+          [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-area-chart>
+
+
+      </div>
+    </div>
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Citas</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-line-chart [view]="[400, 300]" [scheme]="colorScheme" [results]="lineChartData" [xAxis]="showXAxis"
+          [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-line-chart>
+
+      </div>
+    </div>
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Medicamentos</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-pie-chart class="chart" [view]="[550, 300]" [scheme]="colorScheme" [results]="pieChartData"
+          [explodeSlices]="true" [doughnut]="false" [legend]="true"></ngx-charts-pie-chart>
+
+      </div>
+    </div>
+  </div>
+</div>

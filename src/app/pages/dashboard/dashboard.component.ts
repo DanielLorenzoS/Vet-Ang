@@ -11,7 +11,7 @@ export class DashboardComponent {
   
   title = 'veterinaria';
   isLoading: boolean = false;
-  isDrawerOpen: boolean = true;
+  isDrawerOpen: boolean = false;
 
   constructor(
     private loadingIndicatorService: SpinnerService,

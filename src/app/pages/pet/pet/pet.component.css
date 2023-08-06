@@ -14,7 +14,7 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    box-shadow: 0 0 8px 0 #7a00dd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .info>* {
@@ -28,7 +28,7 @@
     margin-top: 2rem;
     width: 80%;
     text-align: center;
-    box-shadow: 0 0 4px 0 #7a00dd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .table-container h3 {

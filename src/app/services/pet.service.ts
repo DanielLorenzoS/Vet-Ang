@@ -65,4 +65,13 @@ export class PetService {
 
     return this.http.get(`${this.url}/pets/${id}`, { headers });
   }
+
+  getAllPets() {
+
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+
+    return this.http.get(`${this.url}/pets/`, { headers });
+  }
 }
