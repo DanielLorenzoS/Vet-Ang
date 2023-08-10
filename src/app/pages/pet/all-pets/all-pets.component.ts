@@ -12,9 +12,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./all-pets.component.css']
 })
 export class AllPetsComponent {
+
   pets: any[] = [];
 
-  displayedColumns: string[] = ['id', 'name', 'race', 'specie'];
+  displayedColumns: string[] = ['id', 'name', 'race', 'specie', 'user'];
   dataSource = new MatTableDataSource<any>(this.pets);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -28,13 +29,12 @@ export class AllPetsComponent {
 
   ngOnInit(): void {
     this.spinner.showLoadingIndicator();
-    this.petService.getAllPets().subscribe(
+    this.petService.getPetsWithUser().subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
         this.pets = res;
-        this.dataSource = new MatTableDataSource<any>(this.pets); // Asigna la respuesta a la fuente de datos de la tabla
-        this.dataSource.paginator = this.paginator; // Asigna el paginador después de obtener los datos
-        console.log(this.pets);
+        this.dataSource = new MatTableDataSource<any>(this.pets);
+        this.dataSource.paginator = this.paginator;
       },
       err => {
         this.spinner.hideLoadingIndicator();
@@ -43,7 +43,7 @@ export class AllPetsComponent {
     )
     this.userService.getAllUsers().subscribe(
       (res: any) => {
-        console.log(res);
+        this.spinner.hideLoadingIndicator();
       },
       err => {
         console.log(err);
@@ -53,7 +53,7 @@ export class AllPetsComponent {
 
   onRowClick(row: any) {
     console.log(row.username)
-    this.router.navigate([`dashboard/pets/${row.id}`])
+    this.router.navigate([`dashboard/pet/${row.id}`])
   }
 
   filter(event: Event) {

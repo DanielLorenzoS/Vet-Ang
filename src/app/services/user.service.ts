@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
@@ -11,7 +12,17 @@ export class UserService {
   url = 'http://localhost:8080';
   /* url: string = 'https://spring-vet-production.up.railway.app'; */
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
+
+  getHeadersViaCookie() {
+    const headers = {
+      'Authorization': `Bearer ${this.cookieService.get('token')}`
+    }
+    return headers;
+  }
 
   recoverPassword(email: string) {
 
@@ -47,29 +58,17 @@ export class UserService {
 
   getAllUsers() {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.get(`${this.url}/`, { headers });
+    return this.http.get(`${this.url}/`, { headers: this.getHeadersViaCookie() });
   }
 
   getUserByRole(role: string) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.get(`${this.url}/roles/${role}`, { headers });
+    return this.http.get(`${this.url}/roles/${role}`, { headers: this.getHeadersViaCookie() });
   }
 
   getUserByUsername(username: string) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.get(`${this.url}/user/${username}`, { headers });
+    return this.http.get(`${this.url}/user/${username}`, { headers: this.getHeadersViaCookie() });
   }
 
   createClient(user: any) {
@@ -83,30 +82,16 @@ export class UserService {
       roles: ["CLIENT"]
     }
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.post(`${this.url}/createuser`, userData, { headers });
+    return this.http.post(`${this.url}/createuser`, userData, { headers: this.getHeadersViaCookie() });
   }
 
   updateUser(userData: any) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    console.log(userData);
-
-    return this.http.put(`${this.url}/update/user`, userData, { headers });
+    return this.http.put(`${this.url}/update/user`, userData, { headers: this.getHeadersViaCookie() });
   }
 
   deleteUser(id: number) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.delete(`${this.url}/deleteuser/${id}`, { headers });
+    return this.http.delete(`${this.url}/deleteuser/${id}`, { headers: this.getHeadersViaCookie() });
   }
 }

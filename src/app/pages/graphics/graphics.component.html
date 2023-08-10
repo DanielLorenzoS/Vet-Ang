@@ -1,8 +1,45 @@
 <div class="container">
 
-  <h1 class="graphics_title">Análisis de datos</h1>
+<!--   <h1 class="graphics_title">Análisis de datos</h1> -->
 
   <div class="graphics">
+    <div class="graphics_body_item" (click)="goAppointments()">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Citas recientes</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        Tuviste 10 citas en esta semana
+        <span>
+          <mat-icon>history</mat-icon>
+        </span>
+      </div>
+    </div>
+    <div class="graphics_body_item" (click)="goAppointments()">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Citas Próximas</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        Tienes 10 citas en esta semana
+        <span>
+          <mat-icon>
+            calendar_month
+          </mat-icon>
+        </span>
+      </div>
+    </div>
+    <div class="graphics_body_item" (click)="goAddAppointment()">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Nuevas citas</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        ¿Quieres agregar una cita?
+        <span>
+          <mat-icon>
+            add_task
+          </mat-icon>
+        </span>
+      </div>
+    </div>
     <div class="graphics_body_item">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Mascotas</h2>

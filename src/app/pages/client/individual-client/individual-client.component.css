@@ -200,6 +200,15 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.table-container h4 {
+    margin: 0;
+    padding: 2rem 0;
+    font-size: 2rem;
+    font-weight: 300;
+    color: #000;
+    font-family: serif;
+}
+
 .table-container h3 {
     margin: 0;
     padding: 2rem 0;
@@ -223,13 +232,21 @@ th {
     color: #000;
 }
 
-tr.mar-mdc-row {
-    border-top: 1px solid #000 !important;
+tr.mat-mdc-row:hover {
+    background-color: #0060b0;
+    cursor: pointer;
 }
 
-tr.mat-mdc-row:hover {
-    background-color: #dedede;
-    cursor: pointer;
+tr:nth-child(even) {
+    background-color: #ccc !important;
+}
+
+tr:nth-child(even):hover {
+    background-color: #0060b0 !important;
+}
+
+tr.mat-mdc-row:hover td {
+    color: #fff;
 }
 
 mat-icon {
@@ -265,7 +282,6 @@ mat-icon {
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
-    border-bottom: 1px solid grey;
 }
 
 .mat-column-actions {

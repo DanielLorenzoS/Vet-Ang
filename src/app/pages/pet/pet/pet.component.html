@@ -1,57 +1,142 @@
 <div class="container">
-    <div class="info">
-        <h1>Nombre: {{ pet.name }}</h1>
-        <h2>Sexo: {{ pet.sex }}</h2>
-        <h3>Fecha de nacimiento: {{ pet.birthdate }}</h3>
-        <h4>Especie: {{ pet.specie }}</h4>
-        <h4>Raza: {{ pet.race }}</h4>
-        <h4>Tamaño: {{ pet.weight }} kg</h4>
+  <div class="info" *ngIf="showInfo">
+    <div class="buttons-pet">
+
+      <button mat-icon-button (click)="toggleInfo()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deletePet(pet.id)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
     </div>
-    <div class="table-container">
-            <h3>Historial Médico</h3>
-        <!-- Aquí va tu tabla de Angular Material -->
-        <table mat-table [dataSource]="medicalHistories" class="mat-elevation-z8">
-            <!-- Columnas de la tabla -->
-            <ng-container matColumnDef="reason">
-              <th mat-header-cell *matHeaderCellDef> Razón </th>
-              <td mat-cell *matCellDef="let history"> {{ history.reason }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="diagnosis">
-              <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
-              <td mat-cell *matCellDef="let history"> {{ history.diagnosis }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="status">
-              <th mat-header-cell *matHeaderCellDef> Estatus </th>
-              <td mat-cell *matCellDef="let history"> {{ history.status }} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef> 
-                <button class="btnAdd" mat-icon-button (click)="addMedicalHistory()">
-                  <mat-icon>library_add</mat-icon>
-                </button>    
-            </th>
-              <td mat-cell *matCellDef="let history">
-                <!-- Botones para editar o eliminar el historial médico -->
-                <button mat-icon-button (click)="deleteMedicalHistory(history)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-          
-            <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
-          
-            <!-- Encabezados de la tabla -->
-            <tr mat-header-row *matHeaderRowDef="['reason', 'diagnosis', 'status', 'actions']"></tr>
-          
-            <!-- Filas de la tabla -->
-            <tr mat-row *matRowDef="let history; columns: ['reason', 'diagnosis', 'status', 'actions']"></tr>
-          </table>
-          
-          
+    <h1>Nombre: {{ pet.name }}</h1>
+    <h2>Sexo: {{ pet.sex }}</h2>
+    <h3>Fecha de nacimiento: {{ pet.birthdate }}</h3>
+    <h4>Especie: {{ pet.specie }}</h4>
+    <h4>Raza: {{ pet.race }}</h4>
+    <h4>Tamaño: {{ pet.weight }} kg</h4>
+  </div>
+  <div class="info" *ngIf="!showInfo">
+    <div class="buttons-pet">
+
+      <button mat-icon-button (click)="updatePet()">
+        <mat-icon>check_small</mat-icon>
+      </button>
+      <button mat-icon-button (click)="toggleInfo()">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
+    <div class="form" [formGroup]="petForm">
+      <input type="text" name="name" placeholder="Nombre de la mascota" formControlName="name" [(ngModel)]="pet.name">
+      <select name="sex" formControlName="sex" aria-placeholder="Sexo de la mascota" [(ngModel)]="pet.sex">
+        <option value="Hembra">Hembra</option>
+        <option value="Macho">Macho</option>
+      </select>
+      <h3>Fecha de nacimiento previa: {{ pet.birthdate }}</h3>
+      <input type="date" name="birthdate" formControlName="birthdate" [(ngModel)]="pet.birthdate">
+      <input type="text" name="specie" placeholder="Especie de la mascota" formControlName="specie"
+        [(ngModel)]="pet.specie">
+      <input type="text" name="race" placeholder="Raza de la mascota" formControlName="race" [(ngModel)]="pet.race">
+      <input type="number" name="weight" placeholder="Peso de la mascota" formControlName="weight"
+        [(ngModel)]="pet.weight">
+    </div>
+
+  </div>
+  <div class="table-container">
+    <div class="medic">
+      <mat-icon>medical_services</mat-icon>
+      <p>Historial Médico</p>
+    </div>
+    <h5>Diagnósticos</h5>
+    <!-- Aquí va tu tabla de Angular Material -->
+    <table mat-table [dataSource]="medicalHistories" class="mat-elevation-z8">
+      <!-- Columnas de la tabla -->
+      <ng-container matColumnDef="reason">
+        <th mat-header-cell *matHeaderCellDef> Síntomas </th>
+        <td mat-cell *matCellDef="let history"> {{ history.reason }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="diagnosis">
+        <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
+        <td mat-cell *matCellDef="let history"> {{ history.diagnosis }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Estatus </th>
+        <td mat-cell *matCellDef="let history"> {{ history.status }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          <button class="btnAdd" mat-icon-button (click)="addMedicalHistory()">
+            <mat-icon>library_add</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let history">
+          <!-- Botones para editar o eliminar el historial médico -->
+          <button mat-icon-button (click)="deleteMedicalHistory(history)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
+
+      <!-- Encabezados de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="['reason', 'diagnosis', 'status', 'actions']"></tr>
+
+      <!-- Filas de la tabla -->
+      <tr mat-row *matRowDef="let history; columns: ['reason', 'diagnosis', 'status', 'actions']" (click)="onClickRow(history)"></tr>
+    </table>
+
+
+  </div>
+
+  <div class="table-container">
+    <h3 class="subtitle">Medicamentos</h3>
+    <!-- Aquí va tu tabla de Angular Material -->
+    <table mat-table [dataSource]="medicalHistories" class="mat-elevation-z8">
+      <!-- Columnas de la tabla -->
+      <ng-container matColumnDef="reason">
+        <th mat-header-cell *matHeaderCellDef> Síntomas </th>
+        <td mat-cell *matCellDef="let history"> {{ history.reason }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="diagnosis">
+        <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
+        <td mat-cell *matCellDef="let history"> {{ history.diagnosis }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Estatus </th>
+        <td mat-cell *matCellDef="let history"> {{ history.status }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          <button class="btnAdd" mat-icon-button (click)="addMedicalHistory()">
+            <mat-icon>library_add</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let history">
+          <!-- Botones para editar o eliminar el historial médico -->
+          <button mat-icon-button (click)="deleteMedicalHistory(history)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
+
+      <!-- Encabezados de la tabla -->
+      <tr mat-header-row *matHeaderRowDef="['reason', 'diagnosis', 'status', 'actions']"></tr>
+
+      <!-- Filas de la tabla -->
+      <tr mat-row *matRowDef="let history; columns: ['reason', 'diagnosis', 'status', 'actions']" (click)="onClickRow(history)"></tr>
+    </table>
+
+
+  </div>
 
 
 </div>

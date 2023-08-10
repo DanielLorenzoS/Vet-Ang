@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/enviroments/enviroment';
 
 @Injectable({
@@ -13,16 +14,20 @@ export class PetService {
 
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookieService: CookieService
   ) { }
+
+  getHeadersViaCookie() {
+    const headers = {
+      'Authorization': `Bearer ${this.cookieService.get('token')}`
+    }
+    return headers;
+  }
 
   getPetsByUserId(id: number) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.get(`${this.url}/pets/user/${id}`, { headers });
+    return this.http.get(`${this.url}/pets/user/${id}`, { headers: this.getHeadersViaCookie() });
   }
 
   addPet(pet: any) {
@@ -39,39 +44,46 @@ export class PetService {
       }
     }
 
-    console.log(Pet);
-
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.post(`${this.url}/pets/`, Pet, { headers });
+    return this.http.post(`${this.url}/pets/`, Pet, { headers: this.getHeadersViaCookie() });
   }
 
   deletePet(id: number) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.delete(`${this.url}/pets/${id}`, { headers });
+    return this.http.delete(`${this.url}/pets/${id}`, { headers: this.getHeadersViaCookie() });
   }
 
   getPetById(id: number) {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-
-    return this.http.get(`${this.url}/pets/${id}`, { headers });
+    return this.http.get(`${this.url}/pets/${id}`, { headers: this.getHeadersViaCookie() });
   }
 
   getAllPets() {
 
-    const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
+    return this.http.get(`${this.url}/pets/`, { headers: this.getHeadersViaCookie() });
+  }
 
-    return this.http.get(`${this.url}/pets/`, { headers });
+  getPetsWithUser() {
+
+    return this.http.get(`${this.url}/pets/users`, { headers: this.getHeadersViaCookie() });
+  }
+
+  updatePet(pet: any) {
+
+    return this.http.put(`${this.url}/pets/`, pet, { headers: this.getHeadersViaCookie() });
+  }
+
+  createMedicalHistory(medicalHistory: any) {
+
+    return this.http.post(`${this.url}/medical/`, medicalHistory, { headers: this.getHeadersViaCookie() });
+  }
+
+  getMedicalHistoriesById(id: string) {
+
+    return this.http.get(`${this.url}/medical/${id}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  deleteMedicalHistory(id: number) {
+
+    return this.http.delete(`${this.url}/medical/${id}`, { headers: this.getHeadersViaCookie() });
   }
 }

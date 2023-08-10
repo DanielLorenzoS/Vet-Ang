@@ -12,6 +12,7 @@ export class SpinnerService {
 
   showLoadingIndicator() {
     this.loadingSubject.next(true);
+    
   }
 
   hideLoadingIndicator() {

@@ -43,13 +43,13 @@ export class AddPetComponent {
 
   onSubmit() {
     this.spinner.showLoadingIndicator();
-    this.petService.addPet(this.newPetForm.value).subscribe((data) => {
+    this.petService.addPet(this.newPetForm.value).subscribe((data: any) => {
       this.spinner.hideLoadingIndicator();
       Swal.fire({
         icon: 'success',
         text: 'Mascota agregada correctamente',
       });
-      this.router.navigate([`/dashboard/client`]);
+      this.router.navigate([`/dashboard/pet/${data.id}`]);
     }), (error: any) => {
       Swal.fire({
         icon: 'error',

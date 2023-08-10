@@ -27,11 +27,11 @@ export class LoginService {
   }
 
   login(token: any) {
-    localStorage.setItem('token', token);
+    this.cookieService.set('token', token);
   }
 
   isLoggedIn() {
-    let token = localStorage.getItem('token');
+    let token = this.cookieService.get('token');
     if (token == undefined || token == '' || token == null) {
       return false;
     } else {
@@ -40,13 +40,13 @@ export class LoginService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    this.cookieService.deleteAll();
+    window.location.reload();
     return true;
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return this.cookieService.get('token');
   }
 
   setUser(user: any) {
@@ -71,7 +71,7 @@ export class LoginService {
   getCurrentUser() {
 
     const headers = {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      'Authorization': `Bearer ${this.cookieService.get('token')}`
     }
 
     return this.http.get(`${this.url}/actual`, { headers });
@@ -80,35 +80,5 @@ export class LoginService {
   getEmailUser(username: String) {
     return this.http.get(`${this.url}/actualuser/${username}`);
   }
-
-  /* public setLoggedState(logged: string) {
-    localStorage.setItem('logged', logged);
-  }
-
-  public getState(): boolean {
-    return localStorage.getItem('logged') === 'true';
-  }
-
-  public isLogged(): boolean {
-    return this.getState();
-  }
-
-  public logout(): void {
-    localStorage.clear();
-    this.router.navigate(['/login']);
-  }
-
-  login(user: any): Observable<any> {
-    return this.http.post(`${this.url}/auth/login`, user, { withCredentials: true });
-  }
-
-  getInfo(): Observable<any> {
-    return this.http.get(`${this.url}/details`, { withCredentials: true });
-  }
-
-  logout2(): Observable<any> {
-    return this.http.post(`${this.url}/logot`, {}, { withCredentials: true });
-  } */
-
 
 }

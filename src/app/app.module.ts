@@ -35,6 +35,11 @@ import { PetComponent } from './pages/pet/pet/pet.component';
 import { GraphicsComponent } from './pages/graphics/graphics.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AllPetsComponent } from './pages/pet/all-pets/all-pets.component';
+import { AllAppointmentComponent } from './pages/appointment/all-appointment/all-appointment.component';
+import { AppointmentComponent } from './pages/appointment/appointment/appointment.component';
+import { AddAppointmentComponent } from './pages/appointment/add-appointment/add-appointment.component';
+import { MedicalComponent } from './pages/pet/medical/medical/medical.component';
+import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,12 @@ import { AllPetsComponent } from './pages/pet/all-pets/all-pets.component';
     AddPetComponent,
     PetComponent,
     GraphicsComponent,
-    AllPetsComponent
+    AllPetsComponent,
+    AllAppointmentComponent,
+    AppointmentComponent,
+    AddAppointmentComponent,
+    MedicalComponent,
+    AddMedicalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-graphics',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./graphics.component.css']
 })
 export class GraphicsComponent {
+
+  constructor(
+    private router: Router
+  ) { }
 
   barChartData = [
     {
@@ -86,5 +91,13 @@ export class GraphicsComponent {
     },
     // Puedes agregar más series de datos si es necesario
   ];
+
+  goAppointments() {
+    this.router.navigate(['/dashboard/appointments']);
+  }
+
+  goAddAppointment() {
+    this.router.navigate(['/dashboard/addAppointment']);
+  }
 
 }

@@ -39,6 +39,7 @@
 
         <div class="table-container">
 
+            <h4 *ngIf="pets.length === 0">{{ user.username }} no tiene mascotas asociadas</h4>
             <table mat-table [dataSource]="pets" class="mat-elevation-z8">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Nombre </th>

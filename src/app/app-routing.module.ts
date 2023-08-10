@@ -15,6 +15,11 @@ import { AddPetComponent } from './pages/pet/add-pet/add-pet.component';
 import { PetComponent } from './pages/pet/pet/pet.component';
 import { GraphicsComponent } from './pages/graphics/graphics.component';
 import { AllPetsComponent } from './pages/pet/all-pets/all-pets.component';
+import { AllAppointmentComponent } from './pages/appointment/all-appointment/all-appointment.component';
+import { AppointmentComponent } from './pages/appointment/appointment/appointment.component';
+import { AddAppointmentComponent } from './pages/appointment/add-appointment/add-appointment.component';
+import { MedicalComponent } from './pages/pet/medical/medical/medical.component';
+import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,9 +35,14 @@ const routes: Routes = [
       { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] },
-      { path: 'pets' , component: AllPetsComponent, canActivate: [authGuard]},
+      { path: 'pets', component: AllPetsComponent, canActivate: [authGuard] },
+      { path: 'medical/:id', component: MedicalComponent, canActivate: [authGuard] },
+      { path: 'addMedical', component: AddMedicalComponent, canActivate: [authGuard] },
       { path: 'addPet', component: AddPetComponent, canActivate: [authGuard] },
-      { path: 'pet/:id', component: PetComponent, canActivate: [authGuard] }
+      { path: 'pet/:id', component: PetComponent, canActivate: [authGuard] },
+      { path: 'appointments', component: AllAppointmentComponent, canActivate: [authGuard] },
+      { path: 'appointment', component: AppointmentComponent, canActivate: [authGuard] },
+      { path: 'addAppointment', component: AddAppointmentComponent, canActivate: [authGuard] }
     ]
   },
   { path: '**', redirectTo: '/' }
