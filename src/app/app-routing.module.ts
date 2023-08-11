@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
     children: [
-      { path: '', component: GraphicsComponent, canActivate: [authGuard] },
+      { path: '', component: GraphicsComponent, canActivate: [authGuard], pathMatch: 'full' },
       { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'indClient/:username', component: IndividualClientComponent, canActivate: [authGuard] },
@@ -42,7 +42,8 @@ const routes: Routes = [
       { path: 'pet/:id', component: PetComponent, canActivate: [authGuard] },
       { path: 'appointments', component: AllAppointmentComponent, canActivate: [authGuard] },
       { path: 'appointment', component: AppointmentComponent, canActivate: [authGuard] },
-      { path: 'addAppointment', component: AddAppointmentComponent, canActivate: [authGuard] }
+      { path: 'addAppointment', component: AddAppointmentComponent, canActivate: [authGuard] },
+      { path: '**', redirectTo: 'graphics' }
     ]
   },
   { path: '**', redirectTo: '/' }

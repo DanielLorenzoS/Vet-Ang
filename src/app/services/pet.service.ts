@@ -39,9 +39,7 @@ export class PetService {
       specie: pet.specie,
       race: pet.race,
       weight: pet.weight,
-      user: {
-        id: pet.user
-      }
+      userId: pet.user
     }
 
     return this.http.post(`${this.url}/pets/`, Pet, { headers: this.getHeadersViaCookie() });
@@ -65,6 +63,11 @@ export class PetService {
   getPetsWithUser() {
 
     return this.http.get(`${this.url}/pets/users`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getOnlyUser(id: number) {
+
+    return this.http.get(`${this.url}/user/pet/${id}`, { headers: this.getHeadersViaCookie() });
   }
 
   updatePet(pet: any) {

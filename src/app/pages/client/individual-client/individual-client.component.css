@@ -249,6 +249,10 @@ tr.mat-mdc-row:hover td {
     color: #fff;
 }
 
+tr.mat-mdc-row:hover mat-icon {
+    color: #fff;
+}
+
 mat-icon {
     color: #0060b0;
 }

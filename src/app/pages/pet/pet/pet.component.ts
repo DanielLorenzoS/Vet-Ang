@@ -26,6 +26,7 @@ const Pet = {
 export class PetComponent {
 
   pet: any = {};
+  user: any = {};
   medicalHistories: any = {};
   showInfo: boolean = true;
   petForm!: FormGroup;
@@ -122,6 +123,22 @@ export class PetComponent {
     this.router.navigate(['/dashboard/addMedical'], { queryParams: { id: this.pet.id } });
   }
 
+  getUserByPetId() {
+    this.spinner.showLoadingIndicator();
+    this.petService.getOnlyUser(this.pet.id).subscribe(
+      (res: any) => {
+        this.spinner.hideLoadingIndicator();
+        console.log(res);
+        this.user = res;
+        console.log(this.user);
+      },
+      (err: any) => {
+        this.spinner.hideLoadingIndicator();
+        console.log(err);
+      }
+    );
+  }
+
   updatePet() {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -141,7 +158,7 @@ export class PetComponent {
       Pet.specie = this.petForm.value.specie;
       Pet.race = this.petForm.value.race;
       Pet.weight = this.petForm.value.weight;
-      Pet.user.id = this.pet.user.id;
+      Pet.user.id = this.user.id;
       console.log(Pet);
       this.petService.updatePet(Pet).subscribe(
         (res: any) => {
@@ -175,17 +192,18 @@ export class PetComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.spinner.showLoadingIndicator();
+        this.getUserByPetId();
         this.petService.deletePet(id).subscribe(
           (res: any) => {
             this.spinner.hideLoadingIndicator();
             console.log(res);
+            this.router.navigate([`/dashboard/indClient/${this.user.username}`]);
             Swal.fire({
               title: '¡Eliminado!',
               text: 'La mascota ha sido eliminada.',
               icon: 'success',
               confirmButtonText: 'Aceptar'
             });
-            this.router.navigate([`/dashboard/indClient/${this.pet.user.username}`]);
           },
           (err: any) => {
             this.spinner.hideLoadingIndicator();
