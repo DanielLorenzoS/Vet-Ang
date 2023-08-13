@@ -139,7 +139,6 @@ export class IndividualClientComponent implements OnInit {
               showConfirmButton: false,
               timer: 1000
             })
-            this.router.navigate(['/dashboard/client'])
           }
         ), (err: any) => {
           this.spinner.hideLoadingIndicator();
@@ -153,7 +152,8 @@ export class IndividualClientComponent implements OnInit {
     })
   }
 
-  deletePet(pet: any) {
+  deletePet(pet: any, event: Event) {
+    event.stopPropagation();
     Swal.fire({
       title: '¿Estás seguro?',
       text: "Se eliminará la mascota",

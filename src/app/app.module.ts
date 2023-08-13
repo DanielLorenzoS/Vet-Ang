@@ -40,6 +40,13 @@ import { AppointmentComponent } from './pages/appointment/appointment/appointmen
 import { AddAppointmentComponent } from './pages/appointment/add-appointment/add-appointment.component';
 import { MedicalComponent } from './pages/pet/medical/medical/medical.component';
 import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical.component';
+import { AddPrescriptionComponent } from './pages/pet/medical/add-prescription/add-prescription.component';
+import { PrescriptionComponent } from './pages/pet/medical/prescription/prescription.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FilterPipe } from './pipes/filter.pipe';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -65,7 +72,10 @@ import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical
     AppointmentComponent,
     AddAppointmentComponent,
     MedicalComponent,
-    AddMedicalComponent
+    AddMedicalComponent,
+    AddPrescriptionComponent,
+    PrescriptionComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -84,9 +94,13 @@ import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical
     MatPaginatorModule,
     MatInputModule,
     MatIconModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatMenuModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
-  providers: [authInterceptorProviders, CookieService ],
+  providers: [authInterceptorProviders, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -75,18 +75,38 @@ export class PetService {
     return this.http.put(`${this.url}/pets/`, pet, { headers: this.getHeadersViaCookie() });
   }
 
-  createMedicalHistory(medicalHistory: any) {
+  getDoctors() {
 
-    return this.http.post(`${this.url}/medical/`, medicalHistory, { headers: this.getHeadersViaCookie() });
+    return this.http.get(`${this.url}/medical/doctor`, { headers: this.getHeadersViaCookie() });
   }
 
-  getMedicalHistoriesById(id: string) {
+  getMedicines() {
 
-    return this.http.get(`${this.url}/medical/${id}`, { headers: this.getHeadersViaCookie() });
+    return this.http.get(`${this.url}/medical/medicine`, { headers: this.getHeadersViaCookie() });
   }
 
-  deleteMedicalHistory(id: number) {
+  createPrescription(prescription: any) {
 
-    return this.http.delete(`${this.url}/medical/${id}`, { headers: this.getHeadersViaCookie() });
+    return this.http.post(`${this.url}/medical/prescription`, prescription, { headers: this.getHeadersViaCookie() });
   }
+
+  getDoctorPrescriptions(id: number) {
+
+    return this.http.get(`${this.url}/medical/prescription/doctor/${id}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  deletePrescription(id: number) {
+
+    return this.http.delete(`${this.url}/medical/prescription/${id}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getPrescriptionById(id: number) {
+
+    return this.http.get(`${this.url}/medical/prescription/${id}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getMedicineByName(name: string) {
+      
+      return this.http.get(`${this.url}/medical/medicine/${name}`, { headers: this.getHeadersViaCookie() });
+    }
 }

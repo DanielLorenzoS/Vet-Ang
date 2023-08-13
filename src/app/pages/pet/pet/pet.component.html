@@ -48,33 +48,45 @@
       <p>Historial Médico</p>
     </div>
     <h5>Diagnósticos</h5>
+    <h3 *ngIf="prescriptions.length === 0">
+      {{ pet.name }} aun no tiene diagnósticos</h3>
     <!-- Aquí va tu tabla de Angular Material -->
-    <table mat-table [dataSource]="medicalHistories" class="mat-elevation-z8">
+    <table mat-table [dataSource]="prescriptions" class="mat-elevation-z8">
       <!-- Columnas de la tabla -->
-      <ng-container matColumnDef="reason">
+      <ng-container matColumnDef="symtomps">
         <th mat-header-cell *matHeaderCellDef> Síntomas </th>
-        <td mat-cell *matCellDef="let history"> {{ history.reason }} </td>
+        <td mat-cell *matCellDef="let prescription"> {{ prescription.symtomps }} </td>
       </ng-container>
 
       <ng-container matColumnDef="diagnosis">
         <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
-        <td mat-cell *matCellDef="let history"> {{ history.diagnosis }} </td>
+        <td mat-cell *matCellDef="let prescription"> {{ prescription.diagnosis }} </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Estatus </th>
-        <td mat-cell *matCellDef="let history"> {{ history.status }} </td>
+        <td mat-cell *matCellDef="let prescription"> {{ prescription.status }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef> Fecha de creación </th>
+        <td mat-cell *matCellDef="let prescription"> {{ prescription.creationDate }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="doctor">
+        <th mat-header-cell *matHeaderCellDef> Doctor </th>
+        <td mat-cell *matCellDef="let prescription"> {{ prescription.doctors[0].name }} </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>
-          <button class="btnAdd" mat-icon-button (click)="addMedicalHistory()">
-            <mat-icon>library_add</mat-icon>
+          <button class="btnAdd" mat-icon-button (click)="addPrescription()">
+            <mat-icon class="add">library_add</mat-icon>
           </button>
         </th>
-        <td mat-cell *matCellDef="let history">
+        <td mat-cell *matCellDef="let prescription">
           <!-- Botones para editar o eliminar el historial médico -->
-          <button mat-icon-button (click)="deleteMedicalHistory(history)">
+          <button mat-icon-button (click)="deletePrescription(prescription.id, $event)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -83,60 +95,13 @@
       <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
 
       <!-- Encabezados de la tabla -->
-      <tr mat-header-row *matHeaderRowDef="['reason', 'diagnosis', 'status', 'actions']"></tr>
+      <tr mat-header-row *matHeaderRowDef="['symtomps', 'diagnosis', 'status', 'creationDate', 'doctor', 'actions']"></tr>
 
       <!-- Filas de la tabla -->
-      <tr mat-row *matRowDef="let history; columns: ['reason', 'diagnosis', 'status', 'actions']" (click)="onClickRow(history)"></tr>
+      <tr mat-row *matRowDef="let prescription; columns: ['symtomps', 'diagnosis', 'status', 'creationDate', 'doctor', 'actions']"
+        (click)="onClickRow(prescription)"></tr>
     </table>
 
-
   </div>
-
-  <div class="table-container">
-    <h3 class="subtitle">Medicamentos</h3>
-    <!-- Aquí va tu tabla de Angular Material -->
-    <table mat-table [dataSource]="medicalHistories" class="mat-elevation-z8">
-      <!-- Columnas de la tabla -->
-      <ng-container matColumnDef="reason">
-        <th mat-header-cell *matHeaderCellDef> Síntomas </th>
-        <td mat-cell *matCellDef="let history"> {{ history.reason }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="diagnosis">
-        <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
-        <td mat-cell *matCellDef="let history"> {{ history.diagnosis }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Estatus </th>
-        <td mat-cell *matCellDef="let history"> {{ history.status }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>
-          <button class="btnAdd" mat-icon-button (click)="addMedicalHistory()">
-            <mat-icon>library_add</mat-icon>
-          </button>
-        </th>
-        <td mat-cell *matCellDef="let history">
-          <!-- Botones para editar o eliminar el historial médico -->
-          <button mat-icon-button (click)="deleteMedicalHistory(history)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
-
-      <!-- Encabezados de la tabla -->
-      <tr mat-header-row *matHeaderRowDef="['reason', 'diagnosis', 'status', 'actions']"></tr>
-
-      <!-- Filas de la tabla -->
-      <tr mat-row *matRowDef="let history; columns: ['reason', 'diagnosis', 'status', 'actions']" (click)="onClickRow(history)"></tr>
-    </table>
-
-
-  </div>
-
 
 </div>

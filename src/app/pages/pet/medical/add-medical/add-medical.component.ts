@@ -51,7 +51,7 @@ export class AddMedicalComponent implements OnInit {
   submitForm() {
     this.diagnosis.reason = this.symptoms.join(', ');
     this.diagnosis.pet.id = this.petI;
-    this.petService.createMedicalHistory(this.diagnosis).subscribe(
+    /* this.petService.createMedicalHistory(this.diagnosis).subscribe(
       (res: any) => {
         Swal.fire({
           icon: 'success',
@@ -70,7 +70,7 @@ export class AddMedicalComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
-    );
+    ); */
     console.log(this.diagnosis);
   }
 

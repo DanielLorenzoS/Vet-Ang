@@ -100,10 +100,8 @@ td {
 }
 
 th {
-    background-color: #fff !important;
-    color: #0060b0;
-    border-top: 3px solid #0060b0 !important;
-    border-bottom: 3px solid #0060b0 !important;
+    background-color: #0060b0 !important;
+    color: #fff;
 }
 
 th:nth-child(1) {
@@ -121,16 +119,16 @@ table {
 }
 
 tr.mat-mdc-row:hover {
-    background-color: #0060b0;
+    background-color: #3393e3 !important;
     cursor: pointer;
 }
 
 tr:nth-child(even) {
-    background-color: #ccc !important;
+    background-color: #a2d4fd !important;
 }
 
 tr:nth-child(even):hover {
-    background-color: #0060b0 !important;
+    background-color: #3393e3 !important;
 }
 
 tr.mat-mdc-row:hover td {
@@ -157,17 +155,16 @@ tr.mat-mdc-row:hover td {
 }
 
 .mat-column-id {
-    border-left: 2px solid #0060b0;
+    border-left: none;
     width: 12% !important;
 }
 
 .mat-column-user {
-    border-right: 2px solid #0060b0;
+    border-right: none;
 }
 
 .mat-paginator {
     min-width: 600px;
-    border: 3px solid #0060b0 !important;
     background-color: #fff;
     color: #0060b0;
 }

@@ -28,6 +28,7 @@ export class PetComponent {
   pet: any = {};
   user: any = {};
   medicalHistories: any = {};
+  prescriptions: any = {};
   showInfo: boolean = true;
   petForm!: FormGroup;
   id: number = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
@@ -42,6 +43,7 @@ export class PetComponent {
 
 
   ngOnInit(): void {
+    this.spinner.showLoadingIndicator();
     this.getPets();
     this.petForm = this.formBuilder.group({
       name: [this.pet.name], // Valor inicial para el nombre
@@ -62,10 +64,9 @@ export class PetComponent {
 
 
   getPets() {
-    this.spinner.showLoadingIndicator();
     this.petService.getPetById(this.id).subscribe(
       (res: any) => {
-        console.log(res);
+        this.spinner.hideLoadingIndicator();
         if (res === null) {
           Swal.fire({
             icon: 'error',
@@ -73,13 +74,12 @@ export class PetComponent {
           });
           this.router.navigate(['/dashboard/pets']);
         } else {
-          this.spinner.hideLoadingIndicator();
+          console.log(res);
           this.pet = res;
-          this.medicalHistories = res.medicalHistories;
+          this.prescriptions = res.prescriptions;
         }
       },
       (err: any) => {
-        this.spinner.hideLoadingIndicator();
         console.log(err);
       }
     );
@@ -89,7 +89,8 @@ export class PetComponent {
     this.router.navigate(['/pet/edit-medical-history', history.id]);
   }
 
-  deleteMedicalHistory(history: any) {
+  deletePrescription(id: number, event: Event) {
+    event.stopPropagation();
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¡No podrás revertir esto!',
@@ -97,21 +98,35 @@ export class PetComponent {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#dc3545',
-      confirmButtonText: '¡Sí, bórralo!',
+      confirmButtonText: '¡Sí, eliminar!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      this.spinner.showLoadingIndicator();
-      this.petService.deleteMedicalHistory(history.id).subscribe(
-        (res: any) => {
-          this.spinner.hideLoadingIndicator();
-          console.log(res);
-          this.getPets();
-        },
-        (err: any) => {
-          this.spinner.hideLoadingIndicator();
-          console.log(err);
-        }
-      );
+      if (result.isConfirmed) {
+        this.spinner.showLoadingIndicator();
+        this.petService.deletePrescription(id).subscribe(
+          (res: any) => {
+            this.spinner.hideLoadingIndicator();
+            console.log(res);
+            this.getPets();
+            Swal.fire({
+              title: '¡Eliminado!',
+              text: 'La prescripción ha sido eliminada.',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          },
+          (err: any) => {
+            this.spinner.hideLoadingIndicator();
+            Swal.fire({
+              title: 'Error',
+              text: 'No se ha podido eliminar la prescripción',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+            console.log(err);
+          }
+        );
+      }
     });
   }
 
@@ -119,8 +134,8 @@ export class PetComponent {
     this.showInfo = !this.showInfo;
   }
 
-  addMedicalHistory() {
-    this.router.navigate(['/dashboard/addMedical'], { queryParams: { id: this.pet.id } });
+  addPrescription() {
+    this.router.navigate(['/dashboard/addPrescription'], { queryParams: { id: this.pet.id } });
   }
 
   getUserByPetId() {
@@ -220,7 +235,8 @@ export class PetComponent {
     });
   }
 
-  onClickRow(history: any) {
-    this.router.navigate([`/dashboard/medical/${history.id}`]);
+  onClickRow(prescription: any) {
+    this.router.navigate(['/dashboard/prescription'], { queryParams: { id: prescription.id } });
   }
+  
 }

@@ -20,6 +20,8 @@ import { AppointmentComponent } from './pages/appointment/appointment/appointmen
 import { AddAppointmentComponent } from './pages/appointment/add-appointment/add-appointment.component';
 import { MedicalComponent } from './pages/pet/medical/medical/medical.component';
 import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical.component';
+import { AddPrescriptionComponent } from './pages/pet/medical/add-prescription/add-prescription.component';
+import { PrescriptionComponent } from './pages/pet/medical/prescription/prescription.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -43,6 +45,8 @@ const routes: Routes = [
       { path: 'appointments', component: AllAppointmentComponent, canActivate: [authGuard] },
       { path: 'appointment', component: AppointmentComponent, canActivate: [authGuard] },
       { path: 'addAppointment', component: AddAppointmentComponent, canActivate: [authGuard] },
+      { path: 'addPrescription', component: AddPrescriptionComponent, canActivate: [authGuard] },
+      { path: 'prescription', component: PrescriptionComponent, canActivate: [authGuard] },
       { path: '**', redirectTo: 'graphics' }
     ]
   },

@@ -94,7 +94,7 @@
 }
 
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .container {
     margin: 1rem 0;
   }
@@ -108,7 +108,7 @@
     margin: auto;
     grid-column: span 2 !important;
   }
-  .graphics_body_item:last-child {
+  .graphics_body_item:nth-child(3) {
     grid-column: span 4 !important;
   }
 }

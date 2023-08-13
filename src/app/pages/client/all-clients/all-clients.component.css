@@ -71,14 +71,13 @@
 
 .search button {
     width: auto;
-    height: 3rem;
+    height: 3.5rem;
     border: none;
     border-radius: 5px;
     background-color: #fff;
     color: #000;
     font-size: 1.2rem;
     font-weight: 300;
-    outline: none;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -100,9 +99,8 @@ td {
 }
 
 th {
-    border-top: 2px solid #0060b0 !important;
-    border-bottom: 2px solid #0060b0 !important;
-    color: #0060b0;
+    color: #fff;
+    background-color: #0060b0 !important;
 }
 
 th:nth-child(1) {
@@ -119,16 +117,16 @@ table {
 }
 
 tr.mat-mdc-row:hover {
-    background-color: #0060b0;
+    background-color: #3393e3 !important;
     cursor: pointer;
 }
 
 tr:nth-child(even) {
-    background-color: #ccc !important;
+    background-color: #a2d4fd !important;
 }
 
 tr:nth-child(even):hover {
-    background-color: #0060b0 !important;
+    background-color: #3393e3 !important;
 }
 
 tr.mat-mdc-row:hover td {
@@ -154,17 +152,17 @@ tr.mat-mdc-row:hover td {
 }
 
 .mat-column-id {
-    border-left: 2px solid #0060b0;
+    border-left: none;
     width: 10% !important;
 }
 
 .mat-column-phone {
-    border-right: 2px solid #0060b0;
+    border-right: none;
 }
 
 .mat-paginator {
     min-width: 600px;
-    border: 2px solid #0060b0;
+    border: none;
     border-bottom: none;
 }
 

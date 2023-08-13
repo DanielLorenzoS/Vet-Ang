@@ -18,6 +18,14 @@
                 <mat-icon>event</mat-icon>
                 <span>Citas</span>
             </mat-button-toggle>
+            <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
+                <mat-icon>shopping_cart</mat-icon>
+                <span>Productos</span>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
+                <mat-icon>healing</mat-icon>
+                <span>Servicios</span>
+            </mat-button-toggle>
         </mat-button-toggle-group>
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">

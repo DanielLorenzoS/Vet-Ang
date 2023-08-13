@@ -63,7 +63,7 @@
                         </button>
                     </th>
                     <td mat-cell *matCellDef="let pet">
-                        <button mat-icon-button class="btnPet" (click)="deletePet(pet)">
+                        <button mat-icon-button class="btnPet" (click)="deletePet(pet, $event)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>

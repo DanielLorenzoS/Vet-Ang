@@ -24,7 +24,7 @@ export class MedicalComponent implements OnInit{
 
   getMedicalHistory() {
     this.spinner.showLoadingIndicator();
-    this.petService.getMedicalHistoriesById(this.route.snapshot.paramMap.get('id')!).subscribe(
+    /* this.petService.getMedicalHistoriesById(this.route.snapshot.paramMap.get('id')!).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
         this.medical = res;
@@ -34,7 +34,7 @@ export class MedicalComponent implements OnInit{
         this.spinner.hideLoadingIndicator();
         console.log(err);
       }
-    );
+    ); */
   }
 
 }

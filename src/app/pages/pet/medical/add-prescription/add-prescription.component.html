@@ -1,0 +1,52 @@
+<div class="add-diagnosis-container">
+    <h2>Agregar Diagnóstico</h2>
+    <form (ngSubmit)="submitForm()">
+        <div class="form-group">
+            <label for="reason">Síntomas:</label>
+            <input type="text" id="reason" name="reason" [(ngModel)]="symptomInput" (keyup.enter)="addSymptom()"
+                required placeholder="Haz enter para agregar un síntoma...">
+        </div>
+        <div class="symptom-checkboxes">
+            <h2 *ngIf="symptoms.length === 0">Aún no has agregado síntomas</h2>
+            <div *ngFor="let symptom of symptoms">
+                <mat-icon class="remove" (click)="removeSymptom(symptom)">close</mat-icon>
+                <label class="label" [for]="symptom">{{ symptom }}</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="diagnosis">Diagnóstico:</label>
+            <input type="text" id="diagnosis" name="diagnosis" [(ngModel)]="diagnosis.diagnosis" required
+                placeholder="Diagnóstico...">
+        </div>
+        <div class="form-group">
+            <label for="observations">Recomendaciones:</label>
+            <input type="text" id="observations" name="observations" [(ngModel)]="diagnosis.observations" required
+                placeholder="Recomendaciones...">
+        </div>
+        <div class="form-group">
+            <label for="status">Estatus:</label>
+            <select id="status" name="status" [(ngModel)]="diagnosis.status" required>
+                <option value="" disabled selected>Selecciona un estatus...</option>
+                <option value="En tratamiento">En tratamiento</option>
+                <option value="Recuperado">Recuperado</option>
+                <option value="Sin cambios">Sin cambios</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="doctor">Doctor:</label>
+            <select id="doctor" name="doctor" [(ngModel)]="diagnosis.doctor.id" required>
+                <option value="" disabled selected>Selecciona un doctor...</option>
+                <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Medicamentos:</mat-label>
+                <mat-select multiple [(ngModel)]="diagnosis.medicines" name="medicines" required>
+                    <mat-option *ngFor="let medicine of medicines" [value]="medicine.id">{{ medicine.name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+    <button (click)="submitForm()">Agregar Diagnóstico</button>
+</div>
