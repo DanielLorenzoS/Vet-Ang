@@ -106,7 +106,12 @@ export class PetService {
   }
 
   getMedicineByName(name: string) {
-      
-      return this.http.get(`${this.url}/medical/medicine/${name}`, { headers: this.getHeadersViaCookie() });
-    }
+
+    return this.http.get(`${this.url}/medical/medicine/${name}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  createRelation(relation: any) {
+
+    return this.http.post(`${this.url}/medical/relation`, relation, { headers: this.getHeadersViaCookie() });
+  }
 }

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         this.userService.getCurrentUser().subscribe(
           (res: any) => {
             console.log('res ', res.authorities[0].authority);
-            if (res.authorities[0].authority === 'ROLE_USER') {
+            if (res.authorities[0].authority === 'ROLE_EMPLOYEE' || res.authorities[0].authority === 'ROLE_ADMIN') {
               this.loadingIndicatorService.hideLoadingIndicator();
               Swal.fire({
                 icon: 'success',
@@ -62,6 +62,13 @@ export class LoginComponent implements OnInit {
               });
               this.getEmailByUsername(this.loginForm.value.username);
               this.router.navigate(['/registro2']);
+            } else if (res.authorities[0].authority === 'ROLE_USER') {
+              Swal.fire({
+                icon: 'warning',
+                title: 'No tienes permisos para acceder',
+                text: 'Contacta con el administrador',
+                showConfirmButton: true,
+              });
             }
           },
           (error: any) => {

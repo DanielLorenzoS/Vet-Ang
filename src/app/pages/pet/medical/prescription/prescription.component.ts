@@ -41,8 +41,8 @@ export class PrescriptionComponent implements OnInit {
   ) { }
 
   dataSource!: Medicine[];
-  columnsToDisplay = ['name', 'type', 'description'];
-  columnsHeaders = ['Nombre', 'Tipo', 'Descripción'];
+  columnsToDisplay = ['medicines[0].name', 'via', 'interval', 'dose'];
+  columnsHeaders = ['Nombre', 'Tipo', 'Intervalo', 'Dosis'];
 
   toggleRow(element: { expanded: boolean; }) {
     element.expanded = !element.expanded
@@ -67,7 +67,7 @@ export class PrescriptionComponent implements OnInit {
     this.petService.getPrescriptionById(id).subscribe(
       (res: any) => {
         this.diagnosis = res;
-        this.dataSource = res.medicines;
+        this.dataSource = res.relations;
         console.log(this.diagnosis);
         this.spinner.hideLoadingIndicator();
       },

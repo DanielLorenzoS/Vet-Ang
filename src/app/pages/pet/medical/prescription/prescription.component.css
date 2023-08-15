@@ -30,6 +30,10 @@
   margin: 1rem 0;
 }
 
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 !important;
+}
+
 table th, table td{
   text-align: center;
   cursor: default;
@@ -66,6 +70,13 @@ table td {
   margin: auto;
 }
 
+.detail-table td {
+  width: 20%;
+}
+
+.detail-table td:last-child {
+  width: 60%;
+}
 
 .diagnosis-field {
   grid-column: span 1;

@@ -37,10 +37,12 @@
   </div>
   <div class="wrapper">
 
-    <table mat-table [dataSource]="diagnosis.medicines" multiTemplateDataRows class="mat-elevation-z8">
+    <table mat-table [dataSource]="diagnosis.relations" multiTemplateDataRows class="mat-elevation-z8">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; let i = index">
         <th class="th" mat-header-cell *matHeaderCellDef> {{columnsHeaders[i]}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        <td mat-cell *matCellDef="let element">
+          {{ i === 0 ? element.medicines[0].name : element[column] }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="expandedDetail">
@@ -48,22 +50,14 @@
           <div class="example-element-detail" [@detailExpand]="element.expanded ? 'expanded' : 'collapsed'">
             <table class="detail-table">
               <tr>
-                <!-- <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Tipo</th> -->
                 <th>Marca</th>
-                <th>Dosis</th>
-                <th>Via</th>
-                <th>Intervalo</th>
+                <th>Tipo</th>
+                <th>Descripción</th>
               </tr>
               <tr>
-                <!-- <td>{{element.name}}</td>
-                <td>{{element.description}}</td>
-                <td>{{element.type}}</td> -->
-                <td>{{element.fabricator}}</td>
-                <td>{{element.dose}}</td>
-                <td>{{element.via}}</td>
-                <td>{{element.interval}}</td>
+                <td>{{element.medicines[0].fabricator}}</td>
+                <td>{{element.medicines[0].type}}</td>
+                <td>{{element.medicines[0].description}}</td>
               </tr>
             </table>
           </div>

@@ -43,6 +43,10 @@
     outline: none;
 }
 
+.input::placeholder {
+  font-style: italic;
+}
+
 .link {
     color: #2962ff;
     text-decoration: none;

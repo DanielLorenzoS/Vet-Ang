@@ -139,6 +139,7 @@ export class IndividualClientComponent implements OnInit {
               showConfirmButton: false,
               timer: 1000
             })
+            this.router.navigate(['/dashboard/client'])
           }
         ), (err: any) => {
           this.spinner.hideLoadingIndicator();

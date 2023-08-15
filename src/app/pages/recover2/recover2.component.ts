@@ -47,7 +47,7 @@ export class Recover2Component implements OnInit{
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Registro exitoso',
+            title: 'Validación exitosa',
             showConfirmButton: false,
             timer: 2000
           });

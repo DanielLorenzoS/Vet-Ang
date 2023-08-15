@@ -26,6 +26,10 @@
                 <mat-icon>healing</mat-icon>
                 <span>Servicios</span>
             </mat-button-toggle>
+            <mat-button-toggle *ngIf="showEmployees" (click)="close('')" class="buttonSide" value="Dashboard">
+                <mat-icon>badge</mat-icon>
+                <span>Empleados</span>
+            </mat-button-toggle>
         </mat-button-toggle-group>
     </mat-drawer>
     <mat-drawer-content class="mat-drawer-content">

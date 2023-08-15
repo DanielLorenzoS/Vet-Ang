@@ -68,7 +68,17 @@ export class UserService {
 
   getUserByUsername(username: string) {
 
-    return this.http.get(`${this.url}/user/${username}`, { headers: this.getHeadersViaCookie() });
+    return this.http.get(`${this.url}/user/username/${username}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getUserByEmail(email: string) {
+
+    return this.http.get(`${this.url}/user/email/${email}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getUserByPhone(phone: string) {
+
+    return this.http.get(`${this.url}/user/phone/${phone}`, { headers: this.getHeadersViaCookie() });
   }
 
   createClient(user: any) {

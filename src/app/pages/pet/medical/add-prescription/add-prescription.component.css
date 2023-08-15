@@ -18,7 +18,7 @@ h2 {
 form {
     grid-column: span 2;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
     outline-color: #0060b0;
 }
@@ -35,8 +35,7 @@ select {
 
 
 .form-group {
-    grid-column: span 1;
-    margin-bottom: 15px;
+    grid-column: span 3;
 }
 
 .form-group:last-child {
@@ -45,10 +44,20 @@ select {
     grid-column: span 2;
 }
 
-.form-group:last-child mat-form-field {
-    width: 100%;
+.form-group:nth-child(7) {
+    grid-column: span 6;
 }
-    
+
+.form-group:nth-child(7) mat-form-field {
+    width: 60%;
+}
+
+.form-group:nth-child(8),
+.form-group:nth-child(9),
+.form-group:nth-child(10) {
+    grid-column: span 2;
+}
+
 div.mat-mdc-select-panel {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
@@ -132,6 +141,67 @@ input {
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+.container-medicines {
+    grid-column: span 6;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+}
+
+.container-medicines .form-group:first-child {
+    grid-column: span 4;
+}
+
+.container-medicines .form-group:first-child mat-form-field {
+    width: 90%;
+}
+
+.container-medicines button {
+    padding: .6rem;
+    width: 80%;
+}
+
+.addedMedicines {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    width: 100%;
+    grid-column: span 6;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.addedMedicines .medicine {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 2rem;
+}
+
+.addedMedicines span {
+    border-bottom: 1px solid #ccc;
+    padding: .5rem;
+    line-height: 2rem;
+    width: 100%;
+}
+
+.container-medicines .form-group {
+    grid-column: span 2;
+}
+
+@media (max-width: 700px) {
+    .form-group {
+        grid-column: span 6 !important;
+    }
+
+    .form-group:nth-child(7) mat-form-field {
+        width: 90%;
+    }
 }
 
 @media (max-width: 650px) {
