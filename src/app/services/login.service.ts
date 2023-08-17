@@ -41,6 +41,7 @@ export class LoginService {
 
   logout() {
     this.cookieService.deleteAll();
+    this.cookieService.delete('token');
     window.location.reload();
     return true;
   }
@@ -81,4 +82,15 @@ export class LoginService {
     return this.http.get(`${this.url}/actualuser/${username}`);
   }
 
+  usernameExists(username: String) {
+    return this.http.get(`${this.url}/exists/username/${username}`);
+  }
+
+  emailExists(email: String) {
+    return this.http.get(`${this.url}/exists/email/${email}`);
+  }
+
+  phoneExists(phone: String) {
+    return this.http.get(`${this.url}/exists/phone/${phone}`);
+  }
 }

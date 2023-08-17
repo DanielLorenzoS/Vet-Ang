@@ -3,8 +3,8 @@
     <form (ngSubmit)="submitForm()" [formGroup]="prescriptionForm">
         <div class="form-group">
             <label for="reason">Síntomas:</label>
-            <input type="text" id="reason" name="reason" formControlName="symptom" (keyup.enter)="addSymptom($event)" required
-                placeholder="Haz enter para agregar un síntoma...">
+            <input type="text" id="reason" name="reason" formControlName="symptom" (keyup.enter)="addSymptom($event)"
+                required placeholder="Haz enter para agregar un síntoma...">
         </div>
         <div class="form-group symptom-checkboxes">
             <h2 *ngIf="symptoms.length === 0">Aún no has agregado síntomas</h2>
@@ -50,13 +50,10 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <button type="button" (click)="medicinesForm()">Agregar medicamento</button>
             <div class="form-group">
-                <label for="dose">Dosis:</label>
                 <input type="text" id="dose" name="dose" formControlName="dose" required placeholder="Ingresa la dosis">
             </div>
             <div class="form-group">
-                <label for="via">Via:</label>
                 <select id="via" name="via" formControlName="via" required>
                     <option value="" disabled selected>Selecciona una via...</option>
                     <option value="Oral">Oral</option>
@@ -71,24 +68,24 @@
                     <option value="Tópica">Tópica</option>
                     <option value="Oftálmica">Oftálmica</option>
                     <option value="Ótica">Ótica</option>
-
                 </select>
             </div>
             <div class="form-group">
-                <label for="interval">Intervalo:</label>
                 <input type="text" id="interval" name="interval" formControlName="interval" required
                     placeholder="Ingresa el intérvalo">
             </div>
+            <button type="button" class="addMedicine" (click)="medicinesForm()">Agregar medicamento</button>
             <div class="addedMedicines" *ngIf="listMedicines.length > 0">
                 <span>Medicinas añadidas</span>
                 <div class="medicine" *ngFor="let medicine of listMedicines">
-                    <p>Medicina: {{ medicine.medicine.name }}</p>
+                    <p>{{ medicine.medicine.name }}</p>
                     <p>Dosis: {{ medicine.dose }}</p>
                     <p>Via: {{ medicine.via }}</p>
                     <p>Intervalo: {{ medicine.interval }}</p>
                 </div>
             </div>
         </div>
+
     </form>
     <button (click)="submitForm()">Agregar Diagnóstico</button>
 </div>

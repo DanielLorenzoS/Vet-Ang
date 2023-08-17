@@ -36,6 +36,8 @@ select {
 
 .form-group {
     grid-column: span 3;
+    width: 90%;
+    margin: auto;
 }
 
 .form-group:last-child {
@@ -151,11 +153,17 @@ input {
 }
 
 .container-medicines .form-group:first-child {
-    grid-column: span 4;
+    grid-column: span 6;
 }
 
 .container-medicines .form-group:first-child mat-form-field {
-    width: 90%;
+    width: 80%;
+}
+
+.container-medicines button {
+    grid-column: span 6;
+    margin: auto;
+    margin-top: 1rem;
 }
 
 .container-medicines button {
@@ -172,15 +180,25 @@ input {
     font-weight: 300;
 }
 
-.addedMedicines .medicine {
+.addedMedicines {
     font-size: 1.2rem;
     margin: 1rem 0;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     line-height: 2rem;
+}
+
+.medicine {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    width: 100%;
+}
+
+.medicine p {
+    margin: auto;
 }
 
 .addedMedicines span {
@@ -192,6 +210,23 @@ input {
 
 .container-medicines .form-group {
     grid-column: span 2;
+}
+
+.addMedicine {
+    margin-bottom: 0;
+    padding: .5rem;
+}
+
+@media (max-width: 980px) {
+    .medicine p {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 850px) {
+    .medicine {
+        word-wrap: break-word;
+    }
 }
 
 @media (max-width: 700px) {

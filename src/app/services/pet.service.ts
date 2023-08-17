@@ -114,4 +114,14 @@ export class PetService {
 
     return this.http.post(`${this.url}/medical/relation`, relation, { headers: this.getHeadersViaCookie() });
   }
+
+  countSpecies() {
+
+    return this.http.get(`${this.url}/dashboard/pets`, { headers: this.getHeadersViaCookie() });
+  }
+
+  countMedicines() {
+
+    return this.http.get(`${this.url}/medical/count`, { headers: this.getHeadersViaCookie() });
+  }
 }

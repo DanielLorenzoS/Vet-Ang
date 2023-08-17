@@ -148,20 +148,20 @@ export class AddPrescriptionComponent implements OnInit {
       }
     });
     console.log(this.listMedicines);
+    this.medicineForm.reset();
   }
 
   submitForm() {
 
     this.spinnerService.showLoadingIndicator();
 
-    this.listMedicinesDTO = []; // Arreglo para almacenar las medicinas sin repetir
+    this.listMedicinesDTO = [];
 
-    const uniqueMedicineIds = new Set<number>(); // Conjunto para almacenar IDs únicos de medicamentos
+    const uniqueMedicineIds = new Set<number>();
 
     this.listMedicines.forEach((medicine: any) => {
       const medicineId = medicine.medicine.id;
 
-      // Si el ID del medicamento no está en el conjunto, agrega la medicina a listMedicinesDTO y al conjunto
       if (!uniqueMedicineIds.has(medicineId)) {
         this.listMedicinesDTO.push({
           medicines: [{ id: medicineId }],
@@ -180,9 +180,7 @@ export class AddPrescriptionComponent implements OnInit {
           console.log(res);
           this.listMedicinesIds.push({ id: res.id });
 
-          // Verifica si es el último elemento del ciclo forEach
           if (index === this.listMedicinesDTO.length - 1) {
-            // Crear diagnosis después de completar todas las relaciones
             const currentDate = new Date();
             const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const day = currentDate.getDate().toString().padStart(2, '0');
@@ -233,42 +231,6 @@ export class AddPrescriptionComponent implements OnInit {
         }
       );
     });
-
-
-
-    /* this.listMedicinesDTO.forEach((medicine: any) => {
-      this.petService.createRelation(medicine).subscribe(
-        (res: any) => {
-          console.log(res);
-          this.listMedicinesIds.push({ id: res.id });
-        },
-        (err: any) => {
-          console.log(err);
-        }
-      );
-    });
-    
-    const currentDate = new Date();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Agrega el cero al mes si es necesario
-    const day = currentDate.getDate().toString().padStart(2, '0');
-    const year = currentDate.getFullYear();
-
-    let date: string = `${day}-${month}-${year}`;
-    
-    let diagnosis: Diagnosis = { 
-      symtomps: this.symptoms.join(', '),
-      diagnosis: this.prescriptionForm.value.diagnosis, 
-      status: this.prescriptionForm.value.status,
-      creationDate: date, 
-      observations: this.prescriptionForm.value.observations,
-      doctors: [{ id: this.prescriptionForm.value.doctor }], 
-      pet: { id: this.petId },
-      relations: this.listMedicinesIds.map(m => m)
-    };
-
-    console.log(this.prescriptionForm.value);
-    console.log(diagnosis);
- */
 
   }
 

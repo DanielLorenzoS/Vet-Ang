@@ -55,11 +55,9 @@
         <h2 class="graphics_body_item_title">Clientes</h2>
       </div>
       <div class="graphics_body_item_body">
-        <ngx-charts-area-chart [view]="[400, 300]" [scheme]="colorScheme" [results]="areaChartData" [xAxis]="showXAxis"
+        <ngx-charts-area-chart [view]="[400, 300]" [scheme]="'cool'" [results]="areaChartData" [xAxis]="showXAxis"
           [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
           [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-area-chart>
-
-
       </div>
     </div>
     <div class="graphics_body_item">
@@ -78,9 +76,8 @@
         <h2 class="graphics_body_item_title">Medicamentos</h2>
       </div>
       <div class="graphics_body_item_body">
-        <ngx-charts-pie-chart class="chart" [view]="[550, 300]" [scheme]="colorScheme" [results]="pieChartData"
-          [explodeSlices]="true" [doughnut]="false" [legend]="true"></ngx-charts-pie-chart>
-
+        <ngx-charts-pie-chart class="chart" [view]="[650, 400]" [scheme]="'neons'" [results]="pieChartData"
+          [explodeSlices]="false" [doughnut]="false" [legend]="true" [labels]="true" ></ngx-charts-pie-chart>
       </div>
     </div>
   </div>

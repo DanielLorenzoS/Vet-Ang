@@ -14,7 +14,7 @@
                 <mat-icon>pets</mat-icon>
                 <span>Mascotas</span>
             </mat-button-toggle>
-            <mat-button-toggle (click)="close('')" class="buttonSide" value="underline">
+            <mat-button-toggle (click)="close('appointments')" class="buttonSide" value="underline">
                 <mat-icon>event</mat-icon>
                 <span>Citas</span>
             </mat-button-toggle>
@@ -26,7 +26,7 @@
                 <mat-icon>healing</mat-icon>
                 <span>Servicios</span>
             </mat-button-toggle>
-            <mat-button-toggle *ngIf="showEmployees" (click)="close('')" class="buttonSide" value="Dashboard">
+            <mat-button-toggle *ngIf="showEmployees" (click)="close('employees')" class="buttonSide" value="Dashboard">
                 <mat-icon>badge</mat-icon>
                 <span>Empleados</span>
             </mat-button-toggle>

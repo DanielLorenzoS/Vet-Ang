@@ -16,9 +16,13 @@
             </div>
             <div class="form-group">
                 <label for="specie">Especie</label>
-                <input class="input" type="text" id="specie" name="specie" formControlName="specie"
-                    placeholder="Especie" required>
-                <mat-error *ngIf="newPetForm.get('specie')?.touched && newPetForm.get('specie')?.errors?.['required']">La especie es requerida</mat-error>
+                <select class="input" id="specie" name="specie" formControlName="specie" required>
+                    <option value="">Seleccionar especie</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Otra">Otra</option>
+                </select>
+                <mat-error *ngIf="newPetForm.get('species')?.touched && newPetForm.get('species')?.errors?.['required']">La especie es requerida</mat-error>
             </div>
             <div class="form-group">
                 <label for="sex">Sexo</label>

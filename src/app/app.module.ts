@@ -47,6 +47,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FilterPipe } from './pipes/filter.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { EmployeesComponent } from './pages/employee/employees/employees.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [
@@ -75,7 +78,8 @@ import { MatSelectModule } from '@angular/material/select';
     AddMedicalComponent,
     AddPrescriptionComponent,
     PrescriptionComponent,
-    FilterPipe
+    FilterPipe,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [authInterceptorProviders, CookieService],
   bootstrap: [AppComponent]

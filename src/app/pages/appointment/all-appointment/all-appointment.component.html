@@ -1,1 +1,34 @@
-<p>all-appointment works!</p>
+<div class="appointments-container">
+    <h1 class="page-title">Organizar Citas</h1>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar cliente o mascota">
+        <button class="search-button">Buscar</button>
+    </div>
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let appointment">{{ appointment.id }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="clientName">
+            <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+            <mat-cell *matCellDef="let appointment">{{ appointment.clientName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="petName">
+            <mat-header-cell *matHeaderCellDef>Mascota</mat-header-cell>
+            <mat-cell *matCellDef="let appointment">{{ appointment.petName }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+            <mat-cell *matCellDef="let appointment">{{ appointment.date | date }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+</div>

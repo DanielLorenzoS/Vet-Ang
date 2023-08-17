@@ -5,7 +5,7 @@
             <div class="form-group">
                 <label for="username">Nombre de usuario</label>
                 <input class="input" type="username" id="username" name="username" formControlName="username"
-                    placeholder="Ej. Bruno" required>
+                    placeholder="Ej. Usuario" required>
                     <mat-error *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.errors?.['required']">El usuario es requerido</mat-error>
                     <mat-error *ngIf="loginForm.get('username')?.errors?.['pattern']">Sólo ingresa caracteres válidos</mat-error>
             </div>

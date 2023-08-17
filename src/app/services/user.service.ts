@@ -83,12 +83,20 @@ export class UserService {
 
   createClient(user: any) {
 
+    const currentDate = new Date();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    const year = currentDate.getFullYear();
+
+    let date: string = `${day}-${month}-${year}`;
+
     const userData = {
       email: user.email,
       phone: user.phone,
       direction: user.city + ' ' + user.municipality + ' ' + user.street,
       username: user.username,
       password: 'passwordClient',
+      createdAt: date,
       roles: ["CLIENT"]
     }
 
@@ -104,4 +112,30 @@ export class UserService {
 
     return this.http.delete(`${this.url}/deleteuser/${id}`, { headers: this.getHeadersViaCookie() });
   }
+
+  updateToEmployee(user: any) {
+      
+      const userData = {
+        id: user.id,
+        email: user.email,
+        phone: user.phone,
+        address: user.direction,
+        username: user.username
+      }
+  
+      return this.http.put(`${this.url}/updatetoemployee`, userData, { headers: this.getHeadersViaCookie() });
+    }
+
+    updateToUser(user: any) {
+        
+        const userData = {
+          id: user.id,
+          email: user.email,
+          phone: user.phone,
+          address: user.direction,
+          username: user.username
+        }
+    
+        return this.http.put(`${this.url}/updatetouser`, userData, { headers: this.getHeadersViaCookie() });
+      }
 }
