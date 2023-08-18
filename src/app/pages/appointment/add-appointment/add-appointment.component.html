@@ -1,1 +1,44 @@
-<p>add-appointment works!</p>
+<div class="form-container">
+    <h2>Agregar cita</h2>
+    <form [formGroup]="appointmentForm" (submit)="addAppointment()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        <mat-form-field>
+            <label for="reason">Razón:</label>
+            <input matInput type="text" id="reason" formControlName="reason" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label for="status">Estatus:</label>
+            <input matInput type="text" id="status" formControlName="status" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label for="type">Tipo:</label>
+            <input matInput type="text" id="type" formControlName="type" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label for="userId">ID de Usuario:</label>
+            <input matInput type="number" id="userId" formControlName="userId" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label for="petId">ID de Mascota:</label>
+            <input matInput type="number" id="petId" formControlName="petId" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <label for="doctorId">ID de Doctor:</label>
+            <input matInput type="number" id="doctorId" formControlName="doctorId" required>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit">Agregar Cita</button>
+    </form>
+</div>

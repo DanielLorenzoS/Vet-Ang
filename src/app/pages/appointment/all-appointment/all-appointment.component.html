@@ -1,34 +1,58 @@
-<div class="appointments-container">
-    <h1 class="page-title">Organizar Citas</h1>
+<div class="table-container">
+    <div class="mat-table">
+        <div class="top-container">
+            <h1 class="title">Citas</h1>
+            <div class="search">
+                <input matInput (keyup)="filter($event)" placeholder="Buscar">
+                <button (click)="goNewClient()">Agregar cita</button>
+            </div>
+        </div>
+        <div class="table-pag">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <div class="search-bar">
-        <input type="text" placeholder="Buscar cliente o mascota">
-        <button class="search-button">Buscar</button>
+                <!-- Columna User -->
+                <ng-container matColumnDef="user">
+                    <th mat-header-cell *matHeaderCellDef>Usuario</th>
+                    <td mat-cell *matCellDef="let appointment">{{ appointment.user }}</td>
+                </ng-container>
+
+                <!-- Columna Pet -->
+                <ng-container matColumnDef="pet">
+                    <th mat-header-cell *matHeaderCellDef>Mascota</th>
+                    <td mat-cell *matCellDef="let appointment">{{ appointment.pet }}</td>
+                </ng-container>
+
+                <!-- Columna Reason -->
+                <ng-container matColumnDef="reason">
+                    <th mat-header-cell *matHeaderCellDef>Razón</th>
+                    <td mat-cell *matCellDef="let appointment">{{ appointment.reason }}</td>
+                </ng-container>
+
+                <!-- Columna Status -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Estatus</th>
+                    <td mat-cell *matCellDef="let appointment">{{ appointment.status }}</td>
+                </ng-container>
+
+                <!-- Columna Type -->
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                    <td mat-cell *matCellDef="let appointment">{{ appointment.type }}</td>
+                </ng-container>
+
+                <!-- Columna Date -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                    <td mat-cell *matCellDef="let appointment">{{ appointment.formattedDate }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
+            </table>
+
+            <mat-paginator class="mat-paginator" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons></mat-paginator>
+        </div>
+
     </div>
-
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-            <mat-cell *matCellDef="let appointment">{{ appointment.id }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="clientName">
-            <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
-            <mat-cell *matCellDef="let appointment">{{ appointment.clientName }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="petName">
-            <mat-header-cell *matHeaderCellDef>Mascota</mat-header-cell>
-            <mat-cell *matCellDef="let appointment">{{ appointment.petName }}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
-            <mat-cell *matCellDef="let appointment">{{ appointment.date | date }}</mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
 </div>

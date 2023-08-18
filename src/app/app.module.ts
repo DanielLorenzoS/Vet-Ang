@@ -49,6 +49,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { EmployeesComponent } from './pages/employee/employees/employees.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { DatePipe } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 @NgModule({
@@ -103,9 +108,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatCheckboxModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    TranslateModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [authInterceptorProviders, CookieService],
+  providers: [authInterceptorProviders, CookieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

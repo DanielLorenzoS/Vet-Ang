@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "@cloudinary/angular": "^1.0.0-beta.14",
+    "@ngx-translate/core": "^15.0.0",
     "@swimlane/ngx-charts": "^20.4.1",
     "body-scroll-lock": "^4.0.0-beta.0",
     "d3-shape": "^3.2.0",
