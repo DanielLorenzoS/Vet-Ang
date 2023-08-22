@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PetService } from 'src/app/services/pet.service';
@@ -22,13 +23,12 @@ interface Appointment {
   }[];
 }
 
-
 @Component({
-  selector: 'app-add-appointment',
-  templateUrl: './add-appointment.component.html',
-  styleUrls: ['./add-appointment.component.css']
+  selector: 'app-edit-appointment',
+  templateUrl: './edit-appointment.component.html',
+  styleUrls: ['./edit-appointment.component.css']
 })
-export class AddAppointmentComponent {
+export class EditAppointmentComponent {
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     return day !== 0 && day !== 6;
@@ -37,9 +37,13 @@ export class AddAppointmentComponent {
   listUsers!: any[];
   listPets!: any[];
   listDoctors!: any[];
-  appointment!: Appointment;
-  appointmentHours: string[] = this.generateTimeIntervals("08:00 AM", "08:00 PM", 30);
-
+  appointment!: any;
+  appointmentHours: string[] = [
+    "08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
+    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM",
+    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM",
+    "05:00 PM", "05:30 PM", "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM"
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -47,47 +51,52 @@ export class AddAppointmentComponent {
     private petService: PetService,
     private appointmentService: AppointmentService,
     private spinnner: SpinnerService,
-    private router: Router
+    private router: Router,
+    public dialogRef: MatDialogRef<EditAppointmentComponent>
   ) { }
 
   ngOnInit() {
     /* this.spinnner.showLoadingIndicator(); */
-    this.appointmentForm = this.fb.group({
-      day: ['', Validators.required],
-      hour: ['', Validators.required],
-      reason: ['', Validators.required],
-      status: ['', Validators.required],
-      type: ['', Validators.required],
-      user: ['', Validators.required],
-      pet: ['', Validators.required],
-      doctor: ['', Validators.required]
-    });
+    this.getAppointmentById(localStorage.getItem('appointmentId')!);
     this.getUsers();
     this.getPets();
     this.getDoctors();
     this.appointment = {
+      id: '',
       date: '',
       reason: '',
       status: '',
-      type: '',
-      user: { id: 0 },
-      pets: [],
-      doctors: []
+      userId: '',
+      petId: '',
+      doctorId: ''
     };
+    console.log(this.appointment.pets[0].id)
   }
 
+  getAppointmentById(id: any) {
+    this.appointmentService.getAppointmentWithUserAndPet(id).subscribe(
+      (res: any) => {
+        console.log(res.date);
+        const dateString = res.date.split(' ')[0];
+        const lastTwoCharacters = dateString.slice(-2);
+        const dayOfMonth = parseInt(lastTwoCharacters, 10) + 1;
 
-  generateTimeIntervals(startTime: string, endTime: string, intervalMinutes: number): string[] {
-    const intervals: string[] = [];
-    const start = new Date(`2023-08-21 ${startTime}`);
-    const end = new Date(`2023-08-21 ${endTime}`);
+        const updatedDateString = dateString.slice(0, -2) + dayOfMonth.toString().padStart(2, '0');
+        console.log(updatedDateString);
 
-    while (start <= end) {
-      intervals.push(this.formatThisTime(start));
-      start.setMinutes(start.getMinutes() + intervalMinutes);
-    }
 
-    return intervals;
+        this.appointmentForm = this.fb.group({
+          day: [updatedDateString, Validators.required],
+          hour: [res.date.split(' ')[1], Validators.required],
+          reason: [res.reason, Validators.required],
+          status: [res.status, Validators.required],
+          user: [res.userId, Validators.required],
+          pet: [res.petId, Validators.required],
+          doctor: [res.doctorId, Validators.required]
+        });
+      },
+      err => console.log(err)
+    )
   }
 
   formatThisTime(time: Date): string {
@@ -128,31 +137,36 @@ export class AddAppointmentComponent {
     )
   }
 
-  addAppointment() {
+  updateAppointment() {
     this.spinnner.showLoadingIndicator();
 
     const selectedDate = this.appointmentForm.get('day')?.value;
     const selectedTime = this.appointmentForm.get('hour')?.value;
 
-    const formattedDate = this.formatDate(selectedDate);
     const formattedTime = this.formatTime(selectedTime);
+    const formattedDate = this.formatDate(new Date(selectedDate));
+    console.log(formattedDate);
 
     const combinedDateTime: string = `${formattedDate} ${formattedTime}`;
     this.appointment.date = combinedDateTime;
-    console.log(this.appointmentForm.value)
+    console.log(combinedDateTime)
+    this.appointment.id = parseInt(localStorage.getItem('appointmentId')!, 10);
+    this.appointment.date = combinedDateTime;
     this.appointment.reason = this.appointmentForm.get('reason')?.value;
     this.appointment.status = this.appointmentForm.get('status')?.value;
-    this.appointment.type = this.appointmentForm.get('type')?.value;
-    this.appointment.user.id = this.appointmentForm.get('user')?.value;
-    this.appointment.pets = [{ id: this.appointmentForm.get('pet')?.value }];
-    this.appointment.doctors = [{ id: this.appointmentForm.get('doctor')?.value }];
+    this.appointment.userId = this.appointmentForm.get('user')?.value;
+    this.appointment.petId = this.appointmentForm.get('pet')?.value;
+    this.appointment.doctorId = this.appointmentForm.get('doctor')?.value;
     console.log(this.appointment)
 
-    this.appointmentService.createAppointment(this.appointment).subscribe(
+    this.appointmentService.updateAppointment(this.appointment).subscribe(
       (res: any) => {
         console.log(res);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['dashboard/appointments']);
+        });
+        this.dialogRef.close();
         this.spinnner.hideLoadingIndicator();
-        this.router.navigate(['dashboard/appointments']);
       },
       err => {
         this.spinnner.hideLoadingIndicator();
@@ -170,26 +184,14 @@ export class AddAppointmentComponent {
   }
 
   formatTime(time: string): string {
-    console.log(time);
-    const [hoursStr, minutesStr] = time.split(':');
-    let hours = parseInt(hoursStr, 10);
-    const minutes = parseInt(minutesStr, 10);
-
-    const isPM = time.toLowerCase().includes('pm');
-
-    if (isPM && hours !== 12) {
-      hours += 12;
-    } else if (!isPM && hours === 12) {
-      hours = 0;
-    }
-
-
-    return `${this.twoDigits(hours)}:${this.twoDigits(minutes)}`;
+    const newTime = time.slice(0, -3);
+    return newTime;
   }
+
+
 
   twoDigits(value: number): string {
     return value < 10 ? `0${value}` : value.toString();
 
   }
-
 }

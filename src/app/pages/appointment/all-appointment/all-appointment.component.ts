@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -7,6 +8,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
+import { AddAppointmentComponent } from '../add-appointment/add-appointment.component';
+import { EditAppointmentComponent } from '../edit-appointment/edit-appointment.component';
+import Swal from 'sweetalert2';
 
 export interface Appointment {
   id: number;
@@ -15,14 +19,6 @@ export interface Appointment {
   date: string;
 }
 
-const APPOINTMENTS_DATA: Appointment[] = [
-  { id: 1, clientName: 'Juan Pérez', petName: 'Luna', date: '2023-08-20T10:00:00Z' },
-  { id: 2, clientName: 'María Rodríguez', petName: 'Max', date: '2023-08-21T15:30:00Z' },
-  { id: 3, clientName: 'Carlos Gómez', petName: 'Buddy', date: '2023-08-22T09:45:00Z' },
-  { id: 4, clientName: 'Ana López', petName: 'Milo', date: '2023-08-23T11:15:00Z' },
-  { id: 5, clientName: 'Luis Torres', petName: 'Coco', date: '2023-08-24T14:00:00Z' }
-];
-
 @Component({
   selector: 'app-all-appointment',
   templateUrl: './all-appointment.component.html',
@@ -30,20 +26,40 @@ const APPOINTMENTS_DATA: Appointment[] = [
 })
 export class AllAppointmentComponent {
   appointments: any[] = [];
+  completedAppointments: any[] = [];
 
-  displayedColumns: string[] = ['user', 'pet', 'reason', 'status', 'type', 'date'];
-  dataSource = new MatTableDataSource<any>(this.appointments); // Usa any como tipo genérico para la fuente de datos
+  displayedColumns: string[] = ['user', 'pet', 'doctor', 'reason', 'status', 'date', 'actions'];
+  dataSource = new MatTableDataSource<any>(this.appointments);
+  secondDataSource = new MatTableDataSource<any>(this.appointments);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private userService: UserService,
+    private dialog: MatDialog,
     private router: Router,
     private spinner: SpinnerService,
     private appointmentService: AppointmentService,
     private datePipe: DatePipe,
-    private translate: TranslateModule
+    public dialogRef: MatDialogRef<EditAppointmentComponent>
   ) { }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: any): void {
+    localStorage.setItem('appointmentId', id);
+    const dialogRef = this.dialog.open(EditAppointmentComponent, {
+      width: '80%',
+      enterAnimationDuration,
+      exitAnimationDuration
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Aquí puedes manejar los resultados después de cerrar la ventana modal
+      if (result) {
+        // Realizar acciones después de cerrar la ventana modal
+        this.loadAppointments(); // Actualiza las citas después de agregar una nueva cita
+      }
+    });
+  }
+
 
   ngOnInit(): void {
     this.spinner.showLoadingIndicator();
@@ -51,27 +67,59 @@ export class AllAppointmentComponent {
   }
 
   loadAppointments() {
+    this.spinner.showLoadingIndicator();
+    this.appointments = [];
     this.appointmentService.getAppointments().subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
-        this.appointments = res.map((appointment: any) => {
+
+        // Filtrar las citas con estatus "Finalizada"
+        const completedAppointments = res.filter((appointment: any) => {
+          return (
+            appointment.status === 'Finalizada' ||
+            appointment.status === 'Cancelada por el cliente' ||
+            appointment.status === 'Cancelada por el veterinario'
+          );
+        });
+
+        // Filtrar las citas sin estatus "Finalizada"
+        const activeAppointments = res.filter((appointment: any) => {
+          return (
+            appointment.status !== 'Finalizada' &&
+            appointment.status !== 'Cancelada por el cliente' &&
+            appointment.status !== 'Cancelada por el veterinario'
+          );
+        });
+
+        this.appointments = activeAppointments.map((appointment: any) => {
           const formattedDate = this.datePipe.transform(appointment.date, 'medium');
-          console.log(formattedDate);
           const translatedDate = formattedDate ? this.translateMonth(formattedDate) : '';
-          console.log(translatedDate);
           return {
             ...appointment,
             formattedDate: translatedDate
           };
         });
+
+        this.completedAppointments = completedAppointments.map((appointment: any) => {
+          const formattedDate = this.datePipe.transform(appointment.date, 'medium');
+          const translatedDate = formattedDate ? this.translateMonth(formattedDate) : '';
+          return {
+            ...appointment,
+            formattedDate: translatedDate
+          };
+        });
+        this.dataSource.data = this.appointments;
+        this.secondDataSource.data = this.completedAppointments;
         console.log(this.appointments);
-        this.dataSource = new MatTableDataSource<any>(this.appointments);
+        this.dataSource.paginator = this.paginator;
+        this.dialogRef.close();
+        this.spinner.hideLoadingIndicator();
       },
       err => {
         this.spinner.hideLoadingIndicator();
         console.log(err);
       }
-    )
+    );
   }
 
   translateMonth(dateString: string): string {
@@ -103,11 +151,18 @@ export class AllAppointmentComponent {
     return dateString;
   }
 
-
+  changeStatus(event: any, appointment: any) {
+    this.spinner.showLoadingIndicator();
+    this.appointmentService.updateStatus(appointment.id, event.value).subscribe(
+      (res: any) => {
+        this.loadAppointments();
+      },
+      err => { console.log(err) }
+    );
+  }
 
 
   onRowClick(row: any) {
-    console.log(row.username)
   }
 
   filter(event: Event) {
@@ -115,6 +170,43 @@ export class AllAppointmentComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase(); // Filtra los datos de la tabla
   }
 
-  goNewClient() {
+  filterSecondTable(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.secondDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  goNewAppointment() {
+    this.router.navigate(['dashboard/addAppointment'])
+  }
+
+  deleteAppointment(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás recuperar esta cita',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.spinner.showLoadingIndicator();
+        this.appointmentService.deleteAppointment(id).subscribe(
+          (res: any) => {
+            this.loadAppointments();
+            this.spinner.hideLoadingIndicator();
+            Swal.fire(
+              '¡Eliminada!',
+              'La cita ha sido eliminada.',
+              'success'
+            )
+          },
+          err => {
+            console.log(err);
+            this.spinner.hideLoadingIndicator();
+          }
+        );
+      }
+    }
+    )
   }
 }

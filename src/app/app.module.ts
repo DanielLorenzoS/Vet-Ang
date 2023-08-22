@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -52,7 +52,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DatePipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { EditAppointmentComponent } from './pages/appointment/edit-appointment/edit-appointment.component';
+
 
 
 
@@ -84,7 +88,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     AddPrescriptionComponent,
     PrescriptionComponent,
     FilterPipe,
-    EmployeesComponent
+    EmployeesComponent,
+    EditAppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -111,9 +116,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSlideToggleModule,
     TranslateModule.forRoot(),
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule,
+    MatDialogModule
   ],
-  providers: [authInterceptorProviders, CookieService, DatePipe],
+  providers: [authInterceptorProviders, CookieService, DatePipe, {provide: MatDialogRef, useValue: {}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

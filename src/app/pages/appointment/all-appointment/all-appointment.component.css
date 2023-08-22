@@ -1,21 +1,14 @@
 .table-container {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.table-pag {
-    width: 90%;
-    margin: auto;
-    margin-bottom: 0;
-}
-
 .mat-table {
     width: 100%;
-    height: 100%;
+    height: 89vh;
     margin: auto;
     overflow: auto;
     padding-top: 1rem;
@@ -25,14 +18,31 @@
     text-align: center;
 }
 
+.mat-table h2 span {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #000;
+}
+
+.table-pag {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 0;
+}
+
+
 .title {
     text-align: center;
     font-size: 3rem;
     font-weight: 350;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     margin-top: 1.5rem;
     color: #000;
     font-family: serif;
+}
+
+.secondTitle {
+    margin-top: 8rem;
 }
 
 .search {
@@ -134,9 +144,10 @@ tr.mat-mdc-row:hover td {
 
 .mat-column-reason,
 .mat-column-status,
-.mat-column-type,
+.mat-column-actions,
 .mat-column-date,
 .mat-column-user,
+.mat-column-doctor,
 .mat-column-pet {
     word-wrap: break-word !important;
     white-space: unset !important;
@@ -157,8 +168,20 @@ tr.mat-mdc-row:hover td {
     width: 10% !important;
 }
 
-.mat-column-phone {
-    border-right: none;
+.mat-column-status mat-form-field {
+    flex-direction: row;
+}
+
+.mat-column-actions {
+    width: 10% !important;
+}
+
+.edit {
+    color: blue !important;
+}
+
+.delete {
+    color: #ff0000 !important;
 }
 
 .mat-paginator {
