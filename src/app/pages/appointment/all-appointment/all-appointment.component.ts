@@ -180,7 +180,7 @@ export class AllAppointmentComponent {
   }
 
   deleteAppointment(id: number) {
-    Swal.fire({
+    Swal.fire({ 
       title: '¿Estás seguro?',
       text: 'No podrás recuperar esta cita',
       icon: 'warning',
