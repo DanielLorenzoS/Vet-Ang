@@ -59,6 +59,9 @@ import { EditAppointmentComponent } from './pages/appointment/edit-appointment/e
 import { AllDoctorsComponent } from './pages/doctor/all-doctors/all-doctors.component';
 import { DoctorComponent } from './pages/doctor/doctor/doctor.component';
 import { AddDoctorComponent } from './pages/doctor/add-doctor/add-doctor.component';
+import { AllMedicinesComponent } from './pages/medicine/all-medicines/all-medicines.component';
+import { MedicineComponent } from './pages/medicine/medicine/medicine.component';
+import { AddMedicineComponent } from './pages/medicine/add-medicine/add-medicine.component';
 
 
 
@@ -95,7 +98,10 @@ import { AddDoctorComponent } from './pages/doctor/add-doctor/add-doctor.compone
     EditAppointmentComponent,
     AllDoctorsComponent,
     DoctorComponent,
-    AddDoctorComponent
+    AddDoctorComponent,
+    AllMedicinesComponent,
+    MedicineComponent,
+    AddMedicineComponent
   ],
   imports: [
     BrowserModule,

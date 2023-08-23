@@ -3,35 +3,35 @@
     <mat-drawer class="side-container" mode="side" [opened]="isDrawerOpen">
         <mat-button-toggle-group class="toggle-group" name="fontStyle" aria-label="Font Style">
             <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
-                <mat-icon>dashboard</mat-icon>
+                <mat-icon class="material-icons-outlined">dashboard</mat-icon>
                 <span>Dashboard</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('client')" class="buttonSide" value="Client">
-                <mat-icon>group</mat-icon>
+                <mat-icon class="material-icons-outlined">group</mat-icon>
                 <span>Clientes</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('pets')" class="buttonSide" value="underline">
-                <mat-icon>pets</mat-icon>
+                <mat-icon class="material-icons-outlined">pets</mat-icon>
                 <span>Mascotas</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('appointments')" class="buttonSide" value="underline">
-                <mat-icon>event</mat-icon>
+                <mat-icon class="material-icons-outlined">event</mat-icon>
                 <span>Citas</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('doctors')" class="buttonSide" value="Client">
-                <mat-icon>vaccines</mat-icon>
+                <mat-icon class="material-icons-outlined">medical_services</mat-icon>
                 <span>Médicos</span>
             </mat-button-toggle>
-            <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
-                <mat-icon>shopping_cart</mat-icon>
-                <span>Productos</span>
+            <mat-button-toggle (click)="close('medicines')" class="buttonSide" value="Dashboard">
+                <mat-icon class="material-icons-outlined">vaccines</mat-icon>
+                <span>Medicinas</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
-                <mat-icon>healing</mat-icon>
+                <mat-icon class="material-icons-outlined">healing</mat-icon>
                 <span>Servicios</span>
             </mat-button-toggle>
             <mat-button-toggle *ngIf="showEmployees" (click)="close('employees')" class="buttonSide" value="Dashboard">
-                <mat-icon>badge</mat-icon>
+                <mat-icon class="material-icons-outlined">badge</mat-icon>
                 <span>Empleados</span>
             </mat-button-toggle>
         </mat-button-toggle-group>
