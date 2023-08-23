@@ -56,6 +56,9 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { EditAppointmentComponent } from './pages/appointment/edit-appointment/edit-appointment.component';
+import { AllDoctorsComponent } from './pages/doctor/all-doctors/all-doctors.component';
+import { DoctorComponent } from './pages/doctor/doctor/doctor.component';
+import { AddDoctorComponent } from './pages/doctor/add-doctor/add-doctor.component';
 
 
 
@@ -89,7 +92,10 @@ import { EditAppointmentComponent } from './pages/appointment/edit-appointment/e
     PrescriptionComponent,
     FilterPipe,
     EmployeesComponent,
-    EditAppointmentComponent
+    EditAppointmentComponent,
+    AllDoctorsComponent,
+    DoctorComponent,
+    AddDoctorComponent
   ],
   imports: [
     BrowserModule,

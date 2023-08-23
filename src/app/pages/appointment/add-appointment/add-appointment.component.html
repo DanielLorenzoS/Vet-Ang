@@ -1,109 +1,114 @@
-<div class="form-container">
-    <h2>Agregar cita</h2>
-    <form [formGroup]="appointmentForm" (submit)="addAppointment()">
-        <mat-form-field appearance="outline">
-            <mat-label>Escoge el día</mat-label>
-            <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="day">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Selecciona la hora de la cita</mat-label>
-            <mat-select formControlName="hour">
-                <mat-option value="08:00 AM">08:00 AM</mat-option>
-                <mat-option value="08:30 AM">08:30 AM</mat-option>
-                <mat-option value="09:00 AM">09:00 AM</mat-option>
-                <mat-option value="09:30 AM">09:30 AM</mat-option>
-                <mat-option value="10:00 AM">10:00 AM</mat-option>
-                <mat-option value="10:30 AM">10:30 AM</mat-option>
-                <mat-option value="11:00 AM">11:00 AM</mat-option>
-                <mat-option value="11:30 AM">11:30 AM</mat-option>
-                <mat-option value="12:00 PM">12:00 PM</mat-option>
-                <mat-option value="12:30 PM">12:30 PM</mat-option>
-                <mat-option value="01:00 PM">01:00 PM</mat-option>
-                <mat-option value="01:30 PM">01:30 PM</mat-option>
-                <mat-option value="02:00 PM">02:00 PM</mat-option>
-                <mat-option value="02:30 PM">02:30 PM</mat-option>
-                <mat-option value="03:00 PM">03:00 PM</mat-option>
-                <mat-option value="03:30 PM">03:30 PM</mat-option>
-                <mat-option value="04:00 PM">04:00 PM</mat-option>
-                <mat-option value="04:30 PM">04:30 PM</mat-option>
-                <mat-option value="05:00 PM">05:00 PM</mat-option>
-                <mat-option value="05:30 PM">05:30 PM</mat-option>
-                <mat-option value="06:00 PM">06:00 PM</mat-option>
-                <mat-option value="06:30 PM">06:30 PM</mat-option>
-                <mat-option value="07:00 PM">07:00 PM</mat-option>
-                <mat-option value="07:30 PM">07:30 PM</mat-option>
-                <mat-option value="08:00 PM">08:00 PM</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Razón de la cita:</mat-label>
-            <mat-select formControlName="reason">
-                <mat-option value="Chequeo general">Chequeo general</mat-option>
-                <mat-option value="Vacunación">Vacunación</mat-option>
-                <mat-option value="Tratamiento médico">Tratamiento médico</mat-option>
-                <mat-option value="Cirugía programada">Cirugía programada</mat-option>
-                <mat-option value="Consulta específica">Consulta específica</mat-option>
-                <mat-option value="Seguimiento">Seguimiento</mat-option>
-                <mat-option value="Otra razón">Otra razón</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Estatus:</mat-label>
-            <mat-select formControlName="status">
-                <mat-option value="Pendiente">Pendiente</mat-option>
-                <mat-option value="Confirmada">Confirmada</mat-option>
-                <mat-option value="En curso">En curso</mat-option>
-                <mat-option value="Finalizada">Finalizada</mat-option>
-                <mat-option value="Cancelada por el cliente">Cancelada por el cliente</mat-option>
-                <mat-option value="Cancelada por el veterinario">Cancelada por el veterinario</mat-option>
-                <mat-option value="Reprogramada">Reprogramada</mat-option>
-                <mat-option value="No asistida">No asistida</mat-option>
-                <mat-option value="Esperando confirmación">Esperando confirmación</mat-option>
-                <mat-option value="En espera de información adicional">En espera de información adicional</mat-option>
-                <mat-option value="En espera de resultados">En espera de resultados</mat-option>
-                <mat-option value="Seguimiento necesario">Seguimiento necesario</mat-option>
-                <mat-option value="En espera de suministros o medicamentos">En espera de suministros o
-                    medicamentos</mat-option>
-                <mat-option value="Consulta telefónica programada">Consulta telefónica programada</mat-option>
-            </mat-select>
-        </mat-form-field>
+<div class="container">
 
 
-        <mat-form-field appearance="outline">
-            <mat-label>Usuario:</mat-label>
-            <mat-select formControlName="user">
-                <mat-option *ngFor="let user of listUsers" [value]="user.id">
-                    {{ user.username }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+    <div class="form-container">
+        <h2>Agregar cita</h2>
+        <form [formGroup]="appointmentForm" (submit)="addAppointment()">
+            <mat-form-field appearance="outline">
+                <mat-label>Escoge el día</mat-label>
+                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="day">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Selecciona la hora de la cita</mat-label>
+                <mat-select formControlName="hour">
+                    <mat-option value="08:00 AM">08:00 AM</mat-option>
+                    <mat-option value="08:30 AM">08:30 AM</mat-option>
+                    <mat-option value="09:00 AM">09:00 AM</mat-option>
+                    <mat-option value="09:30 AM">09:30 AM</mat-option>
+                    <mat-option value="10:00 AM">10:00 AM</mat-option>
+                    <mat-option value="10:30 AM">10:30 AM</mat-option>
+                    <mat-option value="11:00 AM">11:00 AM</mat-option>
+                    <mat-option value="11:30 AM">11:30 AM</mat-option>
+                    <mat-option value="12:00 PM">12:00 PM</mat-option>
+                    <mat-option value="12:30 PM">12:30 PM</mat-option>
+                    <mat-option value="01:00 PM">01:00 PM</mat-option>
+                    <mat-option value="01:30 PM">01:30 PM</mat-option>
+                    <mat-option value="02:00 PM">02:00 PM</mat-option>
+                    <mat-option value="02:30 PM">02:30 PM</mat-option>
+                    <mat-option value="03:00 PM">03:00 PM</mat-option>
+                    <mat-option value="03:30 PM">03:30 PM</mat-option>
+                    <mat-option value="04:00 PM">04:00 PM</mat-option>
+                    <mat-option value="04:30 PM">04:30 PM</mat-option>
+                    <mat-option value="05:00 PM">05:00 PM</mat-option>
+                    <mat-option value="05:30 PM">05:30 PM</mat-option>
+                    <mat-option value="06:00 PM">06:00 PM</mat-option>
+                    <mat-option value="06:30 PM">06:30 PM</mat-option>
+                    <mat-option value="07:00 PM">07:00 PM</mat-option>
+                    <mat-option value="07:30 PM">07:30 PM</mat-option>
+                    <mat-option value="08:00 PM">08:00 PM</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Razón de la cita:</mat-label>
+                <mat-select formControlName="reason">
+                    <mat-option value="Chequeo general">Chequeo general</mat-option>
+                    <mat-option value="Vacunación">Vacunación</mat-option>
+                    <mat-option value="Tratamiento médico">Tratamiento médico</mat-option>
+                    <mat-option value="Cirugía programada">Cirugía programada</mat-option>
+                    <mat-option value="Consulta específica">Consulta específica</mat-option>
+                    <mat-option value="Seguimiento">Seguimiento</mat-option>
+                    <mat-option value="Otra razón">Otra razón</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Estatus:</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option value="Pendiente">Pendiente</mat-option>
+                    <mat-option value="Confirmada">Confirmada</mat-option>
+                    <mat-option value="En curso">En curso</mat-option>
+                    <mat-option value="Finalizada">Finalizada</mat-option>
+                    <mat-option value="Cancelada por el cliente">Cancelada por el cliente</mat-option>
+                    <mat-option value="Cancelada por el veterinario">Cancelada por el veterinario</mat-option>
+                    <mat-option value="Reprogramada">Reprogramada</mat-option>
+                    <mat-option value="No asistida">No asistida</mat-option>
+                    <mat-option value="Esperando confirmación">Esperando confirmación</mat-option>
+                    <mat-option value="En espera de información adicional">En espera de información
+                        adicional</mat-option>
+                    <mat-option value="En espera de resultados">En espera de resultados</mat-option>
+                    <mat-option value="Seguimiento necesario">Seguimiento necesario</mat-option>
+                    <mat-option value="En espera de suministros o medicamentos">En espera de suministros o
+                        medicamentos</mat-option>
+                    <mat-option value="Consulta telefónica programada">Consulta telefónica programada</mat-option>
+                </mat-select>
+            </mat-form-field>
 
 
-        <mat-form-field appearance="outline">
-            <mat-label>Mascota:</mat-label>
-            <mat-select formControlName="pet">
-                <mat-option *ngFor="let pet of listPets" [value]="pet.id">
-                    {{ pet.name }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Usuario:</mat-label>
+                <mat-select formControlName="user">
+                    <mat-option *ngFor="let user of listUsers" [value]="user.id">
+                        {{ user.username }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
 
-        <mat-form-field appearance="outline" class="field-doctors">
-            <mat-label>Doctor:</mat-label>
-            <mat-select formControlName="doctor">
-                <mat-option *ngFor="let doctor of listDoctors" [value]="doctor.id">
-                    {{ doctor.name }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Mascota:</mat-label>
+                <mat-select formControlName="pet">
+                    <mat-option *ngFor="let pet of listPets" [value]="pet.id">
+                        {{ pet.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
 
-        <button mat-raised-button type="submit">Agregar Cita</button>
-    </form>
+            <mat-form-field appearance="outline" class="field-doctors">
+                <mat-label>Doctor:</mat-label>
+                <mat-select formControlName="doctor">
+                    <mat-option *ngFor="let doctor of listDoctors" [value]="doctor.id">
+                        {{ doctor.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <button mat-raised-button type="submit">Agregar Cita</button>
+        </form>
+    </div>
 </div>

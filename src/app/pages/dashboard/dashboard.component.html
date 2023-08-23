@@ -7,10 +7,6 @@
                 <span>Dashboard</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('client')" class="buttonSide" value="Client">
-                <mat-icon>vaccines</mat-icon>
-                <span>Doctores</span>
-            </mat-button-toggle>
-            <mat-button-toggle (click)="close('client')" class="buttonSide" value="Client">
                 <mat-icon>group</mat-icon>
                 <span>Clientes</span>
             </mat-button-toggle>
@@ -22,6 +18,10 @@
                 <mat-icon>event</mat-icon>
                 <span>Citas</span>
             </mat-button-toggle>
+            <mat-button-toggle (click)="close('doctors')" class="buttonSide" value="Client">
+                <mat-icon>vaccines</mat-icon>
+                <span>Médicos</span>
+            </mat-button-toggle>
             <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
                 <mat-icon>shopping_cart</mat-icon>
                 <span>Productos</span>
@@ -32,7 +32,7 @@
             </mat-button-toggle>
             <mat-button-toggle *ngIf="showEmployees" (click)="close('employees')" class="buttonSide" value="Dashboard">
                 <mat-icon>badge</mat-icon>
-                <span>Ayudantes</span>
+                <span>Empleados</span>
             </mat-button-toggle>
         </mat-button-toggle-group>
     </mat-drawer>

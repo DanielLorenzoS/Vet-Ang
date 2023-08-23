@@ -1,10 +1,18 @@
+.container {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-container {
-    max-width: 95%;
-    margin: 1rem auto;
+    width: 90%;
+    margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
     text-align: center;
-    background-color: #fff;
   }
   
   .form-container h2 {

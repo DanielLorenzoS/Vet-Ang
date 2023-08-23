@@ -23,6 +23,9 @@ import { AddMedicalComponent } from './pages/pet/medical/add-medical/add-medical
 import { AddPrescriptionComponent } from './pages/pet/medical/add-prescription/add-prescription.component';
 import { PrescriptionComponent } from './pages/pet/medical/prescription/prescription.component';
 import { EmployeesComponent } from './pages/employee/employees/employees.component';
+import { AllDoctorsComponent } from './pages/doctor/all-doctors/all-doctors.component';
+import { DoctorComponent } from './pages/doctor/doctor/doctor.component';
+import { AddDoctorComponent } from './pages/doctor/add-doctor/add-doctor.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -46,6 +49,9 @@ const routes: Routes = [
       { path: 'appointments', component: AllAppointmentComponent, canActivate: [authGuard] },
       { path: 'appointment', component: AppointmentComponent, canActivate: [authGuard] },
       { path: 'addAppointment', component: AddAppointmentComponent, canActivate: [authGuard] },
+      { path: 'doctors', component: AllDoctorsComponent, canActivate: [authGuard] },
+      { path: 'doctor/:id', component: DoctorComponent, canActivate: [authGuard] },
+      { path: 'addDoctor', component: AddDoctorComponent, canActivate: [authGuard] },
       { path: 'addPrescription', component: AddPrescriptionComponent, canActivate: [authGuard] },
       { path: 'prescription', component: PrescriptionComponent, canActivate: [authGuard] },
       { path: 'employees', component: EmployeesComponent, canActivate: [authGuard] },
