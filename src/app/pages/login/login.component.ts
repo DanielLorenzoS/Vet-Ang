@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { local } from 'd3-selection';
 import { LoginService } from 'src/app/services/login.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
     if (localStorage.getItem('token')) {
-      this.router.navigate(['/dashboard']);
+      localStorage.removeItem('token');
     }
   }
 

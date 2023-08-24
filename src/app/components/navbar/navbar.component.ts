@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { LoginService } from 'src/app/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -26,6 +27,20 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.loginService.logout();
+    Swal.fire({
+      title: "¿Deseas cerrar sesión?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'No, cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33'
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.loginService.logout();
+        this.router.navigate(['/']);
+      }
+    }
+    )
   }
 }

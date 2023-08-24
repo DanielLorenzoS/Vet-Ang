@@ -144,6 +144,5 @@
 }
 
 .logout:hover {
-    color: #000;
-    border-bottom: #000 thin solid;
+    color: #aaa;
 }

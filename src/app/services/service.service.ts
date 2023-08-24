@@ -40,4 +40,8 @@ export class ServiceService {
   deleteService(id: any) {
     return this.http.delete(`${this.url}/service/${id}`, { headers: this.getHeadersViaCookie() });
   }
+
+  updateService(service: any) {
+    return this.http.put(`${this.url}/service/`, service, { headers: this.getHeadersViaCookie() });
+  }
 }

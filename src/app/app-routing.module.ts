@@ -29,6 +29,9 @@ import { AddDoctorComponent } from './pages/doctor/add-doctor/add-doctor.compone
 import { MedicineComponent } from './pages/medicine/medicine/medicine.component';
 import { AddMedicineComponent } from './pages/medicine/add-medicine/add-medicine.component';
 import { AllMedicinesComponent } from './pages/medicine/all-medicines/all-medicines.component';
+import { ServiceComponent } from './pages/service/service/service.component';
+import { AddServiceComponent } from './pages/service/add-service/add-service.component';
+import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -57,6 +60,8 @@ const routes: Routes = [
       { path: 'addDoctor', component: AddDoctorComponent, canActivate: [authGuard] },
       { path: 'medicines', component: AllMedicinesComponent, canActivate: [authGuard] },
       { path: 'addMedicines', component: AddMedicineComponent, canActivate: [authGuard] },
+      { path: 'services', component: AllServiceComponent, canActivate: [authGuard] },
+      { path: 'addService', component: AddServiceComponent, canActivate: [authGuard] },
       { path: 'prescription', component: PrescriptionComponent, canActivate: [authGuard] },
       { path: 'addPrescription', component: AddPrescriptionComponent, canActivate: [authGuard] },
       { path: 'employees', component: EmployeesComponent, canActivate: [authGuard] },

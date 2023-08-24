@@ -62,6 +62,9 @@ import { AddDoctorComponent } from './pages/doctor/add-doctor/add-doctor.compone
 import { AllMedicinesComponent } from './pages/medicine/all-medicines/all-medicines.component';
 import { MedicineComponent } from './pages/medicine/medicine/medicine.component';
 import { AddMedicineComponent } from './pages/medicine/add-medicine/add-medicine.component';
+import { ServiceComponent } from './pages/service/service/service.component';
+import { AddServiceComponent } from './pages/service/add-service/add-service.component';
+import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 
 
 
@@ -101,7 +104,10 @@ import { AddMedicineComponent } from './pages/medicine/add-medicine/add-medicine
     AddDoctorComponent,
     AllMedicinesComponent,
     MedicineComponent,
-    AddMedicineComponent
+    AddMedicineComponent,
+    ServiceComponent,
+    AddServiceComponent,
+    AllServiceComponent
   ],
   imports: [
     BrowserModule,
