@@ -142,7 +142,7 @@ tr.mat-mdc-row:hover td {
     color: #fff;
 }
 
-.mat-column-reason,
+.mat-column-service,
 .mat-column-status,
 .mat-column-actions,
 .mat-column-date,
@@ -163,17 +163,21 @@ tr.mat-mdc-row:hover td {
     hyphens: auto;
 }
 
-.mat-column-id {
-    border-left: none;
-    width: 10% !important;
+.mat-column-status {
+    padding: 0 !important;
 }
 
 .mat-column-status mat-form-field {
     flex-direction: row;
+    width: 10rem;
+}
+
+.mat-column-date, .mat-column-service {
+    width: 20% !important;
 }
 
 .mat-column-actions {
-    width: 10% !important;
+    width: 5% !important;
 }
 
 .edit {

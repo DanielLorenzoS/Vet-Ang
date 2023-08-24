@@ -40,20 +40,13 @@
                 <mat-option value="21:00:00">09:00 PM</mat-option>
             </mat-select>
         </mat-form-field>
-
-
-
-
+        
         <mat-form-field appearance="outline">
-            <mat-label>Razón de la cita:</mat-label>
-            <mat-select formControlName="reason">
-                <mat-option value="Chequeo general">Chequeo general</mat-option>
-                <mat-option value="Vacunación">Vacunación</mat-option>
-                <mat-option value="Tratamiento médico">Tratamiento médico</mat-option>
-                <mat-option value="Cirugía programada">Cirugía programada</mat-option>
-                <mat-option value="Consulta específica">Consulta específica</mat-option>
-                <mat-option value="Seguimiento">Seguimiento</mat-option>
-                <mat-option value="Otra razón">Otra razón</mat-option>
+            <mat-label>Servicio:</mat-label>
+            <mat-select formControlName="service">
+                <mat-option *ngFor="let service of listServices" [value]="service.id">
+                    {{ service.name }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
 

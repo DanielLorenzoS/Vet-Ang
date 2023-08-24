@@ -3,12 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PetService } from 'src/app/services/pet.service';
+import { ServiceService } from 'src/app/services/service.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 
 interface Appointment {
   date: string;
-  reason: string;
+  services: {
+    id: number;
+  }[];
   status: string;
   type: string;
   user: {
@@ -37,6 +40,7 @@ export class AddAppointmentComponent {
   listUsers!: any[];
   listPets!: any[];
   listDoctors!: any[];
+  listServices!: any[];
   appointment!: Appointment;
   appointmentHours: string[] = this.generateTimeIntervals("08:00 AM", "08:00 PM", 30);
 
@@ -45,6 +49,7 @@ export class AddAppointmentComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private petService: PetService,
+    private serviceService: ServiceService,
     private appointmentService: AppointmentService,
     private spinnner: SpinnerService,
     private router: Router
@@ -55,7 +60,7 @@ export class AddAppointmentComponent {
     this.appointmentForm = this.fb.group({
       day: ['', Validators.required],
       hour: ['', Validators.required],
-      reason: ['', Validators.required],
+      service: ['', Validators.required],
       status: ['', Validators.required],
       type: ['', Validators.required],
       user: ['', Validators.required],
@@ -65,9 +70,10 @@ export class AddAppointmentComponent {
     this.getUsers();
     this.getPets();
     this.getDoctors();
+    this.getServices();
     this.appointment = {
       date: '',
-      reason: '',
+      services: [],
       status: '',
       type: '',
       user: { id: 0 },
@@ -128,6 +134,16 @@ export class AddAppointmentComponent {
     )
   }
 
+  getServices() {
+    this.serviceService.getServices().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.listServices = res;
+      },
+      err => console.log(err)
+    )
+  }
+
   addAppointment() {
     this.spinnner.showLoadingIndicator();
 
@@ -140,7 +156,7 @@ export class AddAppointmentComponent {
     const combinedDateTime: string = `${formattedDate} ${formattedTime}`;
     this.appointment.date = combinedDateTime;
     console.log(this.appointmentForm.value)
-    this.appointment.reason = this.appointmentForm.get('reason')?.value;
+    this.appointment.services = [{ id: this.appointmentForm.get('service')?.value }];
     this.appointment.status = this.appointmentForm.get('status')?.value;
     this.appointment.type = this.appointmentForm.get('type')?.value;
     this.appointment.user.id = this.appointmentForm.get('user')?.value;

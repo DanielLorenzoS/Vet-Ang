@@ -28,7 +28,7 @@ export class AllAppointmentComponent {
   appointments: any[] = [];
   completedAppointments: any[] = [];
 
-  displayedColumns: string[] = ['user', 'pet', 'doctor', 'reason', 'status', 'date', 'actions'];
+  displayedColumns: string[] = ['user', 'pet', 'doctor', 'service', 'status', 'date', 'actions'];
   dataSource = new MatTableDataSource<any>(this.appointments);
   secondDataSource = new MatTableDataSource<any>(this.appointments);
 
