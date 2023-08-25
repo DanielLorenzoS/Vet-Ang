@@ -65,6 +65,8 @@ import { AddMedicineComponent } from './pages/medicine/add-medicine/add-medicine
 import { ServiceComponent } from './pages/service/service/service.component';
 import { AddServiceComponent } from './pages/service/add-service/add-service.component';
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
+import { EditClientComponent } from './pages/client/edit-client/edit-client.component';
+import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
 
 
 
@@ -107,7 +109,9 @@ import { AllServiceComponent } from './pages/service/all-service/all-service.com
     AddMedicineComponent,
     ServiceComponent,
     AddServiceComponent,
-    AllServiceComponent
+    AllServiceComponent,
+    EditClientComponent,
+    EditPetComponent
   ],
   imports: [
     BrowserModule,

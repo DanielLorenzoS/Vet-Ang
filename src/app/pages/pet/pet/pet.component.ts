@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PetService } from 'src/app/services/pet.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
+import { EditPetComponent } from '../edit-pet/edit-pet.component';
 
-const Pet = {
-  id: '',
-  name: '',
-  sex: '',
-  birthdate: '',
-  specie: '',
-  race: '',
-  weight: '',
+interface Pet {
+  id: number,
+  name: string,
+  sex: string,
+  birthdate: string,
+  specie: string,
+  race: string,
+  weight: string,
   user: {
-    id: ''
+    id: number
   }
 }
 
@@ -38,13 +40,14 @@ export class PetComponent {
     private spinner: SpinnerService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) { }
 
 
   ngOnInit(): void {
-    this.spinner.showLoadingIndicator();
     this.getPets();
+    /* this.getUserByPetId(); */
     this.petForm = this.formBuilder.group({
       name: [this.pet.name], // Valor inicial para el nombre
       sex: [this.pet.sex], // Valor inicial para el sexo
@@ -52,6 +55,17 @@ export class PetComponent {
       specie: [this.pet.specie], // Valor inicial para la especie
       race: [this.pet.race], // Valor inicial para la raza
       weight: [this.pet.weight], // Valor inicial para el peso
+    });
+  }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditPetComponent, {
+      width: '80%', // Personaliza el ancho según tus necesidades
+      data: { pet: this.pet, user: this.user } // Pasa los datos del usuario al diálogo
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      this.getPets();
     });
   }
 
@@ -64,6 +78,9 @@ export class PetComponent {
 
 
   getPets() {
+    this.spinner.showLoadingIndicator();
+    this.pet = {};
+    this.prescriptions = {};
     this.petService.getPetById(this.id).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
@@ -75,6 +92,7 @@ export class PetComponent {
           this.router.navigate(['/dashboard/pets']);
         } else {
           console.log(res);
+          this.getUserByPetId(res.id);
           this.pet = res;
           this.prescriptions = res.prescriptions;
         }
@@ -138,9 +156,10 @@ export class PetComponent {
     this.router.navigate(['/dashboard/addPrescription'], { queryParams: { id: this.pet.id } });
   }
 
-  getUserByPetId() {
+  getUserByPetId(id: number) {
+    console.log(id)
     this.spinner.showLoadingIndicator();
-    this.petService.getOnlyUser(this.pet.id).subscribe(
+    this.petService.getOnlyUser(id).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
         console.log(res);
@@ -154,7 +173,7 @@ export class PetComponent {
     );
   }
 
-  updatePet() {
+  /* updatePet() {
     Swal.fire({
       title: '¿Estás seguro?',
       icon: 'warning',
@@ -192,7 +211,7 @@ export class PetComponent {
         }
       );
     });
-  }
+  } */
 
   deletePet(id: number) {
     Swal.fire({
@@ -206,8 +225,7 @@ export class PetComponent {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.spinner.showLoadingIndicator();
-        this.getUserByPetId();
+        this.spinner.showLoadingIndicator();        
         this.petService.deletePet(id).subscribe(
           (res: any) => {
             this.spinner.hideLoadingIndicator();

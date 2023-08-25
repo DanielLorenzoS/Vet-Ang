@@ -1,6 +1,6 @@
 <div class="container">
     <div class="info">
-        <div class="client" *ngIf="!editMode">
+        <div class="client">
             <div class="text">
                 <h1><span>Nombre: </span>{{ user.username }}</h1>
                 <h3><span>Correo electrónico: </span>{{ user.email }}</h3>
@@ -8,7 +8,7 @@
                 <h3><span>Dirección: </span>{{ user.address }}</h3>
             </div>
             <div class="buttons">
-                <button class="update" mat-icon-button (click)="editMode = true">
+                <button class="update" mat-icon-button (click)="openEditDialog()">
                     <span>Editar</span>
                     <mat-icon>edit_note</mat-icon>
                 </button>
@@ -18,25 +18,7 @@
                 </button>
             </div>
         </div>
-        <form class="client client-form" *ngIf="editMode" [formGroup]="editForm">
-            <div class="form">
-                <input type="text" name="username" placeholder="Nombre del cliente" formControlName="username">
-                <input type="text" name="email" placeholder="Email" formControlName="email">
-                <input type="text" name="phone" placeholder="Teléfono" formControlName="phone">
-                <input type="text" name="address" placeholder="Dirección" formControlName="address">
-            </div>
-            <div class="buttons" style="width: 100%;">
-                <button class="update" mat-icon-button (click)="saveChanges()">
-                    <span>Guardar</span>
-                    <mat-icon>save</mat-icon>
-                </button>
-                <button class="delete" mat-icon-button (click)="editMode = false">
-                    <span>Cancelar</span>
-                    <mat-icon>cancel</mat-icon>
-                </button>
-            </div>
-        </form>
-
+        
         <div class="table-container">
 
             <h4 *ngIf="pets.length === 0">{{ user.username }} no tiene mascotas asociadas</h4>

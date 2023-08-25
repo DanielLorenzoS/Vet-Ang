@@ -93,7 +93,7 @@ export class UserService {
     const userData = {
       email: user.email,
       phone: user.phone,
-      direction: user.city + ' ' + user.municipality + ' ' + user.street,
+      direction: user.city + '  ' + user.municipality + '  ' + user.street,
       username: user.username,
       password: 'passwordClient',
       createdAt: date,

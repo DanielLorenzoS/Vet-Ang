@@ -2,7 +2,7 @@
   <div class="info" *ngIf="showInfo">
     <div class="buttons-pet">
 
-      <button mat-icon-button (click)="toggleInfo()">
+      <button mat-icon-button (click)="openEditDialog()">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button (click)="deletePet(pet.id)">
@@ -16,32 +16,7 @@
     <h4>Raza: {{ pet.race }}</h4>
     <h4>Tamaño: {{ pet.weight }} kg</h4>
   </div>
-  <div class="info" *ngIf="!showInfo">
-    <div class="buttons-pet">
-
-      <button mat-icon-button (click)="updatePet()">
-        <mat-icon>check_small</mat-icon>
-      </button>
-      <button mat-icon-button (click)="toggleInfo()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-    <div class="form" [formGroup]="petForm">
-      <input type="text" name="name" placeholder="Nombre de la mascota" formControlName="name" [(ngModel)]="pet.name">
-      <select name="sex" formControlName="sex" aria-placeholder="Sexo de la mascota" [(ngModel)]="pet.sex">
-        <option value="Hembra">Hembra</option>
-        <option value="Macho">Macho</option>
-      </select>
-      <h3>Fecha de nacimiento previa: {{ pet.birthdate }}</h3>
-      <input type="date" name="birthdate" formControlName="birthdate" [(ngModel)]="pet.birthdate">
-      <input type="text" name="specie" placeholder="Especie de la mascota" formControlName="specie"
-        [(ngModel)]="pet.specie">
-      <input type="text" name="race" placeholder="Raza de la mascota" formControlName="race" [(ngModel)]="pet.race">
-      <input type="number" name="weight" placeholder="Peso de la mascota" formControlName="weight"
-        [(ngModel)]="pet.weight">
-    </div>
-
-  </div>
+  
   <div class="table-container">
     <div class="medic">
       <mat-icon>medical_services</mat-icon>

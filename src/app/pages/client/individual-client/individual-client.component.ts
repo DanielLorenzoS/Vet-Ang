@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PetService } from 'src/app/services/pet.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { EditClientComponent } from '../edit-client/edit-client.component';
 
 interface User {
   id: number;
@@ -22,9 +24,7 @@ interface User {
 export class IndividualClientComponent implements OnInit {
 
   user!: User;
-  userToEdit!: User;
   pets: any[] = [];
-  editMode = false;
   editForm!: FormGroup;
 
   constructor(
@@ -32,36 +32,34 @@ export class IndividualClientComponent implements OnInit {
     private route: ActivatedRoute,
     private petsService: PetService,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.getUsersandPets();
-    this.editForm = this.initializeForm();
   }
 
-  initializeForm(): FormGroup {
-    return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^@.\n]*@[^@.\n]*\.[^@.\n]*$/)]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(10), Validators.maxLength(10)]],
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(6)]],
-      address: ['', Validators.required],
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditClientComponent, {
+      width: '80%', // Personaliza el ancho según tus necesidades
+      data: { user: this.user } // Pasa los datos del usuario al diálogo
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      this.getUsersandPets();
     });
   }
 
 
   getUsersandPets() {
     this.spinner.showLoadingIndicator();
+    this.user = { id: 0, username: '', email: '', phone: '', address: '' };
+    this.pets = [];
     this.userService.getUserByUsername(this.route.snapshot.paramMap.get('username')!).subscribe(
       (res: any) => {
         this.user = res;
-        this.editForm.patchValue({
-          username: this.user.username,
-          email: this.user.email,
-          phone: this.user.phone,
-          address: this.user.address
-        });
         this.petsService.getPetsByUserId(res.id).subscribe(
           (res: any) => {
             this.spinner.hideLoadingIndicator();
@@ -76,44 +74,6 @@ export class IndividualClientComponent implements OnInit {
       this.spinner.hideLoadingIndicator();
       console.log('error al traer al usuario');
     }
-  }
-
-  goEditClient() {
-    this.editMode = !this.editMode;
-  }
-
-  saveChanges() {
-    this.spinner.showLoadingIndicator();
-    this.userToEdit = {
-      id: this.user.id,
-      username: this.editForm.value.username,
-      email: this.editForm.value.email,
-      phone: this.editForm.value.phone,
-      address: this.editForm.value.address
-    }
-    console.log(this.userToEdit);
-    this.userService.updateUser(this.userToEdit).subscribe(
-      (res: any) => {
-        this.spinner.hideLoadingIndicator();
-        console.log(res);
-        Swal.fire({
-          icon: 'success',
-          title: 'Cambios guardados',
-          showConfirmButton: false,
-          timer: 1000
-        })
-        this.user = this.userToEdit;
-        this.router.navigate([`/dashboard/indClient/${this.editForm.value.username}`])
-      }
-    ), (err: any) => {
-      this.spinner.hideLoadingIndicator();
-      console.log('error al actualizar el usuario');
-      Swal.fire({
-        icon: 'error',
-        text: 'No se pudieron guardar los cambios',
-      })
-    }
-    this.editMode = false;
   }
 
   deleteClient() {
