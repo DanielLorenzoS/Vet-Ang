@@ -32,10 +32,10 @@ interface Appointment {
   styleUrls: ['./add-appointment.component.css']
 })
 export class AddAppointmentComponent {
-  myFilter = (d: Date | null): boolean => {
+  /* myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     return day !== 0 && day !== 6;
-  };
+  }; */
   appointmentForm!: FormGroup;
   listUsers!: any[];
   listPets!: any[];

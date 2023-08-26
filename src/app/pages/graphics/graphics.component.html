@@ -1,32 +1,34 @@
 <div class="container">
 
-<!--   <h1 class="graphics_title">Análisis de datos</h1> -->
+  <!--   <h1 class="graphics_title">Análisis de datos</h1> -->
 
   <div class="graphics">
-    <div class="graphics_body_item" (click)="goAppointments()">
+    <div class="graphics_body_item" (click)="goAddClient()">
       <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Citas recientes</h2>
+        <h2 class="graphics_body_item_title">Nuevo cliente</h2>
       </div>
       <div class="graphics_body_item_body">
-        Tuviste 10 citas en esta semana
+        ¿Quieres agregar un nuevo cliente?
         <span>
-          <mat-icon>history</mat-icon>
-        </span>
-      </div>
-    </div>
-    <div class="graphics_body_item" (click)="goAppointments()">
-      <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Citas Próximas</h2>
-      </div>
-      <div class="graphics_body_item_body">
-        Tienes 10 citas en esta semana
-        <span>
-          <mat-icon>
-            calendar_month
+          <mat-icon class="material-icons-outlined">
+            person_add
           </mat-icon>
         </span>
       </div>
     </div>
+    <!-- <div class="graphics_body_item" (click)="goAddPet()">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Nueva mascota</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        ¿Quieres agregar una mascota?
+        <span>
+          <mat-icon class="material-icons-outlined">
+            pets
+          </mat-icon>
+        </span>
+      </div>
+    </div> -->
     <div class="graphics_body_item" (click)="goAddAppointment()">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Nueva cita</h2>
@@ -34,15 +36,42 @@
       <div class="graphics_body_item_body">
         ¿Quieres agregar una cita?
         <span>
-          <mat-icon>
-            add_task
+          <mat-icon class="material-icons-outlined">
+            add_alert
           </mat-icon>
         </span>
       </div>
     </div>
     <div class="graphics_body_item">
       <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Mascotas</h2>
+        <h2 class="graphics_body_item_title">Citas del Día</h2>
+      </div>
+      <div class="graphics_body_item_body">
+
+        <mat-accordion class="accordion">
+          <div *ngFor="let appointment of appointmentsToday, let i = index">
+            <mat-expansion-panel class="panel" [style.background-color]="calculateColor(i)">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span>{{ appointment.user }}</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <span>{{ appointment.date | date: 'shortTime' }}</span>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <span>{{ appointment.pet }}</span>
+              <span>{{ appointment.doctor }}</span>
+            </mat-expansion-panel>
+          </div>
+        </mat-accordion>
+        <div *ngIf="appointmentsToday.length === 0">No hay citas programadas para hoy.</div>
+      </div>
+    </div>
+
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Especies de Mascotas</h2>
       </div>
       <div class="graphics_body_item_body">
         <ngx-charts-bar-vertical [view]="[400, 300]" [scheme]="colorScheme" [results]="barChartData" [xAxis]="showXAxis"
@@ -55,29 +84,38 @@
         <h2 class="graphics_body_item_title">Clientes</h2>
       </div>
       <div class="graphics_body_item_body">
-        <ngx-charts-area-chart [view]="[400, 300]" [scheme]="'cool'" [results]="areaChartData" [xAxis]="showXAxis"
+        <ngx-charts-area-chart [view]="[400, 300]" [scheme]="'neons'" [results]="areaChartData" [xAxis]="showXAxis"
           [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
           [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-area-chart>
       </div>
     </div>
     <div class="graphics_body_item">
       <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Citas</h2>
+        <h2 class="graphics_body_item_title">Medicamentos recetados</h2>
       </div>
       <div class="graphics_body_item_body">
-        <ngx-charts-line-chart [view]="[400, 300]" [scheme]="colorScheme" [results]="lineChartData" [xAxis]="showXAxis"
-          [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-          [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-line-chart>
-
+        <ngx-charts-pie-chart class="chart" [view]="[650, 400]" [scheme]="'neons'" [results]="pieChartData"
+          [explodeSlices]="false" [doughnut]="true" [legend]="true" [labels]="true"></ngx-charts-pie-chart>
       </div>
     </div>
     <div class="graphics_body_item">
       <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Medicamentos</h2>
+        <h2 class="graphics_body_item_title">Servicios más solicitados</h2>
       </div>
       <div class="graphics_body_item_body">
-        <ngx-charts-pie-chart class="chart" [view]="[650, 400]" [scheme]="'neons'" [results]="pieChartData"
-          [explodeSlices]="false" [doughnut]="false" [legend]="true" [labels]="true" ></ngx-charts-pie-chart>
+        <ngx-charts-pie-grid class="chart" [view]="[650, 400]" [scheme]="'neons'"
+          [results]="gridChartData"></ngx-charts-pie-grid>
+      </div>
+    </div>
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Citas de los últimos meses</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-line-chart [view]="[400, 300]" [scheme]="'neons'" [results]="lineChartData" [xAxis]="showXAxis"
+          [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-line-chart>
+
       </div>
     </div>
   </div>

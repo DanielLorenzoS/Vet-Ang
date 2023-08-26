@@ -22,8 +22,7 @@ export class LoginService {
   ) { }
 
   generateToken(user: any) {
-    console.log('user ', user);
-    return this.http.post(`${this.url}/login`, user);
+    return this.http.post(`${this.url}/auth/login`, user);
   }
 
   login(token: any) {

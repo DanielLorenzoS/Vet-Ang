@@ -67,6 +67,9 @@ import { AddServiceComponent } from './pages/service/add-service/add-service.com
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 import { EditClientComponent } from './pages/client/edit-client/edit-client.component';
 import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 
@@ -140,9 +143,11 @@ import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
     MatDatepickerModule,
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    InfiniteScrollModule,
+    MatExpansionModule
   ],
-  providers: [authInterceptorProviders, CookieService, DatePipe, {provide: MatDialogRef, useValue: {}}],
+  providers: [authInterceptorProviders, CookieService, DatePipe, { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

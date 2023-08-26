@@ -28,8 +28,8 @@
                 <label for="sex">Sexo</label>
                 <select class="input" id="sex" name="sex" formControlName="sex" required>
                     <option value="">Seleccionar sexo</option>
-                    <option value="hembra">Hembra</option>
-                    <option value="macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                    <option value="Macho">Macho</option>
                 </select>
                 <mat-error *ngIf="editPetForm.get('sex')?.touched && editPetForm.get('sex')?.errors?.['required']">El sexo es requerido</mat-error>
             </div>            

@@ -57,22 +57,37 @@ export class EditPetComponent {
 
   onSubmit() {
     this.spinner.showLoadingIndicator();
-    /* this.petService.addPet(this.editPetForm.value).subscribe((data: any) => {
-      this.spinner.hideLoadingIndicator();
-      Swal.fire({
-        icon: 'success',
-        text: 'Mascota agregada correctamente',
-      });
-      this.router.navigate([`/dashboard/pet/${data.id}`]);
-    }), (error: any) => {
-      Swal.fire({
-        icon: 'error',
-        text: 'No se pudo agregar la mascota',
-      });
-      console.log(error);
-    } */
-    console.log(this.editPetForm.value);
-    console.log(this.editPetForm.value.birthdate.split('-').reverse().join('-'));
+    let pet = {
+      id: this.data.pet.id,
+      name: this.editPetForm.value.name,
+      race: this.editPetForm.value.race,
+      specie: this.editPetForm.value.specie,
+      sex: this.editPetForm.value.sex,
+      birthdate: this.editPetForm.value.birthdate.split('-').reverse().join('-'),
+      weight: this.editPetForm.value.weight,
+      user: { id: this.editPetForm.value.user }
+    }
+    console.log(pet);
+    this.petService.updatePet(pet).subscribe(
+      (res: any) => {
+        this.spinner.hideLoadingIndicator();
+        Swal.fire({
+          icon: 'success',
+          title: 'Mascota actualizada',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.dialogRef.close();
+      },
+      (err: any) => {
+        this.spinner.hideLoadingIndicator();
+        Swal.fire({
+          icon: 'error',
+          title: 'No se pudo actualizar la mascota',
+          text: err.error.message,
+        });
+      }
+    );
   }
 
   back() {

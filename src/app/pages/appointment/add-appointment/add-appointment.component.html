@@ -6,7 +6,7 @@
         <form [formGroup]="appointmentForm" (submit)="addAppointment()">
             <mat-form-field appearance="outline">
                 <mat-label>Escoge el día</mat-label>
-                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="day">
+                <input matInput [matDatepicker]="picker" formControlName="day">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>

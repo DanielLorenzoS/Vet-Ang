@@ -44,4 +44,8 @@ export class ServiceService {
   updateService(service: any) {
     return this.http.put(`${this.url}/service/`, service, { headers: this.getHeadersViaCookie() });
   }
+
+  countServices() {
+    return this.http.get(`${this.url}/service/count`, { headers: this.getHeadersViaCookie() });
+  }
 }

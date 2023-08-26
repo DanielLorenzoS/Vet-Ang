@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,11 @@ export class AppointmentService {
   getAppointments() {
 
     return this.http.get(`${this.url}/appointment/all`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getAppointmentsAny(): Observable<any[]> {
+
+    return this.http.get<any[]>(`${this.url}/appointment/all`, { headers: this.getHeadersViaCookie() });
   }
 
   createAppointment(appointment: any) {

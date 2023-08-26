@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private loadingIndicatorService: SpinnerService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
@@ -41,42 +41,49 @@ export class LoginComponent implements OnInit {
     this.userService.generateToken(this.loginForm.value).subscribe(
       (response: any) => {
         this.loadingIndicatorService.hideLoadingIndicator();
-        this.userService.login(response.token);
-        this.userService.getCurrentUser().subscribe(
-          (res: any) => {
-            console.log('res ', res.authorities[0].authority);
-            if (res.authorities[0].authority === 'ROLE_EMPLOYEE' || res.authorities[0].authority === 'ROLE_ADMIN') {
+        if (response.token != null) {
+          this.userService.login(response.token);
+          this.userService.getCurrentUser().subscribe(
+            (res: any) => {
+              console.log('res ', res.authorities[0].authority);
+              if (res.authorities[0].authority === 'ROLE_EMPLOYEE' || res.authorities[0].authority === 'ROLE_ADMIN') {
+                this.loadingIndicatorService.hideLoadingIndicator();
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Bienvenido',
+                  text: 'Has iniciado sesión correctamente',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                this.router.navigate(['/dashboard']);
+              } else if (res.authorities[0].authority === 'ROLE_INVITED') {
+                this.loadingIndicatorService.hideLoadingIndicator();
+                Swal.fire({
+                  icon: 'error',
+                  text: 'No has validado tu cuenta'
+                });
+                this.getEmailByUsername(this.loginForm.value.username);
+                this.router.navigate(['/registro2']);
+              } else if (res.authorities[0].authority === 'ROLE_USER') {
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'No tienes permisos para acceder',
+                  text: 'Contacta con el administrador',
+                  showConfirmButton: true,
+                });
+              }
+            },
+            (error: any) => {
               this.loadingIndicatorService.hideLoadingIndicator();
-              Swal.fire({
-                icon: 'success',
-                title: 'Bienvenido',
-                text: 'Has iniciado sesión correctamente',
-                showConfirmButton: false,
-                timer: 1500
-              });
-              this.router.navigate(['/dashboard']);
-            } else if (res.authorities[0].authority === 'ROLE_INVITED') {
-              this.loadingIndicatorService.hideLoadingIndicator();
-              Swal.fire({
-                icon: 'error',
-                text: 'No has validado tu cuenta'
-              });
-              this.getEmailByUsername(this.loginForm.value.username);
-              this.router.navigate(['/registro2']);
-            } else if (res.authorities[0].authority === 'ROLE_USER') {
-              Swal.fire({
-                icon: 'warning',
-                title: 'No tienes permisos para acceder',
-                text: 'Contacta con el administrador',
-                showConfirmButton: true,
-              });
+              console.log('error ', error);
             }
-          },
-          (error: any) => {
-            this.loadingIndicatorService.hideLoadingIndicator();
-            console.log('error ', error);
-          }
-        );
+          );
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: 'Contraseña incorrecta'
+          });
+        }
       },
       (error: any) => {
         this.loadingIndicatorService.hideLoadingIndicator();
