@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -50,10 +50,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { EmployeesComponent } from './pages/employee/employees/employees.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DatePipe } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { EditAppointmentComponent } from './pages/appointment/edit-appointment/edit-appointment.component';
 import { AllDoctorsComponent } from './pages/doctor/all-doctors/all-doctors.component';
@@ -67,10 +64,8 @@ import { AddServiceComponent } from './pages/service/add-service/add-service.com
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 import { EditClientComponent } from './pages/client/edit-client/edit-client.component';
 import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
-
 
 @NgModule({
   declarations: [
@@ -138,12 +133,8 @@ import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
     MatFormFieldModule,
     MatSelectModule,
     MatSlideToggleModule,
-    TranslateModule.forRoot(),
     MatDatepickerModule,
-    MatNativeDateModule,
-    NgxMaterialTimepickerModule,
     MatDialogModule,
-    InfiniteScrollModule,
     MatExpansionModule
   ],
   providers: [authInterceptorProviders, CookieService, DatePipe, { provide: MatDialogRef, useValue: {} }],
