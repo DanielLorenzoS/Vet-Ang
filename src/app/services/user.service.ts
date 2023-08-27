@@ -8,9 +8,8 @@ import { environment } from 'src/enviroments/enviroment';
 })
 export class UserService {
 
-  /* private url: string = environment.url; */
-  url = 'http://localhost:8080';
-  /* url: string = 'https://spring-vet-production.up.railway.app'; */
+  /* url: string = 'http://localhost:8080'; */
+  url: string = 'https://spring-vet-production.up.railway.app';
 
   constructor(
     private http: HttpClient,
