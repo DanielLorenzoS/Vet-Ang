@@ -27,11 +27,11 @@
 
                 <ng-container matColumnDef="price">
                     <th mat-header-cell *matHeaderCellDef>Precio</th>
-                    <td mat-cell *matCellDef="let service">{{ service.price }}</td>
+                    <td mat-cell *matCellDef="let service">${{ service.price }} MXN</td>
                 </ng-container>
 
                 <ng-container matColumnDef="duration">
-                    <th mat-header-cell *matHeaderCellDef>Duración</th>
+                    <th mat-header-cell *matHeaderCellDef>Duración aproximada</th>
                     <td mat-cell *matCellDef="let service">{{ service.duration }}</td>
                 </ng-container>
 

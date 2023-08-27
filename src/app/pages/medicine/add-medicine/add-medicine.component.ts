@@ -26,9 +26,9 @@ export class AddMedicineComponent {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      fabricator: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s()]+$/)]],
+      description: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s().,]+$/)]],
+      fabricator: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s()]+$/)]],
       type: ['', [Validators.required]]
     });
   }
