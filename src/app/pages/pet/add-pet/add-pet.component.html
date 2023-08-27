@@ -7,12 +7,7 @@
                 <input class="input" type="text" id="name" name="name" formControlName="name"
                     placeholder="Nombre" required>
                 <mat-error *ngIf="newPetForm.get('name')?.touched && newPetForm.get('name')?.errors?.['required']">El nombre es requerido</mat-error>
-            </div>
-            <div class="form-group">
-                <label for="race">Raza</label>
-                <input class="input" type="text" id="race" name="race" formControlName="race"
-                    placeholder="Raza" required>
-                <mat-error *ngIf="newPetForm.get('race')?.touched && newPetForm.get('race')?.errors?.['required']">La raza es requerida</mat-error>
+                <mat-error *ngIf="newPetForm.get('name')?.touched && newPetForm.get('name')?.errors?.['pattern']">El nombre debe contener solo letras</mat-error>
             </div>
             <div class="form-group">
                 <label for="specie">Especie</label>
@@ -23,6 +18,13 @@
                     <option value="Otra">Otra</option>
                 </select>
                 <mat-error *ngIf="newPetForm.get('species')?.touched && newPetForm.get('species')?.errors?.['required']">La especie es requerida</mat-error>
+            </div>
+            <div class="form-group">
+                <label for="race">Raza</label>
+                <input class="input" type="text" id="race" name="race" formControlName="race"
+                    placeholder="Raza" required>
+                <mat-error *ngIf="newPetForm.get('race')?.touched && newPetForm.get('race')?.errors?.['required']">La raza es requerida</mat-error>
+                <mat-error *ngIf="newPetForm.get('race')?.touched && newPetForm.get('race')?.errors?.['pattern']">La raza debe contener solo letras</mat-error>
             </div>
             <div class="form-group">
                 <label for="sex">Sexo</label>
@@ -36,13 +38,13 @@
             <div class="form-group">
                 <label for="birthdate">Fecha de nacimiento</label>
                 <input class="input" type="date" id="birthdate" name="birthdate" formControlName="birthdate"
-                    placeholder="Fecha de nacimiento" required>
+                    placeholder="Fecha de nacimiento" required max="{{ date }}">
                 <mat-error *ngIf="newPetForm.get('birthdate')?.touched && newPetForm.get('birthdate')?.errors?.['required']">La fecha de nacimiento es requerida</mat-error>
             </div>
             <div class="form-group">
-                <label for="weight">Peso</label>
+                <label for="weight">Peso (kg)</label>
                 <input class="input" type="number" id="weight" name="weight" formControlName="weight"
-                    placeholder="Peso" required>
+                    placeholder="Peso" required (keypress)="keyPress($event)">
                 <mat-error *ngIf="newPetForm.get('weight')?.touched && newPetForm.get('weight')?.errors?.['required']">El peso es requerido</mat-error>
             </div>
             <div class="form-group">

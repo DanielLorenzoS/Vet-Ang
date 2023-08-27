@@ -4,32 +4,42 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { UserService } from 'src/app/services/user.service';
-import { AddAppointmentComponent } from '../add-appointment/add-appointment.component';
-import { EditAppointmentComponent } from '../edit-appointment/edit-appointment.component';
 import Swal from 'sweetalert2';
 
-export interface Appointment {
-  id: number;
-  clientName: string;
-  petName: string;
-  date: string;
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
 }
 
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+];
+
 @Component({
-  selector: 'app-all-appointment',
-  templateUrl: './all-appointment.component.html',
-  styleUrls: ['./all-appointment.component.css']
+  selector: 'app-deleted-appointment',
+  templateUrl: './deleted-appointment.component.html',
+  styleUrls: ['./deleted-appointment.component.css']
 })
-export class AllAppointmentComponent {
+export class DeletedAppointmentComponent {
   appointments: any[] = [];
   completedAppointments: any[] = [];
 
-  displayedColumns: string[] = ['user', 'pet', 'doctor', 'service', 'status', 'date', 'actions'];
-  dataSource = new MatTableDataSource<any>(this.appointments);
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = ELEMENT_DATA;
+
   secondDataSource = new MatTableDataSource<any>(this.appointments);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -39,26 +49,8 @@ export class AllAppointmentComponent {
     private router: Router,
     private spinner: SpinnerService,
     private appointmentService: AppointmentService,
-    private datePipe: DatePipe,
-    public dialogRef: MatDialogRef<EditAppointmentComponent>
+    private datePipe: DatePipe
   ) { }
-
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: any): void {
-    localStorage.setItem('appointmentId', id);
-    const dialogRef = this.dialog.open(EditAppointmentComponent, {
-      width: '80%',
-      enterAnimationDuration,
-      exitAnimationDuration
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // Aquí puedes manejar los resultados después de cerrar la ventana modal
-      if (result) {
-        // Realizar acciones después de cerrar la ventana modal
-        this.loadAppointments(); // Actualiza las citas después de agregar una nueva cita
-      }
-    });
-  }
 
 
   ngOnInit(): void {
@@ -108,11 +100,9 @@ export class AllAppointmentComponent {
             formattedDate: translatedDate
           };
         });
-        this.dataSource.data = this.appointments;
         this.secondDataSource.data = this.completedAppointments;
         console.log(this.appointments);
-        this.dataSource.paginator = this.paginator;
-        this.dialogRef.close();
+        console.log(this.completedAppointments);
         this.spinner.hideLoadingIndicator();
       },
       err => {
@@ -151,7 +141,7 @@ export class AllAppointmentComponent {
     return dateString;
   }
 
-  changeStatus(event: any, appointment: any) {
+  /* changeStatus(event: any, appointment: any) {
     this.spinner.showLoadingIndicator();
     this.appointmentService.updateStatus(appointment.id, event.value).subscribe(
       (res: any) => {
@@ -167,7 +157,7 @@ export class AllAppointmentComponent {
 
   filter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase(); // Filtra los datos de la tabla
+    this.secondDataSource.filter = filterValue.trim().toLowerCase(); // Filtra los datos de la tabla
   }
 
   filterSecondTable(event: Event) {
@@ -212,5 +202,5 @@ export class AllAppointmentComponent {
       }
     }
     )
-  }
+  } */
 }

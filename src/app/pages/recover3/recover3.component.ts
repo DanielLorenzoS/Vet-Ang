@@ -31,7 +31,7 @@ export class Recover3Component implements OnInit {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      password: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/), Validators.minLength(8)]],
       confirmPassword: ['', Validators.required]
     });
   }

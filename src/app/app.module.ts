@@ -69,9 +69,7 @@ import { EditClientComponent } from './pages/client/edit-client/edit-client.comp
 import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatExpansionModule } from '@angular/material/expansion';
-
-
-
+import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
 
 
 @NgModule({
@@ -114,7 +112,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     AddServiceComponent,
     AllServiceComponent,
     EditClientComponent,
-    EditPetComponent
+    EditPetComponent,
+    NumbersOnlyPipe
   ],
   imports: [
     BrowserModule,

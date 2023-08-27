@@ -17,6 +17,15 @@ export class EditPetComponent {
   listClients!: any;
   user!: any;
 
+  today = new Date();
+  day = this.today.getDate();
+  month = this.today.getMonth() + 1; // Recuerda que los meses son base 0 en JavaScript
+  year = this.today.getFullYear();
+
+
+
+  date: string = `${this.year}-${this.month.toString().padStart(2, '0')}-${this.day.toString().padStart(2, '0')}`;
+
   constructor(
     public dialogRef: MatDialogRef<EditPetComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -26,6 +35,14 @@ export class EditPetComponent {
     private petService: PetService,
     private spinner: SpinnerService
   ) { }
+
+  keyPress(event: any) {
+    const pattern = /[0-9\.\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 
   ngOnInit(): void {
     this.editPetForm = this.initializeForm();
@@ -45,8 +62,8 @@ export class EditPetComponent {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required]],
-      race: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      race: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
       specie: ['', [Validators.required]],
       sex: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],

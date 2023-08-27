@@ -30,25 +30,28 @@
                     required>
                 <mat-error *ngIf="loginForm.get('city')?.touched && loginForm.get('city')?.errors?.['required']">La
                     ciudad es requerida</mat-error>
+                <mat-error *ngIf="loginForm.get('city')?.errors?.['pattern']">Ingresa una ciudad válida</mat-error>
             </div>
             <div class="street">
 
                 <div class="form-group municipio">
                     <label for="municipality">Municipio</label>
-                    <input class="input" type="text" id="municipality" name="municipality"
-                        formControlName="municipality" placeholder="Municipio" required>
+                    <input class="input" type="text" id="municipality" name="municipality" formControlName="municipality"
+                        placeholder="Municipio" required>
                     <mat-error
                         *ngIf="loginForm.get('municipality')?.touched && loginForm.get('municipality')?.errors?.['required']">El
                         municipio es requerido</mat-error>
+                    <mat-error *ngIf="loginForm.get('municipality')?.errors?.['pattern']">Ingresa un municipio válido</mat-error>
                 </div>
-
+    
                 <div class="form-group calle">
                     <label for="street">Calle</label>
-                    <input class="input" type="text" id="street" name="street" formControlName="street"
-                        placeholder="Calle" required>
+                    <input class="input" type="text" id="street" name="street" formControlName="street" placeholder="Calle"
+                        required>
                     <mat-error
                         *ngIf="loginForm.get('street')?.touched && loginForm.get('street')?.errors?.['required']">La
                         calle es requerida</mat-error>
+                    <mat-error *ngIf="loginForm.get('street')?.errors?.['pattern']">Ingresa una calle válida</mat-error>
                 </div>
             </div>
             <div class="form-group">
@@ -70,8 +73,8 @@
                 <mat-error
                     *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">La
                     contraseña es requerida</mat-error>
-                <mat-error *ngIf="loginForm.get('password')?.errors?.['pattern']">La contraseña tiene caracteres
-                    inválidos</mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.errors?.['pattern']">Ingresa al menos una letra mayúscula,
+                    una minúscula, un número y un caracter especial</mat-error>
                 <mat-error *ngIf="loginForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 8
                     caracteres</mat-error>
             </div>

@@ -19,6 +19,8 @@ interface WeekData {
 })
 export class GraphicsComponent implements OnInit {
 
+  @ViewChild(MatAccordion) accordion: MatAccordion = new MatAccordion;
+
   barChartData: any[] = [
     {
       name: 'Perros',
@@ -54,6 +56,8 @@ export class GraphicsComponent implements OnInit {
   lineChartData: any[] = [];
 
   appointmentsToday: any[] = [];
+
+  openPanel = true;
 
   constructor(
     private router: Router,
@@ -171,57 +175,28 @@ export class GraphicsComponent implements OnInit {
   getAppointmentsToday() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
+  
     this.appointmentService.getAppointmentsAny().subscribe(
       (appointments: any[]) => {
         console.log(appointments);
         this.appointmentsToday = appointments.filter(appointment => {
           const appointmentDate = new Date(appointment.date);
-          console.log(appointmentDate.toString().substring(8, 10))
-          return appointmentDate.toString().substring(8, 10) === today.toString().substring(8, 10);
+  
+          // Filtrar por fecha y por estatus
+          const isToday = appointmentDate.getDate() === today.getDate() &&
+                          appointmentDate.getMonth() === today.getMonth() &&
+                          appointmentDate.getFullYear() === today.getFullYear();
+  
+          const validStatus = ["Finalizada", "Cancelada por el cliente", "Cancelada por el veterinario"].indexOf(appointment.status) === -1;
+  
+          return isToday && validStatus;
         });
         console.log(this.appointmentsToday);
-        this.appointmentsToday = appointments;
+        this.accordion.openAll();
       },
       err => console.log(err)
     );
   }
-
-  calculateOpacity(index: number): number {
-    const maxOpacity = 0.8; // Opacidad máxima
-    const minOpacity = 0.2; // Opacidad mínima
-    const opacityRange = maxOpacity - minOpacity;
-    const appointmentsCount = this.appointmentsToday.length;
-  
-    if (appointmentsCount === 0) {
-      return maxOpacity; // Opacidad máxima si no hay citas
-    }
-  
-    // Calcula la opacidad en función del índice y la cantidad de citas
-    return maxOpacity - (opacityRange * (index / appointmentsCount));
-  }
-
-  calculateColor(index: number): string {
-    const baseColor = [0, 96, 176]; // Color base (0060b0 en RGB)
-    const colorStep = 80; // Cambio en cada componente de color
-    const appointmentsCount = this.appointmentsToday.length;
-  
-    if (appointmentsCount === 0) {
-      return `rgb(${baseColor.join(',')})`;
-    }
-  
-    const modifiedColor = baseColor.map((component, i) => {
-      const maxComponentValue = 255;
-      const minComponentValue = 0;
-      const componentRange = maxComponentValue - minComponentValue;
-  
-      const modifiedComponent = component + (colorStep * (index / appointmentsCount));
-      return Math.min(maxComponentValue, Math.max(minComponentValue, modifiedComponent));
-    });
-  
-    return `rgb(${modifiedColor.join(',')})`;
-  }
-  
   
 
   getAppointments() {

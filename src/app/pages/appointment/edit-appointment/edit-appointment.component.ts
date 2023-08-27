@@ -32,10 +32,10 @@ interface Appointment {
   styleUrls: ['./edit-appointment.component.css']
 })
 export class EditAppointmentComponent {
-  myFilter = (d: Date | null): boolean => {
+  /* myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     return day !== 0 && day !== 6;
-  };
+  }; */
   appointmentForm!: FormGroup;
   listUsers!: any[];
   listPets!: any[];
@@ -48,6 +48,13 @@ export class EditAppointmentComponent {
     "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM",
     "05:00 PM", "05:30 PM", "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM"
   ];
+
+  today = new Date(); 
+  day = this.today.getDate() + 1; 
+  month = this.today.getMonth() + 1;
+  year = this.today.getFullYear();
+
+  date: string = `${this.year}-${this.month.toString().padStart(2, '0')}-${this.day.toString().padStart(2, '0')}`;
 
   constructor(
     private fb: FormBuilder,

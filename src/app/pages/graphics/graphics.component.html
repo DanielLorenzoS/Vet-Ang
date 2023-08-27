@@ -16,7 +16,7 @@
         </span>
       </div>
     </div>
-    <!-- <div class="graphics_body_item" (click)="goAddPet()">
+    <div class="graphics_body_item" (click)="goAddPet()" *ngIf="appointmentsToday.length === 0">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Nueva mascota</h2>
       </div>
@@ -28,8 +28,8 @@
           </mat-icon>
         </span>
       </div>
-    </div> -->
-    <div class="graphics_body_item" (click)="goAddAppointment()">
+    </div>
+    <div class="graphics_body_item" (click)="goAddAppointment()" *ngIf="appointmentsToday.length != 0">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Nueva cita</h2>
       </div>
@@ -42,36 +42,43 @@
         </span>
       </div>
     </div>
-    <div class="graphics_body_item">
-      <div class="graphics_body_item_header">
+    <div class="graphics_body_item bod">
+      <div class="graphics_body_item_header div divheader">
         <h2 class="graphics_body_item_title">Citas del Día</h2>
       </div>
-      <div class="graphics_body_item_body">
-
-        <mat-accordion class="accordion">
+      <div class="panel-not div" *ngIf="appointmentsToday.length === 0">No hay citas programadas para hoy.</div>
+      <div class="graphics_body_item_body div" (click)="goAddAppointment()" *ngIf="appointmentsToday.length === 0">
+        ¿Quieres agregar una cita?
+        <span>
+          <mat-icon class="material-icons-outlined">
+            add_alert
+          </mat-icon>
+        </span>
+      </div>
+      <div class="graphics_body_item_body secondBod">
+        <mat-accordion class="accordion" [multi]="true">
           <div *ngFor="let appointment of appointmentsToday, let i = index">
-            <mat-expansion-panel class="panel" [style.background-color]="calculateColor(i)">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
+            <mat-expansion-panel class="panel" [expanded]="true">
+              <mat-expansion-panel-header class="header-panel">
+                <mat-panel-title class="panel-title">
                   <span>{{ appointment.user }}</span>
-                </mat-panel-title>
-                <mat-panel-description>
                   <span>{{ appointment.date | date: 'shortTime' }}</span>
-                </mat-panel-description>
+                </mat-panel-title>
               </mat-expansion-panel-header>
-
-              <span>{{ appointment.pet }}</span>
-              <span>{{ appointment.doctor }}</span>
+              <mat-panel-description class="panel-description" (click)="goAppointments()">
+                <span>{{ appointment.pet }}</span>
+                <span>{{ appointment.doctor }}</span>
+                <span>{{ appointment.service }}</span>
+              </mat-panel-description>
             </mat-expansion-panel>
           </div>
         </mat-accordion>
-        <div *ngIf="appointmentsToday.length === 0">No hay citas programadas para hoy.</div>
       </div>
     </div>
 
     <div class="graphics_body_item">
       <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Especies de Mascotas</h2>
+        <h2 class="graphics_body_item_title">Especies más tratadas</h2>
       </div>
       <div class="graphics_body_item_body">
         <ngx-charts-bar-vertical [view]="[400, 300]" [scheme]="colorScheme" [results]="barChartData" [xAxis]="showXAxis"

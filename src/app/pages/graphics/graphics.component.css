@@ -45,17 +45,81 @@
   width: 90%;
   max-height: 25rem;
   overflow-y: auto;
-  scrollbar-color: red yellow !important;
 }
 
 .panel {
   margin-bottom: .5rem;
   color: white;
+  background-color: #2697f3;
 }
 
+.header-panel {
+  background-color: #0060b0;
+}
+
+
 .panel span {
+  font-weight: 200;
+  font-size: 1.5rem;
   color: white;
 }
+
+.header-panel:hover {
+  background-color: #0060b0 !important;
+}
+
+.panel-description {
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  text-align: center;
+}
+
+.panel-description span:nth-child(1),
+.panel-description span:nth-child(2) {
+  grid-column: span 1;
+}
+
+.panel-description span:nth-child(3) {
+  margin-top: 1rem;
+  grid-column: span 2;
+}
+
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.panel-not {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  line-height: 3rem;
+}
+
+.bod {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+
+.secondBod {
+  height: auto !important;
+}
+
+.bod .div {
+  margin-top: 3rem;
+}
+
+.divheader {
+  margin-top: 0rem !important;
+}
+
+mat-content {
+  justify-content: space-between !important;
+}
+
 
 .graphics_body_item:nth-child(2) span mat-icon {
   color: rgb(255, 72, 0);
@@ -104,6 +168,7 @@
   grid-column: span 2;
   grid-row: span 1;
 }
+
 .graphics_body_item:nth-child(3) {
   grid-column: span 2;
   grid-row: span 2;

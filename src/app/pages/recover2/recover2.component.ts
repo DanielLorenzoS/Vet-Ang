@@ -28,9 +28,17 @@ export class Recover2Component implements OnInit{
     this.tokenForm = this.initializeForm();
   }
 
+  keyPress(event: any) {
+    const pattern = /[0-9\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      token: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(8), Validators.maxLength(8)]],
+      token: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
     });
   }
 

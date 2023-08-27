@@ -44,6 +44,12 @@ export class AddAppointmentComponent {
   appointment!: Appointment;
   appointmentHours: string[] = this.generateTimeIntervals("08:00 AM", "08:00 PM", 30);
 
+  today = new Date(); 
+  day = this.today.getDate() + 1; 
+  month = this.today.getMonth() + 1;
+  year = this.today.getFullYear();
+
+  date: string = `${this.year}-${this.month.toString().padStart(2, '0')}-${this.day.toString().padStart(2, '0')}`;
 
   constructor(
     private fb: FormBuilder,
@@ -62,7 +68,6 @@ export class AddAppointmentComponent {
       hour: ['', Validators.required],
       service: ['', Validators.required],
       status: ['', Validators.required],
-      type: ['', Validators.required],
       user: ['', Validators.required],
       pet: ['', Validators.required],
       doctor: ['', Validators.required]

@@ -27,7 +27,7 @@ export class Recover1Component implements OnInit {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[^@.\n]*@[^@.\n]*\.[^@.\n]*$/)]]
+      email: ['', [Validators.required, Validators.email, Validators.pattern( /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]]
     });
   }
 

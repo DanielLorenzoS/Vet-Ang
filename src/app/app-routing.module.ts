@@ -32,6 +32,7 @@ import { AllMedicinesComponent } from './pages/medicine/all-medicines/all-medici
 import { ServiceComponent } from './pages/service/service/service.component';
 import { AddServiceComponent } from './pages/service/add-service/add-service.component';
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
+import { DeletedAppointmentComponent } from './pages/appointment/deleted-appointment/deleted-appointment.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
       { path: 'addPet', component: AddPetComponent, canActivate: [authGuard] },
       { path: 'pet/:id', component: PetComponent, canActivate: [authGuard] },
       { path: 'appointments', component: AllAppointmentComponent, canActivate: [authGuard] },
+      { path: 'deletedAppointments', component: DeletedAppointmentComponent, canActivate: [authGuard] },
       { path: 'appointment', component: AppointmentComponent, canActivate: [authGuard] },
       { path: 'addAppointment', component: AddAppointmentComponent, canActivate: [authGuard] },
       { path: 'doctors', component: AllDoctorsComponent, canActivate: [authGuard] },
