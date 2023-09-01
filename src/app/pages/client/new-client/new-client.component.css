@@ -8,29 +8,61 @@
 
 .form {
     width: 90%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 5px 8px rgba(0, 0, 0, 0.3);
     padding: 1rem;
     padding-top: 0;
     border-radius: 6px;
-    font-weight: 200;  
-    
+    font-weight: 200;
+
+}
+
+.back {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    padding: .44rem 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #0060b0;
+    color: white;
+}
+
+.back::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style: solid;
+    border-color: transparent #0060b0;
+    border-width: 17px 15px 17px 0;
+    width: 0;
+    height: 0;
+}
+
+.back span {
+    font-size: 1.2rem;
+    font-weight: 200;
 }
 
 .back img {
-  padding-top: 1.5rem;
-  width: 40px;
-  opacity: .7;
-  cursor: pointer;
-  position: absolute;
-  top: .5rem;
+    padding-top: 1.5rem;
+    width: 40px;
+    opacity: .7;
+    cursor: pointer;
+    position: absolute;
+    top: .5rem;
 }
 
 .form form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .title {
@@ -76,11 +108,11 @@
 .btnContainer {
     display: flex;
     justify-content: space-between;
-    align-self: center;
     width: 70%;
 }
 
-.btnSubmit {
+.btnSubmit,
+.btnCancel {
     margin: auto;
     margin-top: 1rem;
     padding: 0.6rem 1rem;
@@ -95,6 +127,23 @@
     width: 100%;
 }
 
+.btnSubmit {
+    margin-right: 1rem;
+}
+
+.btnCancel {
+    margin-left: 1rem;
+    background-color: #dc3545;
+    border: thin solid #dc3545;
+    color: #fff;
+}
+
+.btnCancel:hover {
+    background-color: #fff;
+    color: #dc3545;
+    border: thin solid #dc3545;
+}
+
 .btnSubmit:hover {
     background-color: #fff;
     color: #0035c5;
@@ -102,24 +151,39 @@
 }
 
 .btnDisabled {
-  cursor: not-allowed !important;
-  margin: auto;
-  margin-top: 1rem;
-  padding: 0.6rem 1rem;
-  border: thin solid #2e82d7;
-  border-radius: 0.30rem;
-  font-size: 1.1rem;
-  background-color: #2e82d7;
-  color: #fff;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-  width: 100%;
+    cursor: not-allowed !important;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    border: thin solid #2e82d7;
+    border-radius: 0.30rem;
+    font-size: 1.1rem;
+    background-color: #2e82d7;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
 }
 
 
 @media screen and (max-width: 700px) {
-  .form-group {
-    width: 90% !important;
-  }
+    .form {
+        margin-bottom: 10rem;
+    }
+
+    .form-group {
+        width: 90% !important;
+    }
+
+    .btnContainer {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .btnCancel,
+    .btnSubmit {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }

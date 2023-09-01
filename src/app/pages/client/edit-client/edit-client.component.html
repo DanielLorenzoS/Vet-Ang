@@ -1,5 +1,8 @@
 <div class="container">
     <div class="form">
+        <div class="back" (click)="onCancelClick()">
+            <mat-icon>cancel</mat-icon>
+        </div>
         <h1 class="title">Editar cliente</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="editClientForm">
             <div class="form-group">
@@ -23,7 +26,8 @@
                 <mat-error *ngIf="editClientForm.get('phone')?.errors?.['pattern']">Ingresa un número de teléfono
                     válido</mat-error>
                 <mat-error *ngIf="editClientForm.get('phone')?.errors?.['minlength']">Ingresa 10 dígitos</mat-error>
-                <mat-error *ngIf="editClientForm.get('phone')?.errors?.['maxlength']">Ingresa sólo 10 dígitos</mat-error>
+                <mat-error *ngIf="editClientForm.get('phone')?.errors?.['maxlength']">Ingresa sólo 10
+                    dígitos</mat-error>
             </div>
 
             <div class="form-group">
@@ -54,7 +58,8 @@
                 <mat-error
                     *ngIf="editClientForm.get('street')?.touched && editClientForm.get('street')?.errors?.['required']">La
                     calle es requerida</mat-error>
-                <mat-error *ngIf="editClientForm.get('street')?.errors?.['pattern']">Ingresa una calle válida</mat-error>
+                <mat-error *ngIf="editClientForm.get('street')?.errors?.['pattern']">Ingresa una calle
+                    válida</mat-error>
             </div>
 
             <div class="form-group">
@@ -66,13 +71,15 @@
                     usuario es requerido</mat-error>
                 <mat-error *ngIf="editClientForm.get('username')?.errors?.['minlength']">Ingresa más de 6
                     caracteres</mat-error>
-                <mat-error *ngIf="editClientForm.get('username')?.errors?.['pattern']">No ingreses caracteres inválidos o
+                <mat-error *ngIf="editClientForm.get('username')?.errors?.['pattern']">No ingreses caracteres inválidos
+                    o
                     espacios</mat-error>
             </div>
             <div class="btnContainer">
                 <button [disabled]="!editClientForm.valid"
                     [ngClass]="{'btnSubmit': editClientForm.valid, 'btnDisabled': !editClientForm.valid}"
                     type="submit">Actualizar</button>
+                <button class="btnCancel" type="button" (click)="onCancelClick()">Cancelar</button>
             </div>
         </form>
     </div>

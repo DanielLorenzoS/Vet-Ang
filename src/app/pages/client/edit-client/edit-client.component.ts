@@ -192,6 +192,4 @@ export class EditClientComponent implements OnInit {
     );
   }
 
-
-
 }

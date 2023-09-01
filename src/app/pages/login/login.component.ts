@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
                   text: 'Contacta con el administrador',
                   showConfirmButton: true,
                 });
+                this.loginService.deleteToken();
               }
             },
             (error: any) => {

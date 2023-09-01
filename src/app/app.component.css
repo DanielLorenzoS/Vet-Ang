@@ -16,6 +16,7 @@
 .spinner {
     opacity: 1;
 }
+
 .container {
     background-color: #fff;
 }
@@ -52,4 +53,4 @@
     background-color: #fff;
     color: #000;
     border-right: 2px dotted #ddd;
-  }
+}

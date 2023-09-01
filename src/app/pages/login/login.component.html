@@ -14,7 +14,9 @@
                 <input class="input" type="password" id="password" name="password" formControlName="password"
                    placeholder="**********" required>
                    <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">La contraseña es requerida</mat-error>
-                   <mat-error *ngIf="loginForm.get('password')?.errors?.['pattern']">La contraseña tiene caracteres inválidos</mat-error>
+                   <mat-error *ngIf="loginForm.get('password')?.errors?.['pattern']">La contraseña debe tener por lo 
+                     menos 8 caracteres, una letra mayúscula, una minúscula y un número
+                   </mat-error>
             </div>
             <a routerLink="/registro1" class="link">Registrarme</a>
             <a routerLink="/recover1" class="link">Olvidé la contraseña</a>

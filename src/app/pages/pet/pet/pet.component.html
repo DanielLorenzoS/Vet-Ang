@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="back" (click)="goBack()">
+    <span>Volver</span>
+  </div>
   <div class="info" *ngIf="showInfo">
     <div class="buttons-pet">
 
@@ -16,7 +19,7 @@
     <h4>Raza: {{ pet.race }}</h4>
     <h4>Tamaño: {{ pet.weight }} kg</h4>
   </div>
-  
+
   <div class="table-container">
     <div class="medic">
       <mat-icon>medical_services</mat-icon>
@@ -70,10 +73,12 @@
       <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
 
       <!-- Encabezados de la tabla -->
-      <tr mat-header-row *matHeaderRowDef="['symtomps', 'diagnosis', 'status', 'creationDate', 'doctor', 'actions']"></tr>
+      <tr mat-header-row *matHeaderRowDef="['symtomps', 'diagnosis', 'status', 'creationDate', 'doctor', 'actions']">
+      </tr>
 
       <!-- Filas de la tabla -->
-      <tr mat-row *matRowDef="let prescription; columns: ['symtomps', 'diagnosis', 'status', 'creationDate', 'doctor', 'actions']"
+      <tr mat-row
+        *matRowDef="let prescription; columns: ['symtomps', 'diagnosis', 'status', 'creationDate', 'doctor', 'actions']"
         (click)="onClickRow(prescription)"></tr>
     </table>
 

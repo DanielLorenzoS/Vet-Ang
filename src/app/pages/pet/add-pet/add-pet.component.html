@@ -1,5 +1,8 @@
 <div class="container">
     <div class="form">
+        <div class="back" (click)="goBack()">
+            <span>Volver</span>
+        </div>
         <h1 class="title">Agregar mascota</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="newPetForm">
             <div class="form-group">

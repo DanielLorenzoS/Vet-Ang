@@ -7,8 +7,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class MedicineService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
+  url: string = 'http://localhost:8080';
+  /* url: string = 'https://spring-vet-production.up.railway.app'; */
 
 
   constructor(

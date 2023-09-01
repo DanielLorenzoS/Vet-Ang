@@ -6,6 +6,7 @@ import { PetService } from 'src/app/services/pet.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
 import { EditPetComponent } from '../edit-pet/edit-pet.component';
+import { Location } from '@angular/common';
 
 interface Pet {
   id: number,
@@ -39,6 +40,7 @@ export class PetComponent {
     private petService: PetService,
     private spinner: SpinnerService,
     private router: Router,
+    private location: Location,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
@@ -255,6 +257,10 @@ export class PetComponent {
 
   onClickRow(prescription: any) {
     this.router.navigate(['/dashboard/prescription'], { queryParams: { id: prescription.id } });
+  }
+
+  goBack() {
+    this.location.back();
   }
   
 }

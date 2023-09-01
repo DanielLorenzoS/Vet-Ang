@@ -10,7 +10,6 @@
 .table-pag {
     width: 90%;
     margin: auto;
-    margin-bottom: 0;
 }
 
 .mat-table {
@@ -21,15 +20,48 @@
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     text-align: center;
 }
+
+.back {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    padding: .44rem 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #0060b0;
+    color: white;
+}
+
+.back::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style: solid;
+    border-color: transparent #0060b0;
+    border-width: 17px 15px 17px 0;
+    width: 0;
+    height: 0;
+}
+
+.back span {
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
 
 .title {
     text-align: center;
     font-size: 3rem;
     font-weight: 350;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     margin-top: 1.5rem;
     color: #000;
     font-family: serif;
@@ -106,7 +138,7 @@ th:nth-child(1) {
     border-top-left-radius: 3px;
 }
 
-th:nth-child(4) {
+th:nth-child(5) {
     border-top-right-radius: 3px;
 }
 
@@ -132,10 +164,15 @@ tr.mat-mdc-row:hover td {
     color: #fff;
 }
 
+tr.mat-mdc-row:hover mat-icon {
+    color: #fff;
+}
+
 .mat-column-id,
 .mat-column-username,
 .mat-column-email,
-.mat-column-phone {
+.mat-column-phone,
+.mat-column-actions {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 28% !important;
@@ -152,11 +189,27 @@ tr.mat-mdc-row:hover td {
 
 .mat-column-id {
     border-left: none;
-    width: 10% !important;
+    width: 5% !important;
 }
 
 .mat-column-phone {
     border-right: none;
+    width: 20% !important;
+}
+
+.mat-column-actions {
+    width: 5% !important;
+}
+
+.mat-column-actions mat-icon {
+    cursor: pointer;
+    margin: auto;
+    padding: .6rem;
+}
+
+.edit {
+    color: #0060b0;
+    font-size: 1.6rem;
 }
 
 .mat-paginator {

@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { environment } from 'src/enviroments/enviroment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
+  url: string = 'http://localhost:8080';
+  /* url: string = 'https://spring-vet-production.up.railway.app'; */
+  /* url: string = environment.url; */
 
 
   constructor(
@@ -42,6 +43,10 @@ export class LoginService {
     this.cookieService.delete('token');
     window.location.reload();
     return true;
+  }
+
+  deleteToken() {
+    this.cookieService.delete('token');
   }
 
   getToken() {

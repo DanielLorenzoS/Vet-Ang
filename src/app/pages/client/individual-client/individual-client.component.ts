@@ -7,6 +7,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { EditClientComponent } from '../edit-client/edit-client.component';
+import { Location } from '@angular/common';
 
 interface User {
   id: number;
@@ -30,6 +31,7 @@ export class IndividualClientComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    private location: Location,
     private petsService: PetService,
     private router: Router,
     private spinner: SpinnerService,
@@ -44,6 +46,7 @@ export class IndividualClientComponent implements OnInit {
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditClientComponent, {
       width: '80%', // Personaliza el ancho según tus necesidades
+      height: '90%', // Personaliza el alto según tus necesidades
       data: { user: this.user } // Pasa los datos del usuario al diálogo
     });
   
@@ -155,8 +158,8 @@ export class IndividualClientComponent implements OnInit {
     )
   }
 
-  back() {
-    this.router.navigate(['/dashboard/client'])
+  goBack() {
+    this.location.back();
   }
 
   goCreatePet() {

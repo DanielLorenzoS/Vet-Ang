@@ -7,6 +7,38 @@
     align-items: center;
 }
 
+.back {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    padding: .44rem 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #0060b0;
+    color: white;
+}
+
+.back::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style: solid;
+    border-color: transparent #0060b0;
+    border-width: 17px 15px 17px 0;
+    width: 0;
+    height: 0;
+}
+
+.back span {
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
 .table-pag {
     width: 90%;
     margin: auto;
@@ -107,7 +139,7 @@ th:nth-child(1) {
     border-top-left-radius: 3px;
 }
 
-th:nth-child(5) {
+th:nth-child(6) {
     border-top-right-radius: 3px;
 }
 
@@ -115,11 +147,11 @@ th:nth-child(5) {
 table {
     min-width: 600px;
     width: 100%;
+    cursor: default;
 }
 
 tr.mat-mdc-row:hover {
     background-color: #3393e3 !important;
-    cursor: pointer;
 }
 
 tr:nth-child(even) {
@@ -138,7 +170,8 @@ tr.mat-mdc-row:hover td {
 .mat-column-name,
 .mat-column-race,
 .mat-column-specie,
-.mat-column-user {
+.mat-column-user,
+.mat-column-actions {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 28% !important;
@@ -155,11 +188,45 @@ tr.mat-mdc-row:hover td {
 
 .mat-column-id {
     border-left: none;
-    width: 12% !important;
+    width: 4% !important;
 }
 
 .mat-column-user {
     border-right: none;
+}
+
+.mat-column-actions {
+    border-right: none;
+    width: 8% !important;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+mat-icon {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: .3rem;
+}
+
+.icon {
+    font-size: 1.6rem;
+    display: inline-block;
+    color: #0060b0;
+}
+
+.icon:hover {
+    color: #fff;
+}
+
+.icon:last-child {
+    color: #dc3545;
 }
 
 .mat-paginator {

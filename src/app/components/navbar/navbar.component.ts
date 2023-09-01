@@ -40,7 +40,10 @@ export class NavbarComponent {
         this.loginService.logout();
         this.router.navigate(['/']);
       }
-    }
-    )
+    })
+  }
+
+  goDashboard() {
+    this.router.navigate(['dashboard'])
   }
 }

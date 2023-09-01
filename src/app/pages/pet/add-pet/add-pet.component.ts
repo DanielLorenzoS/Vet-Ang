@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -20,11 +21,12 @@ export class AddPetComponent {
   month = this.today.getMonth() + 1; // Recuerda que los meses son base 0 en JavaScript
   year = this.today.getFullYear();
 
-  
+
 
   date: string = `${this.year}-${this.month.toString().padStart(2, '0')}-${this.day.toString().padStart(2, '0')}`;
   constructor(
     private router: Router,
+    private location: Location,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private petService: PetService,
@@ -47,8 +49,8 @@ export class AddPetComponent {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
-      race: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/)]],
+      race: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/)]],
       specie: ['', [Validators.required]],
       sex: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
@@ -75,9 +77,8 @@ export class AddPetComponent {
     }
   }
 
-  back() {
-    this.router.lastSuccessfulNavigation;
-    console.log('Regresando');
+  goBack() {
+    this.location.back();
   }
 
   getClients() {

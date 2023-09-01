@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class AllClientsComponent implements OnInit {
   usuarios: any[] = []; // Inicializa el arreglo vacío
 
-  displayedColumns: string[] = ['id', 'username', 'email', 'phone'];
+  displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'actions'];
   dataSource = new MatTableDataSource<any>(this.usuarios); // Usa any como tipo genérico para la fuente de datos
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -21,6 +22,7 @@ export class AllClientsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private location: Location,
     private spinner: SpinnerService
   ) { }
 
@@ -53,5 +55,9 @@ export class AllClientsComponent implements OnInit {
 
   goNewClient() {
     this.router.navigate(['dashboard/addClient'])
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

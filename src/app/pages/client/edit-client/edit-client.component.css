@@ -11,25 +11,36 @@
     padding: 1rem;
     padding-top: 0;
     border-radius: 6px;
-    font-weight: 200;  
-    
+    font-weight: 200;
+    overflow: auto;
 }
 
-.back img {
-  padding-top: 1.5rem;
-  width: 40px;
-  opacity: .7;
-  cursor: pointer;
-  position: absolute;
-  top: .5rem;
+.back {
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    padding: .2rem;
+    border-radius: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+}
+
+.back mat-icon {
+    font-size: 2.3rem !important;
+    padding: 1rem;
+    padding-top: 0;
+    color: #dc3545;
 }
 
 .form form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .title {
@@ -79,7 +90,8 @@
     width: 70%;
 }
 
-.btnSubmit {
+.btnSubmit,
+.btnCancel {
     margin: auto;
     margin-top: 1rem;
     padding: 0.6rem 1rem;
@@ -94,6 +106,24 @@
     width: 100%;
 }
 
+.btnSubmit {
+    margin-right: 1rem;
+}
+
+.btnCancel {
+    margin-left: 1rem;
+    background-color: #dc3545;
+    border: thin solid #dc3545;
+    color: #fff;
+}
+
+.btnCancel:hover {
+    background-color: #fff;
+    color: #dc3545;
+    border: thin solid #dc3545;
+}
+
+
 .btnSubmit:hover {
     background-color: #fff;
     color: #0035c5;
@@ -101,24 +131,29 @@
 }
 
 .btnDisabled {
-  cursor: not-allowed !important;
-  margin: auto;
-  margin-top: 1rem;
-  padding: 0.6rem 1rem;
-  border: thin solid #2e82d7;
-  border-radius: 0.30rem;
-  font-size: 1.1rem;
-  background-color: #2e82d7;
-  color: #fff;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-  width: 100%;
+    cursor: not-allowed !important;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    border: thin solid #2e82d7;
+    border-radius: 0.30rem;
+    font-size: 1.1rem;
+    background-color: #2e82d7;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
 }
 
 
 @media screen and (max-width: 700px) {
-  .form-group {
-    width: 90% !important;
-  }
+
+    .form {
+        padding-top: 20rem;
+    }
+
+    .form-group {
+        width: 90% !important;
+    }
 }

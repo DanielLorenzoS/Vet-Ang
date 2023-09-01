@@ -62,8 +62,8 @@ export class EditPetComponent {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
-      race: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/)]],
+      race: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]+$/)]],
       specie: ['', [Validators.required]],
       sex: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
@@ -107,11 +107,6 @@ export class EditPetComponent {
     );
   }
 
-  back() {
-    this.router.lastSuccessfulNavigation;
-    console.log('Regresando');
-  }
-
   getClients() {
     this.spinner.showLoadingIndicator();
     this.userService.getUserByRole('CLIENT').subscribe((data) => {
@@ -134,5 +129,9 @@ export class EditPetComponent {
         console.log(err);
       }
     );
+  }
+
+  onCancelClick() {
+    this.dialogRef.close();
   }
 }

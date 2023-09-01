@@ -66,6 +66,7 @@ import { EditClientComponent } from './pages/client/edit-client/edit-client.comp
 import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -135,7 +136,8 @@ import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatNativeDateModule
   ],
   providers: [authInterceptorProviders, CookieService, DatePipe, { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent]

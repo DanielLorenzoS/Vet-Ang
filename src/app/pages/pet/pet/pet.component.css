@@ -4,6 +4,38 @@
     scroll-behavior: smooth;
 }
 
+.back {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    padding: .44rem 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #0060b0;
+    color: white;
+}
+
+.back::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style: solid;
+    border-color: transparent #0060b0;
+    border-width: 17px 15px 17px 0;
+    width: 0;
+    height: 0;
+}
+
+.back span {
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
 .info {
     margin: auto;
     margin-top: 2rem;

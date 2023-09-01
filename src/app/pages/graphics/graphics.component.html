@@ -16,7 +16,7 @@
         </span>
       </div>
     </div>
-    <div class="graphics_body_item" (click)="goAddPet()" *ngIf="appointmentsToday.length === 0">
+    <div class="graphics_body_item" (click)="goAddPet()">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Nueva mascota</h2>
       </div>
@@ -29,7 +29,7 @@
         </span>
       </div>
     </div>
-    <div class="graphics_body_item" (click)="goAddAppointment()" *ngIf="appointmentsToday.length != 0">
+    <div class="graphics_body_item" (click)="goAddAppointment()">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Nueva cita</h2>
       </div>
@@ -47,14 +47,14 @@
         <h2 class="graphics_body_item_title">Citas del Día</h2>
       </div>
       <div class="panel-not div" *ngIf="appointmentsToday.length === 0">No hay citas programadas para hoy.</div>
-      <div class="graphics_body_item_body div" (click)="goAddAppointment()" *ngIf="appointmentsToday.length === 0">
+      <!-- <div class="graphics_body_item_body div" (click)="goAddAppointment()" *ngIf="appointmentsToday.length === 0">
         ¿Quieres agregar una cita?
         <span>
           <mat-icon class="material-icons-outlined">
             add_alert
           </mat-icon>
         </span>
-      </div>
+      </div> -->
       <div class="graphics_body_item_body secondBod">
         <mat-accordion class="accordion" [multi]="true">
           <div *ngFor="let appointment of appointmentsToday, let i = index">
@@ -96,24 +96,7 @@
           [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-area-chart>
       </div>
     </div>
-    <div class="graphics_body_item">
-      <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Medicamentos recetados</h2>
-      </div>
-      <div class="graphics_body_item_body">
-        <ngx-charts-pie-chart class="chart" [view]="[650, 400]" [scheme]="'neons'" [results]="pieChartData"
-          [explodeSlices]="false" [doughnut]="true" [legend]="true" [labels]="true"></ngx-charts-pie-chart>
-      </div>
-    </div>
-    <div class="graphics_body_item">
-      <div class="graphics_body_item_header">
-        <h2 class="graphics_body_item_title">Servicios más solicitados</h2>
-      </div>
-      <div class="graphics_body_item_body">
-        <ngx-charts-pie-grid class="chart" [view]="[650, 400]" [scheme]="'neons'"
-          [results]="gridChartData"></ngx-charts-pie-grid>
-      </div>
-    </div>
+
     <div class="graphics_body_item">
       <div class="graphics_body_item_header">
         <h2 class="graphics_body_item_title">Citas de los últimos meses</h2>
@@ -123,6 +106,24 @@
           [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
           [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"></ngx-charts-line-chart>
 
+      </div>
+    </div>
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Medicamentos recetados</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-pie-chart class="chart" [view]="[650, 400]" [scheme]="'neons'" [results]="pieChartData"
+          [explodeSlices]="false" [doughnut]="false" [legend]="true" [labels]="true"></ngx-charts-pie-chart>
+      </div>
+    </div>
+    <div class="graphics_body_item">
+      <div class="graphics_body_item_header">
+        <h2 class="graphics_body_item_title">Servicios más solicitados</h2>
+      </div>
+      <div class="graphics_body_item_body">
+        <ngx-charts-pie-grid class="chart" [view]="[650, 400]" [scheme]="'neons'"
+          [results]="gridChartData"></ngx-charts-pie-grid>
       </div>
     </div>
   </div>

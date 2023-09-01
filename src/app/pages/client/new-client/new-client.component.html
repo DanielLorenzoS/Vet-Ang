@@ -1,5 +1,8 @@
 <div class="container">
     <div class="form">
+        <div class="back" (click)="goBack()">
+            <span>Volver</span>
+        </div>
         <h1 class="title">Agregar cliente</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="newclientForm">
             <div class="form-group">
@@ -71,6 +74,7 @@
                 <button [disabled]="!newclientForm.valid"
                     [ngClass]="{'btnSubmit': newclientForm.valid, 'btnDisabled': !newclientForm.valid}"
                     type="submit">Agregar cliente</button>
+                <button class="btnCancel" type="button" (click)="goBack()">Cancelar</button>
             </div>
         </form>
     </div>
