@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -36,6 +36,7 @@ export class AllAppointmentComponent {
   constructor(
     private dialog: MatDialog,
     private router: Router,
+    private location: Location,
     private spinner: SpinnerService,
     private appointmentService: AppointmentService,
     private datePipe: DatePipe,
@@ -211,5 +212,9 @@ export class AllAppointmentComponent {
       }
     }
     )
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

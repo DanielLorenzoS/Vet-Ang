@@ -42,7 +42,6 @@
 .table-pag {
     width: 90%;
     margin: auto;
-    margin-bottom: 0;
 }
 
 .mat-table {
@@ -53,7 +52,7 @@
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     text-align: center;
 }
 

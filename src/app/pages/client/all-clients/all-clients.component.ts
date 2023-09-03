@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-all-clients',
@@ -28,6 +29,11 @@ export class AllClientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.showLoadingIndicator();
+    this.getClients();
+  }
+
+  getClients() {
+    this.usuarios = [];
     this.userService.getUserByRole("CLIENT").subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
@@ -41,6 +47,43 @@ export class AllClientsComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  deleteUser(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Se eliminará el cliente y todas sus mascotas",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.spinner.showLoadingIndicator();
+        this.userService.deleteUser(id).subscribe(
+          (res: any) => {
+            this.spinner.hideLoadingIndicator();
+            console.log(res);
+            Swal.fire({
+              icon: 'success',
+              title: 'Cliente eliminado',
+              showConfirmButton: false,
+              timer: 1000
+            })
+            this.getClients();
+          }
+        ), (err: any) => {
+          this.spinner.hideLoadingIndicator();
+          console.log('error al eliminar el usuario');
+          Swal.fire({
+            icon: 'error',
+            text: 'No se pudo eliminar el cliente',
+          })
+        }
+      }
+    })
   }
 
   onRowClick(row: any) {

@@ -149,7 +149,6 @@ table {
 
 tr.mat-mdc-row:hover {
     background-color: #3393e3 !important;
-    cursor: pointer;
 }
 
 tr:nth-child(even) {
@@ -205,6 +204,35 @@ tr.mat-mdc-row:hover mat-icon {
     cursor: pointer;
     margin: auto;
     padding: .6rem;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+mat-icon {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: .3rem;
+}
+
+.icon {
+    font-size: 1.6rem;
+    display: inline-block;
+    color: #0060b0;
+}
+
+.icon:hover {
+    color: #fff;
+}
+
+.icon:last-child {
+    color: #dc3545;
 }
 
 .edit {

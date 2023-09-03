@@ -2,22 +2,25 @@
   <div class="back" (click)="goBack()">
     <span>Volver</span>
   </div>
-  <div class="info" *ngIf="showInfo">
+  <div class="info">
+    <div class="text">
+      <p><span>Nombre:</span> {{ pet.name }}</p>
+      <p><span>Sexo:</span> {{ pet.sex }}</p>
+      <p><span>Fecha </span>de nacimiento: {{ pet.birthdate }}</p>
+      <p><span>Especie:</span> {{ pet.specie }}</p>
+      <p><span>Raza:</span> {{ pet.race }}</p>
+      <p><span>Tamaño:</span> {{ pet.weight }} kg</p>
+    </div>
     <div class="buttons-pet">
-
-      <button mat-icon-button (click)="openEditDialog()">
+      <button class="update" mat-icon-button (click)="openEditDialog()">
+        <span>Editar</span>
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button (click)="deletePet(pet.id)">
+      <button class="delete" mat-icon-button (click)="deletePet(pet.id)">
+        <span>Eliminar</span>
         <mat-icon class="deleteIcon">delete_forever</mat-icon>
       </button>
     </div>
-    <h1>Nombre: {{ pet.name }}</h1>
-    <h2>Sexo: {{ pet.sex }}</h2>
-    <h3>Fecha de nacimiento: {{ pet.birthdate }}</h3>
-    <h4>Especie: {{ pet.specie }}</h4>
-    <h4>Raza: {{ pet.race }}</h4>
-    <h4>Tamaño: {{ pet.weight }} kg</h4>
   </div>
 
   <div class="table-container">

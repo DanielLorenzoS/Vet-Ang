@@ -11,7 +11,6 @@
   width: 90%;
   margin: auto;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
 
@@ -44,35 +43,54 @@ mat-form-field {
   display: flex;
 }
 
-.form-container form button {
-  width: 80%;
-  margin: auto;
-  padding: 1.5rem 1rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  font-size: 1.2rem;
+.back {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  padding: .44rem 1rem;
+  border-bottom-right-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  grid-column: span 3;
+  background-color: #0060b0;
+  color: white;
 }
 
-.form-container form button:hover {
-  background-color: #0056b3;
+.back::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  border-style: solid;
+  border-color: transparent #0060b0;
+  border-width: 17px 15px 17px 0;
+  width: 0;
+  height: 0;
 }
 
+.back span {
+  font-size: 1.2rem;
+  font-weight: 200;
+}
 
 .btnContainer {
-  display: flex;
+  grid-column: span 3;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   justify-content: space-between;
-  align-self: center;
   width: 70%;
 }
 
-.btnSubmit {
+.btnSubmit,
+.btnCancel {
+  grid-column: span 1;
   margin: auto;
   margin-top: 1rem;
-  padding: 0.9rem 1rem !important;
+  padding: 0.6rem 1rem;
   border: thin solid #0035c5;
   border-radius: 0.30rem;
   font-size: 1.1rem;
@@ -84,6 +102,23 @@ mat-form-field {
   width: 100%;
 }
 
+.btnSubmit {
+  margin-right: 1rem;
+}
+
+.btnCancel {
+  margin-left: 1rem;
+  background-color: #dc3545;
+  border: thin solid #dc3545;
+  color: #fff;
+}
+
+.btnCancel:hover {
+  background-color: #fff;
+  color: #dc3545;
+  border: thin solid #dc3545;
+}
+
 .btnSubmit:hover {
   background-color: #fff;
   color: #0035c5;
@@ -91,10 +126,11 @@ mat-form-field {
 }
 
 .btnDisabled {
+  grid-column: span 1;
   cursor: not-allowed !important;
   margin: auto;
   margin-top: 1rem;
-  padding: .9rem 1rem !important;
+  padding: .6rem 1rem !important;
   border: thin solid #2e82d7;
   border-radius: 0.30rem;
   font-size: 1.1rem;
@@ -108,4 +144,28 @@ mat-form-field {
 
 button {
   padding: 0;
+}
+
+@media (width < 700px) {
+  .btnContainer {
+    grid-template-columns: repeat(1, 1fr);
+    width: 90%;
+  }
+
+  .form-container h2 {
+    margin-top: 25rem !important;
+  }
+
+  mat-form-field {
+    grid-column: span 3;
+  }
+
+  .field-doctors {
+    width: 90% !important;
+  }
+
+  .btnCancel,
+  .btnSubmit {
+    margin: auto;
+  }
 }

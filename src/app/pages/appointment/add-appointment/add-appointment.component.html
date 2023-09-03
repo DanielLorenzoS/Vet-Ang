@@ -1,47 +1,31 @@
 <div class="container">
-
-
+    <div class="back" (click)="goBack()">
+        <span>Volver</span>
+    </div>
     <div class="form-container">
         <h2>Agregar cita</h2>
         <form [formGroup]="appointmentForm" (submit)="addAppointment()">
             <mat-form-field appearance="outline">
                 <mat-label>Escoge el día</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="day" [min]="date">
+                <input matInput [matDatepicker]="picker" formControlName="day" [min]="date" (click)="picker.open()"
+                    [readonly]="true" (dateChange)="onDateChange($event)">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="appointmentForm.get('day')?.touched && appointmentForm.get('day')?.errors?.['required']">El día es requerido</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('day')?.touched && appointmentForm.get('day')?.errors?.['required']">El
+                    día es requerido</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Selecciona la hora de la cita</mat-label>
                 <mat-select formControlName="hour">
-                    <mat-option value="08:00 AM">08:00 AM</mat-option>
-                    <mat-option value="08:30 AM">08:30 AM</mat-option>
-                    <mat-option value="09:00 AM">09:00 AM</mat-option>
-                    <mat-option value="09:30 AM">09:30 AM</mat-option>
-                    <mat-option value="10:00 AM">10:00 AM</mat-option>
-                    <mat-option value="10:30 AM">10:30 AM</mat-option>
-                    <mat-option value="11:00 AM">11:00 AM</mat-option>
-                    <mat-option value="11:30 AM">11:30 AM</mat-option>
-                    <mat-option value="12:00 PM">12:00 PM</mat-option>
-                    <mat-option value="12:30 PM">12:30 PM</mat-option>
-                    <mat-option value="01:00 PM">01:00 PM</mat-option>
-                    <mat-option value="01:30 PM">01:30 PM</mat-option>
-                    <mat-option value="02:00 PM">02:00 PM</mat-option>
-                    <mat-option value="02:30 PM">02:30 PM</mat-option>
-                    <mat-option value="03:00 PM">03:00 PM</mat-option>
-                    <mat-option value="03:30 PM">03:30 PM</mat-option>
-                    <mat-option value="04:00 PM">04:00 PM</mat-option>
-                    <mat-option value="04:30 PM">04:30 PM</mat-option>
-                    <mat-option value="05:00 PM">05:00 PM</mat-option>
-                    <mat-option value="05:30 PM">05:30 PM</mat-option>
-                    <mat-option value="06:00 PM">06:00 PM</mat-option>
-                    <mat-option value="06:30 PM">06:30 PM</mat-option>
-                    <mat-option value="07:00 PM">07:00 PM</mat-option>
-                    <mat-option value="07:30 PM">07:30 PM</mat-option>
-                    <mat-option value="08:00 PM">08:00 PM</mat-option>
+                    <mat-option *ngFor="let hour of appointmentHoursValues; let i = index" [value]="hour">
+                        {{ appointmentHoursLabels[i] }}
+                    </mat-option>
                 </mat-select>
-                <mat-error *ngIf="appointmentForm.get('hour')?.touched && appointmentForm.get('hour')?.errors?.['required']">La hora es requerida</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('hour')?.touched && appointmentForm.get('hour')?.errors?.['required']">La
+                    hora es requerida</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -51,7 +35,9 @@
                         {{ service.name }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="appointmentForm.get('service')?.touched && appointmentForm.get('service')?.errors?.['required']">El servicio es requerido</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('service')?.touched && appointmentForm.get('service')?.errors?.['required']">El
+                    servicio es requerido</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -74,7 +60,9 @@
                         medicamentos</mat-option>
                     <mat-option value="Consulta telefónica programada">Consulta telefónica programada</mat-option>
                 </mat-select>
-                <mat-error *ngIf="appointmentForm.get('status')?.touched && appointmentForm.get('status')?.errors?.['required']">El estatus es requerido</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('status')?.touched && appointmentForm.get('status')?.errors?.['required']">El
+                    estatus es requerido</mat-error>
             </mat-form-field>
 
 
@@ -85,7 +73,9 @@
                         {{ user.username }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="appointmentForm.get('user')?.touched && appointmentForm.get('user')?.errors?.['required']">El usuario es requerido</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('user')?.touched && appointmentForm.get('user')?.errors?.['required']">El
+                    usuario es requerido</mat-error>
             </mat-form-field>
 
 
@@ -96,7 +86,9 @@
                         {{ pet.name }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="appointmentForm.get('pet')?.touched && appointmentForm.get('pet')?.errors?.['required']">La mascota es requerida</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('pet')?.touched && appointmentForm.get('pet')?.errors?.['required']">La
+                    mascota es requerida</mat-error>
             </mat-form-field>
 
 
@@ -107,12 +99,17 @@
                         {{ doctor.name }}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="appointmentForm.get('doctor')?.touched && appointmentForm.get('doctor')?.errors?.['required']">El doctor es requerido</mat-error>
+                <mat-error
+                    *ngIf="appointmentForm.get('doctor')?.touched && appointmentForm.get('doctor')?.errors?.['required']">El
+                    doctor es requerido</mat-error>
             </mat-form-field>
 
-            <button [disabled]="!appointmentForm.valid"
-                [ngClass]="{'btnSubmit': appointmentForm.valid, 'btnDisabled': !appointmentForm.valid}"
-                type="submit">Agregar cita</button>
+            <div class="btnContainer">
+                <button [disabled]="!appointmentForm.valid"
+                    [ngClass]="{'btnSubmit': appointmentForm.valid, 'btnDisabled': !appointmentForm.valid}"
+                    type="submit">Agregar cita</button>
+                <button class="btnCancel" type="button" (click)="goBack()">Cancelar</button>
+            </div>
         </form>
     </div>
 </div>

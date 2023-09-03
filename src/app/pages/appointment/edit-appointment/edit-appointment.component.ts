@@ -42,15 +42,53 @@ export class EditAppointmentComponent {
   listDoctors!: any[];
   listServices!: any[];
   appointment!: any;
-  appointmentHours: string[] = [
-    "08:00 AM", "08:30 AM", "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
-    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM",
-    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM",
-    "05:00 PM", "05:30 PM", "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM"
+
+  appointmentHoursValues: string[] = [
+    "00:00:00", "00:30:00", "01:00:00", "01:30:00", "02:00:00", "02:30:00",
+    "03:00:00", "03:30:00", "04:00:00", "04:30:00", "05:00:00", "05:30:00",
+    "06:00:00", "06:30:00", "07:00:00", "07:30:00", "08:00:00", "08:30:00",
+    "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00",
+    "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
+    "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00",
+    "18:00:00", "18:30:00", "19:00:00", "19:30:00", "20:00:00", "20:30:00",
+    "21:00:00", "21:30:00", "22:00:00", "22:30:00", "23:00:00", "23:30:00"
   ];
 
-  today = new Date(); 
-  day = this.today.getDate() + 1; 
+  appointmentHoursLabels: string[] = [
+    "12:00 AM", "12:30 AM", "01:00 AM", "01:30 AM", "02:00 AM", "02:30 AM",
+    "03:00 AM", "03:30 AM", "04:00 AM", "04:30 AM", "05:00 AM", "05:30 AM",
+    "06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM", "08:00 AM", "08:30 AM",
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+    "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM",
+    "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM", "08:30 PM",
+    "09:00 PM", "09:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"
+  ];
+
+  originalAppointmentHoursValues: string[] = [
+    "00:00:00", "00:30:00", "01:00:00", "01:30:00", "02:00:00", "02:30:00",
+    "03:00:00", "03:30:00", "04:00:00", "04:30:00", "05:00:00", "05:30:00",
+    "06:00:00", "06:30:00", "07:00:00", "07:30:00", "08:00:00", "08:30:00",
+    "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00",
+    "12:00:00", "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
+    "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00",
+    "18:00:00", "18:30:00", "19:00:00", "19:30:00", "20:00:00", "20:30:00",
+    "21:00:00", "21:30:00", "22:00:00", "22:30:00", "23:00:00", "23:30:00"
+  ];
+
+  originalAppointmentHoursLabels: string[] = [
+    "12:00 AM", "12:30 AM", "01:00 AM", "01:30 AM", "02:00 AM", "02:30 AM",
+    "03:00 AM", "03:30 AM", "04:00 AM", "04:30 AM", "05:00 AM", "05:30 AM",
+    "06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM", "08:00 AM", "08:30 AM",
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+    "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM",
+    "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM", "08:30 PM",
+    "09:00 PM", "09:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"
+  ];
+
+  today = new Date();
+  day = this.today.getDate() + 1;
   month = this.today.getMonth() + 1;
   year = this.today.getFullYear();
 
@@ -83,21 +121,22 @@ export class EditAppointmentComponent {
       petId: '',
       doctorId: ''
     };
-    console.log(this.appointment.pets[0].id)
+    if (this.isToday(this.date)) this.filterHours(this.today.getHours())
+  }
+
+  resetAppointmentHours() {
+    this.appointmentHoursValues = [...this.originalAppointmentHoursValues];
+    this.appointmentHoursLabels = [...this.originalAppointmentHoursLabels];
   }
 
   getAppointmentById(id: any) {
     this.appointmentService.getAppointmentWithUserAndPet(id).subscribe(
       (res: any) => {
-        console.log(res.date);
         const dateString = res.date.split(' ')[0];
         const lastTwoCharacters = dateString.slice(-2);
         const dayOfMonth = parseInt(lastTwoCharacters, 10) + 1;
 
         const updatedDateString = dateString.slice(0, -2) + dayOfMonth.toString().padStart(2, '0');
-        console.log(updatedDateString);
-
-
         this.appointmentForm = this.fb.group({
           day: [updatedDateString, Validators.required],
           hour: [res.date.split(' ')[1], Validators.required],
@@ -153,7 +192,6 @@ export class EditAppointmentComponent {
   getServices() {
     this.serviceService.getServices().subscribe(
       (res: any) => {
-        console.log(res);
         this.listServices = res;
       },
       err => console.log(err)
@@ -168,7 +206,6 @@ export class EditAppointmentComponent {
 
     const formattedTime = this.formatTime(selectedTime);
     const formattedDate = this.formatDate(new Date(selectedDate));
-    console.log(formattedDate);
 
     const combinedDateTime: string = `${formattedDate} ${formattedTime}`;
     this.appointment.date = combinedDateTime;
@@ -184,7 +221,6 @@ export class EditAppointmentComponent {
 
     this.appointmentService.updateAppointment(this.appointment).subscribe(
       (res: any) => {
-        console.log(res);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['dashboard/appointments']);
         });
@@ -211,10 +247,43 @@ export class EditAppointmentComponent {
     return newTime;
   }
 
-
-
   twoDigits(value: number): string {
     return value < 10 ? `0${value}` : value.toString();
 
+  }
+
+  isToday(date: string) {
+    const today = new Date();
+    const selectedDate = new Date(date);
+    return (
+      today.getFullYear() === selectedDate.getFullYear() &&
+      today.getMonth() === selectedDate.getMonth() &&
+      today.getDate() === selectedDate.getDate()
+    );
+  }
+
+  onDateChange(event: any) {
+    const selectedDate = event.value;
+
+    if (selectedDate === this.date) {
+    } else if (this.isToday(selectedDate)) {
+      this.filterHours(this.today.getHours());
+    } else {
+      this.resetAppointmentHours();
+    }
+  }
+  filterHours(hours: number) {
+    this.appointmentHoursValues = this.appointmentHoursValues.filter(hour => {
+      const hourNumber = parseInt(hour.split(':')[0], 10);
+      if (hourNumber < hours) {
+        this.appointmentHoursLabels.shift();
+      }
+      return hourNumber >= hours;
+    });
+  }
+
+
+  onCancelClick() {
+    this.dialogRef.close();
   }
 }

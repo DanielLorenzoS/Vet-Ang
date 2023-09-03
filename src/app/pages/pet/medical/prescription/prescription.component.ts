@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PetService } from 'src/app/services/pet.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Location } from '@angular/common';
 
 export interface Medicine {
   id: number;
@@ -37,7 +38,8 @@ export class PrescriptionComponent implements OnInit {
   constructor(
     private spinner: SpinnerService,
     private petService: PetService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   dataSource!: Medicine[];
@@ -76,5 +78,9 @@ export class PrescriptionComponent implements OnInit {
         this.spinner.hideLoadingIndicator();
       }
     )
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

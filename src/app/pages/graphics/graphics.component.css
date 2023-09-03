@@ -41,20 +41,39 @@
   height: 100%;
 }
 
+.secondBod {
+  height: 50vh !important;
+  position: relative;
+}
+
 .accordion {
-  width: 90%;
-  max-height: 25rem;
-  overflow-y: auto;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .panel {
-  margin-bottom: .5rem;
+  width: 20rem;
+  display: inline-block;
   color: white;
   background-color: #2697f3;
 }
 
-.header-panel {
+.header-panel,
+.header-panel:active {
   background-color: #0060b0;
+}
+
+.mat-expansion-panel-header.mat-expanded:focus {
+  background-color: #0060b0;
+}
+
+.mat-expansion-panel-spacing {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
 }
 
 
@@ -70,9 +89,18 @@
 
 .panel-description {
   padding-top: 1rem;
+  height: 16vh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   text-align: center;
+}
+
+.list {
+  padding-bottom: 1rem;
+  width: 98%;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
 }
 
 .panel-description span:nth-child(1),
@@ -82,6 +110,7 @@
 
 .panel-description span:nth-child(3) {
   margin-top: 1rem;
+  line-height: 2rem;
   grid-column: span 2;
 }
 
@@ -102,10 +131,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start !important;
-}
-
-.secondBod {
-  height: auto !important;
 }
 
 .bod .div {
@@ -172,7 +197,7 @@ mat-content {
 
 .graphics_body_item:nth-child(4) {
   grid-column: span 6;
-  grid-row: span 1;
+  min-height: 50%;
 }
 
 .graphics_body_item:nth-child(5),
