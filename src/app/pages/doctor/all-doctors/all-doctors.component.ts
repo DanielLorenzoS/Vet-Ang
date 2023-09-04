@@ -7,6 +7,8 @@ import { DoctorService } from 'src/app/services/doctor.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import { DoctorComponent } from '../doctor/doctor.component';
+import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-all-doctors',
@@ -22,9 +24,9 @@ export class AllDoctorsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private userService: UserService,
     private doctorService: DoctorService,
     private router: Router,
+    private location: Location,
     private spinner: SpinnerService,
     public dialog: MatDialog
   ) { }
@@ -58,20 +60,39 @@ export class AllDoctorsComponent {
         doctorId: id // Puedes enviar el ID del médico seleccionado si es necesario
       }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       this.getDoctors(); // Actualiza la tabla cuando se cierra el diálogo
     });
   }
 
   deleteDoctor(id: any) {
-    this.spinner.showLoadingIndicator();
-    this.doctorService.deleteDoctor(id).subscribe(
-      (res: any) => {
-        this.spinner.hideLoadingIndicator();
-      },
-      err => console.log(err)
-    )
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#00A8E8',
+      cancelButtonColor: '#E81123',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.doctorService.deleteDoctor(id).subscribe(
+          res => {
+            this.getDoctors(); // Actualiza la tabla cuando se elimina un médico
+            Swal.fire(
+              '¡Eliminado!',
+              'El médico ha sido eliminado.',
+              'success'
+            )
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }
+    })
   }
 
   filter(event: Event) {
@@ -82,4 +103,9 @@ export class AllDoctorsComponent {
   goNewClient() {
     this.router.navigate(['dashboard/addDoctor'])
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }

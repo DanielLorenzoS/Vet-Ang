@@ -1,12 +1,16 @@
 <div class="container">
     <div class="form">
+        <div class="back" (click)="goBack()">
+            <span>Volver</span>
+        </div>
         <h1 class="title">Agregar medicamento</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="medicineForm">
             <div class="form-group">
                 <label for="name">Nombre</label>
                 <input class="input" type="text" id="name" name="name" formControlName="name" placeholder="Nombre"
                     required>
-                <mat-error *ngIf="medicineForm.get('name')?.touched && medicineForm.get('name')?.errors?.['required']">El
+                <mat-error
+                    *ngIf="medicineForm.get('name')?.touched && medicineForm.get('name')?.errors?.['required']">El
                     nombre es requerido</mat-error>
                 <mat-error *ngIf="medicineForm.get('name')?.touched && medicineForm.get('name')?.errors?.['pattern']">El
                     nombre contiene caracteres inválidos</mat-error>
@@ -14,11 +18,12 @@
             <div class="form-group">
                 <label for="description">Descripción</label>
                 <textarea class="input" id="description" name="description" formControlName="description"
-                    placeholder="Descripción" required></textarea>
+                    placeholder="Descripción" required  cdkTextareaAutosize></textarea>
                 <mat-error
                     *ngIf="medicineForm.get('description')?.touched && medicineForm.get('description')?.errors?.['required']">La
                     descripción es requerida</mat-error>
-                    <mat-error *ngIf="medicineForm.get('description')?.touched && medicineForm.get('description')?.errors?.['pattern']">La
+                <mat-error
+                    *ngIf="medicineForm.get('description')?.touched && medicineForm.get('description')?.errors?.['pattern']">La
                     descripción contiene caracteres inválidos</mat-error>
             </div>
             <div class="form-group">
@@ -28,12 +33,14 @@
                 <mat-error
                     *ngIf="medicineForm.get('fabricator')?.touched && medicineForm.get('fabricator')?.errors?.['required']">El
                     fabricante es requerido</mat-error>
-                <mat-error *ngIf="medicineForm.get('fabricator')?.touched && medicineForm.get('fabricator')?.errors?.['pattern']">El
+                <mat-error
+                    *ngIf="medicineForm.get('fabricator')?.touched && medicineForm.get('fabricator')?.errors?.['pattern']">El
                     fabricante contiene caracteres inválidos</mat-error>
             </div>
             <div class="form-group">
                 <label for="type">Tipo</label>
-                <mat-select class="input" id="type" placeholder="Selecciona un tipo" name="type" formControlName="type" required>
+                <mat-select class="input" id="type" placeholder="Selecciona un tipo" name="type" formControlName="type"
+                    required>
                     <mat-option value="Tableta">Tableta</mat-option>
                     <mat-option value="Cápsula">Cápsula</mat-option>
                     <mat-option value="Jarabe">Jarabe</mat-option>
@@ -57,8 +64,9 @@
                     <mat-option value="Antihistamínico">Antihistamínico</mat-option>
                     <mat-option value="Corticosteroide">Corticosteroide</mat-option>
                 </mat-select>
-                
-                <mat-error *ngIf="medicineForm.get('type')?.touched && medicineForm.get('type')?.errors?.['required']">El
+
+                <mat-error
+                    *ngIf="medicineForm.get('type')?.touched && medicineForm.get('type')?.errors?.['required']">El
                     tipo es
                     requerido</mat-error>
             </div>
@@ -66,8 +74,10 @@
             <!-- ... Otros campos ... -->
             <div class="btnContainer">
                 <button [disabled]="!medicineForm.valid"
-                    [ngClass]="{'btnSubmit': medicineForm.valid, 'btnDisabled': !medicineForm.valid}" type="submit">Agregar
+                    [ngClass]="{'btnSubmit': medicineForm.valid, 'btnDisabled': !medicineForm.valid}"
+                    type="submit">Agregar
                     medicamento</button>
+                <button class="btnCancel" type="button" (click)="goBack()">Cancelar</button>
             </div>
         </form>
     </div>

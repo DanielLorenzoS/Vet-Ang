@@ -2,6 +2,9 @@
     <div class="form">
         <h1 class="title">Editar médico</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="doctorForm">
+            <div class="back" (click)="onCancelClick()">
+                <mat-icon>cancel</mat-icon>
+            </div>
             <div class="form-group">
                 <label for="name">Nombre</label>
                 <input class="input" type="text" id="name" name="name" formControlName="name" placeholder="Nombre"
@@ -58,6 +61,7 @@
                 <button [disabled]="!doctorForm.valid"
                     [ngClass]="{'btnSubmit': doctorForm.valid, 'btnDisabled': !doctorForm.valid}"
                     type="submit">Actualizar</button>
+                <button class="btnCancel" type="button" (click)="onCancelClick()">Cancelar</button>
             </div>
         </form>
     </div>

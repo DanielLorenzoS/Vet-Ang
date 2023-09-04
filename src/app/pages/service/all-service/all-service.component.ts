@@ -7,6 +7,7 @@ import { DoctorService } from 'src/app/services/doctor.service';
 import { ServiceService } from 'src/app/services/service.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { ServiceComponent } from '../service/service.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-all-service',
@@ -24,6 +25,7 @@ export class AllServiceComponent {
   constructor(
     private serviceService: ServiceService,
     private router: Router,
+    private location: Location,
     private spinner: SpinnerService,
     public dialog: MatDialog
   ) { }
@@ -72,4 +74,9 @@ export class AllServiceComponent {
   goNewService() {
     this.router.navigate(['dashboard/addService'])
   }
+
+  goBack() {
+    this.location.back();
+  }
+  
 }

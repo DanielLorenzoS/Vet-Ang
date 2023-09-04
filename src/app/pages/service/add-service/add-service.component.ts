@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class AddServiceComponent {
 
   constructor(
     private router: Router,
+    private location: Location,
     private serviceService: ServiceService,
     private formBuilder: FormBuilder,
     private spinner: SpinnerService,
@@ -69,4 +71,9 @@ export class AddServiceComponent {
       }
     );
   }
+
+  goBack() {
+    this.location.back();
+  }
+  
 }

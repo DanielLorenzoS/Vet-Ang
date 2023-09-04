@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class AddMedicineComponent {
 
   constructor(
     private router: Router,
+    private location: Location,
     private formBuilder: FormBuilder,
     private medicineService: MedicineService,
     private spinner: SpinnerService,
@@ -46,6 +48,10 @@ export class AddMedicineComponent {
       this.router.navigate(['/dashboard/medicines']);
     }
     );
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

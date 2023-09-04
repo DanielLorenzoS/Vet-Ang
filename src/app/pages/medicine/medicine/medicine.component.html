@@ -1,5 +1,8 @@
 <div class="container">
     <div class="form">
+        <div class="back" (click)="onCancelClick()">
+            <mat-icon>cancel</mat-icon>
+        </div>
         <h1 class="title">Editar médico</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="medicineForm">
             <div class="form-group">
@@ -15,7 +18,7 @@
             <div class="form-group">
                 <label for="description">Descripción</label>
                 <textarea class="input" id="description" name="description" formControlName="description"
-                    placeholder="Descripción" required></textarea>
+                    placeholder="Descripción" required cdkTextareaAutosize></textarea>
                 <mat-error
                     *ngIf="medicineForm.get('description')?.touched && medicineForm.get('description')?.errors?.['required']">La
                     descripción es requerida</mat-error>
@@ -36,7 +39,8 @@
             </div>
             <div class="form-group">
                 <label for="type">Tipo</label>
-                <mat-select class="input" id="type" placeholder="Selecciona un tipo" name="type" formControlName="type" required>
+                <mat-select class="input" id="type" placeholder="Selecciona un tipo" name="type" formControlName="type"
+                    required>
                     <mat-option value="Tableta">Tableta</mat-option>
                     <mat-option value="Cápsula">Cápsula</mat-option>
                     <mat-option value="Jarabe">Jarabe</mat-option>
@@ -70,6 +74,7 @@
                 <button [disabled]="!medicineForm.valid"
                     [ngClass]="{'btnSubmit': medicineForm.valid, 'btnDisabled': !medicineForm.valid}"
                     type="submit">Actualizar</button>
+                <button class="btnCancel" type="button" (click)="onCancelClick()">Cancelar</button>
             </div>
         </form>
     </div>

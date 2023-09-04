@@ -7,6 +7,38 @@
     align-items: center;
 }
 
+.back {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    padding: .44rem 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #0060b0;
+    color: white;
+}
+
+.back::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style: solid;
+    border-color: transparent #0060b0;
+    border-width: 17px 15px 17px 0;
+    width: 0;
+    height: 0;
+}
+
+.back span {
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
 .table-pag {
     width: 90%;
     margin: auto;
@@ -95,6 +127,7 @@ th,
 td {
     background-color: transparent;
     color: #000;
+    cursor: default;
 }
 
 th {
@@ -102,11 +135,11 @@ th {
     background-color: #0060b0 !important;
 }
 
-th:nth-child(1) {
+th:first-child {
     border-top-left-radius: 3px;
 }
 
-th:nth-child(4) {
+th:last-child {
     border-top-right-radius: 3px;
 }
 
@@ -117,7 +150,6 @@ table {
 
 tr.mat-mdc-row:hover {
     background-color: #3393e3 !important;
-    cursor: pointer;
 }
 
 tr:nth-child(even) {
@@ -143,7 +175,7 @@ tr.mat-mdc-row:hover td {
     white-space: unset !important;
     flex: 0 0 28% !important;
     text-align: center !important;
-    width: 18% !important;
+    width: 16% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -155,7 +187,7 @@ tr.mat-mdc-row:hover td {
 
 .mat-column-id {
     border-left: none;
-    width: 4% !important;
+    width: 8% !important;
 }
 
 .mat-column-phone {
@@ -167,12 +199,29 @@ tr.mat-mdc-row:hover td {
 }
 
 .mat-column-actions {
-    width: 4% !important;    
+    width: 10% !important;    
+}
+
+.add {
+    color: #fff;
 }
 
 mat-icon {
     color: #0060b0;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
+
+.icons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .icon:last-child {
+    color: #dc3545;
+} */
 
 .mat-paginator {
     min-width: 600px;

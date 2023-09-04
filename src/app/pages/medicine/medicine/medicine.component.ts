@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -25,6 +26,7 @@ export class MedicineComponent {
   id!: number;
 
   constructor(
+    private location: Location,
     private formBuilder: FormBuilder,
     private spinner: SpinnerService,
     private dialog: MatDialog,
@@ -86,4 +88,9 @@ export class MedicineComponent {
       }
     );
   }
+
+  onCancelClick() {
+    this.dialog.closeAll();
+  }
+    
 }

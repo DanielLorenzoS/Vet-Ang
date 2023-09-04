@@ -8,6 +8,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import { MedicineComponent } from '../medicine/medicine.component';
 import { MedicineService } from 'src/app/services/medicine.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-all-medicines',
@@ -25,6 +26,7 @@ export class AllMedicinesComponent {
   constructor(
     private medicineService: MedicineService,
     private router: Router,
+    private location: Location,
     private spinner: SpinnerService,
     public dialog: MatDialog
   ) { }
@@ -87,4 +89,9 @@ export class AllMedicinesComponent {
   goNewMedicine() {
     this.router.navigate(['dashboard/addMedicines'])
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -25,6 +26,7 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private localion: Location,
     private spinner: SpinnerService
   ) { }
 
@@ -131,6 +133,10 @@ export class EmployeesComponent implements OnInit {
 
   isChecked(user: any) {
     return user.roles[0].name == "EMPLOYEE";
+  }
+
+  goBack() {
+    this.localion.back();
   }
 
 }

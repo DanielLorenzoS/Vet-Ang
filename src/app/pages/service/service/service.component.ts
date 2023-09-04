@@ -109,4 +109,9 @@ export class ServiceComponent {
       }
     );
   }
+
+  onCancelClick() {
+    this.dialog.closeAll();
+  }
+
 }

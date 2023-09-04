@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,9 +19,8 @@ export class AddDoctorComponent {
 
   constructor(
     private router: Router,
+    private location: Location,
     private formBuilder: FormBuilder,
-    private userService: UserService,
-    private petService: PetService,
     private spinner: SpinnerService,
     private doctorService: DoctorService
   ) { }
@@ -70,4 +70,9 @@ export class AddDoctorComponent {
       this.listDoctors = data;
     });
   }
+
+  goBack() {
+    this.location.back();
+  }
+  
 }

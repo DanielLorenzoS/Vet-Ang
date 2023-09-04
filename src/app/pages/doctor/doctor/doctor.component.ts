@@ -97,4 +97,8 @@ export class DoctorComponent {
       this.doctorForm.patchValue(data);
     });
   }
+
+  onCancelClick() {
+    this.dialog.closeAll();
+  }
 }

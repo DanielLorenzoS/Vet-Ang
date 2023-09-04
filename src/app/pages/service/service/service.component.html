@@ -1,5 +1,8 @@
 <div class="container">
     <div class="form">
+        <div class="back" (click)="onCancelClick()">
+            <mat-icon>cancel</mat-icon>
+        </div>
         <h1 class="title">Modificar servicio</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="serviceForm">
             <div class="form-group">
@@ -14,7 +17,7 @@
             <div class="form-group">
                 <label for="description">Descripción</label>
                 <textarea class="input auto-resize" id="description" name="description" formControlName="description"
-                    placeholder="Descripción" required></textarea>
+                    placeholder="Descripción" required cdkTextareaAutosize></textarea>
                 <mat-error
                     *ngIf="serviceForm.get('description')?.touched && serviceForm.get('description')?.errors?.['required']">La
                     descripción es requerida</mat-error>
@@ -50,6 +53,7 @@
                 <button [disabled]="!serviceForm.valid"
                     [ngClass]="{'btnSubmit': serviceForm.valid, 'btnDisabled': !serviceForm.valid}"
                     type="submit">Actualizar servicio</button>
+                <button class="btnCancel" type="button" (click)="onCancelClick()">Cancelar</button>
             </div>
         </form>
     </div>
