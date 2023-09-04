@@ -23,18 +23,8 @@ form {
     outline-color: #0060b0;
 }
 
-/* Estilos para el select */
-select {
-    width: 95%;
-    padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 1rem;
-}
 
-
-.form-group {
+/* .form-group {
     grid-column: span 3;
     width: 90%;
     margin: auto;
@@ -58,7 +48,7 @@ select {
 .form-group:nth-child(9),
 .form-group:nth-child(10) {
     grid-column: span 2;
-}
+} */
 
 div.mat-mdc-select-panel {
     display: grid !important;
@@ -71,27 +61,21 @@ div.mat-mdc-select-panel {
 }
 
 .form-group h2 {
-    margin-top: 2rem;
+    margin-top: 1rem;
+    text-align: center;
+    width: 100%;
 }
 
 .symptom-checkboxes {
     display: flex;
-    justify-content: center;
     align-items: center;
-    max-width: 100%;
     overflow-x: auto;
 }
 
-.symptom-checkboxes::-webkit-scrollbar {
-    background-color: #fff;
-}
-
-.symptom-checkboxes::-webkit-scrollbar-thumb {
-    background-color: #0060b0;
-}
-
 .symptom-checkboxes div {
+    min-width: fit-content;
     margin-left: .5rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -114,9 +98,14 @@ label {
     margin-left: .1rem;
     padding: .2rem;
     cursor: pointer;
-    background-color: red;
+    background-color: transparent;
     border-radius: 100%;
-    color: white;
+    color: red;
+    transition: all .3s ease-in-out;
+}
+
+.remove:hover {
+    transform: rotate(90deg);
 }
 
 button {
@@ -138,26 +127,42 @@ label {
 }
 
 input {
-    width: 90%;
+    width: 80%;
     padding: .8rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
 
-.container-medicines {
-    grid-column: span 6;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+.container-medicines, .container-prescription {
+    grid-column: span 3;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
     width: 100%;
+    border-left: thin  solid #ccc;
 }
 
-.container-medicines .form-group:first-child {
-    grid-column: span 6;
+.mat {
+    width: 85%;
 }
 
-.container-medicines .form-group:first-child mat-form-field {
-    width: 80%;
+.container-prescription {
+    gap: 2rem;
+    border: none;
+}
+
+.container-medicines h2 {
+    padding: 1rem 0;
+}
+
+select {
+    width: 85%;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1rem;
 }
 
 .container-medicines button {
@@ -168,7 +173,7 @@ input {
 
 .container-medicines button {
     padding: .6rem;
-    width: 80%;
+    width: 85%;
 }
 
 .addedMedicines {
@@ -189,6 +194,7 @@ input {
     justify-content: space-around;
     align-items: center;
     line-height: 2rem;
+    overflow-x: auto;
 }
 
 .medicine {
@@ -213,8 +219,9 @@ input {
 }
 
 .addMedicine {
-    margin-bottom: 0;
-    padding: .5rem;
+    margin-bottom: 0 !important;
+    padding: .5rem 0;
+    width: 100%;
 }
 
 @media (max-width: 980px) {
@@ -246,6 +253,12 @@ input {
 
     form {
         grid-template-columns: 1fr;
+    }
+
+    .container-medicines, .container-prescription {
+        border: none;
+        border-bottom: thin solid #ccc;
+        padding-bottom: 1rem;
     }
 
     button {

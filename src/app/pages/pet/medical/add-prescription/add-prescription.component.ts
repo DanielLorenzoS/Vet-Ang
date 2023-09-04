@@ -43,6 +43,25 @@ export class AddPrescriptionComponent implements OnInit {
   prescriptionForm!: FormGroup;
   medicineForm!: FormGroup;
 
+  symptomOptions: string[] = [
+    'Diarrea',
+    'Vómitos',
+    'Fiebre',
+    'Tos',
+    'Estornudos',
+    'Pérdida de apetito',
+    'Letargia',
+    'Picazón',
+    'Dificultad para respirar',
+    'Dolor abdominal',
+    'Cojera',
+    'Convulsiones',
+    'Secreción nasal',
+    'Problemas de comportamiento',
+    'Otros',
+  ];
+  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -88,7 +107,10 @@ export class AddPrescriptionComponent implements OnInit {
       this.symptoms.push(this.symptomInput);
       this.symptomInput = '';
       this.prescriptionForm.get('symptom')?.reset(); // Resetea el valor del campo de síntomas en el formulario
+      this.prescriptionForm.patchValue({ symptom: '' });
     }
+
+
   }
 
 
@@ -140,13 +162,13 @@ export class AddPrescriptionComponent implements OnInit {
 
   medicinesForm() {
     console.log(this.medicineForm.value);
-    this.medicines.forEach((medicine: any) => {
+    /* this.medicines.forEach((medicine: any) => {
       if (medicine.id === this.medicineForm.value.medicine) {
         this.medicines = this.medicines.filter(m => m.id !== medicine.id);
-        this.listMedicines.push(this.medicineForm.value);
         this.listMedicines[this.listMedicines.length - 1].medicine = medicine;
       }
-    });
+    }); */
+    this.listMedicines.push(this.medicineForm.value);
     console.log(this.listMedicines);
     this.medicineForm.reset();
   }
