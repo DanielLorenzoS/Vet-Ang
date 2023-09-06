@@ -88,6 +88,7 @@
 }
 
 .panel-description {
+  cursor: pointer;
   padding-top: 1rem;
   height: 16vh;
   display: grid;
@@ -125,6 +126,11 @@
   justify-content: space-between;
   width: 80%;
   line-height: 3rem;
+}
+
+.panel-not span {
+  width: 100%;
+  text-align: center;
 }
 
 .bod {
@@ -200,14 +206,20 @@ mat-content {
   min-height: 50%;
 }
 
-.graphics_body_item:nth-child(5),
-.graphics_body_item:nth-child(8) {
+.subtitle {
+  grid-column: span 6;
+  text-align: center;
+  line-height: 4rem;
+}
+
+.graphics_body_item:nth-child(6),
+.graphics_body_item:nth-child(9) {
   grid-column: span 4;
   grid-row: span 1;
 }
 
-.graphics_body_item:nth-child(6),
-.graphics_body_item:nth-child(7) {
+.graphics_body_item:nth-child(7),
+.graphics_body_item:nth-child(8) {
   grid-column: span 2;
   grid-row: span 1;
 }

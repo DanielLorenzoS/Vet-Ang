@@ -46,7 +46,8 @@
       <div class="graphics_body_item_header div divheader">
         <h2 class="graphics_body_item_title">Citas del Día</h2>
       </div>
-      <div class="panel-not div" *ngIf="appointmentsToday.length === 0">No hay citas programadas para hoy.</div>
+      <div class="panel-not div" *ngIf="appointmentsToday.length === 0"><span>No hay citas programadas para hoy</span>
+      </div>
       <!-- <div class="graphics_body_item_body div" (click)="goAddAppointment()" *ngIf="appointmentsToday.length === 0">
         ¿Quieres agregar una cita?
         <span>
@@ -77,6 +78,10 @@
           </div>
         </mat-accordion>
       </div>
+    </div>
+
+    <div class="subtitle">
+      <span class="graphics_title">Análisis de los datos registrados</span>
     </div>
 
     <div class="graphics_body_item">

@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class RegisterService {
 
-  url: string = 'http://localhost:8080';
-  /* url: string = 'https://spring-vet-production.up.railway.app'; */
+  /* url: string = 'http://localhost:8080'; */
+  url: string = 'https://spring-vet-production.up.railway.app';
 
   constructor(private http: HttpClient) { }
   

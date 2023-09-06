@@ -68,9 +68,10 @@ export class PrescriptionComponent implements OnInit {
 
     this.petService.getPrescriptionById(id).subscribe(
       (res: any) => {
+        console.log(res);
         this.diagnosis = res;
-        this.dataSource = res.relations;
-        console.log(this.diagnosis);
+        this.dataSource = res.relations[0].medicines;
+        console.log(this.diagnosis.relations[0].medicines);
         this.spinner.hideLoadingIndicator();
       },
       (error: any) => {

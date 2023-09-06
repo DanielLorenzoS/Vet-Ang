@@ -10,10 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
 
-  url: string = 'http://localhost:8080';
-  /* url: string = 'https://spring-vet-production.up.railway.app'; */
-  /* url: string = environment.url; */
-
+  /* url: string = 'http://localhost:8080'; */
+  url: string = 'https://spring-vet-production.up.railway.app';
 
   constructor(
     private http: HttpClient,

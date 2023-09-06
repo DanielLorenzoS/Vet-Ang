@@ -1,13 +1,15 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
+import { parse } from 'date-fns';
 import { PetService } from 'src/app/services/pet.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
 
 interface MedicineDTO {
-  medicines: [{ id: string }];
+  medicines: [{ id: number }];
   dose: string;
   via: string;
   interval: string;
@@ -21,7 +23,7 @@ interface Diagnosis {
   observations: string,
   doctors: [{ id: number }],
   pet: { id: number },
-  relations: any,
+  relations: any
 };
 
 @Component({
@@ -34,11 +36,13 @@ export class AddPrescriptionComponent implements OnInit {
   symptomInput: string = '';
   symptoms: string[] = [];
   petId!: number;
+  tempId!: number;
   doctors: any[] = [];
   medicines: any[] = [];
   listMedicines: any[] = [];
   listMedicinesIds = new Array();
   listMedicinesDTO: MedicineDTO[] = [];
+  hasMedicine: boolean = false;
 
   prescriptionForm!: FormGroup;
   medicineForm!: FormGroup;
@@ -60,11 +64,12 @@ export class AddPrescriptionComponent implements OnInit {
     'Problemas de comportamiento',
     'Otros',
   ];
-  
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private petService: PetService,
     private spinnerService: SpinnerService,
     private formBuilder: FormBuilder
@@ -74,6 +79,8 @@ export class AddPrescriptionComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.petId = params['id'] || null;
     });
+    this.tempId = parseInt(this.petId.toString(), 10);
+    console.log(typeof this.tempId);
     this.getDoctors();
     this.getMedicines();
     this.prescriptionForm = this.initializeForm();
@@ -83,9 +90,8 @@ export class AddPrescriptionComponent implements OnInit {
   initializeForm(): FormGroup {
     return this.formBuilder.group({
       symptom: ['', Validators.required],
-      diagnosis: ['', Validators.required],
-      observations: ['', Validators.required],
-      status: ['', Validators.required],
+      diagnosis: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚÑñ\s]+$/), Validators.minLength(6)]],
+      observations: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚÑñ\s,]+$/), Validators.minLength(8)]],
       doctor: ['', Validators.required]
     });
   }
@@ -93,9 +99,9 @@ export class AddPrescriptionComponent implements OnInit {
   initializeMedicineForm(): FormGroup {
     return this.formBuilder.group({
       medicine: ['', Validators.required],
-      dose: ['', Validators.required],
+      dose: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚÑñ\s]+$/)]],
       via: ['', Validators.required],
-      interval: ['', Validators.required]
+      interval: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚÑñ\s]+$/)]]
     });
   }
 
@@ -110,9 +116,7 @@ export class AddPrescriptionComponent implements OnInit {
       this.prescriptionForm.patchValue({ symptom: '' });
     }
 
-
   }
-
 
   removeSymptom(symptom: string) {
     this.symptoms = this.symptoms.filter(s => s !== symptom);
@@ -137,8 +141,6 @@ export class AddPrescriptionComponent implements OnInit {
       }
     );
   }
-
-
 
   getDoctors() {
     this.spinnerService.showLoadingIndicator();
@@ -171,22 +173,23 @@ export class AddPrescriptionComponent implements OnInit {
     this.listMedicines.push(this.medicineForm.value);
     console.log(this.listMedicines);
     this.medicineForm.reset();
+    this.hasMedicine = true;
   }
 
   submitForm() {
 
     this.spinnerService.showLoadingIndicator();
-
     this.listMedicinesDTO = [];
-
     const uniqueMedicineIds = new Set<number>();
+    let successfulRelationsCount = 0;
 
     this.listMedicines.forEach((medicine: any) => {
-      const medicineId = medicine.medicine.id;
+      const medicineId = medicine.medicine;
+      console.log(medicineId);
 
       if (!uniqueMedicineIds.has(medicineId)) {
         this.listMedicinesDTO.push({
-          medicines: [{ id: medicineId }],
+          medicines: [{ id: medicineId.id }],
           dose: medicine.dose,
           via: medicine.via,
           interval: medicine.interval
@@ -194,36 +197,39 @@ export class AddPrescriptionComponent implements OnInit {
 
         uniqueMedicineIds.add(medicineId);
       }
+      console.log(this.listMedicinesDTO);
     });
+
+    const currentDate = new Date();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    const year = currentDate.getFullYear();
+
+    let date: string = `${day}-${month}-${year}`;
+
+    const symptomsArray = this.prescriptionForm.value.symptom.toString().split(',');
+    const formattedSymptoms = symptomsArray.join(', ');
+
+    let diagnosis: Diagnosis = {
+      symtomps: formattedSymptoms,
+      diagnosis: this.prescriptionForm.value.diagnosis,
+      status: 'status',
+      creationDate: date,
+      observations: this.prescriptionForm.value.observations,
+      doctors: [{ id: this.prescriptionForm.value.doctor }],
+      pet: { id: this.tempId },
+      relations: this.listMedicinesIds.map(m => m)
+    };
+
+    console.log(diagnosis);
 
     this.listMedicinesDTO.forEach((medicine: any, index: number) => {
       this.petService.createRelation(medicine).subscribe(
         (res: any) => {
           console.log(res);
-          this.listMedicinesIds.push({ id: res.id });
-
-          if (index === this.listMedicinesDTO.length - 1) {
-            const currentDate = new Date();
-            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-            const day = currentDate.getDate().toString().padStart(2, '0');
-            const year = currentDate.getFullYear();
-
-            let date: string = `${day}-${month}-${year}`;
-
-            let diagnosis: Diagnosis = {
-              symtomps: this.symptoms.join(', '),
-              diagnosis: this.prescriptionForm.value.diagnosis,
-              status: this.prescriptionForm.value.status,
-              creationDate: date,
-              observations: this.prescriptionForm.value.observations,
-              doctors: [{ id: this.prescriptionForm.value.doctor }],
-              pet: { id: this.petId },
-              relations: this.listMedicinesIds.map(m => m)
-            };
-
-            console.log(this.prescriptionForm.value);
-            console.log(diagnosis);
-
+          diagnosis.relations.push({ id: res.id });
+          successfulRelationsCount++;
+          if (successfulRelationsCount === this.listMedicinesDTO.length) {
             this.petService.createPrescription(diagnosis).subscribe(
               (res: any) => {
                 Swal.fire({
@@ -252,8 +258,12 @@ export class AddPrescriptionComponent implements OnInit {
           console.log(err);
         }
       );
-    });
+    })
 
   }
 
+  goBack() {
+    this.location.back();
+  }
+  
 }

@@ -62,10 +62,27 @@
 
 .diagnosis-info {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   grid-gap: 1rem;
+  justify-content: center;
   margin: 1rem 0 3rem 0;
+}
+
+.diagnosis-info div {
+  min-width: 30%;
+  border: thin solid #0060b0;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.diagnosis-info div p {
+  background-color: #0060b0;
+  color: #fff;
+  margin-bottom: 0;
+  padding: 1rem;
 }
 
 .mdc-data-table__cell, .mdc-data-table__header-cell {
@@ -126,14 +143,15 @@ table td {
 }
 
 .diagnosis-field label {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 300;
-  border-bottom: 1px solid #aaa;
+  padding: 1rem;
+  border-bottom: 1px solid #0060b0;
 }
 
 .diagnosis-field p {
-  margin-top: 1rem;
-  font-size: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
   font-weight: 200;
 }
 

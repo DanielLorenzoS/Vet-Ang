@@ -72,7 +72,7 @@ export class AllAppointmentComponent {
     this.appointmentService.getAppointments().subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
-
+  
         // Filtrar las citas con estatus "Finalizada"
         const completedAppointments = res.filter((appointment: any) => {
           return (
@@ -81,7 +81,7 @@ export class AllAppointmentComponent {
             appointment.status === 'Cancelada por el veterinario'
           );
         });
-
+  
         // Filtrar las citas sin estatus "Finalizada"
         const activeAppointments = res.filter((appointment: any) => {
           return (
@@ -90,7 +90,14 @@ export class AllAppointmentComponent {
             appointment.status !== 'Cancelada por el veterinario'
           );
         });
-
+  
+        // Ordenar las citas activas por fecha de la más pronta a la más lejana
+        activeAppointments.sort((a: any, b: any) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateA - dateB;
+        });
+  
         this.appointments = activeAppointments.map((appointment: any) => {
           const formattedDate = this.datePipe.transform(appointment.date, 'medium');
           const translatedDate = formattedDate ? this.translateMonth(formattedDate) : '';
@@ -99,7 +106,7 @@ export class AllAppointmentComponent {
             formattedDate: translatedDate
           };
         });
-
+  
         this.completedAppointments = completedAppointments.map((appointment: any) => {
           const formattedDate = this.datePipe.transform(appointment.date, 'medium');
           const translatedDate = formattedDate ? this.translateMonth(formattedDate) : '';
@@ -121,6 +128,7 @@ export class AllAppointmentComponent {
       }
     );
   }
+  
 
   translateMonth(dateString: string): string {
     const monthTranslations: { [key: string]: string } = {
