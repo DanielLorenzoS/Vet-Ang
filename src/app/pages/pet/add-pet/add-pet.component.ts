@@ -7,6 +7,16 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
+interface Pet {
+  name: string;
+  race: string;
+  specie: string;
+  sex: string;
+  birthdate: string;
+  weight: number;
+  user: number;
+}
+
 @Component({
   selector: 'app-add-pet',
   templateUrl: './add-pet.component.html',
@@ -61,7 +71,23 @@ export class AddPetComponent {
 
   onSubmit() {
     this.spinner.showLoadingIndicator();
-    this.petService.addPet(this.newPetForm.value).subscribe((data: any) => {
+
+    let birthdate = this.newPetForm.value.birthdate.split('-').reverse().join('-');
+
+    let pet: Pet = {
+      name: this.newPetForm.value.name,
+      race: this.newPetForm.value.race,
+      specie: this.newPetForm.value.specie,
+      sex: this.newPetForm.value.sex,
+      birthdate: birthdate,
+      weight: this.newPetForm.value.weight,
+      user: this.newPetForm.value.user,
+    };
+
+    console.log(this.newPetForm.value);
+    console.log(pet);
+
+    this.petService.addPet(pet).subscribe((data: any) => {
       this.spinner.hideLoadingIndicator();
       Swal.fire({
         icon: 'success',
@@ -78,7 +104,7 @@ export class AddPetComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/pets']);
   }
 
   getClients() {

@@ -105,7 +105,7 @@ export class AllDoctorsComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard']);
   }
 
 }

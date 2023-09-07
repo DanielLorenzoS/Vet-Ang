@@ -162,7 +162,7 @@ export class NewClientComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/client']);
   }
 }
 

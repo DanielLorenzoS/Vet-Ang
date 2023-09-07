@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PetService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
-
   constructor(
     private http: HttpClient,
+    private loginService: LoginService,
     private cookieService: CookieService
   ) { }
+
+  url: string = this.loginService.url;
 
   getHeadersViaCookie() {
     const headers = {
@@ -38,6 +39,8 @@ export class PetService {
       weight: pet.weight,
       userId: pet.user
     }
+
+    console.log(Pet);
 
     return this.http.post(`${this.url}/pets/`, Pet, { headers: this.getHeadersViaCookie() });
   }

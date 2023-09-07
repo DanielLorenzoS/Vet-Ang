@@ -2,9 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { local } from 'd3-selection';
+import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from 'src/app/services/login.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import Swal from 'sweetalert2';
+
+interface Login {
+  username: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -15,22 +21,28 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
+  veterinaries: any[] = [
+    { id: 1, name: 'Veterinaria 1' },
+    { id: 2, name: 'Veterinaria 2' },
+    { id: 3, name: 'Veterinaria 3' }
+  ];
+
   constructor(private userService: LoginService,
     private loginService: LoginService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private loadingIndicatorService: SpinnerService
+    private loadingIndicatorService: SpinnerService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token');
-    }
+    localStorage.clear();
   }
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
+      veterinary: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/), Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/), Validators.minLength(8)]]
     });
@@ -38,7 +50,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.loadingIndicatorService.showLoadingIndicator();
-    this.userService.generateToken(this.loginForm.value).subscribe(
+    let user: Login = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    }
+    this.userService.generateToken(user).subscribe(
       (response: any) => {
         this.loadingIndicatorService.hideLoadingIndicator();
         if (response.token != null) {

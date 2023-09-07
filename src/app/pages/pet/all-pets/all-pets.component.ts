@@ -74,7 +74,7 @@ export class AllPetsComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard']);
   }
 
   deletePet(id: number) {

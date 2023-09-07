@@ -260,7 +260,7 @@ export class PetComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/pets']);
   }
   
 }

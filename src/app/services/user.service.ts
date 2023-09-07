@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
-
   constructor(
     private http: HttpClient,
+    private loginService: LoginService,
     private cookieService: CookieService
   ) { }
+
+  url: string = this.loginService.url;
 
   getHeadersViaCookie() {
     const headers = {
@@ -112,28 +113,28 @@ export class UserService {
   }
 
   updateToEmployee(user: any) {
-      
-      const userData = {
-        id: user.id,
-        email: user.email,
-        phone: user.phone,
-        address: user.direction,
-        username: user.username
-      }
-  
-      return this.http.put(`${this.url}/updatetoemployee`, userData, { headers: this.getHeadersViaCookie() });
+
+    const userData = {
+      id: user.id,
+      email: user.email,
+      phone: user.phone,
+      address: user.direction,
+      username: user.username
     }
 
-    updateToUser(user: any) {
-        
-        const userData = {
-          id: user.id,
-          email: user.email,
-          phone: user.phone,
-          address: user.direction,
-          username: user.username
-        }
-    
-        return this.http.put(`${this.url}/updatetouser`, userData, { headers: this.getHeadersViaCookie() });
-      }
+    return this.http.put(`${this.url}/updatetoemployee`, userData, { headers: this.getHeadersViaCookie() });
+  }
+
+  updateToUser(user: any) {
+
+    const userData = {
+      id: user.id,
+      email: user.email,
+      phone: user.phone,
+      address: user.direction,
+      username: user.username
+    }
+
+    return this.http.put(`${this.url}/updatetouser`, userData, { headers: this.getHeadersViaCookie() });
+  }
 }

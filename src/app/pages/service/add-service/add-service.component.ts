@@ -73,7 +73,7 @@ export class AddServiceComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/services']);
   }
   
 }

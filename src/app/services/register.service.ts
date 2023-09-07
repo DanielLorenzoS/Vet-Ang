@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService,
+  ) { }
 
-  constructor(private http: HttpClient) { }
-  
+  url: string = this.loginService.url;
+
   createUser(user: any) {
 
     const userData = {
@@ -19,7 +22,7 @@ export class RegisterService {
       direction: user.city + ' ' + user.municipality + ' ' + user.street,
       username: user.username,
       password: user.password,
-      roles: [ "INVITED" ]
+      roles: ["INVITED"]
     }
 
     console.log('userData ', userData);
@@ -28,7 +31,7 @@ export class RegisterService {
   }
 
   validate(code: any) {
-    
+
     const codeData = {
       email: code.email,
       code: code.code

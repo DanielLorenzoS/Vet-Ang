@@ -297,6 +297,6 @@ export class AddAppointmentComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/appointments']);
   }
 }

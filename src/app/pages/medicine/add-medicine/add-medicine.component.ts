@@ -51,7 +51,7 @@ export class AddMedicineComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/medicines']);
   }
 
 }

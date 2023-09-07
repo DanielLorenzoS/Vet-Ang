@@ -3,21 +3,21 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
-
-
   constructor(
     private http: HttpClient,
+    private loginService: LoginService,
     private router: Router,
     private cookieService: CookieService
   ) { }
+
+  url: string = this.loginService.url;
 
   getHeadersViaCookie() {
     const headers = {

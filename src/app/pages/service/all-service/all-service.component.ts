@@ -76,7 +76,7 @@ export class AllServiceComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard']);
   }
   
 }

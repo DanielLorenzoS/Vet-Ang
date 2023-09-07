@@ -72,7 +72,7 @@ export class AddDoctorComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard/doctors']);
   }
   
 }

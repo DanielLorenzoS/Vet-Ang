@@ -223,6 +223,6 @@ export class AllAppointmentComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard']);
   }
 }

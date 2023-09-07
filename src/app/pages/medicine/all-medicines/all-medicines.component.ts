@@ -91,7 +91,7 @@ export class AllMedicinesComponent {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard']);
   }
 
 }

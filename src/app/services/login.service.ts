@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
+  url: string = 'http://localhost:8080';
+  /* url: string = 'https://spring-vet-production.up.railway.app'; */
 
   constructor(
     private http: HttpClient,
@@ -38,7 +38,8 @@ export class LoginService {
 
   logout() {
     this.cookieService.deleteAll();
-    this.cookieService.delete('token');
+    this.cookieService.delete('token', '/');
+    this.cookieService.set('token', '');
     window.location.reload();
     return true;
   }

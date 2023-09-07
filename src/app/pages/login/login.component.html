@@ -3,6 +3,13 @@
         <h1 class="title">Iniciar sesión</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
             <div class="form-group">
+                <label for="veterinary">Veterinaria</label>
+                <mat-select class="input" id="veterinary" name="veterinary" formControlName="veterinary" required placeholder="Selecciona tu veterinaria">
+                    <mat-option *ngFor="let veterinary of veterinaries" [value]="veterinary.id">{{veterinary.name}}</mat-option>
+                </mat-select>
+                    <mat-error *ngIf="loginForm.get('veterinary')?.touched && loginForm.get('veterinary')?.errors?.['required']">La veterinaria es requerida</mat-error>
+            </div>
+            <div class="form-group">
                 <label for="username">Nombre de usuario</label>
                 <input class="input" type="username" id="username" name="username" formControlName="username"
                     placeholder="Ej. Usuario" required>

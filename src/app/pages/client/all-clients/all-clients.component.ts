@@ -101,6 +101,6 @@ export class AllClientsComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['dashboard']);
   }
 }
