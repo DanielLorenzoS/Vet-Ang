@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
 
-  url: string = 'http://localhost:8080';
-  /* url: string = 'https://spring-vet-production.up.railway.app'; */
+  /* url: string = 'http://localhost:8080'; */
+  url: string = 'https://spring-vet-production.up.railway.app';
 
   constructor(
     private http: HttpClient,
@@ -20,6 +20,7 @@ export class LoginService {
   ) { }
 
   generateToken(user: any) {
+    console.log(this.url)
     return this.http.post(`${this.url}/auth/login`, user);
   }
 
