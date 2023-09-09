@@ -17,10 +17,6 @@
     overflow: auto;
 }
 
-.dialog {
-    z-index: 1;
-}
-
 .back {
     position: absolute;
     top: .5rem;
@@ -154,7 +150,9 @@
 
 
 @media screen and (max-width: 700px) {
-
+    .title {
+        margin-top: 6rem;
+    }
     
     .form {
         padding-top: 20rem;

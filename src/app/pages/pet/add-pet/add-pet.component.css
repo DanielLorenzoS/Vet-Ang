@@ -78,6 +78,7 @@
 }
 
 .input {
+    width: auto;
     margin-top: 8px;
     padding: .9rem 1rem;
     border: 1px solid #ccc;
@@ -168,6 +169,10 @@
 @media screen and (max-width: 700px) {
     .container {
         margin-top: 11rem;
+    }
+
+    .title {
+        margin-top: 7rem;
     }
 
     .form-group {

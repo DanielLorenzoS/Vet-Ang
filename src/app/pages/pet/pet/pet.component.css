@@ -145,6 +145,10 @@ mat-icon {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.table {
+    overflow-x: auto;
+}
+
 .table-container h5 {
     margin: 0;
     padding: 2rem 0;
@@ -188,6 +192,7 @@ h5 {
 table {
     background-color: transparent;
     box-shadow: none;
+    min-width: 500px;
 }
 
 th {
@@ -265,4 +270,23 @@ mat-icon {
         flex-direction: column;
     }
 
+}
+
+@media (width < 520px) {
+    .medic p {
+        line-height: initial;
+    }
+    .medic mat-icon {
+        margin-right: .5rem;
+    }
+}
+
+@media (width < 400px) {
+    .update, .delete {
+        width: 80% !important;
+    }
+    .medic mat-icon {
+        margin-right: 0;
+        padding-right: .3rem;
+    }
 }
