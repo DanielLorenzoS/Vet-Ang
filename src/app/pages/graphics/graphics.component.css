@@ -302,9 +302,41 @@ mat-content {
 
 @media (max-width: 650px) {
 
+  .graphics_body_item:nth-child(4) {
+    overflow-x: hidden;
+  }
+  .accordion {
+    padding-left: .2rem;
+  }
+  .graphics_body_item:nth-child(6),
+  .graphics_body_item:nth-child(7),
+  .graphics_body_item:nth-child(8),
   .graphics_body_item:nth-child(9),
   .graphics_body_item:nth-child(10) {
     overflow-x: scroll;
   }
 
+}
+
+@media (width < 400px) {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+    width: 80%;
+  }
+  .graphics {
+    width: 100%;
+  }
+  .graphics_body_item {
+    width: auto;
+    padding: 0 1rem;
+  }
+
+  .graphics_body_item:nth-child(4),
+  .graphics_body_item:nth-child(n+6) {
+    width: 90%;
+  }
+  .graphics_body_item_body {
+    justify-content: flex-start !important;
+  }
 }

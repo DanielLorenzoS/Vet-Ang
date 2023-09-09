@@ -230,6 +230,7 @@
     width: 80%;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow-x: auto;
 }
 
 .table-container h4 {
@@ -239,6 +240,10 @@
     font-weight: 300;
     color: #000;
     font-family: serif;
+}
+
+.dialog {
+    z-index: 1;
 }
 
 .table-container h3 {
@@ -350,7 +355,9 @@ mat-icon {
 }
 
 @media (max-width: 820px) {
-
+    table {
+        min-width: 400px;
+    }
     .buttons {
         flex-direction: column;
         justify-content: center;

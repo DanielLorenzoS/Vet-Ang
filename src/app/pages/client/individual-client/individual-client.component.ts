@@ -47,6 +47,7 @@ export class IndividualClientComponent implements OnInit {
     const dialogRef = this.dialog.open(EditClientComponent, {
       width: '80%', // Personaliza el ancho según tus necesidades
       height: '90%', // Personaliza el alto según tus necesidades
+      panelClass: 'dialog', // Personaliza la clase del diálogo
       data: { user: this.user } // Pasa los datos del usuario al diálogo
     });
   

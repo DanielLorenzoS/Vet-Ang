@@ -37,6 +37,7 @@ export class EditClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.showLoadingIndicator();
     this.editClientForm = this.initializeForm();
     this.getClientById();
     console.log('data ', this.data.user.username);
@@ -53,8 +54,10 @@ export class EditClientComponent implements OnInit {
           municipality: response.address[1],
           street: response.address[2]
         });
+        this.spinner.hideLoadingIndicator();
       },
       (error: any) => {
+        this.spinner.hideLoadingIndicator();
         console.log('error ', error);
       }
     );
@@ -66,12 +69,12 @@ export class EditClientComponent implements OnInit {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.pattern( /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
-      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/), Validators.minLength(6)]],
-      city: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
-      municipality: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
-      street: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      email: ['Cargando...', [Validators.required, Validators.email, Validators.pattern( /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
+      phone: ['Cargando...', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      username: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/), Validators.minLength(6)]],
+      city: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      municipality: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      street: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
     });
   }
 

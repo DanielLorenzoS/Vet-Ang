@@ -5,6 +5,7 @@ import { CalendarEvent } from 'angular-calendar';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { PetService } from 'src/app/services/pet.service';
 import { ServiceService } from 'src/app/services/service.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 
 interface WeekData {
@@ -65,9 +66,11 @@ export class GraphicsComponent implements OnInit {
     private userService: UserService,
     private appointmentService: AppointmentService,
     private serviceService: ServiceService,
+    private spinnerService: SpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.spinnerService.showLoadingIndicator();
     this.getSpecies();
     this.getUsers();
     this.getMedicinesCount();
@@ -193,6 +196,7 @@ export class GraphicsComponent implements OnInit {
         });
         console.log(this.appointmentsToday);
         this.accordion.openAll();
+        this.spinnerService.hideLoadingIndicator();
       },
       err => console.log(err)
     );

@@ -10,13 +10,13 @@
 .table-pag {
     width: 90%;
     margin: auto;
+    overflow-x: auto;
 }
 
 .mat-table {
     width: 100%;
     height: 100%;
     margin: auto;
-    overflow: auto;
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
@@ -189,6 +189,24 @@ tr.mat-mdc-row:hover mat-icon {
 .mat-column-id {
     border-left: none;
     width: 5% !important;
+    min-width: 55px;
+}
+
+.mat-column-username,
+.mat-column-email,
+.cdk-column-username,
+.cdk-column-email {
+    width: 250px;
+}
+
+.cdk-column-phone,
+.mat-column-phone,
+.mat-column-actions {
+    width: 150px;
+}
+
+.cdk-column-phone {
+    padding: 0;
 }
 
 .mat-column-phone {
@@ -249,5 +267,15 @@ mat-icon {
 @media (max-width: 630px) {
     .table-pag {
         width: 100%;
+    }
+}
+
+@media (width < 430px) {
+    .mat-table {
+        height: auto;
+    }
+
+    .title {
+        padding-top: 1.5rem;
     }
 }

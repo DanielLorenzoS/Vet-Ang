@@ -39,7 +39,8 @@
     <mat-drawer-content class="mat-drawer-content">
         <router-outlet>
             <div [ngClass]="{'progress-container': isLoading, 'progress-container-hidden': !isLoading}">
-                <mat-progress-spinner class="spinner" mode="indeterminate" *ngIf="isLoading"></mat-progress-spinner>
+                <mat-progress-spinner class="spinner" diameter="120" 
+                 mode="indeterminate" color="primary" *ngIf="isLoading"></mat-progress-spinner>
             </div>
         </router-outlet>
     </mat-drawer-content>
