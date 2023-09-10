@@ -58,6 +58,7 @@
 .table-pag {
     width: 90%;
     margin: auto;
+    overflow-x: auto;
 }
 
 
@@ -205,6 +206,7 @@ tr.mat-mdc-row:hover td {
 .mat-column-status mat-form-field {
     flex-direction: row;
     width: 10rem;
+    min-width: 50px;
 }
 
 .mat-column-date,
@@ -239,6 +241,16 @@ tr.mat-mdc-row:hover td {
     min-width: 600px;
     border: none;
     border-bottom: none;
+}
+
+@media (width < 950px) {
+    table {
+        width: 750px !important;
+    }
+    .status-select mat-label {
+        position: relative;
+        min-width: 150px;
+    }
 }
 
 @media (max-width: 630px) {

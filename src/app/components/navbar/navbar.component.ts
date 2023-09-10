@@ -26,6 +26,11 @@ export class NavbarComponent {
     this.showNavbar = !this.showNavbar;
   }
 
+  closeSideBar() {
+    this.dashboard.isDrawerOpen = false;
+    this.showNavbar = false;
+  }
+
   logout() {
     Swal.fire({
       title: "¿Deseas cerrar sesión?",

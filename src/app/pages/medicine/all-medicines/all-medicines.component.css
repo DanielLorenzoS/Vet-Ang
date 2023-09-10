@@ -42,6 +42,7 @@
 .table-pag {
     width: 90%;
     margin: auto;
+    overflow: auto;
 }
 
 .mat-table {
@@ -142,7 +143,7 @@ th:last-child {
 }
 
 table {
-    min-width: 600px;
+    min-width: 850px;
     width: 100%;
 }
 
@@ -190,6 +191,53 @@ tr.mat-mdc-row:hover td, tr.mat-mdc-row:hover mat-icon {
 .mat-column-description {
     width: 30% !important;
 }
+
+.description {
+    position: relative;
+    max-height: 2.5rem; /* Dos líneas aproximadamente */
+    overflow: hidden;
+}
+
+.description-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Muestra solo dos líneas */
+    -webkit-box-orient: vertical;
+}
+
+.collapsed {
+    display: none; /* Oculta el contenido cuando está colapsado */
+}
+
+.expand-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0060b0;
+    text-decoration: underline;
+}
+
+.expanded .description-content {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible;
+    display: block;
+    text-overflow: clip; /* Muestra el contenido completo cuando está expandido */
+}
+
+.desc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.expand-button {
+    position: absolute;
+}
+
+
 
 .mat-column-actions {
     width: 8% !important;    

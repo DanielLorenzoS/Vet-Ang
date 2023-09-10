@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
 })
 export class AllMedicinesComponent {
   medicines: any[] = [];
-
+  showDescription: boolean = true;
   displayedColumns: string[] = ['id', 'name', 'description', 'fabricator', 'type', 'actions'];
   dataSource = new MatTableDataSource<any>(this.medicines); // Usa any como tipo genérico para la fuente de datos
 
@@ -93,5 +93,11 @@ export class AllMedicinesComponent {
   goBack() {
     this.router.navigate(['dashboard']);
   }
+
+  toggleDescription(event: any) {
+    this.showDescription = !this.showDescription;
+    console.log(this.showDescription);
+  }
+
 
 }

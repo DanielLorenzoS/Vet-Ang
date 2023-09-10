@@ -171,7 +171,7 @@ textarea {
 
 @media (width < 700px) {
     .container {
-        margin-top: 11rem;
+        margin-top: 8rem;
     }
 
     .form-group {
