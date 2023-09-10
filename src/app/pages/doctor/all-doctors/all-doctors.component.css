@@ -224,12 +224,16 @@ mat-icon {
 } */
 
 .mat-paginator {
-    min-width: 600px;
+    min-width: 850px;
+    width: 100%;
     border: none;
     border-bottom: none;
 }
 
 @media (max-width: 630px) {
+    .title {
+        margin-top: 4rem;
+    }
     .table-pag {
         width: 100%;
     }

@@ -239,12 +239,13 @@ tr.mat-mdc-row:hover td {
 
 .mat-paginator {
     min-width: 600px;
+    width: 100%;
     border: none;
     border-bottom: none;
 }
 
 @media (width < 950px) {
-    table {
+    table, .mat-paginator {
         width: 750px !important;
     }
     .status-select mat-label {
@@ -254,6 +255,9 @@ tr.mat-mdc-row:hover td {
 }
 
 @media (max-width: 630px) {
+    .title {
+        margin-top: 4rem;
+    }
     .table-pag {
         width: 100%;
     }
