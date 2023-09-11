@@ -15,7 +15,7 @@ export class DoctorService {
     private cookieService: CookieService
   ) { }
   
-  url: string = this.loginService.url;
+  url: string = '';
 
   getHeadersViaCookie() {
     const headers = {

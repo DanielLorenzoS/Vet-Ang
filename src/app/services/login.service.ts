@@ -1,23 +1,20 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HomeComponent } from '../pages/home/home.component';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private urlService: UrlService
   ) { }
 
-  url!: string;
+  url: string = '';
 
   generateToken(user: any) {
     console.log(this.url)
@@ -70,6 +67,8 @@ export class LoginService {
   }
 
   getCurrentUser() {
+
+    console.log(this.url)
 
     const headers = {
       'Authorization': `Bearer ${this.cookieService.get('token')}`

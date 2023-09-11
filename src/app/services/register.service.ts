@@ -12,7 +12,7 @@ export class RegisterService {
     private loginService: LoginService,
   ) { }
 
-  url: string = this.loginService.url;
+  url: string = '';
 
   createUser(user: any) {
 
