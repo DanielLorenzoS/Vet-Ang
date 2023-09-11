@@ -33,9 +33,11 @@ import { ServiceComponent } from './pages/service/service/service.component';
 import { AddServiceComponent } from './pages/service/add-service/add-service.component';
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 import { DeletedAppointmentComponent } from './pages/appointment/deleted-appointment/deleted-appointment.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'registro1', component: RegisterStep1Component },
   { path: 'registro2', component: RegisterStep2Component },
   { path: 'recover1', component: Recover1Component },

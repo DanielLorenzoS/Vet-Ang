@@ -23,7 +23,7 @@ export class Recover2Component implements OnInit{
       localStorage.removeItem('token');
     }
     if (localStorage.getItem('email') === null) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     }
     this.tokenForm = this.initializeForm();
   }

@@ -43,7 +43,7 @@ export class NavbarComponent {
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.loginService.logout();
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       }
     })
   }

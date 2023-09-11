@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
   veterinaries: any[] = [
-    { id: 1, name: 'Veterinaria 1' },
-    { id: 2, name: 'Veterinaria 2' },
-    { id: 3, name: 'Veterinaria 3' }
+    { url: 'https://spring-vet-production.up.railway.app', name: 'Veterinaria 1' },
+    { url: 'https://spring-vet-production.up.railway.app', name: 'Veterinaria 2' },
+    { url: 'https://localhost:8080', name: 'Veterinaria 3' }
   ];
 
   constructor(private userService: LoginService,
@@ -38,11 +38,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
     localStorage.clear();
+    if (this.loginService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      veterinary: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/), Validators.minLength(6)]],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/), Validators.minLength(8)]]
     });
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password
     }
+
     this.userService.generateToken(user).subscribe(
       (response: any) => {
         this.loadingIndicatorService.hideLoadingIndicator();

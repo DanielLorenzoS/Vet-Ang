@@ -4,20 +4,20 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { HomeComponent } from '../pages/home/home.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  /* url: string = 'http://localhost:8080'; */
-  url: string = 'https://spring-vet-production.up.railway.app';
 
   constructor(
     private http: HttpClient,
-    private router: Router,
     private cookieService: CookieService
   ) { }
+
+  url!: string;
 
   generateToken(user: any) {
     console.log(this.url)
@@ -38,10 +38,7 @@ export class LoginService {
   }
 
   logout() {
-    this.cookieService.deleteAll();
-    this.cookieService.delete('token', '/');
-    this.cookieService.set('token', '');
-    window.location.reload();
+    this.deleteToken();
     return true;
   }
 
