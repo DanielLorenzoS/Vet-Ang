@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface Url {
   url: string;
@@ -10,10 +11,19 @@ interface Url {
 })
 export class UrlService {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   checkUrl(): void {
-    if (this.getUrl() != '' || this.getUrl() != undefined) {
+    console.log(this.getUrl());
+    if (this.getUrl() === '' || this.getUrl() === undefined) {
+      console.log('no hay url');
+      localStorage.setItem('veterinary', '');
+      this.router.navigate(['']);
+
+    } else {
+      console.log('hay url');
       const name = localStorage.getItem('veterinary');
       this.setUrl(this.veterinaries.find(veterinary => veterinary.name === name));
     }
