@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export class NavbarComponent {
 
   showNavbar: boolean = false;
+  veterinary: string = localStorage.getItem('veterinary') || '';
 
   constructor(
     private loginService: LoginService,

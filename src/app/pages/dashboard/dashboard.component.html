@@ -4,7 +4,7 @@
         <mat-button-toggle-group class="toggle-group" name="fontStyle" aria-label="Font Style">
             <mat-button-toggle (click)="close('')" class="buttonSide" value="Dashboard">
                 <mat-icon class="material-icons-outlined">dashboard</mat-icon>
-                <span>Dashboard</span>
+                <span>Panel</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('client')" class="buttonSide" value="Client">
                 <mat-icon class="material-icons-outlined">group</mat-icon>
@@ -24,7 +24,7 @@
             </mat-button-toggle>
             <mat-button-toggle (click)="close('medicines')" class="buttonSide" value="Dashboard">
                 <mat-icon class="material-icons-outlined">vaccines</mat-icon>
-                <span>Medicinas</span>
+                <span>Medicamentos</span>
             </mat-button-toggle>
             <mat-button-toggle (click)="close('services')" class="buttonSide" value="Dashboard">
                 <mat-icon class="material-icons-outlined">healing</mat-icon>
@@ -33,6 +33,10 @@
             <mat-button-toggle *ngIf="showEmployees" (click)="close('employees')" class="buttonSide" value="Dashboard">
                 <mat-icon class="material-icons-outlined">badge</mat-icon>
                 <span>Empleados</span>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="logout()" class="buttonSide" value="Dashboard">
+                <mat-icon class="material-icons-outlined">logout</mat-icon>
+                <span>Cerrar Sesión</span>
             </mat-button-toggle>
         </mat-button-toggle-group>
     </mat-drawer>

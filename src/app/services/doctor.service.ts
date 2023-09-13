@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './login.service';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class DoctorService {
 
   constructor(
     private http: HttpClient,
-    private loginService: LoginService,
+    private urlService: UrlService,
     private cookieService: CookieService
   ) { }
   
-  url: string = '';
+  url: string = this.urlService.getUrl();
 
   getHeadersViaCookie() {
     const headers = {

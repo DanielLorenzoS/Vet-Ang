@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,11 @@ export class AppointmentService {
 
   constructor(
     private http: HttpClient,
-    private loginService: LoginService,
-    private router: Router,
+    private urlService: UrlService,
     private cookieService: CookieService
   ) { }
 
-  url: string = '';
+  url: string = this.urlService.getUrl();
 
   getHeadersViaCookie() {
     const headers = {

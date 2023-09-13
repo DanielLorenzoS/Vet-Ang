@@ -4,8 +4,8 @@
         <form (ngSubmit)="goLogin()" [formGroup]="loginForm">
             <div class="form-group">
                 <label for="veterinary">Veterinaria</label>
-                <mat-select class="input" id="veterinary" name="veterinary" formControlName="veterinary" required placeholder="Selecciona tu veterinaria">
-                    <mat-option *ngFor="let veterinary of veterinaries" [value]="veterinary.url">{{veterinary.name}}</mat-option>
+                <mat-select class="input" id="veterinary" name="veterinary" formControlName="veterinary" required placeholder="Selecciona tu veterinaria" (selectionChange)="onChange($event)">
+                    <mat-option *ngFor="let veterinary of veterinaries" [value]="veterinary">{{veterinary.name}}</mat-option>
                 </mat-select>
                     <mat-error *ngIf="loginForm.get('veterinary')?.touched && loginForm.get('veterinary')?.errors?.['required']">La veterinaria es requerida</mat-error>
             </div>

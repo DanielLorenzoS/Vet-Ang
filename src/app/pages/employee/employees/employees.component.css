@@ -9,9 +9,9 @@
 
 .back {
     position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    padding: .44rem 1rem;
+    top: .3rem;
+    left: 1rem;
+    padding: .44rem 1.4rem;
     border-bottom-right-radius: 1rem;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@
 
 .table-pag {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .mat-table {
@@ -52,7 +52,7 @@
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
 }
 
@@ -63,6 +63,7 @@
     font-weight: lighter;
     margin-top: 1.5rem;
     color: #000;
+    line-height: 4rem;
 }
 
 
@@ -78,11 +79,11 @@ th {
     background-color: #0060b0 !important;
 }
 
-th:nth-child(1) {
+th:first-child {
     border-top-left-radius: 3px;
 }
 
-th:nth-child(4) {
+th:last-child {
     border-top-right-radius: 3px;
 }
 
@@ -118,7 +119,7 @@ tr.mat-mdc-row:hover td {
     white-space: unset !important;
     flex: 0 0 28% !important;
     text-align: center !important;
-    width: 20% !important;
+    width: 15% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -135,6 +136,10 @@ tr.mat-mdc-row:hover td {
 
 .mat-column-phone {
     border-right: none;
+}
+
+.mat-column-email {
+    width: 30% !important;
 }
 
 .mat-paginator {

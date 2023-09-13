@@ -14,10 +14,9 @@ export class LoginService {
     private urlService: UrlService
   ) { }
 
-  url: string = '';
+  url: string = this.urlService.getUrl();
 
   generateToken(user: any) {
-    console.log(this.url)
     return this.http.post(`${this.url}/auth/login`, user);
   }
 
@@ -67,8 +66,6 @@ export class LoginService {
   }
 
   getCurrentUser() {
-
-    console.log(this.url)
 
     const headers = {
       'Authorization': `Bearer ${this.cookieService.get('token')}`

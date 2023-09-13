@@ -8,9 +8,9 @@
 
 .back {
     position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    padding: .44rem 1rem;
+    top: .3rem;
+    left: 1rem;
+    padding: .44rem 1.4rem;
     border-bottom-right-radius: 1rem;
     display: flex;
     justify-content: center;
@@ -45,7 +45,7 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     text-align: center;
 }
 
@@ -57,7 +57,7 @@
 
 .table-pag {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
     overflow-x: auto;
 }
 

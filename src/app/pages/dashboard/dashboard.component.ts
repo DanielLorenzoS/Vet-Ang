@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,5 +48,22 @@ export class DashboardComponent implements  OnInit{
         console.log(this.showEmployees);
       }
     );
+  }
+
+  logout() {
+    Swal.fire({
+      title: "¿Deseas cerrar sesión?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'No, cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33'
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.loginService.logout();
+        this.router.navigate(['/login']);
+      }
+    })
   }
 }

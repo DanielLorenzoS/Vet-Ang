@@ -51,11 +51,9 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('url ', this.urlService.getUrl());
     this.loginForm = this.initializeForm();
-    if (this.loginService.isLoggedIn()) {
-      this.router.navigate(['/dashboard']);
-    }
+    this.loginService.deleteToken();
+
     this.loginService.url = this.urlService.getUrl();
     this.petService.url = this.urlService.getUrl();
     this.appoinmentService.url = this.urlService.getUrl();

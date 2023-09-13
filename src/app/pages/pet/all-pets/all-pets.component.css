@@ -9,9 +9,9 @@
 
 .back {
     position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    padding: .44rem 1rem;
+    top: .3rem;
+    left: 1rem;
+    padding: .44rem 1.4rem;
     border-bottom-right-radius: 1rem;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@
 .table-pag {
     width: 90%;
     overflow: auto;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .mat-table {
@@ -52,7 +52,7 @@
     padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     text-align: center;
 }
 
@@ -60,7 +60,7 @@
     text-align: center;
     font-size: 3rem;
     font-weight: 350;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     margin-top: 1.5rem;
     color: #000;
     font-family: serif;
