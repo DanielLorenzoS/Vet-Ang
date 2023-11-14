@@ -25,7 +25,7 @@ export class HomeComponent {
   veterinary: string = '';
 
   veterinaries: any[] = [
-    { url: 'https://spring-vet-production.up.railway.app', name: 'Veterinaria 1' },
+    { url: 'https://backvet.up.railway.app', name: 'Veterinaria 1' },
     { url: 'https://spring-vet-production-f8a0.up.railway.app', name: 'Veterinaria 2' },
     { url: 'http://localhost:8080', name: 'Veterinaria 3' }
   ];
