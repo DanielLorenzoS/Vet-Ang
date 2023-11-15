@@ -40,8 +40,8 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.loginForm = this.initializeForm();
-    localStorage.clear();
-    this.loginService.deleteToken();
+    /*localStorage.clear();
+    this.loginService.deleteToken();*/
   }
 
   onChange(event: MatSelectChange) {
