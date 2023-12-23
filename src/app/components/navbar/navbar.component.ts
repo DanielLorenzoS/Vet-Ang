@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 export class NavbarComponent {
 
   showNavbar: boolean = false;
-  veterinary: string = localStorage.getItem('veterinary') || '';
 
   constructor(
     private loginService: LoginService,
@@ -44,7 +43,7 @@ export class NavbarComponent {
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.loginService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
     })
   }

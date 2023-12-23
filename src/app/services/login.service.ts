@@ -1,22 +1,25 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { UrlService } from './url.service';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  url: string = 'http://localhost:8080';
+
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService,
-    private urlService: UrlService
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
-  url: string = this.urlService.getUrl();
-
   generateToken(user: any) {
+    console.log(this.url)
     return this.http.post(`${this.url}/auth/login`, user);
   }
 
@@ -34,7 +37,10 @@ export class LoginService {
   }
 
   logout() {
-    this.deleteToken();
+    this.cookieService.deleteAll();
+    this.cookieService.delete('token', '/');
+    this.cookieService.set('token', '');
+    window.location.reload();
     return true;
   }
 

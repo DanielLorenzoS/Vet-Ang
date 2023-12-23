@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginService } from './login.service';
-import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +9,10 @@ export class RegisterService {
 
   constructor(
     private http: HttpClient,
-    private urlService: UrlService
+    private loginService: LoginService,
   ) { }
 
-  url: string = this.urlService.getUrl();
+  url: string = this.loginService.url;
 
   createUser(user: any) {
 

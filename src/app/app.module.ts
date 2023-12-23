@@ -67,7 +67,6 @@ import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
 import { MatNativeDateModule } from '@angular/material/core';
-import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -110,8 +109,7 @@ import { HomeComponent } from './pages/home/home.component';
     AllServiceComponent,
     EditClientComponent,
     EditPetComponent,
-    NumbersOnlyPipe,
-    HomeComponent
+    NumbersOnlyPipe
   ],
   imports: [
     BrowserModule,

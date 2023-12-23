@@ -24,7 +24,7 @@ export class RegisterStep2Component implements OnInit {
       localStorage.removeItem('token');
     }
     if (localStorage.getItem('email') === null) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     }
     this.tokenForm = this.initializeForm();
   }
@@ -53,7 +53,7 @@ export class RegisterStep2Component implements OnInit {
             showConfirmButton: false,
             timer: 2000
           });
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         } else {
           Swal.fire({
             position: 'center',

@@ -130,19 +130,7 @@
 }
 
 .nav-buttons {
-    margin-right: 1rem;
-    display: flex;
-    justify-content: center;
-}
-
-.veterinary {
-    padding: .5rem 1rem;
-    border: thin solid transparent;
-    background-color: transparent;
-    color: #fff;
-    font-size: 1.6rem;
-    cursor: default;
-    transition: all .3s ease-in-out;
+    margin-right: 2rem;
 }
 
 .logout {
@@ -150,7 +138,7 @@
     border: thin solid transparent;
     background-color: transparent;
     color: #fff;
-    font-size: 1.3rem;
+    font-size: large;
     cursor: pointer;
     transition: all .3s ease-in-out;
 }

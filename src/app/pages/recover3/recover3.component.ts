@@ -24,7 +24,7 @@ export class Recover3Component implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('email') === null) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     }
     this.passwordForm = this.initializeForm();
   }
@@ -60,7 +60,7 @@ export class Recover3Component implements OnInit {
             showConfirmButton: true
           });
           localStorage.removeItem('email');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         }),
         (error: any) => {
           this.loadingIndicatorService.hideLoadingIndicator();

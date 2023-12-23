@@ -16,7 +16,6 @@ import Swal from 'sweetalert2';
 export class EmployeesComponent implements OnInit {
 
   usuarios: any[] = [];
-  anotherUsers: any[] = [];
   toggle!: boolean;
 
   displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'rol', 'actions'];
@@ -37,41 +36,31 @@ export class EmployeesComponent implements OnInit {
   }
 
   getUsers() {
+    this.usuarios = [];
     this.userService.getUserByRole("EMPLOYEE").subscribe(
       (res: any) => {
-        this.anotherUsers = res;
-        this.getUserByRole("USER");
-      },
-      err => {
         this.spinner.hideLoadingIndicator();
-        console.log(err);
-      }
-    );
-  }
-  
-  getUserByRole(role: string) {
-    this.userService.getUserByRole(role).subscribe(
-      (res: any) => {
-        this.spinner.hideLoadingIndicator();
-        if (role === "USER") {
-          this.usuarios = res;
-        } else if (role === "EMPLOYEE") {
-          this.anotherUsers = res;
-        }
-        this.updateDataSource();
+        this.usuarios = res;
         console.log(this.usuarios);
       },
       err => {
         this.spinner.hideLoadingIndicator();
         console.log(err);
       }
-    );
-  }
-
-  updateDataSource() {
-    this.usuarios = [];
-    this.usuarios = [...this.usuarios, ...this.anotherUsers];
-    this.dataSource.data = [...this.usuarios]; // Actualiza la fuente de datos de la tabla
+    )
+    this.userService.getUserByRole("USER").subscribe(
+      (res: any) => {
+        this.spinner.hideLoadingIndicator();
+        this.usuarios = this.usuarios.concat(res);
+        this.dataSource = new MatTableDataSource<any>(this.usuarios); // Asigna la respuesta a la fuente de datos de la tabla
+        this.dataSource.paginator = this.paginator; // Asigna el paginador después de obtener los datos
+        console.log(this.usuarios);
+      },
+      err => {
+        this.spinner.hideLoadingIndicator();
+        console.log(err);
+      }
+    )
   }
 
   setPermission(event: MatSlideToggleChange, user: any) {
@@ -138,9 +127,9 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
-  /* private updateDataSource() {
+  private updateDataSource() {
     this.dataSource.data = [...this.usuarios]; // Actualiza la fuente de datos de la tabla
-  } */
+  }
 
   isChecked(user: any) {
     return user.roles[0].name == "EMPLOYEE";

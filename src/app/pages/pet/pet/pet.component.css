@@ -192,8 +192,7 @@ h5 {
 table {
     background-color: transparent;
     box-shadow: none;
-    width: 100%;
-    min-width: 600px;
+    min-width: 500px;
 }
 
 th {
