@@ -19,6 +19,7 @@
 
 .side-container {
   min-width: 5rem;
+  max-width: 17rem;
   height: 100vh;
   background: #2e82d7;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -58,6 +59,66 @@ span {
   border-bottom: thin solid #0060b0;
 }
 
+.buttonSide:first-child {
+  border-bottom: none !important;
+}
+
+.buttonAcc {
+  justify-content: normal !important;
+  background-color: #2e82d7;
+  padding-right: .3rem;
+  box-shadow: none !important;
+}
+
+.buttonAcc {
+  border-top: thin solid #0060b0 !important;
+}
+
+.buttonAcc:first-child {
+  border-top: none !important;
+}
+
+.buttonSide:last-child {
+  border-top: thin solid #0060b0 !important;
+}
+
+::ng-deep .mat-expansion-indicator {
+  margin-right: 1rem !important;
+}
+
+mat-expansion-panel, mat-expansion-panel-header {
+  padding: 0 !important;
+}
+
+mat-expansion-panel span, mat-expansion-panel mat-icon {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  padding-left: 12px;
+  margin-left: 4px;
+}
+
+mat-expansion-panel span {
+  padding: 0 5px;
+  margin-left: 3px;
+}
+
+mat-expansion-panel mat-icon {
+  font-size: 25px;
+  padding: 4px;
+}
+
+mat-expansion-panel .buttonSide {
+  border-bottom: none !important;
+  border-top: thin solid #0060b0 !important;
+  background-color: #2c8ee9 !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
 .mat-button-toggle-label-content {
   padding: 0 !important;
 }
@@ -71,10 +132,8 @@ span {
   display: flex !important;
 }
 
-::ng-deep .buttonSide.mat-button-toggle-checked {
-  background-color: #fff;
-  color: #000;
-  border-right: 8px double #0060b0;
+::ng-deep mat-button-toggle.mat-button-toggle-checked {
+  border-right: none !important;
 }
 
 .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
@@ -121,10 +180,19 @@ span {
     border-bottom: thin solid #0060b0;
   }
 
-  ::ng-deep .buttonSide.mat-button-toggle-checked {
+  mat-expansion-panel mat-button-toggle {
+    background-color: #2e82d7 !important;
+    font-size: 15px !important;
+  }
+
+  .reduce-text {
+    font-size: 12px !important;
+  }
+
+  /* ::ng-deep .buttonSide.mat-button-toggle-checked {
     background-color: #fff;
     color: #000;
     border-right: 8px double #0060b0;
-  }
+  } */
   
 }

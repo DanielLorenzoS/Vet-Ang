@@ -43,6 +43,10 @@
     outline: none;
 }
 
+label, .error, .link {
+  font-weight: 400;
+}
+
 mat-select {
   width: auto;
 }
@@ -71,14 +75,12 @@ mat-select {
 .btnSubmit {
     margin: auto;
     margin-top: 1rem;
-    padding: 0.6rem 1rem;
-    border: thin solid #0035c5;
+    padding: 1.5rem 1rem !important;
     border-radius: 0.30rem;
     font-size: 1.1rem;
-    background-color: #0035c5;
-    color: #fff;
+    background-color: #0035c5 !important;
+    color: #fff !important;
     cursor: pointer;
-    outline: none;
     transition: all 0.2s ease-in-out;
     width: 100%;
 }
@@ -93,13 +95,9 @@ mat-select {
   cursor: not-allowed !important;
   margin: auto;
   margin-top: 1rem;
-  padding: 0.6rem 1rem;
-  border: thin solid #2e82d7;
+  padding: 1.5rem 1rem !important;
   border-radius: 0.30rem;
   font-size: 1.1rem;
-  background-color: #2e82d7;
-  color: #fff;
-  cursor: pointer;
   outline: none;
   transition: all 0.2s ease-in-out;
   width: 100%;
