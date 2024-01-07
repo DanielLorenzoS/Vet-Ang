@@ -49,7 +49,7 @@ export class AllPetsComponent {
         console.log(err);
       }
     )
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAllUsers({ page: 1, size: 5 }).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
       },

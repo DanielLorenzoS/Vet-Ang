@@ -7,16 +7,16 @@ body {
 }
 
 div, h1, h2, h3, h4, h5, h6, p, span, input, th, td, button, mat-input {
-  font-family: 'Quicksand', "Helvetica Neue", sans-serif !important;
+  font-family: 'Dosis', "Helvetica Neue", sans-serif !important;
 }
 
-th, td {
-  font-weight: 400 !important;
+input, th, td {
+  font-weight: 500 !important;
 }
 
 body {
     margin: 0;
-    font-family: 'Quicksand', "Helvetica Neue", sans-serif !important;
+    font-family: 'Dosis', "Helvetica Neue", sans-serif !important;
     background: linear-gradient(0.25turn, #2e82d7, #7eafdf);
 }
 

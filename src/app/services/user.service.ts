@@ -55,9 +55,8 @@ export class UserService {
     return this.http.put(`${this.url}/update`, passwordData);
   }
 
-  getAllUsers() {
-
-    return this.http.get(`${this.url}/`, { headers: this.getHeadersViaCookie() });
+  getAllUsers(params: any) {
+    return this.http.get(`${this.url}/user`, { params: params });
   }
 
   getUserByRole(role: string) {
@@ -103,13 +102,11 @@ export class UserService {
   }
 
   updateUser(userData: any) {
-
-    return this.http.put(`${this.url}/update/user`, userData, { headers: this.getHeadersViaCookie() });
+    return this.http.put(`${this.url}/user/${userData.id}`, userData);
   }
 
   deleteUser(id: number) {
-
-    return this.http.delete(`${this.url}/deleteuser/${id}`, { headers: this.getHeadersViaCookie() });
+    return this.http.delete(`${this.url}/user/${id}`);
   }
 
   updateToEmployee(user: any) {

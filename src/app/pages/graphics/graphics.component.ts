@@ -70,13 +70,13 @@ export class GraphicsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.spinnerService.showLoadingIndicator();
+    /* this.spinnerService.showLoadingIndicator();
     this.getSpecies();
     this.getUsers();
     this.getMedicinesCount();
     this.getServicesCount();
     this.getAppointments();
-    this.getAppointmentsToday();
+    this.getAppointmentsToday(); */
   }
 
   getSpecies() {
@@ -107,7 +107,7 @@ export class GraphicsComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getAllUsers().subscribe(
+    this.userService.getAllUsers({ page: 0, size: 5 }).subscribe(
       (users: any) => {
         this.usersData = users;
         this.processUserData();

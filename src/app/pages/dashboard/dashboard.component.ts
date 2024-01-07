@@ -26,7 +26,7 @@ export class DashboardComponent implements  OnInit{
     });
   }
   ngOnInit(): void {
-    this.getRole();
+    //this.getRole();
   }
 
   toggleDrawer() {

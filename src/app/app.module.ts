@@ -126,7 +126,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonToggleModule,
     MatTableModule,
     MatPaginatorModule,
-    MatInputModule,
     MatIconModule,
     NgxChartsModule,
     MatMenuModule,
@@ -139,7 +138,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatExpansionModule,
     MatNativeDateModule
   ],
-  providers: [authInterceptorProviders, CookieService, DatePipe, { provide: MatDialogRef, useValue: {} }],
+  providers: [authInterceptorProviders, DatePipe, { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
