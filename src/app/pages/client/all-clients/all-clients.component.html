@@ -1,7 +1,7 @@
 <div class="table-container">
     <div class="mat-table">
         <div class="top-container">
-            <h2 class="title">Clientes</h2>
+            <span class="title">Clientes</span>
             <form class="search" [formGroup]="searchForm" (ngSubmit)="searchClient()">
                 <input (keyup)="filter($event)" matInput placeholder="Nombre" formControlName="name">
                 <input matInput placeholder="Apellido" formControlName="lastName">
@@ -9,36 +9,44 @@
                 <input matInput placeholder="Celular" formControlName="phone">
                 <div class="buttons">
                     <button type="submit" [disabled]="isSearchDisabled()"
-                    [ngClass]="isSearchDisabled() ? 'disabled' : 'submit'"
-                        >Buscar cliente</button>
+                        [ngClass]="isSearchDisabled() ? 'disabled' : 'submit'">Buscar cliente</button>
                     <button class="reset" type="reset">Limpiar</button>
                 </div>
             </form>
         </div>
         <div class="table-pag">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-                <!-- Columna ID -->
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef>ID</th>
-                    <td mat-cell *matCellDef="let usuario">{{ usuario.id }}</td>
-                </ng-container>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z24">
 
                 <!-- Columna Username -->
                 <ng-container matColumnDef="username">
-                    <th mat-header-cell *matHeaderCellDef>Usuario</th>
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="header-content">
+                            <span>Usuario</span>
+                            <mat-icon class="sort-icon" (click)="sortData('name')">unfold_more</mat-icon>
+                        </div>
+                    </th>
                     <td mat-cell *matCellDef="let usuario">{{ usuario.name }} {{ usuario.lastName }}</td>
                 </ng-container>
 
                 <!-- Columna Email -->
                 <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef>Correo electrónico</th>
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="header-content">
+                            <span>Correo electrónico</span>
+                            <mat-icon class="sort-icon" (click)="sortData('email')">unfold_more</mat-icon>
+                        </div>
+                    </th>
                     <td mat-cell *matCellDef="let usuario">{{ usuario.email }}</td>
                 </ng-container>
 
                 <!-- Columna Phone -->
                 <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef>Celular</th>
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="header-content">
+                            <span>Celular</span>
+                            <mat-icon class="sort-icon" (click)="sortData('phone')">unfold_more</mat-icon>
+                        </div>
+                    </th>
                     <td mat-cell *matCellDef="let usuario">{{ usuario.phone }}</td>
                 </ng-container>
 
@@ -48,14 +56,13 @@
                     </th>
                     <td mat-cell *matCellDef="let usuario">
                         <div class="icons">
-                            <mat-icon class="icon" (click)="onRowClick(usuario)">visibility</mat-icon>
                             <mat-icon class="icon" (click)="deleteUser(usuario.id)">delete</mat-icon>
                         </div>
                     </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
             </table>
 
             <mat-paginator class="mat-paginator" (page)="pageEvent($event)" [pageSize]="5"

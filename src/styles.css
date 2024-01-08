@@ -7,11 +7,11 @@ body {
 }
 
 div, h1, h2, h3, h4, h5, h6, p, span, input, th, td, button, mat-input {
-  font-family: 'Dosis', "Helvetica Neue", sans-serif !important;
+  font-family: 'Lato', "Helvetica Neue", sans-serif !important;
 }
 
 input, th, td {
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 
 body {

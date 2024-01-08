@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -17,11 +18,12 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   usuarios: any[] = []; // Inicializa el arreglo vacío
   params: any = {
     page: 0,
-    size: 5
+    size: 5,
+    sort: 'name,asc'
   }
   searchForm!: FormGroup;
-  displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'actions'];
-  dataSource = new MatTableDataSource<any>(this.usuarios); // Usa any como tipo genérico para la fuente de datos
+  displayedColumns: string[] = ['username', 'email', 'phone', 'actions'];
+  dataSource = new MatTableDataSource<any>(this.usuarios);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -37,7 +39,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.spinner.showLoadingIndicator();
+    this.dataSource.paginator = this.paginator;
     this.getClients(this.params);
   }
 
@@ -60,6 +62,8 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
 }
 
   getClients(params: any) {
+    console.log(params);
+    this.spinner.showLoadingIndicator();
     this.usuarios = [];
     this.userService.getAllUsers(params).subscribe({
       next: (res: any) => {
@@ -67,7 +71,6 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
         this.usuarios = res.content;
         this.dataSource = new MatTableDataSource<any>(this.usuarios);
         this.setupPaginator(res);
-        console.log(res);
       },
       error: (err: any) => {
         this.spinner.hideLoadingIndicator();
@@ -87,9 +90,17 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   pageEvent(event: any) {
-    console.log(event);
     this.params.page = event.pageIndex;
     this.params.size = event.pageSize;
+    this.getClients(this.params);
+  }
+
+  sortData(sortby: string) {
+    if (this.params.sort === `${sortby},asc`) {
+      this.params.sort = `${sortby},desc`;
+    } else {
+      this.params.sort = `${sortby},asc`;
+    }
     this.getClients(this.params);
   }
 
@@ -140,8 +151,8 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   onRowClick(row: any) {
-    console.log(row.username)
-    this.router.navigate([`dashboard/indClient/${row.username}`])
+    console.log(row)
+    this.router.navigate([`dashboard/indClient/${row.name}`])
   }
 
   filter(event: Event) {
