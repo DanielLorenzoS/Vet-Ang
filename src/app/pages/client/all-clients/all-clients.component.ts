@@ -22,7 +22,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
     sort: 'name,asc'
   }
   searchForm!: FormGroup;
-  displayedColumns: string[] = ['username', 'email', 'phone', 'actions'];
+  displayedColumns: string[] = ['username', 'email', 'phone', 'municipality', 'actions'];
   dataSource = new MatTableDataSource<any>(this.usuarios);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -45,28 +45,45 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
 
   initializeSearchForm() {
     this.searchForm = new FormGroup({
-      name: new FormControl(null),
-      lastName: new FormControl(null),
-      email: new FormControl(null),
-      phone: new FormControl(null)
+      search: new FormControl(null),
+      option: new FormControl('name')
     });
   }
 
   isSearchDisabled() {
-    const name = this.searchForm.get('name')?.value;
-    const lastName = this.searchForm.get('lastName')?.value;
-    const email = this.searchForm.get('email')?.value;
-    const phone = this.searchForm.get('phone')?.value;
-
-    return !name && !lastName && !email && !phone;
-}
+    const { search } = this.searchForm.value;
+    return !search || search.length === 0;
+  }
 
   getClients(params: any) {
+    console.log(this.searchForm.value);
+    if (this.searchForm.value.option === 'name' && this.searchForm.value.search) {
+      params['name'] = this.searchForm.value.search;
+    } else {
+      delete params.name;
+    }
+    if (this.searchForm.value.option === 'lastname' && this.searchForm.value.search) {
+      params['lastName'] = this.searchForm.value.search;
+    } else {
+      delete params.lastName;
+    }
+    if (this.searchForm.value.option === 'email' && this.searchForm.value.search) {
+      params['email'] = this.searchForm.value.search;
+    } else {
+      delete params.email;
+    }
+    if (this.searchForm.value.option === 'phone' && this.searchForm.value.search) {
+      params['phone'] = this.searchForm.value.search;
+    } else {
+      delete params.phone;
+    }
+
     console.log(params);
     this.spinner.showLoadingIndicator();
     this.usuarios = [];
     this.userService.getAllUsers(params).subscribe({
       next: (res: any) => {
+        console.log(res);
         this.spinner.hideLoadingIndicator();
         this.usuarios = res.content;
         this.dataSource = new MatTableDataSource<any>(this.usuarios);
@@ -74,7 +91,21 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
       },
       error: (err: any) => {
         this.spinner.hideLoadingIndicator();
-        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudo obtener los clientes',
+          showCancelButton: true,
+          showConfirmButton: true,
+          cancelButtonColor: '#d33',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Reintentar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.getClients(this.params);
+          }
+        })
       }
     });
   }
@@ -105,12 +136,13 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   searchClient() {
-    console.log(this.searchForm.value);
-    /* this.params.name = this.searchForm.value.name;
-    this.params.lastName = this.searchForm.value.lastName;
-    this.params.email = this.searchForm.value.email;
-    this.params.phone = this.searchForm.value.phone;
-    this.getClients(this.params); */
+    this.getClients(this.params);
+  }
+
+  resetForm() {
+    this.searchForm.reset();
+    this.searchForm.patchValue({ option: 'name' });
+    this.getClients(this.params);
   }
 
   deleteUser(id: number) {

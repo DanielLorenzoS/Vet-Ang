@@ -56,7 +56,8 @@ export class UserService {
   }
 
   getAllUsers(params: any) {
-    return this.http.get(`${this.url}/user`, { params: params });
+    console.log(params);
+    return this.http.get(`${this.url}/user/filter`, { params: params });
   }
 
   getUserByRole(role: string) {
