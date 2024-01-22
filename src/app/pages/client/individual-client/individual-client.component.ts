@@ -11,10 +11,14 @@ import { Location } from '@angular/common';
 
 interface User {
   id: number;
-  username: string;
+  name: string;
+  lastName: string;
   email: string;
   phone: string;
-  address: string;
+  city: string,
+  municipality: string,
+  number: number,
+  createdAt: string
 }
 
 @Component({
@@ -59,20 +63,13 @@ export class IndividualClientComponent implements OnInit {
 
   getUsersandPets() {
     this.spinner.showLoadingIndicator();
-    this.user = { id: 0, username: '', email: '', phone: '', address: '' };
+    this.user = { id: 0, name: '', lastName: '', email: '', phone: '', city: '', municipality: '', number: 0, createdAt: '' };
     this.pets = [];
-    this.userService.getUserByUsername(this.route.snapshot.paramMap.get('username')!).subscribe(
+    this.userService.getUserById(parseInt(this.route.snapshot.paramMap.get('id')!)).subscribe(
       (res: any) => {
         this.user = res;
-        this.petsService.getPetsByUserId(res.id).subscribe(
-          (res: any) => {
-            this.spinner.hideLoadingIndicator();
-            this.pets = res.map((pet: any) => ({ ...pet, view: false })); // Agregar la propiedad 'view' a cada mascota
-          }
-        ), (err: any) => {
-          this.spinner.hideLoadingIndicator();
-          console.log('error al traer las mascotas');
-        }
+        console.log(res);
+        this.spinner.hideLoadingIndicator();
       }
     ), (err: any) => {
       this.spinner.hideLoadingIndicator();

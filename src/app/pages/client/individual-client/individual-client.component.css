@@ -4,52 +4,24 @@
     scroll-behavior: smooth;
 }
 
-.back {
-    position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    padding: .44rem 1rem;
-    border-bottom-right-radius: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background-color: #0060b0;
-    color: white;
-}
-
-.back::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 100%;
-    border-style: solid;
-    border-color: transparent #0060b0;
-    border-width: 17px 15px 17px 0;
-    width: 0;
-    height: 0;
-}
-
-.back span {
-    font-size: 1.2rem;
-    font-weight: 200;
-}
-
-.client {
+.client, .facture {
     margin: auto;
-    margin-top: 4rem;
-    padding: 2rem 0;
-    width: 80%;
+    margin-top: 3rem;
+    width: 90%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.facture {
     display: flex;
-    justify-content: center;
 }
 
 .client-form {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     padding: 2rem 0;
 }
 
@@ -78,18 +50,19 @@
 }
 
 .buttons {
+    grid-column: span 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.5rem;
+    align-items: center;
     padding: 1rem;
-    width: 50%;
 }
 
 .buttons button {
-    width: 80%;
-    height: 3rem;
-    padding: 0.5rem;
+    margin: 0 auto;
+    width: 70%;
+    height: 20%;
+    padding: 3rem 0.5rem;
     border-radius: 5px;
     border: none;
     background-color: #1e90ff;
@@ -110,8 +83,7 @@
 
 .update {
     background-color: #fff !important;
-    color: #1e90ff !important;
-    border: 1px solid #1e90ff !important;
+    color: #0060b0 !important;
 }
 
 .update:hover {
@@ -122,7 +94,6 @@
 .delete {
     background-color: #fff !important;
     color: #ff0000 !important;
-    border: 1px solid #ff0000 !important;
 }
 
 .nopets {
@@ -147,14 +118,26 @@
 }
 
 .text {
-    width: 100%;
+    grid-column: span 4;
+    border-right: 2px solid #0060b0;
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
-    text-align: center;
     vertical-align: middle;
+}
+
+.text > * {
+    width: 100%;
+    text-align: center;
+}
+
+.text h1 {
+    font-size: 35px;
+    font-weight: 200;
+    padding-bottom: 1rem;
+    border-bottom: thin solid #0060b0;
 }
 
 .photo {
@@ -227,7 +210,7 @@
 .table-container {
     margin: auto;
     margin-top: 2rem;
-    width: 80%;
+    width: 90%;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     overflow-x: auto;
@@ -292,6 +275,10 @@ tr.mat-mdc-row:hover mat-icon {
 
 mat-icon {
     color: #0060b0;
+}
+
+.mat-icon-delete {
+    color: #ff0000;
 }
 
 .btnPet {

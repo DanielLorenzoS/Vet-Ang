@@ -62,7 +62,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
     } else {
       delete params.name;
     }
-    if (this.searchForm.value.option === 'lastname' && this.searchForm.value.search) {
+    if (this.searchForm.value.option === 'lastName' && this.searchForm.value.search) {
       params['lastName'] = this.searchForm.value.search;
     } else {
       delete params.lastName;
@@ -184,7 +184,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
 
   onRowClick(row: any) {
     console.log(row)
-    this.router.navigate([`dashboard/indClient/${row.name}`])
+    this.router.navigate([`dashboard/indClient/${row.id}`])
   }
 
   filter(event: Event) {

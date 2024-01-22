@@ -80,6 +80,10 @@ export class UserService {
     return this.http.get(`${this.url}/user/phone/${phone}`, { headers: this.getHeadersViaCookie() });
   }
 
+  getUserById(id: number) {
+    return this.http.get(`${this.url}/user/${id}`);
+  }
+
   createClient(user: any) {
 
     const currentDate = new Date();

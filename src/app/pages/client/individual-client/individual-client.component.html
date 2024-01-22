@@ -1,14 +1,13 @@
 <div class="container">
     <div class="info">
-        <div class="back" (click)="goBack()">
-            <span>Volver</span>
-        </div>
         <div class="client">
             <div class="text">
-                <h1><span>Nombre: </span>{{ user.username }}</h1>
-                <h3><span>Correo electrónico: </span>{{ user.email }}</h3>
-                <h3><span>Celular: </span>{{ user.phone }}</h3>
-                <h3><span>Dirección: </span>{{ user.address }}</h3>
+                <h1>Detalles Cliente</h1>
+                <h2>{{ user.name }} {{ user.lastName }}</h2>
+                <h2><span></span>{{ user.email }}</h2>
+                <h2><span></span>{{ user.phone }}</h2>
+                <h2><span></span>{{ user.city }} {{ user.municipality }} {{ user.number }}</h2>
+                <h2><span>Registrad@ el </span>{{ user.createdAt }}</h2>
             </div>
             <div class="buttons">
                 <button class="update" mat-icon-button (click)="openEditDialog()">
@@ -17,14 +16,14 @@
                 </button>
                 <button class="delete" mat-icon-button (click)="deleteClient()">
                     <span>Eliminar</span>
-                    <mat-icon>person_remove</mat-icon>
+                    <mat-icon class="mat-icon-delete">person_remove</mat-icon>
                 </button>
             </div>
         </div>
         
         <div class="table-container">
 
-            <h4 *ngIf="pets.length === 0">{{ user.username }} no tiene mascotas asociadas</h4>
+            <h4 *ngIf="pets.length === 0">{{ user.name }} no tiene mascotas asociadas</h4>
             <table mat-table [dataSource]="pets" class="mat-elevation-z8">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -62,6 +61,24 @@
                     (click)="goEditPet(pet)"></tr>
             </table>
         </div>
-
+        <div class="facture">
+            <div class="text">
+                <h1><span></span>{{ user.name }} {{ user.lastName }}</h1>
+                <h2><span></span>{{ user.email }}</h2>
+                <h2><span></span>{{ user.phone }}</h2>
+                <h2><span></span>{{ user.city }} {{ user.municipality }} {{ user.number }}</h2>
+                <h2><span>Registrad@ el </span>{{ user.createdAt }}</h2>
+            </div>
+            <div class="buttons">
+                <button class="update" mat-icon-button (click)="openEditDialog()">
+                    <span>Editar</span>
+                    <mat-icon>edit_note</mat-icon>
+                </button>
+                <button class="delete" mat-icon-button (click)="deleteClient()">
+                    <span>Eliminar</span>
+                    <mat-icon>person_remove</mat-icon>
+                </button>
+            </div>
+        </div>
     </div>
 </div>

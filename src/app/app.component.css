@@ -17,14 +17,9 @@
     opacity: 1;
 }
 
-.container {
-    background-color: #fff;
-}
-
 .side-container {
     width: 15%;
     height: 100vh;
-    background: #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +28,7 @@
 
 .mat-drawer-content {
     height: 91vh;
-    background-color: #fff;
+    background-color: #aaa;
     color: #000;
 }
 
@@ -43,10 +38,6 @@
     flex-direction: column;
     border: none;
     border-radius: 0;
-}
-
-.buttonSide {
-    background-color: #888;
 }
 
 ::ng-deep .buttonSide.mat-button-toggle-checked {
