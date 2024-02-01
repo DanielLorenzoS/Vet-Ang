@@ -44,7 +44,7 @@ export class EditClientComponent implements OnInit {
   }
 
   getClientById(): void {
-    this.userService.getUserByUsername(this.data.user.username).subscribe(
+    this.userService.getUserById(this.data.user.id).subscribe(
       (response: any) => {
         console.log('response ', response);
         this.editClientForm.patchValue(response);
@@ -71,10 +71,12 @@ export class EditClientComponent implements OnInit {
     return this.formBuilder.group({
       email: ['Cargando...', [Validators.required, Validators.email, Validators.pattern( /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
       phone: ['Cargando...', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      username: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/), Validators.minLength(6)]],
+      name: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      lastName: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
       city: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
       municipality: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
       street: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
+      number: ['Cargando...', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
     });
   }
 

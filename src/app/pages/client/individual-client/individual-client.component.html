@@ -3,27 +3,29 @@
         <div class="client">
             <div class="text">
                 <h1>Detalles Cliente</h1>
-                <h2>{{ user.name }} {{ user.lastName }}</h2>
-                <h2><span></span>{{ user.email }}</h2>
-                <h2><span></span>{{ user.phone }}</h2>
-                <h2><span></span>{{ user.city }} {{ user.municipality }} {{ user.number }}</h2>
-                <h2><span>Registrad@ el </span>{{ user.createdAt }}</h2>
+                <div class="data">
+                    <h2>{{ user.name }} {{ user.lastName }}</h2>
+                    <h2><span></span>{{ user.email }}</h2>
+                    <h2><span></span>{{ user.phone }}</h2>
+                    <h2><span></span>{{ user.city }} {{ user.municipality }} {{ user.number }}</h2>
+                    <h2><span>Registrad@ el </span>{{ user.createdAt }}</h2>
+                </div>
             </div>
             <div class="buttons">
-                <button class="update" mat-icon-button (click)="openEditDialog()">
+                <button mat-raised-button class="update" (click)="openEditDialog()">
                     <span>Editar</span>
                     <mat-icon>edit_note</mat-icon>
                 </button>
-                <button class="delete" mat-icon-button (click)="deleteClient()">
+                <button mat-raised-button class="delete" color="warn" (click)="deleteClient()">
                     <span>Eliminar</span>
                     <mat-icon class="mat-icon-delete">person_remove</mat-icon>
                 </button>
             </div>
         </div>
-        
+
         <div class="table-container">
 
-            <h4 *ngIf="pets.length === 0">{{ user.name }} no tiene mascotas asociadas</h4>
+            <h4 *ngIf="pets.length === 0">{{ user.name }} no tiene mascotas registradas</h4>
             <table mat-table [dataSource]="pets" class="mat-elevation-z8">
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -40,6 +42,11 @@
                     <td mat-cell *matCellDef="let pet"> {{ pet.race }} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="onRegister">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+                    <td mat-cell *matCellDef="let pet"> {{ pet.onRegister }} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef>
                         <button mat-icon-button class="btnPet newPet" (click)="goCreatePet()">
@@ -54,30 +61,37 @@
                 </ng-container>
 
                 <!-- Encabezados de la tabla -->
-                <tr mat-header-row *matHeaderRowDef="['name', 'specie', 'race', 'actions']"></tr>
+                <tr mat-header-row *matHeaderRowDef="['name', 'specie', 'race', 'onRegister', 'actions']"></tr>
 
                 <!-- Filas de la tabla -->
-                <tr mat-row *matRowDef="let pet; columns: ['name', 'specie', 'race', 'actions']"
+                <tr mat-row *matRowDef="let pet; columns: ['name', 'specie', 'race', 'onRegister', 'actions']"
                     (click)="goEditPet(pet)"></tr>
             </table>
         </div>
         <div class="facture">
-            <div class="text">
-                <h1><span></span>{{ user.name }} {{ user.lastName }}</h1>
-                <h2><span></span>{{ user.email }}</h2>
-                <h2><span></span>{{ user.phone }}</h2>
-                <h2><span></span>{{ user.city }} {{ user.municipality }} {{ user.number }}</h2>
-                <h2><span>Registrad@ el </span>{{ user.createdAt }}</h2>
+            <div class="summary">
+
             </div>
-            <div class="buttons">
-                <button class="update" mat-icon-button (click)="openEditDialog()">
-                    <span>Editar</span>
-                    <mat-icon>edit_note</mat-icon>
-                </button>
-                <button class="delete" mat-icon-button (click)="deleteClient()">
-                    <span>Eliminar</span>
-                    <mat-icon>person_remove</mat-icon>
-                </button>
+            <div class="text lists">
+                <h1><span></span>Historial de Facturación</h1>
+                <div class="container-lists">
+                    <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Personal data
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Type your name and age
+                                    <mat-icon>account_circle</mat-icon>
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+
+                            <span>Data</span>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>                
             </div>
         </div>
     </div>

@@ -18,7 +18,8 @@ interface User {
   city: string,
   municipality: string,
   number: number,
-  createdAt: string
+  createdAt: string,
+  pets?: any[]
 }
 
 @Component({
@@ -63,11 +64,12 @@ export class IndividualClientComponent implements OnInit {
 
   getUsersandPets() {
     this.spinner.showLoadingIndicator();
-    this.user = { id: 0, name: '', lastName: '', email: '', phone: '', city: '', municipality: '', number: 0, createdAt: '' };
+    this.user = { id: 0, name: '', lastName: '', email: '', phone: '', city: '', municipality: '', number: 0, createdAt: '', pets: [] };
     this.pets = [];
     this.userService.getUserById(parseInt(this.route.snapshot.paramMap.get('id')!)).subscribe(
       (res: any) => {
         this.user = res;
+        this.pets = res.pets;
         console.log(res);
         this.spinner.hideLoadingIndicator();
       }
