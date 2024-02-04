@@ -298,26 +298,64 @@ mat-icon {
     text-align: center;
     line-height: 2rem;
     padding: 1rem;
+    margin-bottom: 0;
 }
 
 .content {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
-    padding: 1rem;
+    align-items: flex-start;
+    padding: 0 1rem;
 }
 
 .summary {
     width: 40%;
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.summary ul {
+    list-style: none;
+}
+
+.example-action-buttons button {
+    margin: 0 1rem;
+    opacity: .8;
+}
+
+.expandButton {
+    background-color: #0060b0 !important; 
+    color: #fff !important;
+}
+
+.collapsedButton {
+    background-color: #ff0000 !important;
+    color: #fff !important;
 }
 
 .lists {
-    width: 60%;
+    width: 50%;
+    height: 100%;
+    border-left: thin solid #0060b0;
+    padding-left: 1rem;
 }
 
 .container-lists mat-accordion {
-    width: 60%;
+    width: 50%;
+}
+
+mat-expansion-panel {
+    margin-bottom: 1rem;
+}
+
+mat-expansion-panel-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-expansion-indicator {
+    display: none !important;
 }
 
 .icon-pet {

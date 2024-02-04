@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { EditClientComponent } from '../edit-client/edit-client.component';
 import { Location } from '@angular/common';
+import { MatAccordion } from '@angular/material/expansion';
 
 interface User {
   id: number;
@@ -29,6 +30,7 @@ interface User {
 })
 export class IndividualClientComponent implements OnInit {
 
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
   user!: User;
   pets: any[] = [];
   editForm!: FormGroup;

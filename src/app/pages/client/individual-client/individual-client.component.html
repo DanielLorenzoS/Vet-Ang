@@ -73,31 +73,69 @@
             <div class="content">
 
                 <div class="summary">
-                    <h2>Algo</h2>
+                    <h2>Resumen de Facturas</h2>
+                    <p>Facturas emitidas: 10</p>
+                    <p>Facturas pagadas: 8</p>
+                    <p>Facturas pendientes: 2</p>
+                    <br>
+                    <h2>Total de Facturas</h2>
+                    <p>Total: $500.00</p>
                 </div>
                 <div class="text lists">
 
                     <div class="container-lists">
+                        <div class="example-action-buttons">
+                            <button class="expandButton" mat-raised-button (click)="accordion.openAll()">Abrir
+                                todo</button>
+                            <button class="collapsedButton" mat-raised-button (click)="accordion.closeAll()">Cerrar
+                                todo</button>
+                        </div>
                         <mat-accordion class="example-headers-align" multi>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
                                         Consultas
                                     </mat-panel-title>
-                                    <mat-panel-description>
-                                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">inventory</mat-icon>
-                                    </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <span>Data</span>
                             </mat-expansion-panel>
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
-                                        Consultas
+                                        Cirugías
                                     </mat-panel-title>
-                                    <mat-panel-description>
-                                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">clinical_notes</mat-icon>
-                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <span>Data</span>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Laboratorios
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span>Data</span>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Vacunas
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span>Data</span>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Medicamentos
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span>Data</span>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Otros
+                                    </mat-panel-title>
                                 </mat-expansion-panel-header>
                                 <span>Data</span>
                             </mat-expansion-panel>
