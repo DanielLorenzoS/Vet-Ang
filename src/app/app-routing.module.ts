@@ -33,6 +33,7 @@ import { ServiceComponent } from './pages/service/service/service.component';
 import { AddServiceComponent } from './pages/service/add-service/add-service.component';
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 import { DeletedAppointmentComponent } from './pages/appointment/deleted-appointment/deleted-appointment.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
     children: [
       { path: '', component: GraphicsComponent, canActivate: [authGuard], pathMatch: 'full' },
+      { path: 'reportes', component: ReportesComponent, canActivate: [authGuard] },
       { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'indClient/:id', component: IndividualClientComponent, canActivate: [authGuard] },

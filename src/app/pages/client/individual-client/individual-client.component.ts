@@ -34,6 +34,9 @@ export class IndividualClientComponent implements OnInit {
   user!: User;
   pets: any[] = [];
   editForm!: FormGroup;
+  nombreArchivo: string = '';
+  listaExcel: any[] = [];
+  formulario!: FormGroup;
 
   constructor(
     private userService: UserService,
@@ -42,11 +45,50 @@ export class IndividualClientComponent implements OnInit {
     private petsService: PetService,
     private router: Router,
     private spinner: SpinnerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.getUsersandPets();
+    //this.getUsersandPets();
+    this.formulario = this.formBuilder.group({
+      archivoCarga: [null], // Puedes inicializarlo con un valor predeterminado si es necesario
+    });
+  }
+
+  seleccionarArchivoMovtos(event: any) {
+    this.uploadExcelMovtos(event);
+
+    this.nombreArchivo = event.target.files[0].name;
+    console.log(this.nombreArchivo);
+  }
+
+  uploadExcelMovtos(datosExcel: any) {
+    try {
+      import('xlsx').then((xlsx) => {
+        let workBook: any = null;
+        let jsonData = null;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const data = reader.result;
+          workBook = xlsx.read(data, { type: 'binary' });
+          jsonData = workBook.SheetNames.reduce((initial: any, name: any) => {
+            const sheet = workBook.Sheets[name];
+            initial[name] = xlsx.utils.sheet_to_json(sheet);
+            return initial;
+          }, {});
+          this.listaExcel = jsonData[Object.keys(jsonData)[0]] as any[];
+          this.listaExcel.forEach((documento: any) => {
+            if (documento['Encabezado6'].startsWith('Luz3')) {
+              console.log('documento: ', documento);
+            }
+          });
+        };
+        reader.readAsBinaryString(datosExcel.target.files[0]);
+      });
+    } catch (excp) {
+      console.log('error', excp);
+    }
   }
 
 

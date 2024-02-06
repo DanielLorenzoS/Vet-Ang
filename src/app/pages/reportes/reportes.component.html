@@ -1,0 +1,11 @@
+<p>reportes works!</p>
+<form [formGroup]="formulario">
+    <div class="md-form">
+        <input id="archivo" formControlName="archivoCarga"
+            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            (change)="seleccionarArchivoMovtos($event)" type="file" style="display: none;" />
+    </div>
+    <button type="button" class="btn-gold m-0" (click)="selectFile()">
+        <span>Cargar*</span>
+    </button>
+</form>
