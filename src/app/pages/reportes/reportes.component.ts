@@ -3,45 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { SpinnerService } from 'src/app/services/spinner.service';
 import * as FileSaver from 'file-saver';
 import * as dateFns from 'date-fns';
-import * as moment from 'moment';
-
-interface User2 {
-  FECHA_DOCUMENTO: Date;
-  SOSTENIMIENTO: string;
-  RFC: string;
-  PLAZA: string;
-  CENTRO_TRABAJO: string;
-  CLAVE_MOVIMIENTO: string;
-  MOTIVO_MOVIMIENTO: string;
-  FECHA_INICIAL: Date;
-  FECHA_FINAL: Date;
-  NIVEL_SUELDO: number;
-  FECHA_INGRESO_SUB: Date;
-  REINSTALACION_O_TRANSFERENCIA: number;
-}
-
-interface UserMultiple {
-  FECHA_DOCUMENTO: Date;
-  SOSTENIMIENTO: string;
-  RFC: string;
-  PLAZA: string;
-  CENTRO_TRABAJO: string;
-  CLAVE_MOVIMIENTO: string;
-  MOTIVO_MOVIMIENTO: string;
-  FECHA_INICIAL: Date;
-}
-
-interface User11 {
-  FECHA_DOCUMENTO: Date;
-  SOSTENIMIENTO: string;
-  RFC: string;
-  PLAZA: string;
-  CENTRO_TRABAJO: string;
-  CLAVE_MOVIMIENTO: string;
-  MOTIVO_MOVIMIENTO: string;
-  FECHA_INICIAL: Date;
-  FECHA_FINAL: Date;
-}
 
 @Component({
   selector: 'app-reportes',
@@ -53,6 +14,7 @@ export class ReportesComponent implements OnInit {
   nombreArchivo: string = '';
   listaExcel: any[] = [];
   formulario!: FormGroup;
+  lista01: any[] = [];
   lista02: any[] = [];
   lista0607: any[] = [];
   lista11: any[] = [];
@@ -109,6 +71,50 @@ export class ReportesComponent implements OnInit {
           this.listaExcel = jsonData[Object.keys(jsonData)[0]] as any[];
           this.listaExcel.forEach((documento: any) => {
             let lastDate = dateFns.parse('31/12/9999', 'dd/MM/yyyy', new Date());
+            if (documento['OPERACION'].toString().startsWith('01')) {
+              let user: any = {
+                FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA'].toString()),
+                SOSTENIMIENTO: 'FEDERAL',
+                CENTRO_TRABAJO: documento['CCT'],
+                RFC: documento['RFC'],
+                CURP: documento['CURP'],
+                DISCAPACIDAD: 1,
+                NIVEL_ACADEMICO: '00',
+                ESTADO_CIVIL: 1,
+                TEL_FIJO: 'x',
+                EXTENSION: 'x',
+                TEL_MOVIL: 'x',
+                CORREO_PERSONAL: 'x',
+                CORREO_INSTITUCIONAL: 'x',
+                NSS: 'x',
+                CUENTA_SAR: 0,
+                REGIMEN_PENSIONARIO: 1,
+                CALLE: 'x',
+                NUMERO_EXTERIOR: 0,
+                NUMERO_INTERIOR: 'x',
+                CODIGO_POSTAL: documento['CP'],
+                CODIGO_POSTAL_FISCAL: documento['CP'],
+                ENTIDAD_FEDERATIVA: 11,
+                MUNICIPIO: 'x',
+                LOCALIDAD: 'x',
+                COLONIA: 'x',
+                CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
+                MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
+                ING_GOBIERNO: this.extraerFechaDocumento(documento['FEC_INI']),
+                ING_SEP: this.extraerFechaDocumento(documento['FEC_INI']),
+                ING_RAMA_SUBSISTEMA: this.extraerFechaDocumento(documento['FEC_INI']),
+                REINSTALACION_O_TRANSFERENCIA: 0,
+                CLAVE_DE_COBRO: documento['CLAVE DE COBRO'],
+                NIVEL_SUELDO: 3,
+                FECHA_INICIO: this.extraerFechaDocumento(documento['FEC_INI']),
+                FECHA_FIN: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN']),
+                SINDICATO: 99999,
+                BANCO: 0,
+                CLABE_INTERBANCARIA: 0,
+                FOLIO_RYS: 'x' 
+              };
+              this.lista01.push(user);
+            }
             if (documento['OPERACION'].toString().startsWith('02')) {
               let user: any = {
                 FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA']),
@@ -118,43 +124,43 @@ export class ReportesComponent implements OnInit {
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: '02',
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: (!documento['FEC_INI']) ? lastDate : dateFns.parse(this.extraerFechaDocumento(documento['FEC_INI'].toString()), 'dd/MM/yyyy', new Date()),
-                FECHA_FINAL: (!documento['FEC_FIN']) ? lastDate : dateFns.parse(this.extraerFechaDocumento(documento['FEC_FIN'].toString()), 'dd/MM/yyyy', new Date()),
+                FECHA_INICIAL: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
+                FECHA_FINAL: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN']),
                 NIVEL_SUELDO: 3,
-                FECHA_INGRESO_SUB: (!documento['FEC_INI']) ? lastDate : dateFns.parse(this.extraerFechaDocumento(documento['FEC_INI'].toString()), 'dd/MM/yyyy', new Date()),
+                FECHA_INGRESO_SUB: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
                 REINSTALACION_O_TRANSFERENCIA: 0
-              };            
+              };
               this.lista02.push(user);
             }
             if (documento['OPERACION'].toString().startsWith('06') || documento['OPERACION'].toString().startsWith('07')) {
-              let user: UserMultiple = {
-                FECHA_DOCUMENTO: new Date(this.extraerFechaDocumento(documento['FECHA'].toString())),
+              let user: any = {
+                FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA']),
                 SOSTENIMIENTO: 'FEDERAL',
                 RFC: documento['RFC'],
                 PLAZA: documento['CPZA'],
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: (documento['FEC_FIN'] === undefined) ? new Date('99/99/9999') : new Date(this.obtenerFechaSiguiente(this.extraerFechaDocumento(documento['FEC_FIN'].toString())))
+                FECHA_INICIAL: (!documento['FEC_FIN']) ? '99/99/9999' : this.obtenerFechaSiguiente(this.extraerFechaDocumento(documento['FEC_FIN'].toString()))
               };
               this.lista0607.push(user);
             }
             if (documento['OPERACION'].toString().startsWith('11')) {
-              let user: User11 = {
-                FECHA_DOCUMENTO: new Date(this.extraerFechaDocumento(documento['FECHA'].toString())),
+              let user: any = {
+                FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA']),
                 SOSTENIMIENTO: 'FEDERAL',
                 RFC: documento['RFC'],
                 PLAZA: documento['CPZA'],
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: (documento['FEC_INI'] === undefined) ? new Date('99/99/9999') : new Date(this.extraerFechaDocumento(documento['FEC_INI'].toString())),
-                FECHA_FINAL: (documento['FEC_FIN'] === undefined) ? new Date('99/99/9999') : new Date(this.extraerFechaDocumento(documento['FEC_FIN'].toString()))
+                FECHA_INICIAL: (!documento['FEC_INI']) ? '99/99/9999' : this.extraerFechaDocumento(documento['FEC_INI']),
+                FECHA_FINAL: (!documento['FEC_FIN']) ? '99/99/9999' : this.extraerFechaDocumento(documento['FEC_FIN'].toString())
               };
               this.lista11.push(user);
             }
             if (documento['OPERACION'].toString().startsWith('12')) {
-              let user: UserMultiple = {
+              let user: any = {
                 FECHA_DOCUMENTO: new Date(this.extraerFechaDocumento(documento['FECHA'].toString())),
                 SOSTENIMIENTO: 'FEDERAL',
                 RFC: documento['RFC'],
@@ -162,35 +168,94 @@ export class ReportesComponent implements OnInit {
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: (documento['FEC_INI'] === undefined) ? new Date('99/99/9999') : new Date(this.extraerFechaDocumento(documento['FEC_INI'].toString())),
+                FECHA_INICIAL: (documento['FEC_INI'] === undefined) ? new Date('99/99/9999') : this.extraerFechaDocumento(documento['FEC_INI']),
               };
               this.lista12.push(user);
             }
             if (documento['OPERACION'].toString().startsWith('16')) {
-              let user: UserMultiple = {
-                FECHA_DOCUMENTO: new Date(this.extraerFechaDocumento(documento['FECHA'].toString())),
+              let user: any = {
+                FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA']),
                 SOSTENIMIENTO: 'FEDERAL',
                 RFC: documento['RFC'],
                 PLAZA: documento['CPZA'],
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: new Date(this.extraerFechaDocumento(documento['FEC_INI'].toString()))
+                FECHA_INICIAL: this.extraerFechaDocumento(documento['FEC_INI'].toString())
               };
               this.lista16.push(user);
             }
           });
-          this.exportToExcel(this.lista02, '02');
-          //this.exportToExcel(this.lista0607, '06-07');
-          //this.exportToExcel(this.lista11, '11');
-          //this.exportToExcel(this.lista12, '12');
-          //this.exportToExcel(this.lista16, '16');
+          this.exportToExcelIngreso(this.lista01, '01');
+          /* this.exportToExcel(this.lista02, '02');
+          this.exportToExcel(this.lista0607, '06-07');
+          this.exportToExcel(this.lista11, '11');
+          this.exportToExcel(this.lista12, '12');
+          this.exportToExcel(this.lista16, '16'); */
         };
         reader.readAsBinaryString(datosExcel.target.files[0]);
       });
     } catch (excp) {
       console.log('error', excp);
     }
+  }
+
+  exportToExcelIngreso(response: any, termino: string) {
+    this.spinner.showLoadingIndicator();
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(response);
+      worksheet['A1'].v = 'FECHA_DOCUMENTO';
+      worksheet['B1'].v = 'SOSTENIMIENTO';
+      worksheet['C1'].v = 'CENTRO TRABAJO';
+      worksheet['D1'].v = 'RFC';
+      worksheet['E1'].v = 'CURP';
+      worksheet['F1'].v = 'DISCAPACIDAD';
+      worksheet['G1'].v = 'NIVEL ACADEMICO';
+      worksheet['H1'].v = 'ESTADO CIVIL';
+      worksheet['I1'].v = 'TEL FIJO';
+      worksheet['J1'].v = 'EXTENSION';
+      worksheet['K1'].v = 'TEL MOVIL';
+      worksheet['L1'].v = 'CORREO PERSONAL';
+      worksheet['M1'].v = 'CORREO INSTITUCIONAL';
+      worksheet['N1'].v = 'NSS';
+      worksheet['O1'].v = 'CUENTA SAR';
+      worksheet['P1'].v = 'REGIMEN PENSIONARIO';
+      worksheet['Q1'].v = 'CALLE';
+      worksheet['R1'].v = 'NUMERO EXTERIOR';
+      worksheet['S1'].v = 'NUMERO INTERIOR';
+      worksheet['T1'].v = 'CODIGO POSTAL';
+      worksheet['U1'].v = 'CODIGO POSTAL FISCAL';
+      worksheet['V1'].v = 'ENTIDAD FEDERATIVA';
+      worksheet['W1'].v = 'MUNICIPIO';
+      worksheet['X1'].v = 'LOCALIDAD';
+      worksheet['Y1'].v = 'COLONIA';
+      worksheet['Z1'].v = 'CLAVE MOVIMIENTO';
+      worksheet['AA1'].v = 'MOTIVO MOVIMIENTO';
+      worksheet['AB1'].v = 'ING GOBIERNO';
+      worksheet['AC1'].v = 'ING SEP';
+      worksheet['AD1'].v = 'ING RAMA - SUBSISTEMA';
+      worksheet['AE1'].v = 'REINSTALACION O TRANSFERENCIA';
+      worksheet['AF1'].v = 'CLAVE DE COBRO';
+      worksheet['AG1'].v = 'NIVEL SUELDO';
+      worksheet['AH1'].v = 'FECHA INICIO';
+      worksheet['AI1'].v = 'FECHA FIN';
+      worksheet['AJ1'].v = 'SINDICATO';
+      worksheet['AK1'].v = 'BANCO';
+      worksheet['AL1'].v = 'CLABE INTERBANCARIA';
+      worksheet['AM1'].v = 'FOLIO RYS';
+
+      const workbook = {
+        Sheets: { resultados: worksheet },
+        SheetNames: ['resultados']
+      };
+
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+        cellDates: true
+      });
+      this.saveAsExcelFile(excelBuffer, 'Resultados - ' + termino);
+    });
   }
 
   exportToExcel(response: any, termino: string) {
@@ -225,15 +290,15 @@ export class ReportesComponent implements OnInit {
       this.saveAsExcelFile(excelBuffer, 'Resultados - ' + termino);
     });
   }
-  
+
   saveAsExcelFile(buffer: any, fileName: string): void {
-      let EXCEL_TYPE =
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-      let EXCEL_EXTENSION = '.xlsx';
-      const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE,
-      });
-      FileSaver.saveAs(data, fileName + ' ' + EXCEL_EXTENSION);
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(data, fileName + ' ' + EXCEL_EXTENSION);
     this.spinner.hideLoadingIndicator();
   }
 
