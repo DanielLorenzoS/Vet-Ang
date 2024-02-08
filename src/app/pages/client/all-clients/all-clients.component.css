@@ -176,7 +176,7 @@ mat-icon {
 
 .mat-paginator {
     min-width: 600px;
-    border-top: 1px solid #3393e3;
+    border-top: 2px solid #3393e3;
     color: #000 !important;
     font-weight: 500 !important;
 }
