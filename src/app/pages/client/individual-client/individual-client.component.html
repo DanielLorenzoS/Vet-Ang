@@ -21,125 +21,129 @@
                     <mat-icon class="mat-icon-delete">person_remove</mat-icon>
                 </button>
             </div>
-        </div>
 
-        <div class="table-container">
 
-            <h4 *ngIf="pets.length === 0">{{ user.name }} no tiene mascotas registradas</h4>
-            <table mat-table [dataSource]="pets" class="mat-elevation-z8">
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                    <td mat-cell *matCellDef="let pet"> {{ pet.name }} </td>
-                </ng-container>
+            <div class="table-container">
+                <h4 *ngIf="pets.length === 0">{{ user.name }} no tiene mascotas registradas</h4>
+                <div *ngIf="pets.length > 0">
+                    <table mat-table [dataSource]="pets" class="mat-elevation-z8">
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                            <td mat-cell *matCellDef="let pet"> {{ pet.name }} </td>
+                        </ng-container>
 
-                <ng-container matColumnDef="specie">
-                    <th mat-header-cell *matHeaderCellDef> Especie </th>
-                    <td mat-cell *matCellDef="let pet"> {{ pet.specie }} </td>
-                </ng-container>
+                        <ng-container matColumnDef="specie">
+                            <th mat-header-cell *matHeaderCellDef> Especie </th>
+                            <td mat-cell *matCellDef="let pet"> {{ pet.specie }} </td>
+                        </ng-container>
 
-                <ng-container matColumnDef="race">
-                    <th mat-header-cell *matHeaderCellDef> Raza </th>
-                    <td mat-cell *matCellDef="let pet"> {{ pet.race }} </td>
-                </ng-container>
+                        <ng-container matColumnDef="race">
+                            <th mat-header-cell *matHeaderCellDef> Raza </th>
+                            <td mat-cell *matCellDef="let pet"> {{ pet.race }} </td>
+                        </ng-container>
 
-                <ng-container matColumnDef="onRegister">
-                    <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
-                    <td mat-cell *matCellDef="let pet"> {{ pet.onRegister }} </td>
-                </ng-container>
+                        <ng-container matColumnDef="onRegister">
+                            <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+                            <td mat-cell *matCellDef="let pet"> {{ pet.onRegister }} </td>
+                        </ng-container>
 
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>
-                        <button mat-icon-button class="btnPet newPet" (click)="goCreatePet()">
-                            <mat-icon>add</mat-icon>
-                        </button>
-                    </th>
-                    <td mat-cell *matCellDef="let pet">
-                        <button mat-icon-button class="btnPet" (click)="deletePet(pet, $event)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <button mat-icon-button class="btnPet newPet" (click)="goCreatePet()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </th>
+                            <td mat-cell *matCellDef="let pet">
+                                <button mat-icon-button class="btnPet" (click)="deletePet(pet, $event)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
 
-                <!-- Encabezados de la tabla -->
-                <tr mat-header-row *matHeaderRowDef="['name', 'specie', 'race', 'onRegister', 'actions']"></tr>
+                        <tr mat-header-row *matHeaderRowDef="['name', 'specie', 'race', 'onRegister', 'actions']"></tr>
 
-                <!-- Filas de la tabla -->
-                <tr mat-row *matRowDef="let pet; columns: ['name', 'specie', 'race', 'onRegister', 'actions']"
-                    (click)="goEditPet(pet)"></tr>
-            </table>
+                        <tr mat-row *matRowDef="let pet; columns: ['name', 'specie', 'race', 'onRegister', 'actions']"
+                            (click)="goEditPet(pet)"></tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="facture">
             <h1>Historial de Facturación</h1>
             <div class="content">
 
                 <div class="summary">
-                    <h2>Resumen de Facturas</h2>
-                    <p>Facturas emitidas: 10</p>
-                    <p>Facturas pagadas: 8</p>
-                    <p>Facturas pendientes: 2</p>
-                    <br>
-                    <h2>Total de Facturas</h2>
-                    <p>Total: $500.00</p>
+                    <div class="sep">
+                        <h2>Resumen de Facturas</h2>
+                        <p>Facturas emitidas: 10</p>
+                        <p>Facturas pagadas: 8</p>
+                        <p>Facturas pendientes: 2</p>
+                    </div>
+                    <div class="sep">
+                        <h2>Total de Facturas</h2>
+                        <p class="p">Total: $500.00</p>
+                    </div>
+                    <div class="sep">
+                        <button mat-raised-button class="update red pdf">
+                            <span>Descargar facturas</span>
+                            <mat-icon>receipt_long</mat-icon>
+                        </button>
+                        <button mat-raised-button class="update green excel">
+                            <span>Descargar facturas</span>
+                            <mat-icon>receipt_long</mat-icon>
+                        </button>
+                    </div>
                 </div>
                 <div class="text lists">
-
                     <div class="container-lists">
-                        <div class="example-action-buttons">
-                            <button class="expandButton" mat-raised-button (click)="accordion.openAll()">Abrir
-                                todo</button>
-                            <button class="collapsedButton" mat-raised-button (click)="accordion.closeAll()">Cerrar
-                                todo</button>
+                        <div class="table-container table-bills">
+                            <h4 *ngIf="bills.length === 0">{{ user.name }} no tiene facturas registradas</h4>
+                            <div *ngIf="bills.length > 0">
+                                <table mat-table [dataSource]="pets" class="mat-elevation-z8 table-bills">
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                                        <td mat-cell *matCellDef="let pet"> {{ pet.name }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="specie">
+                                        <th mat-header-cell *matHeaderCellDef> Especie </th>
+                                        <td mat-cell *matCellDef="let pet"> {{ pet.specie }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="race">
+                                        <th mat-header-cell *matHeaderCellDef> Raza </th>
+                                        <td mat-cell *matCellDef="let pet"> {{ pet.race }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="onRegister">
+                                        <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+                                        <td mat-cell *matCellDef="let pet"> {{ pet.onRegister }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="actions">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <button mat-icon-button class="btnPet newPet" (click)="goCreatePet()">
+                                                <mat-icon>add</mat-icon>
+                                            </button>
+                                        </th>
+                                        <td mat-cell *matCellDef="let pet">
+                                            <button mat-icon-button class="btnPet" (click)="deletePet(pet, $event)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- Encabezados de la tabla -->
+                                    <tr mat-header-row
+                                        *matHeaderRowDef="['name', 'specie', 'race', 'onRegister', 'actions']"></tr>
+
+                                    <!-- Filas de la tabla -->
+                                    <tr mat-row
+                                        *matRowDef="let pet; columns: ['name', 'specie', 'race', 'onRegister', 'actions']"
+                                        (click)="goEditPet(pet)"></tr>
+                                </table>
+                            </div>
                         </div>
-                        <mat-accordion class="example-headers-align" multi>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Consultas
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <span>Data</span>
-                            </mat-expansion-panel>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Cirugías
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <span>Data</span>
-                            </mat-expansion-panel>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Laboratorios
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <span>Data</span>
-                            </mat-expansion-panel>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Vacunas
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <span>Data</span>
-                            </mat-expansion-panel>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Medicamentos
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <span>Data</span>
-                            </mat-expansion-panel>
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Otros
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <span>Data</span>
-                            </mat-expansion-panel>
-                        </mat-accordion>
                     </div>
                 </div>
             </div>

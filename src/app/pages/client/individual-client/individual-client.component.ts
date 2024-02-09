@@ -34,6 +34,7 @@ export class IndividualClientComponent implements OnInit {
   user!: User;
   pets: any[] = [];
   editForm!: FormGroup;
+  bills: any[] = [];
 
   constructor(
     private userService: UserService,

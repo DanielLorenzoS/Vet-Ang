@@ -72,10 +72,10 @@
 }
 
 .buttons button {
-    width: 25%;
+    width: 22%;
     margin: 0 2rem;
     height: 20%;
-    padding: 1rem 0.5rem;
+    padding: .6rem 0.3rem;
     border-radius: 5px;
     color: white;
     font-size: 1.2rem;
@@ -89,12 +89,26 @@
 .delete {
     background-color: #fff !important;
     color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
 }
 
 
 .update {
     background-color: #fff !important;
-    color: #0060b0 !important;
+    color: rgb(190, 146, 0) !important;
+    border: 1px solid rgb(190, 146, 0) !important;
+}
+
+.update mat-icon {
+    color: rgb(190, 146, 0) !important;
+}
+
+.red, .red mat-icon {
+    color: #f00 !important;
+}
+
+.green, .green mat-icon {
+    color: #0f0 !important;
 }
 
 .nopets {
@@ -120,7 +134,7 @@
 
 .text {
     grid-column: span 4;
-    padding: 1rem 0;
+    padding: 1rem 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -210,7 +224,7 @@ h1 {
 .table-container {
     margin: auto;
     margin-top: 2rem;
-    width: 90%;
+    width: 100%;
     text-align: center;
     overflow-x: auto;
     border-radius: 5px;
@@ -314,16 +328,64 @@ mat-icon {
 
 .content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0 1rem;
 }
 
 .summary {
-    width: 40%;
+    width: 100%;
     height: 100%;
-    padding-top: 1rem;
+    padding: 1rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.sep {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sep h2 {
+    font-size: 22px;
+}
+
+.sep p {
+    width: 50%;
+    text-align: left;
+    font-size: 16px;
+}
+
+.p {
+    text-align: center !important;
+}
+
+.sep button {
+    height: 3.5rem !important;
+}
+
+.excel {
+    border: 1px solid #0f0 !important;
+}
+
+.pdf {
+    border: 1px solid #f00 !important;
+}
+
+.summary > h2 {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    border-bottom: thin solid #0060b0;
 }
 
 .example-action-buttons button {
@@ -342,27 +404,12 @@ mat-icon {
 }
 
 .lists {
-    width: 50%;
+    width: 100%;
     height: 100%;
-    border-left: thin solid #0060b0;
-    padding-left: 1rem;
 }
 
-.container-lists mat-accordion {
-    width: 50%;
-}
-
-mat-expansion-panel {
-    margin-bottom: 1rem;
-}
-
-mat-expansion-panel-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.mat-expansion-indicator {
-    display: none !important;
+.table-bills {
+    width: 100%;
 }
 
 .icon-pet {

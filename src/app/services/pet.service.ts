@@ -52,7 +52,7 @@ export class PetService {
 
   getPetById(id: number) {
 
-    return this.http.get(`${this.url}/pets/${id}`, { headers: this.getHeadersViaCookie() });
+    return this.http.get(`${this.url}/pet/${id}`, { headers: this.getHeadersViaCookie() });
   }
 
   getAllPets() {

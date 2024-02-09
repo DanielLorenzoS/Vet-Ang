@@ -48,7 +48,7 @@ export class PetComponent {
 
 
   ngOnInit(): void {
-    this.getPets();
+    this.getPet();
     /* this.getUserByPetId(); */
     this.petForm = this.formBuilder.group({
       name: [this.pet.name], // Valor inicial para el nombre
@@ -67,7 +67,7 @@ export class PetComponent {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      this.getPets();
+      this.getPet();
     });
   }
 
@@ -79,7 +79,7 @@ export class PetComponent {
   }
 
 
-  getPets() {
+  getPet() {
     this.spinner.showLoadingIndicator();
     this.pet = {};
     this.prescriptions = {};
@@ -94,7 +94,7 @@ export class PetComponent {
           this.router.navigate(['/dashboard/pets']);
         } else {
           console.log(res);
-          this.getUserByPetId(res.id);
+          /* this.getUserByPetId(res.id); */
           this.pet = res;
           this.prescriptions = res.prescriptions;
         }
@@ -127,7 +127,7 @@ export class PetComponent {
           (res: any) => {
             this.spinner.hideLoadingIndicator();
             console.log(res);
-            this.getPets();
+            this.getPet();
             Swal.fire({
               title: '¡Eliminado!',
               text: 'La prescripción ha sido eliminada.',
