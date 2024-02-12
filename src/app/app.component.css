@@ -27,7 +27,7 @@
 }
 
 .mat-drawer-content {
-    height: 91vh;
+    height: 100%;
     background-color: #aaa;
     color: #000;
 }

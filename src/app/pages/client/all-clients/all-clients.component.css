@@ -21,7 +21,6 @@
 }
 
 .table-pag {
-    box-shadow: 4px 5px 13px 0px #0060b0;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
 }
@@ -91,47 +90,6 @@
     cursor: not-allowed;
 }
 
-table,
-th,
-td {
-    background-color: transparent;
-}
-
-th {
-    color: #fff !important;
-    background-color: #0060b0 !important;
-}
-
-table {
-    min-width: 600px;
-    width: 100%;
-}
-
-td {
-    text-align: center;
-}
-
-tr.mat-mdc-row:hover {
-    background-color: #3393e3 !important;
-    cursor: pointer;
-}
-
-tr:nth-child(even) {
-    background-color: #a2d4fd !important;
-}
-
-tr:nth-child(even):hover {
-    background-color: #3393e3 !important;
-}
-
-tr.mat-mdc-row:hover td {
-    color: #fff;
-}
-
-tr.mat-mdc-row:hover mat-icon {
-    color: #fff;
-}
-
 .icons {
     display: flex;
     justify-content: space-between;
@@ -151,10 +109,6 @@ mat-icon {
     padding-right: .6rem;
 }
 
-.mat-column-actions, .mat-header-cell:last-child {
-    width: 3% !important;
-}
-
 .icon {
     font-size: 1.6rem;
     display: inline-block;
@@ -172,13 +126,6 @@ mat-icon {
 .edit {
     color: #0060b0;
     font-size: 1.6rem;
-}
-
-.mat-paginator {
-    min-width: 600px;
-    border-top: 2px solid #3393e3;
-    color: #000 !important;
-    font-weight: 500 !important;
 }
 
 @media (max-width: 825px) {

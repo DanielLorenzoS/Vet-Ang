@@ -42,12 +42,11 @@ export class PetService {
 
     console.log(Pet);
 
-    return this.http.post(`${this.url}/pets/`, Pet, { headers: this.getHeadersViaCookie() });
+    return this.http.post(`${this.url}/pet/`, Pet, { headers: this.getHeadersViaCookie() });
   }
 
   deletePet(id: number) {
-
-    return this.http.delete(`${this.url}/pets/${id}`, { headers: this.getHeadersViaCookie() });
+    return this.http.delete(`${this.url}/pet/${id}`, { headers: this.getHeadersViaCookie() });
   }
 
   getPetById(id: number) {
@@ -57,7 +56,7 @@ export class PetService {
 
   getAllPets() {
 
-    return this.http.get(`${this.url}/pets/`, { headers: this.getHeadersViaCookie() });
+    return this.http.get(`${this.url}/pet/`, { headers: this.getHeadersViaCookie() });
   }
 
   getPetsWithUser() {

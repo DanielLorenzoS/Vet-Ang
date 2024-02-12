@@ -27,7 +27,7 @@
     margin: 0 .4rem 1rem .4rem; /* Espaciado entre filas */
     box-sizing: border-box; /* Incluye el padding en el ancho del elemento */
     line-height: 3rem;
-    border: 2px solid #0060b0;
+    border: 2px solid #05828e;
     border-radius: 10px 100px / 120px;
 }
 
@@ -55,7 +55,7 @@
     margin-top: .5rem;
     text-align: center;
     border-radius: 5px;
-    border: 1px solid #0060b0;
+    border: 1px solid #162229;
     /*2e82d7*/
 }
 
@@ -77,29 +77,39 @@
     height: 20%;
     padding: .6rem 0.3rem;
     border-radius: 5px;
-    color: white;
+    color: #162229;
+    border: 1px solid #162229;
+    background-color: #fff;
     font-size: 1.2rem;
     font-weight: 300;
     cursor: pointer;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    transition: all 0.3s ease;
 }
 
-.delete {
+.buttons button mat-icon {
+    color: #162229;
+}
+
+.delete:hover {
     background-color: #fff !important;
     color: #ff0000 !important;
     border: 1px solid #ff0000 !important;
 }
 
+.delete:hover mat-icon {
+    color: #ff0000 !important;
+}
 
-.update {
+.update:hover {
     background-color: #fff !important;
     color: rgb(190, 146, 0) !important;
     border: 1px solid rgb(190, 146, 0) !important;
 }
 
-.update mat-icon {
+.update:hover mat-icon {
     color: rgb(190, 146, 0) !important;
 }
 
@@ -107,7 +117,27 @@
     color: #f00 !important;
 }
 
+.red:hover {
+    background-color: #fff !important;
+    color: #f00 !important;
+    border: 1px solid #f00 !important;
+}
+
+.red:hover mat-icon {
+    color: #f00 !important;
+}
+
 .green, .green mat-icon {
+    color: #0f0 !important;
+}
+
+.green:hover {
+    background-color: #fff !important;
+    color: #0f0 !important;
+    border: 1px solid #0f0 !important;
+}
+
+.green:hover mat-icon {
     color: #0f0 !important;
 }
 
@@ -149,9 +179,9 @@
 
 h1 {
     font-size: 35px;
-    font-weight: 200;
+    font-weight: 400;
     padding-bottom: 1rem;
-    border-bottom: thin solid #0060b0;
+    border-bottom: 2px solid #162229;
 }
 
 .photo {
@@ -177,26 +207,7 @@ h1 {
 }
 
 .pet:hover {
-    box-shadow: 1px 3px 10px 0 #0060b0;
-}
-
-.photo::-webkit-scrollbar {
-    width: 8px;
-    /* Ancho de la barra de desplazamiento */
-}
-
-/* Estilo del pulgar del scroll */
-.photo::-webkit-scrollbar-thumb {
-    background-color: #0060b0;
-    /* Color del pulgar */
-    border-radius: 6px;
-    /* Bordes redondeados del pulgar */
-}
-
-/* Estilo del fondo de la barra de desplazamiento */
-.photo::-webkit-scrollbar-track {
-    background-color: #4a90d6;
-    /* Color del fondo de la barra de desplazamiento */
+    box-shadow: 1px 3px 10px 0 #162229;
 }
 
 .buttons-pets {
@@ -253,54 +264,8 @@ h1 {
     font-family: serif;
 }
 
-table,
-th,
-td {
-    background-color: transparent;
-    text-align: center;
-}
-
-th {
-    color: #fff !important;
-    background-color: #0060b0 !important;
-}
-
-table {
-    min-width: 600px;
-    width: 100%;
-}
-
-td {
-    text-align: center;
-}
-
-tr.mat-mdc-row:hover {
-    background-color: #3393e3 !important;
-    cursor: pointer;
-}
-
-tr:nth-child(even) {
-    background-color: #a2d4fd !important;
-}
-
-tr:nth-child(even):hover {
-    background-color: #3393e3 !important;
-}
-
-tr.mat-mdc-row:hover td {
-    color: #fff;
-}
-
-tr.mat-mdc-row:hover mat-icon {
-    color: #fff;
-}
-
-.mat-column-actions, .mat-header-cell:last-child {
-    width: 3% !important;
-}
-
 mat-icon {
-    color: #0060b0;
+    color: #162229;
     font-size: 2rem !important;
     padding-right: 1rem;
     padding-bottom: 1rem;
@@ -385,7 +350,7 @@ mat-icon {
     padding: 1rem;
     font-size: 1.5rem;
     font-weight: 300;
-    border-bottom: thin solid #0060b0;
+    border-bottom: thin solid #162229;
 }
 
 .example-action-buttons button {
@@ -394,7 +359,7 @@ mat-icon {
 }
 
 .expandButton {
-    background-color: #0060b0 !important; 
+    background-color: #162229 !important; 
     color: #fff !important;
 }
 
