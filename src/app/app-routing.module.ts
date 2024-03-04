@@ -3,11 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
-import { RegisterStep1Component } from './pages/register-step1/register-step1.component';
-import { RegisterStep2Component } from './pages/register-step2/register-step2.component';
-import { Recover1Component } from './pages/recover1/recover1.component';
-import { Recover2Component } from './pages/recover2/recover2.component';
-import { Recover3Component } from './pages/recover3/recover3.component';
 import { NewClientComponent } from './pages/client/new-client/new-client.component';
 import { IndividualClientComponent } from './pages/client/individual-client/individual-client.component';
 import { AllClientsComponent } from './pages/client/all-clients/all-clients.component';
@@ -33,6 +28,13 @@ import { ServiceComponent } from './pages/service/service/service.component';
 import { AddServiceComponent } from './pages/service/add-service/add-service.component';
 import { AllServiceComponent } from './pages/service/all-service/all-service.component';
 import { DeletedAppointmentComponent } from './pages/appointment/deleted-appointment/deleted-appointment.component';
+import { RegisterStep1Component } from './pages/login/register-step1/register-step1.component';
+import { RegisterStep2Component } from './pages/login/register-step2/register-step2.component';
+import { Recover1Component } from './pages/login/recover1/recover1.component';
+import { Recover2Component } from './pages/login/recover2/recover2.component';
+import { Recover3Component } from './pages/login/recover3/recover3.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { BillsComponent } from './pages/bills/bills.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -60,6 +62,8 @@ const routes: Routes = [
       { path: 'doctors', component: AllDoctorsComponent, canActivate: [authGuard] },
       { path: 'doctor/:id', component: DoctorComponent, canActivate: [authGuard] },
       { path: 'addDoctor', component: AddDoctorComponent, canActivate: [authGuard] },
+      { path: 'products', component: ProductsComponent, canActivate: [authGuard] },
+      { path: 'bills', component: BillsComponent, canActivate: [authGuard] },
       { path: 'medicines', component: AllMedicinesComponent, canActivate: [authGuard] },
       { path: 'addMedicines', component: AddMedicineComponent, canActivate: [authGuard] },
       { path: 'services', component: AllServiceComponent, canActivate: [authGuard] },

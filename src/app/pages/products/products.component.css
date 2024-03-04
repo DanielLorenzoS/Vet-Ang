@@ -4,6 +4,11 @@
     padding: 1.5rem 0;
 }
 
+.top-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .table-pag {
     width: 90%;
     margin: auto;
@@ -17,7 +22,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    text-align: center;
 }
 
 .table-pag {
@@ -26,7 +30,9 @@
 }
 
 .title {
-    text-align: right;
+    width: 100%;
+    margin: auto;
+    text-align: center !important;
     font-size: 3rem;
     color: #000;
     font-weight: lighter !important;

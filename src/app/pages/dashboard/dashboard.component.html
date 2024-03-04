@@ -10,23 +10,6 @@
                 <mat-expansion-panel class="buttonAcc">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <mat-icon class="material-icons-outlined">description</mat-icon>
-                            <span>Registros</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-button-toggle (click)="close('client')" class="buttonSide inside" value="Client">
-                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">group</mat-icon>
-                        <span style="font-size: 20px;">Clientes</span>
-                    </mat-button-toggle>
-                    <mat-button-toggle style="font-size: 24px;" (click)="close('pets')" class="buttonSide inside"
-                        value="underline">
-                        <mat-icon style="font-size: 20px;" class="material-icons-outlined">pets</mat-icon>
-                        <span>Mascotas</span>
-                    </mat-button-toggle>
-                </mat-expansion-panel>
-                <mat-expansion-panel class="buttonAcc">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
                             <mat-icon class="material-icons-outlined">event</mat-icon>
                             <span>Citas</span>
                         </mat-panel-title>
@@ -44,17 +27,59 @@
                 <mat-expansion-panel class="buttonAcc">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
+                            <mat-icon class="material-icons-outlined">description</mat-icon>
+                            <span>Registros</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-button-toggle (click)="close('client')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">group</mat-icon>
+                        <span style="font-size: 20px;">Clientes</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('addClient')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">person_add</mat-icon>
+                        <span style="font-size: 20px;">Registrar cliente</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle style="font-size: 24px;" (click)="close('pets')" class="buttonSide inside"
+                        value="underline">
+                        <mat-icon style="font-size: 20px;" class="material-icons-outlined">pets</mat-icon>
+                        <span>Mascotas</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('addPet')" class="buttonSide
+                        inside" value="underline">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">add_circle_outline</mat-icon>
+                        <span style="font-size: 20px;">Registrar mascota</span>
+                    </mat-button-toggle>
+                </mat-expansion-panel>
+                <mat-expansion-panel class="buttonAcc">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
                             <mat-icon class="material-icons-outlined">inventory</mat-icon>
                             <span>Inventario</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-button-toggle (click)="close('doctors')" class="buttonSide inside" value="Client">
+                    <mat-button-toggle (click)="close('products')" class="buttonSide inside" value="Client">
                         <mat-icon style="font-size: 24px;" class="material-icons-outlined">inventory_2</mat-icon>
                         <span style="font-size: 20px;">Administrar productos</span>
                     </mat-button-toggle>
                     <mat-button-toggle (click)="close('doctors')" class="buttonSide inside" value="Client">
                         <mat-icon style="font-size: 24px;" class="material-icons-outlined">add_circle_outline</mat-icon>
                         <span style="font-size: 20px;">Registrar producto</span>
+                    </mat-button-toggle>
+                </mat-expansion-panel>
+                <mat-expansion-panel class="buttonAcc">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon class="material-icons-outlined">credit_card</mat-icon>
+                            <span>Facturación</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-button-toggle (click)="close('bills')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">receipt_long</mat-icon>
+                        <span style="font-size: 20px;">Facturas</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">receipt</mat-icon>
+                        <span style="font-size: 20px;">Registrar factura</span>
                     </mat-button-toggle>
                 </mat-expansion-panel>
                 <mat-expansion-panel class="buttonAcc">
@@ -71,22 +96,6 @@
                     <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
                         <mat-icon style="font-size: 24px;" class="material-icons-outlined">toggle_on</mat-icon>
                         <span style="font-size: 20px;">Cambiar permisos</span>
-                    </mat-button-toggle>
-                </mat-expansion-panel>
-                <mat-expansion-panel class="buttonAcc">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <mat-icon class="material-icons-outlined">credit_card</mat-icon>
-                            <span>Facturación</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
-                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">receipt_long</mat-icon>
-                        <span style="font-size: 20px;">Facturas</span>
-                    </mat-button-toggle>
-                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
-                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">receipt</mat-icon>
-                        <span style="font-size: 20px;">Registrar factura</span>
                     </mat-button-toggle>
                 </mat-expansion-panel>
                 <mat-button-toggle *ngIf="showEmployees" (click)="close('employees')" class="buttonSide"

@@ -12,13 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
-import { RegisterStep1Component } from './pages/register-step1/register-step1.component';
-import { RegisterStep2Component } from './pages/register-step2/register-step2.component';
 import { PhonePipe } from './pipes/phone.pipe';
 import { AdressPipe } from './pipes/adress.pipe';
-import { Recover1Component } from './pages/recover1/recover1.component';
-import { Recover2Component } from './pages/recover2/recover2.component';
-import { Recover3Component } from './pages/recover3/recover3.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -67,6 +62,13 @@ import { EditPetComponent } from './pages/pet/edit-pet/edit-pet.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NumbersOnlyPipe } from './pipes/numbers-only.pipe';
 import { MatNativeDateModule } from '@angular/material/core';
+import { RegisterStep1Component } from './pages/login/register-step1/register-step1.component';
+import { RegisterStep2Component } from './pages/login/register-step2/register-step2.component';
+import { Recover1Component } from './pages/login/recover1/recover1.component';
+import { Recover2Component } from './pages/login/recover2/recover2.component';
+import { Recover3Component } from './pages/login/recover3/recover3.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { BillsComponent } from './pages/bills/bills.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +111,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     AllServiceComponent,
     EditClientComponent,
     EditPetComponent,
-    NumbersOnlyPipe
+    NumbersOnlyPipe,
+    ProductsComponent,
+    BillsComponent
   ],
   imports: [
     BrowserModule,

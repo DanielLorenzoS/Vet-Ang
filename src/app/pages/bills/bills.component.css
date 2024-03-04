@@ -25,6 +25,20 @@
     border-top-left-radius: 4px;
 }
 
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.sort-icon {
+    height: fit-content;
+    color: #fff !important;
+    font-size: 18px;
+    margin: auto 0;
+}
+
 .title {
     text-align: right;
     font-size: 3rem;
