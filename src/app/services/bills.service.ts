@@ -14,7 +14,22 @@ export class BillsService {
 
 
   getBills(params: any) {
-    return this.http.get(`${this.url}/bills`, { params });
+    return this.http.get(`${this.url}/bill`, { params });
   }
-  
+
+  getBillsByFilter(params: any) {
+    return this.http.get(`${this.url}/bill/filter`, { params });
+  }
+
+    getBillById(id: string) {
+        return this.http.get(`${this.url}/bill/${id}`);
+    }
+
+    createBill(data: any) {
+        return this.http.post(`${this.url}/bill`, data);
+    }
+
+    updateBill(id: string, data: any) {
+        return this.http.put(`${this.url}/bill/${id}`, data);
+    }
 }

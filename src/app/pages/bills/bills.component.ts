@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import {BillsService} from "../../services/bills.service";
 
 @Component({
   selector: 'app-bills',
@@ -13,20 +13,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./bills.component.css']
 })
 export class BillsComponent implements AfterViewInit, OnInit {
-  usuarios: any[] = []; // Inicializa el arreglo vacío
+  bills: any[] = []; // Inicializa el arreglo vacío
   params: any = {
     page: 0,
     size: 5,
     sort: 'name,asc'
   }
   searchForm!: FormGroup;
-  displayedColumns: string[] = ['username', 'email', 'phone', 'municipality', 'actions'];
-  dataSource = new MatTableDataSource<any>(this.usuarios);
+  displayedColumns: string[] = ['concept', 'createdAt', 'paymentMethod', 'paymentStatus'];
+  dataSource = new MatTableDataSource<any>(this.bills);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private userService: UserService,
+    private billsService: BillsService,
     private router: Router,
     private spinner: SpinnerService
   ) { }
@@ -37,13 +37,13 @@ export class BillsComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.getClients(this.params);
+    this.getBills(this.params);
   }
 
   initializeSearchForm() {
     this.searchForm = new FormGroup({
       search: new FormControl(null),
-      option: new FormControl('name')
+      option: new FormControl('paymentMethod')
     });
   }
 
@@ -52,7 +52,7 @@ export class BillsComponent implements AfterViewInit, OnInit {
     return !search || search.length === 0;
   }
 
-  getClients(params: any) {
+  /*getClients(params: any) {
     console.log(this.searchForm.value);
     if (this.searchForm.value.option === 'name' && this.searchForm.value.search) {
       params['name'] = this.searchForm.value.search;
@@ -105,6 +105,51 @@ export class BillsComponent implements AfterViewInit, OnInit {
         })
       }
     });
+  } */
+
+  getBills(params: any) {
+    console.log(this.searchForm.value);
+    if (this.searchForm.value.option === 'paymentMethod' && this.searchForm.value.search) {
+      params['paymentMethod'] = this.searchForm.value.search;
+    } else {
+      delete params.paymentMethod;
+    }
+    if (this.searchForm.value.option === 'paymentStatus' && this.searchForm.value.search) {
+      params['paymentStatus'] = this.searchForm.value.search;
+    } else {
+      delete params.paymentStatus;
+    }
+
+    console.log(params);
+    this.spinner.showLoadingIndicator();
+    this.bills = [];
+    this.billsService.getBills(params).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.spinner.hideLoadingIndicator();
+        this.bills = res.content;
+        this.dataSource = new MatTableDataSource<any>(this.bills);
+        this.setupPaginator(res);
+      },
+      error: (err: any) => {
+        this.spinner.hideLoadingIndicator();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudo obtener las facturas',
+          showCancelButton: true,
+          showConfirmButton: true,
+          cancelButtonColor: '#d33',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Reintentar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.getBills(this.params);
+          }
+        })
+      }
+    });
   }
 
   setupPaginator(res: any) {
@@ -120,7 +165,7 @@ export class BillsComponent implements AfterViewInit, OnInit {
   pageEvent(event: any) {
     this.params.page = event.pageIndex;
     this.params.size = event.pageSize;
-    this.getClients(this.params);
+    this.getBills(this.params);
   }
 
   sortData(sortby: string) {
@@ -129,20 +174,20 @@ export class BillsComponent implements AfterViewInit, OnInit {
     } else {
       this.params.sort = `${sortby},asc`;
     }
-    this.getClients(this.params);
+    this.getBills(this.params);
   }
 
-  searchClient() {
-    this.getClients(this.params);
+  searchBill() {
+    this.getBills(this.params);
   }
 
   resetForm() {
     this.searchForm.reset();
     this.searchForm.patchValue({ option: 'name' });
-    this.getClients(this.params);
+    this.getBills(this.params);
   }
 
-  deleteUser(id: number) {
+  /* deleteUser(id: number) {
     Swal.fire({
       title: '¿Estás seguro?',
       text: "Se eliminará el cliente y todas sus mascotas",
@@ -182,18 +227,15 @@ export class BillsComponent implements AfterViewInit, OnInit {
   onRowClick(row: any) {
     console.log(row)
     this.router.navigate([`dashboard/indClient/${row.id}`])
-  }
+  } */
 
   filter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase(); // Filtra los datos de la tabla
   }
 
-  goNewClient() {
+  /* goNewClient() {
     this.router.navigate(['dashboard/addClient'])
-  }
+  } */
 
-  goBack() {
-    this.router.navigate(['dashboard']);
-  }
 }

@@ -2,17 +2,15 @@
     <div class="mat-table">
         <div class="top-container">
             <span class="title">Facturas</span>
-            <form class="search" [formGroup]="searchForm" (ngSubmit)="searchClient()">
+            <form class="search" [formGroup]="searchForm" (ngSubmit)="searchBill()">
                 <mat-form-field class="input" appearance="outline" color="accent">
                     <mat-label>Buscar facturas</mat-label>
-                    <input matInput formControlName="search" placeholder="Buscar cliente">
+                    <input matInput formControlName="search" placeholder="Buscar facturas">
                 </mat-form-field>
                 <mat-form-field class="select" appearance="outline" color="accent">
                     <mat-select formControlName="option">
-                        <mat-option value="name" selected>Nombre</mat-option>
-                        <mat-option value="lastName">Apellido</mat-option>
-                        <mat-option value="email">Correo electrónico</mat-option>
-                        <mat-option value="phone">Celular</mat-option>
+                        <mat-option value="paymentMethod" selected>Método de pago</mat-option>
+                        <mat-option value="status">Estado</mat-option>
                     </mat-select>
                   </mat-form-field>
                 <div class="buttons">
@@ -27,62 +25,47 @@
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z24">
 
                 <!-- Columna Username -->
-                <ng-container matColumnDef="username">
+                <ng-container matColumnDef="concept">
                     <th mat-header-cell *matHeaderCellDef>
                         <div class="header-content">
-                            <span>Usuario</span>
-                            <mat-icon class="sort-icon" (click)="sortData('name')">unfold_more</mat-icon>
+                            <span>Concepto</span>
+                            <mat-icon class="sort-icon" (click)="sortData('concept')">unfold_more</mat-icon>
                         </div>
                     </th>
-                    <td mat-cell *matCellDef="let usuario">{{ usuario.name }} {{ usuario.lastName }}</td>
+                    <td mat-cell *matCellDef="let bill">{{ bill.concept }}</td>
                 </ng-container>
 
-                <!-- Columna Email -->
-                <ng-container matColumnDef="email">
+                <ng-container matColumnDef="createdAt">
                     <th mat-header-cell *matHeaderCellDef>
                         <div class="header-content">
-                            <span>Correo electrónico</span>
-                            <mat-icon class="sort-icon" (click)="sortData('email')">unfold_more</mat-icon>
+                            <span>Fecha de creación</span>
+                            <mat-icon class="sort-icon" (click)="sortData('createdAt')">unfold_more</mat-icon>
                         </div>
                     </th>
-                    <td mat-cell *matCellDef="let usuario">{{ usuario.email }}</td>
+                    <td mat-cell *matCellDef="let bill">{{ bill.createdAt | date: 'dd/MM/yyyy' }}</td>
                 </ng-container>
-
-                <!-- Columna Phone -->
-                <ng-container matColumnDef="phone">
+                <ng-container matColumnDef="paymentMethod">
                     <th mat-header-cell *matHeaderCellDef>
                         <div class="header-content">
-                            <span>Celular</span>
-                            <mat-icon class="sort-icon" (click)="sortData('phone')">unfold_more</mat-icon>
+                            <span>Método de pago</span>
+                            <mat-icon class="sort-icon" (click)="sortData('paymentMethod')">unfold_more</mat-icon>
                         </div>
                     </th>
-                    <td mat-cell *matCellDef="let usuario">{{ usuario.phone }}</td>
+                    <td mat-cell *matCellDef="let bill">{{ bill.paymentMethod }}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="municipality">
+                <ng-container matColumnDef="paymentStatus">
                     <th mat-header-cell *matHeaderCellDef>
                         <div class="header-content">
-                            <span>Dirección</span>
-                            <mat-icon class="sort-icon" (click)="sortData('municipality')">unfold_more</mat-icon>
+                            <span>Estado</span>
+                            <mat-icon class="sort-icon" (click)="sortData('paymentStatus')">unfold_more</mat-icon>
                         </div>
                     </th>
-                    <td mat-cell *matCellDef="let usuario">{{ usuario.municipality }}, 
-                        {{ usuario.street }} {{ usuario.number }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>
-                        <mat-icon class="newClient" (click)="goNewClient()">person_add</mat-icon>
-                    </th>
-                    <td mat-cell *matCellDef="let usuario">
-                        <!-- <div class="icons">
-                            <mat-icon class="icon" (click)="deleteUser(usuario.id)">delete</mat-icon>
-                        </div> -->
-                    </td>
+                    <td mat-cell *matCellDef="let bill">{{ bill.paymentStatus }}</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
 
             <mat-paginator class="mat-paginator" (page)="pageEvent($event)" [pageSize]="5"
