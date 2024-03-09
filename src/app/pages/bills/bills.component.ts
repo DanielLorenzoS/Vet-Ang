@@ -17,7 +17,7 @@ export class BillsComponent implements AfterViewInit, OnInit {
   params: any = {
     page: 0,
     size: 5,
-    sort: 'name,asc'
+    sort: 'createdAt,asc'
   }
   searchForm!: FormGroup;
   displayedColumns: string[] = ['concept', 'createdAt', 'paymentMethod', 'paymentStatus'];
@@ -33,6 +33,7 @@ export class BillsComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.initializeSearchForm();
+    this.getBills(this.params);
   }
 
   ngAfterViewInit(): void {
@@ -52,63 +53,7 @@ export class BillsComponent implements AfterViewInit, OnInit {
     return !search || search.length === 0;
   }
 
-  /*getClients(params: any) {
-    console.log(this.searchForm.value);
-    if (this.searchForm.value.option === 'name' && this.searchForm.value.search) {
-      params['name'] = this.searchForm.value.search;
-    } else {
-      delete params.name;
-    }
-    if (this.searchForm.value.option === 'lastName' && this.searchForm.value.search) {
-      params['lastName'] = this.searchForm.value.search;
-    } else {
-      delete params.lastName;
-    }
-    if (this.searchForm.value.option === 'email' && this.searchForm.value.search) {
-      params['email'] = this.searchForm.value.search;
-    } else {
-      delete params.email;
-    }
-    if (this.searchForm.value.option === 'phone' && this.searchForm.value.search) {
-      params['phone'] = this.searchForm.value.search;
-    } else {
-      delete params.phone;
-    }
-
-    console.log(params);
-    this.spinner.showLoadingIndicator();
-    this.usuarios = [];
-    this.userService.getAllUsers(params).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.spinner.hideLoadingIndicator();
-        this.usuarios = res.content;
-        this.dataSource = new MatTableDataSource<any>(this.usuarios);
-        this.setupPaginator(res);
-      },
-      error: (err: any) => {
-        this.spinner.hideLoadingIndicator();
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'No se pudo obtener los clientes',
-          showCancelButton: true,
-          showConfirmButton: true,
-          cancelButtonColor: '#d33',
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Reintentar',
-          cancelButtonText: 'Cancelar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.getClients(this.params);
-          }
-        })
-      }
-    });
-  } */
-
   getBills(params: any) {
-    console.log(this.searchForm.value);
     if (this.searchForm.value.option === 'paymentMethod' && this.searchForm.value.search) {
       params['paymentMethod'] = this.searchForm.value.search;
     } else {
@@ -120,10 +65,47 @@ export class BillsComponent implements AfterViewInit, OnInit {
       delete params.paymentStatus;
     }
 
-    console.log(params);
     this.spinner.showLoadingIndicator();
     this.bills = [];
-    this.billsService.getBills(params).subscribe({
+    this.billsService.getBillsByFilter(params).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.spinner.hideLoadingIndicator();
+        this.bills = res.content;
+        this.dataSource = new MatTableDataSource<any>(this.bills);
+        this.setupPaginator(res);
+      },
+      error: (err: any) => {
+        this.spinner.hideLoadingIndicator();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudo obtener las facturas',
+          showCancelButton: true,
+          showConfirmButton: true,
+          cancelButtonColor: '#d33',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Reintentar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.getBills(this.params);
+          }
+        })
+      }
+    });
+  }
+
+  getBillByUserId(params: any) {
+    if (this.searchForm.value.option === 'user' && this.searchForm.value.search) {
+      params['name'] = this.searchForm.value.search;
+    } else {
+      delete params.name;
+    }
+
+    this.spinner.showLoadingIndicator();
+    this.bills = [];
+    this.billsService.getBillsByFilter(params).subscribe({
       next: (res: any) => {
         console.log(res);
         this.spinner.hideLoadingIndicator();
@@ -178,7 +160,11 @@ export class BillsComponent implements AfterViewInit, OnInit {
   }
 
   searchBill() {
-    this.getBills(this.params);
+    if (this.searchForm.value.option === 'paymentMethod' || this.searchForm.value.option === 'paymentStatus') {
+      this.getBills(this.params);
+    } else {
+      this.getBillByUserId(this.searchForm.value.search);
+    }
   }
 
   resetForm() {

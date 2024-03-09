@@ -32,4 +32,8 @@ export class BillsService {
     updateBill(id: string, data: any) {
         return this.http.put(`${this.url}/bill/${id}`, data);
     }
+
+    getBillByUserId(id: string) {
+        return this.http.get(`${this.url}/bill/user/${id}`);
+    }
 }

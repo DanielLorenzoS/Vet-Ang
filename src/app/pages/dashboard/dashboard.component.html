@@ -85,6 +85,19 @@
                 <mat-expansion-panel class="buttonAcc">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
+                            <mat-icon class="material-icons-outlined">article</mat-icon>
+                            <span>Reportes</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide
+                        inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">analytics</mat-icon>
+                        <span style="font-size: 20px;">Generar reporte</span>
+                    </mat-button-toggle>
+                </mat-expansion-panel>
+                <mat-expansion-panel class="buttonAcc">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
                             <mat-icon class="material-icons-outlined">manage_accounts</mat-icon>
                             <span>Administración</span>
                         </mat-panel-title>
