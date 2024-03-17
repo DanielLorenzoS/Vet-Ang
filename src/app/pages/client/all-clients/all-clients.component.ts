@@ -184,7 +184,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
 
   onRowClick(row: any) {
     console.log(row)
-    this.router.navigate([`dashboard/indClient/${row.id}`])
+    this.router.navigate([`dashboard/client/${row.id}`])
   }
 
   filter(event: Event) {
@@ -193,7 +193,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   goNewClient() {
-    this.router.navigate(['dashboard/addClient'])
+    this.router.navigate(['dashboard/client'])
   }
 
   goBack() {

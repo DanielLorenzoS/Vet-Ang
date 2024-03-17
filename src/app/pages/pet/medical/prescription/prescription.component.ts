@@ -66,7 +66,7 @@ export class PrescriptionComponent implements OnInit {
 
   getPrescriprionById(id: number) {
 
-    this.petService.getPrescriptionById(id).subscribe(
+    /* this.petService.getPrescriptionById(id).subscribe(
       (res: any) => {
         console.log(res);
         this.diagnosis = res;
@@ -78,7 +78,7 @@ export class PrescriptionComponent implements OnInit {
         console.log(error);
         this.spinner.hideLoadingIndicator();
       }
-    )
+    ) */
   }
 
   goBack() {

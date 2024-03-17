@@ -48,19 +48,10 @@ export class PetComponent {
 
 
   ngOnInit(): void {
-    this.getPet();
-    /* this.getUserByPetId(); */
-    this.petForm = this.formBuilder.group({
-      name: [this.pet.name], // Valor inicial para el nombre
-      sex: [this.pet.sex], // Valor inicial para el sexo
-      birthdate: [this.pet.birthdate], // Valor inicial para la fecha de nacimiento
-      specie: [this.pet.specie], // Valor inicial para la especie
-      race: [this.pet.race], // Valor inicial para la raza
-      weight: [this.pet.weight], // Valor inicial para el peso
-    });
+    
   }
 
-  openEditDialog(): void {
+  /* openEditDialog(): void {
     const dialogRef = this.dialog.open(EditPetComponent, {
       width: '80%', // Personaliza el ancho según tus necesidades
       data: { pet: this.pet, user: this.user } // Pasa los datos del usuario al diálogo
@@ -79,31 +70,6 @@ export class PetComponent {
   }
 
 
-  getPet() {
-    this.spinner.showLoadingIndicator();
-    this.pet = {};
-    this.prescriptions = {};
-    this.petService.getPetById(this.id).subscribe(
-      (res: any) => {
-        this.spinner.hideLoadingIndicator();
-        if (res === null) {
-          Swal.fire({
-            icon: 'error',
-            text: 'No se pudo obtener la mascota',
-          });
-          this.router.navigate(['/dashboard/pets']);
-        } else {
-          console.log(res);
-          /* this.getUserByPetId(res.id); */
-          this.pet = res;
-          this.prescriptions = res.prescriptions;
-        }
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-  }
 
   editMedicalHistory(history: any) {
     this.router.navigate(['/pet/edit-medical-history', history.id]);
@@ -175,7 +141,7 @@ export class PetComponent {
     );
   }
 
-  /* updatePet() {
+  updatePet() {
     Swal.fire({
       title: '¿Estás seguro?',
       icon: 'warning',
@@ -213,7 +179,7 @@ export class PetComponent {
         }
       );
     });
-  } */
+  }
 
   deletePet(id: number) {
     Swal.fire({
@@ -262,5 +228,5 @@ export class PetComponent {
   goBack() {
     this.router.navigate(['dashboard/pets']);
   }
-  
+   */
 }

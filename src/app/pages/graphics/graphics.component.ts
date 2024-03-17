@@ -80,7 +80,7 @@ export class GraphicsComponent implements OnInit {
   }
 
   getSpecies() {
-    this.petService.countSpecies().subscribe(
+    /* this.petService.countSpecies().subscribe(
       (res: any) => {
         this.countDogs = res.dogs;
         this.countCats = res.cats;
@@ -103,7 +103,7 @@ export class GraphicsComponent implements OnInit {
         console.log(this.barChartData);
       },
       err => console.log(err)
-    );
+    ); */
   }
 
   getUsers() {
@@ -154,13 +154,13 @@ export class GraphicsComponent implements OnInit {
   }
 
   getMedicinesCount() {
-    this.petService.countMedicines().subscribe(
+    /* this.petService.countMedicines().subscribe(
       (res: any) => {
         this.pieChartData = res;
         console.log(this.pieChartData);
       },
       err => console.log(err)
-    );
+    ); */
   }
 
   getServicesCount() {

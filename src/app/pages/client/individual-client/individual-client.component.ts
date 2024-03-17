@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { EditClientComponent } from '../edit-client/edit-client.component';
 import { Location } from '@angular/common';
 import { MatAccordion } from '@angular/material/expansion';
+import { BillsService } from 'src/app/services/bills.service';
 
 interface User {
   id: number;
@@ -38,6 +39,7 @@ export class IndividualClientComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private billsService: BillsService,
     private route: ActivatedRoute,
     private location: Location,
     private petsService: PetService,
@@ -74,11 +76,29 @@ export class IndividualClientComponent implements OnInit {
         this.user = res;
         this.pets = res.pets;
         console.log(res);
+        this.getBillsByUserId(res.id);
         this.spinner.hideLoadingIndicator();
       }
     ), (err: any) => {
       this.spinner.hideLoadingIndicator();
-      console.log('error al traer al usuario');
+      console.log('error al obtener al usuario');
+    }
+  }
+
+  getBillsByUserId(id: any) {
+    this.spinner.showLoadingIndicator();
+    this.billsService.getBillByUserId(id).subscribe(
+      (res: any) => {
+        this.bills = res;
+        console.log(res);
+        this.spinner.hideLoadingIndicator();
+      }
+    ), (err: any) => {
+      this.spinner.hideLoadingIndicator();
+      Swal.fire({
+        icon: 'error',
+        text: 'No se pudieron obtener las facturas',
+      })
     }
   }
 
@@ -139,7 +159,7 @@ export class IndividualClientComponent implements OnInit {
 
   deleteMascota(pet: any) {
     this.spinner.showLoadingIndicator();
-    this.petsService.deletePet(pet.id).subscribe(
+    /* this.petsService.deletePet(pet.id).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
         console.log(res);
@@ -158,7 +178,7 @@ export class IndividualClientComponent implements OnInit {
           text: 'No se pudo eliminar la mascota',
         })
       }
-    )
+    ) */
   }
 
   goBack() {

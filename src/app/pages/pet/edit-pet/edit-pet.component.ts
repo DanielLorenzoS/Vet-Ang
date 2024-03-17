@@ -85,7 +85,7 @@ export class EditPetComponent {
       user: { id: this.editPetForm.value.user }
     }
     console.log(pet);
-    this.petService.updatePet(pet).subscribe(
+    /* this.petService.updatePet(pet).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
         Swal.fire({
@@ -104,7 +104,7 @@ export class EditPetComponent {
           text: err.error.message,
         });
       }
-    );
+    ); */
   }
 
   getClients() {
@@ -117,7 +117,7 @@ export class EditPetComponent {
 
   getUserByPetId() {
     this.spinner.showLoadingIndicator();
-    this.petService.getOnlyUser(this.data.pet.id).subscribe(
+    /* this.petService.getOnlyUser(this.data.pet.id).subscribe(
       (res: any) => {
         this.spinner.hideLoadingIndicator();
         console.log(res);
@@ -128,7 +128,7 @@ export class EditPetComponent {
         this.spinner.hideLoadingIndicator();
         console.log(err);
       }
-    );
+    ); */
   }
 
   onCancelClick() {

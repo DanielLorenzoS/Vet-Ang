@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="info">
     <div class="text">
       <p><span>Nombre:</span> {{ pet.name }}</p>
@@ -27,10 +27,9 @@
     <h5>Diagnósticos</h5>
     <h3 *ngIf="prescriptions.length === 0">
       {{ pet.name }} aun no tiene diagnósticos</h3>
-    <!-- Aquí va tu tabla de Angular Material -->
     <div class="table">
       <table mat-table [dataSource]="prescriptions" class="mat-elevation-z8">
-        <!-- Columnas de la tabla -->
+        
         <ng-container matColumnDef="symtomps">
           <th mat-header-cell *matHeaderCellDef> Síntomas </th>
           <td mat-cell *matCellDef="let prescription"> {{ prescription.symtomps }} </td>
@@ -40,11 +39,6 @@
           <th mat-header-cell *matHeaderCellDef> Diagnóstico </th>
           <td mat-cell *matCellDef="let prescription"> {{ prescription.diagnosis }} </td>
         </ng-container>
-
-        <!-- <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Estatus </th>
-        <td mat-cell *matCellDef="let prescription"> {{ prescription.status }} </td>
-      </ng-container> -->
 
         <ng-container matColumnDef="creationDate">
           <th mat-header-cell *matHeaderCellDef> Fecha de creación </th>
@@ -63,20 +57,14 @@
             </button>
           </th>
           <td mat-cell *matCellDef="let prescription">
-            <!-- Botones para editar o eliminar el historial médico -->
             <button mat-icon-button (click)="deletePrescription(prescription.id, $event)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </ng-container>
-
-        <!-- Define más columnas aquí para mostrar otras propiedades del historial médico -->
-
-        <!-- Encabezados de la tabla -->
         <tr mat-header-row *matHeaderRowDef="['symtomps', 'diagnosis', 'creationDate', 'doctor', 'actions']">
         </tr>
 
-        <!-- Filas de la tabla -->
         <tr mat-row
           *matRowDef="let prescription; columns: ['symtomps', 'diagnosis', 'creationDate', 'doctor', 'actions']"
           (click)="onClickRow(prescription)"></tr>
@@ -84,4 +72,4 @@
     </div>
   </div>
 
-</div>
+</div> -->

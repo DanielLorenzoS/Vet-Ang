@@ -47,9 +47,9 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
     children: [
       { path: '', component: GraphicsComponent, canActivate: [authGuard], pathMatch: 'full' },
-      { path: 'client', component: AllClientsComponent, canActivate: [authGuard] },
+      { path: 'clients', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
-      { path: 'indClient/:id', component: IndividualClientComponent, canActivate: [authGuard] },
+      { path: 'client/:id', component: IndividualClientComponent, canActivate: [authGuard] },
       { path: 'pets', component: AllPetsComponent, canActivate: [authGuard] },
       { path: 'medical/:id', component: MedicalComponent, canActivate: [authGuard] },
       { path: 'addMedical', component: AddMedicalComponent, canActivate: [authGuard] },

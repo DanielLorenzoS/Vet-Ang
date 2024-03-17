@@ -87,7 +87,7 @@ export class AddPetComponent {
     console.log(this.newPetForm.value);
     console.log(pet);
 
-    this.petService.addPet(pet).subscribe((data: any) => {
+    /* this.petService.addPet(pet).subscribe((data: any) => {
       this.spinner.hideLoadingIndicator();
       Swal.fire({
         icon: 'success',
@@ -100,7 +100,7 @@ export class AddPetComponent {
         text: 'No se pudo agregar la mascota',
       });
       console.log(error);
-    }
+    } */
   }
 
   goBack() {

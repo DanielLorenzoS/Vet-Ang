@@ -124,7 +124,7 @@ export class AddPrescriptionComponent implements OnInit {
 
   getMedicines() {
     this.spinnerService.showLoadingIndicator();
-    this.petService.getMedicines().subscribe(
+    /* this.petService.getMedicines().subscribe(
       (res: any) => {
         this.spinnerService.hideLoadingIndicator();
         this.medicines = res;
@@ -139,12 +139,12 @@ export class AddPrescriptionComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
-    );
+    ); */
   }
 
   getDoctors() {
     this.spinnerService.showLoadingIndicator();
-    this.petService.getDoctors().subscribe(
+    /* this.petService.getDoctors().subscribe(
       (res: any) => {
         this.spinnerService.hideLoadingIndicator();
         this.doctors = res;
@@ -159,7 +159,7 @@ export class AddPrescriptionComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
-    );
+    ); */
   }
 
   medicinesForm() {
@@ -222,7 +222,7 @@ export class AddPrescriptionComponent implements OnInit {
     };
 
     console.log(diagnosis);
-
+/* 
     this.listMedicinesDTO.forEach((medicine: any, index: number) => {
       this.petService.createRelation(medicine).subscribe(
         (res: any) => {
@@ -258,7 +258,7 @@ export class AddPrescriptionComponent implements OnInit {
           console.log(err);
         }
       );
-    })
+    }) */
 
   }
 

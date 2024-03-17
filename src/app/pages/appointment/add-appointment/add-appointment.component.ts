@@ -173,21 +173,21 @@ export class AddAppointmentComponent {
   }
 
   getPets() {
-    this.petService.getAllPets().subscribe(
+    /* this.petService.getAllPets().subscribe(
       (res: any) => {
         this.listPets = res;
       },
       err => console.log(err)
-    )
+    ) */
   }
 
   getDoctors() {
-    this.petService.getDoctors().subscribe(
+    /* this.petService.getDoctors().subscribe(
       (res: any) => {
         this.listDoctors = res;
       },
       err => console.log(err)
-    )
+    ) */
   }
 
   getServices() {
