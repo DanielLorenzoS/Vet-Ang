@@ -69,6 +69,7 @@ import { Recover2Component } from './pages/login/recover2/recover2.component';
 import { Recover3Component } from './pages/login/recover3/recover3.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { BillsComponent } from './pages/bills/bills.component';
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { BillsComponent } from './pages/bills/bills.component';
     EditPetComponent,
     NumbersOnlyPipe,
     ProductsComponent,
-    BillsComponent
+    BillsComponent,
+    DateFormatPipe
   ],
   imports: [
     BrowserModule,

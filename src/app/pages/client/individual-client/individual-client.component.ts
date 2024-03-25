@@ -7,8 +7,6 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { EditClientComponent } from '../edit-client/edit-client.component';
-import { Location } from '@angular/common';
-import { MatAccordion } from '@angular/material/expansion';
 import { BillsService } from 'src/app/services/bills.service';
 
 interface User {
@@ -31,7 +29,6 @@ interface User {
 })
 export class IndividualClientComponent implements OnInit {
 
-  @ViewChild(MatAccordion) accordion!: MatAccordion;
   user!: User;
   pets: any[] = [];
   editForm!: FormGroup;
@@ -41,8 +38,6 @@ export class IndividualClientComponent implements OnInit {
     private userService: UserService,
     private billsService: BillsService,
     private route: ActivatedRoute,
-    private location: Location,
-    private petsService: PetService,
     private router: Router,
     private spinner: SpinnerService,
     private dialog: MatDialog
@@ -55,10 +50,10 @@ export class IndividualClientComponent implements OnInit {
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(EditClientComponent, {
-      width: '80%', // Personaliza el ancho según tus necesidades
-      height: '90%', // Personaliza el alto según tus necesidades
-      panelClass: 'dialog', // Personaliza la clase del diálogo
-      data: { user: this.user } // Pasa los datos del usuario al diálogo
+      width: '80%',
+      height: '90%',
+      panelClass: 'dialog',
+      data: { user: this.user }
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -75,8 +70,8 @@ export class IndividualClientComponent implements OnInit {
       (res: any) => {
         this.user = res;
         this.pets = res.pets;
+        this.bills = res.bills;
         console.log(res);
-        this.getBillsByUserId(res.id);
         this.spinner.hideLoadingIndicator();
       }
     ), (err: any) => {

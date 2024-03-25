@@ -20,6 +20,25 @@ interface WeekData {
 })
 export class GraphicsComponent implements OnInit {
 
+  single: any[] = [
+    {
+      name: 'Enero',
+      value: 100,
+    },
+    {
+      name: 'Febrero',
+      value: 200,
+    },
+    {
+      name: 'Marzo',
+      value: 300,
+    },
+    {
+      name: 'Abril',
+      value: 400,
+    },
+  ];
+
   @ViewChild(MatAccordion) accordion: MatAccordion = new MatAccordion;
 
   barChartData: any[] = [
@@ -56,9 +75,83 @@ export class GraphicsComponent implements OnInit {
   weekData: WeekData[] = [];
   lineChartData: any[] = [];
 
-  appointmentsToday: any[] = [];
+  appointmentsToday = [
+    {
+      user: 'Juan Pérez',
+      date: new Date('2024-03-23T10:00:00'),
+      pet: 'Max',
+      doctor: 'Dr. García',
+      service: 'Vacunación'
+    },
+    {
+      user: 'María Rodríguez',
+      date: new Date('2024-03-23T11:30:00'),
+      pet: 'Luna',
+      doctor: 'Dra. Martínez',
+      service: 'Consulta general'
+    },
+    {
+      user: 'Pedro López',
+      date: new Date('2024-03-23T12:45:00'),
+      pet: 'Rocky',
+      doctor: 'Dr. Sánchez',
+      service: 'Esterilización'
+    },
+    {
+      user: 'Ana García',
+      date: new Date('2024-03-23T14:00:00'),
+      pet: 'Milo',
+      doctor: 'Dra. Hernández',
+      service: 'Examen de laboratorio'
+    },
+    {
+      user: 'Sofía Martínez',
+      date: new Date('2024-03-23T15:30:00'),
+      pet: 'Lucky',
+      doctor: 'Dr. Pérez',
+      service: 'Desparasitación'
+    },
+    {
+      user: 'Jorge Gutiérrez',
+      date: new Date('2024-03-23T16:45:00'),
+      pet: 'Bella',
+      doctor: 'Dra. Ramírez',
+      service: 'Cirugía menor'
+    },
+    {
+      user: 'Luisa Flores',
+      date: new Date('2024-03-23T17:30:00'),
+      pet: 'Simba',
+      doctor: 'Dr. Morales',
+      service: 'Chequeo dental'
+    },
+    {
+      user: 'Roberto Vargas',
+      date: new Date('2024-03-23T18:15:00'),
+      pet: 'Toby',
+      doctor: 'Dra. Cruz',
+      service: 'Radiografía'
+    },
+    {
+      user: 'Carolina Torres',
+      date: new Date('2024-03-23T19:00:00'),
+      pet: 'Coco',
+      doctor: 'Dr. Ríos',
+      service: 'Ultrasonido'
+    },
+    {
+      user: 'Fernando Díaz',
+      date: new Date('2024-03-23T20:00:00'),
+      pet: 'Pelusa',
+      doctor: 'Dra. Reyes',
+      service: 'Consulta de dermatología'
+    }
+  ];
+  
 
   openPanel = true;
+  toTop = false;
+  dNone = false;
 
   constructor(
     private router: Router,
@@ -77,6 +170,13 @@ export class GraphicsComponent implements OnInit {
     this.getServicesCount();
     this.getAppointments();
     this.getAppointmentsToday(); */
+    setTimeout(() => {
+      this.toTop = true;
+    }, 5000);
+
+    setTimeout(() => {
+      this.dNone = true;
+    }, 6000);
   }
 
   getSpecies() {

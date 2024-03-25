@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <mat-drawer-container class="container">
     <mat-drawer class="side-container" mode="side" [opened]="isDrawerOpen">
-        <mat-accordion multi>
+        <mat-accordion>
             <mat-button-toggle-group class="toggle-group" name="fontStyle" aria-label="Font Style">
                 <mat-button-toggle (click)="close('')" class="buttonSide buttonAcc" value="Dashboard">
                     <mat-icon class="material-icons-outlined">home</mat-icon>
@@ -10,10 +10,15 @@
                 <mat-expansion-panel class="buttonAcc">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <mat-icon class="material-icons-outlined">event</mat-icon>
+                            <mat-icon class="material-icons-outlined">calendar_month</mat-icon>
                             <span>Citas</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <mat-button-toggle style="font-size: 24px;" (click)="close('appointments')" class="buttonSide inside"
+                        value="underline">
+                        <mat-icon style="font-size: 20px;" class="material-icons-outlined">event</mat-icon>
+                        <span>Citas pendientes</span>
+                    </mat-button-toggle>
                     <mat-button-toggle style="font-size: 24px;" (click)="close('appointments')" class="buttonSide inside"
                         value="underline">
                         <mat-icon style="font-size: 20px;" class="material-icons-outlined">alarm_add</mat-icon>
@@ -69,8 +74,8 @@
                 <mat-expansion-panel class="buttonAcc">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <mat-icon class="material-icons-outlined">credit_card</mat-icon>
-                            <span>Facturación</span>
+                            <mat-icon class="material-icons-outlined">account_balance</mat-icon>
+                            <span>Finanzas</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-button-toggle (click)="close('bills')" class="buttonSide inside" value="Client">
@@ -80,6 +85,14 @@
                     <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
                         <mat-icon style="font-size: 24px;" class="material-icons-outlined">receipt</mat-icon>
                         <span style="font-size: 20px;">Registrar factura</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">description</mat-icon>
+                        <span style="font-size: 20px;">Estados de cuenta</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">analytics</mat-icon>
+                        <span style="font-size: 20px;">Balance general</span>
                     </mat-button-toggle>
                 </mat-expansion-panel>
                 <mat-expansion-panel class="buttonAcc">
@@ -98,13 +111,17 @@
                 <mat-expansion-panel class="buttonAcc">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            <mat-icon class="material-icons-outlined">manage_accounts</mat-icon>
+                            <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>
                             <span>Administración</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">groups</mat-icon>
+                        <span style="font-size: 20px;">Empleados</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
                         <mat-icon style="font-size: 24px;" class="material-icons-outlined">manage_accounts</mat-icon>
-                        <span style="font-size: 20px;">Registrar trabajador</span>
+                        <span style="font-size: 20px;">Registrar empleado</span>
                     </mat-button-toggle>
                     <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
                         <mat-icon style="font-size: 24px;" class="material-icons-outlined">toggle_on</mat-icon>
@@ -123,7 +140,7 @@
             </mat-button-toggle-group>
         </mat-accordion>
     </mat-drawer>
-    <mat-drawer-content class="mat-drawer-content">
+    <mat-drawer-content class="mat-drawer-content" (click)="isDrawerOpen = false">
         <router-outlet>
             <div [ngClass]="{
           'progress-container': isLoading,
