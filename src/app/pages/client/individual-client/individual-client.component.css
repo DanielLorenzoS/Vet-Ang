@@ -1,7 +1,7 @@
 .container {
     width: 100%;
     scroll-behavior: smooth;
-    
+
 }
 
 .info {
@@ -12,7 +12,8 @@
     height: 2rem;
 }
 
-.client, .facture {
+.client,
+.facture {
     margin: auto;
     margin-top: 3rem;
     width: 90%;
@@ -29,10 +30,13 @@
     padding: 1rem;
 }
 
-.data > h2 {
-    flex: 0 0 calc(33.333% - 1rem); /* Calcula el ancho para tres elementos en una fila */
-    margin: 0 .4rem 1rem .4rem; /* Espaciado entre filas */
-    box-sizing: border-box; /* Incluye el padding en el ancho del elemento */
+.data>h2 {
+    flex: 0 0 calc(33.333% - 1rem);
+    /* Calcula el ancho para tres elementos en una fila */
+    margin: 0 .4rem 1rem .4rem;
+    /* Espaciado entre filas */
+    box-sizing: border-box;
+    /* Incluye el padding en el ancho del elemento */
     line-height: 3rem;
     border: 2px solid #05828e;
     border-radius: 10px 100px / 120px;
@@ -120,7 +124,8 @@
     color: rgb(190, 146, 0) !important;
 }
 
-.red, .red mat-icon {
+.red,
+.red mat-icon {
     color: #f00 !important;
 }
 
@@ -134,7 +139,8 @@
     color: #f00 !important;
 }
 
-.green, .green mat-icon {
+.green,
+.green mat-icon {
     color: #0f0 !important;
 }
 
@@ -179,7 +185,7 @@
     vertical-align: middle;
 }
 
-.text > * {
+.text>* {
     width: 100%;
     text-align: center;
 }
@@ -332,7 +338,7 @@ mat-icon {
 
 .sep p {
     width: 50%;
-    text-align: left;
+    text-align: center;
     font-size: 16px;
 }
 
@@ -344,15 +350,24 @@ mat-icon {
     height: 3.5rem !important;
 }
 
-.excel {
-    border: 1px solid #0f0 !important;
+.excel:hover {
+    border: none !important;
 }
 
-.pdf {
-    border: 1px solid #f00 !important;
+.pdf:hover {
+    border: none !important;
 }
 
-.summary > h2 {
+::ng-deep.mat-menu-panel {
+    max-width: fit-content !important;
+}
+
+.menu {
+    background-color: #05828e !important;
+    color: #fff !important;
+}
+
+.summary>h2 {
     text-align: center;
     padding: 1rem;
     font-size: 1.5rem;
@@ -366,7 +381,7 @@ mat-icon {
 }
 
 .expandButton {
-    background-color: #162229 !important; 
+    background-color: #162229 !important;
     color: #fff !important;
 }
 
@@ -412,6 +427,7 @@ mat-icon {
     table {
         min-width: 400px;
     }
+
     .buttons {
         flex-direction: column;
         justify-content: center;
