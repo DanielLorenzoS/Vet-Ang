@@ -132,6 +132,26 @@
                         <span style="font-size: 20px;">Cambiar permisos</span>
                     </mat-button-toggle>
                 </mat-expansion-panel>
+                <mat-expansion-panel class="buttonAcc">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon class="material-icons-outlined">bar_chart</mat-icon>
+                            <span>Estadísticas</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">show_chart</mat-icon>
+                        <span style="font-size: 20px;">Análisis de clientes</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">pie_chart</mat-icon>
+                        <span style="font-size: 20px;">Análisis de mascotas</span>
+                    </mat-button-toggle>
+                    <mat-button-toggle (click)="close('employees')" class="buttonSide inside" value="Client">
+                        <mat-icon style="font-size: 24px;" class="material-icons-outlined">waterfall_chart</mat-icon>
+                        <span style="font-size: 20px;">Análisis de finanzas</span>
+                    </mat-button-toggle>
+                </mat-expansion-panel>
                 <mat-button-toggle *ngIf="showEmployees" (click)="close('employees')" class="buttonSide"
                     value="Dashboard">
                     <mat-icon class="material-icons-outlined">badge</mat-icon>
