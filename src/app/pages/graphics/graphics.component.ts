@@ -104,15 +104,16 @@ export class GraphicsComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.toTop = true;
-    }, 3000);
+    }, 2000);
 
     setTimeout(() => {
       this.dNone = true;
-    }, 4000);
+    }, 3000);
   }
 
-  goAppointments() {
-    this.router.navigate(['/dashboard/appointments']);
+  goAppointments(appointment: any) {
+    /* this.router.navigate(['/dashboard/appointments']); */
+    alert('Ir a cita de ' + appointment.user + ' con ' + appointment.pet + ' a las ' + appointment.date + ' con el doctor ' + appointment.doctor + ' para ' + appointment.service);
   }
 
   goAddAppointment() {

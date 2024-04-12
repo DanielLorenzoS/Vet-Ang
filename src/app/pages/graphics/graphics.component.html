@@ -21,10 +21,10 @@
                     <span>{{ appointment.date | date: 'shortTime' }}</span>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-panel-description class="panel-description" (click)="goAppointments()">
+                <mat-panel-description class="panel-description" (click)="goAppointments(appointment)">
                   <span class="span-description"><b>Mascota:</b> {{ appointment.pet }}</span>
-                  <span><b>Médico:</b> {{ appointment.doctor }}</span>
-                  <span><b>Servicio:</b> {{ appointment.service }}</span>
+                  <span class="span-description"><b>Médico:</b> {{ appointment.doctor }}</span>
+                  <span class="span-description"><b>Servicio:</b> {{ appointment.service }}</span>
                 </mat-panel-description>
               </mat-expansion-panel>
             </div>
@@ -39,7 +39,7 @@
       <div class="graphics_body_item_body">
         <span class="subtitle">¿Quieres agregar un nuevo cliente?</span>
         <span>
-          <mat-icon class="material-icons-outlined mat-icon-client">
+          <mat-icon class="material-icons-outlined mat-icon-client" style="margin-bottom: .8rem;">
             person_add
           </mat-icon>
         </span>
@@ -52,7 +52,7 @@
       <div class="graphics_body_item_body">
         ¿Quieres agregar una mascota?
         <span>
-          <mat-icon class="material-icons-outlined mat-icon-pet">
+          <mat-icon class="material-icons-outlined mat-icon-pet" style="margin-bottom: .8rem;">
             pets
           </mat-icon>
         </span>
@@ -65,7 +65,7 @@
       <div class="graphics_body_item_body">
         ¿Quieres agregar una cita?
         <span>
-          <mat-icon class="material-icons-outlined mat-icon-appointment">
+          <mat-icon class="material-icons-outlined mat-icon-appointment" style="margin-bottom: .8rem;">
             add_alert
           </mat-icon>
         </span>
