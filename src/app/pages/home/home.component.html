@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="buttons-container">
+        <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Punto de venta</button>
+        <button mat-raised-button [ngClass]="{'active': activeButton === 2}" (click)="activeButton = 2">Citas de hoy</button>
+    </div>
+
+    <app-today *ngIf="activeButton === 2" />
+    <app-pos *ngIf="activeButton === 1" />
+</div>

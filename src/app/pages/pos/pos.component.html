@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="buttons-container">
+        <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Servicios médicos</button>
+        <button mat-raised-button [ngClass]="{'active': activeButton === 2}" (click)="activeButton = 2">Medicamentos</button>
+        <button mat-raised-button [ngClass]="{'active': activeButton === 3}" (click)="activeButton = 3">Comida</button>
+        <button mat-raised-button [ngClass]="{'active': activeButton === 4}" (click)="activeButton = 4">Productos de limpieza</button>
+        <button mat-raised-button [ngClass]="{'active': activeButton === 5}" (click)="activeButton = 5">Servicios de estética</button>
+    </div>
+    <div class="input-container">
+        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 1">
+            <mat-label>Buscar servicio médico</mat-label>
+            <input matInput formControlName="search" placeholder="Buscar servicio médico">
+        </mat-form-field>
+        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 2">
+            <mat-label>Buscar medicamento</mat-label>
+            <input matInput formControlName="search" placeholder="Buscar medicamento">
+        </mat-form-field>
+        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 3">
+            <mat-label>Buscar comida</mat-label>
+            <input matInput formControlName="search" placeholder="Buscar comida">
+        </mat-form-field>
+        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 4">
+            <mat-label>Buscar producto de limpieza</mat-label>
+            <input matInput formControlName="search" placeholder="Buscar producto de limpieza">
+        </mat-form-field>
+        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 5">
+            <mat-label>Buscar servicio de estética</mat-label>
+            <input matInput formControlName="search" placeholder="Buscar servicio de estética">
+        </mat-form-field>
+    </div>
+</div>

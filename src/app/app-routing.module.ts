@@ -35,6 +35,7 @@ import { Recover2Component } from './pages/login/recover2/recover2.component';
 import { Recover3Component } from './pages/login/recover3/recover3.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { BillsComponent } from './pages/bills/bills.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -46,7 +47,7 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
     children: [
-      { path: '', component: GraphicsComponent, canActivate: [authGuard], pathMatch: 'full' },
+      { path: '', component: HomeComponent, canActivate: [authGuard], pathMatch: 'full' },
       { path: 'clients', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'client/:id', component: IndividualClientComponent, canActivate: [authGuard] },
@@ -71,7 +72,7 @@ const routes: Routes = [
       { path: 'prescription', component: PrescriptionComponent, canActivate: [authGuard] },
       { path: 'addPrescription', component: AddPrescriptionComponent, canActivate: [authGuard] },
       { path: 'employees', component: EmployeesComponent, canActivate: [authGuard] },
-      { path: '**', redirectTo: 'graphics' }
+      { path: '**', redirectTo: '' }
     ]
   },
   { path: '**', redirectTo: '/' }

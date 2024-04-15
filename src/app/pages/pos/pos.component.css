@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1.8rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.buttons-container, .input-container {
+    /* border-top: 1px solid #05828e; */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1.5rem;
+}
+
+.input-container {
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.buttons-container button {
+    border-radius: 10rem;
+    padding: 1rem 2rem;
+    height: 3rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.active {
+    background-color: #05828e !important;
+    color: white !important;
+}
+
+.input {
+    width: 90%;
+    border-radius: 10rem !important;
+}
