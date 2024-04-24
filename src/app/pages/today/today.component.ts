@@ -11,6 +11,8 @@ export class TodayComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion = new MatAccordion;
 
+  activeButton = 1;
+
   usersData: any[] = [];
   dates: any[] = [];
 

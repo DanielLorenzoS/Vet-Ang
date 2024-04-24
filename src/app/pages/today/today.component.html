@@ -1,11 +1,12 @@
 <div class="container">
-
-    <!-- <h1 class="graphics_title" [ngClass]="{'toTop': toTop, 'dNone': dNone}">
-      !Hola <span>Daniel</span>, bienvenido al panel de <span>Veterinaria</span>!</h1> -->
     <div class="graphics">
-      <div class="graphics_body_item bod">
-        <div class="graphics_body_item_header div divheader">
-          <h2 class="graphics_body_item_title">Citas de hoy</h2>
+      <div class="graphics_body_item">
+        <div class="graphics_body_item_header">
+          <div class="buttons-container">
+            <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Citas de hoy</button>
+            <button mat-raised-button [ngClass]="{'active': activeButton === 2}" (click)="activeButton = 2">Citas de mañana</button>
+            <button mat-raised-button [ngClass]="{'active': activeButton === 3}" (click)="activeButton = 3">Citas de la semana</button>
+        </div>
         </div>
         <div class="panel-not div" *ngIf="appointmentsToday.length === 0"><span>No hay citas programadas para hoy</span>
         </div>
@@ -29,45 +30,6 @@
               </div>
             </div>
           </mat-accordion>
-        </div>
-      </div>
-      <div class="graphics_body_item" (click)="goAddClient()">
-        <div class="graphics_body_item_header">
-          <h2 class="graphics_body_item_title">Nuevo cliente</h2>
-        </div>
-        <div class="graphics_body_item_body">
-          <span class="subtitle">¿Quieres agregar un nuevo cliente?</span>
-          <span>
-            <mat-icon class="material-icons-outlined mat-icon-client" style="margin-bottom: .8rem;">
-              person_add
-            </mat-icon>
-          </span>
-        </div>
-      </div>
-      <div class="graphics_body_item" (click)="goAddPet()">
-        <div class="graphics_body_item_header">
-          <h2 class="graphics_body_item_title">Nueva mascota</h2>
-        </div>
-        <div class="graphics_body_item_body">
-          ¿Quieres agregar una mascota?
-          <span>
-            <mat-icon class="material-icons-outlined mat-icon-pet" style="margin-bottom: .8rem;">
-              pets
-            </mat-icon>
-          </span>
-        </div>
-      </div>
-      <div class="graphics_body_item" (click)="goAddAppointment()">
-        <div class="graphics_body_item_header">
-          <h2 class="graphics_body_item_title">Nueva cita</h2>
-        </div>
-        <div class="graphics_body_item_body">
-          ¿Quieres agregar una cita?
-          <span>
-            <mat-icon class="material-icons-outlined mat-icon-appointment" style="margin-bottom: .8rem;">
-              add_alert
-            </mat-icon>
-          </span>
         </div>
       </div>
     </div>
