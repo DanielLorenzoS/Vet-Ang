@@ -81,15 +81,20 @@
 
 .panel {
   margin: 1rem;
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important;
 }
 
 .header-panel, .header-panel:focus {
   background-color: #05828e;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .header-panel:hover {
   background-color: white;
+  border-bottom: 3px solid #05828e;
 }
 
 .header-panel:hover .panel-title {

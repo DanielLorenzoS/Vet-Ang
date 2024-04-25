@@ -28,4 +28,13 @@
             <input matInput formControlName="search" placeholder="Buscar servicio de estética">
         </mat-form-field>
     </div>
+    <div class="products-container">
+        <div class="product" *ngFor="let product of products">
+            <img src="../../../assets/kira.jpeg" alt="product image">
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price | currency }}</p>
+                <button mat-raised-button>Agregar</button>
+            </div>
+        </div>
 </div>

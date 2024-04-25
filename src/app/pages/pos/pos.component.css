@@ -14,11 +14,11 @@
   border-radius: 10px;
 }
 
-.buttons-container, .input-container {
+.buttons-container, .input-container, .products-container {
     /* border-top: 1px solid #05828e; */
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 1rem;
     padding-top: 1.5rem;
 }
@@ -28,7 +28,7 @@
     justify-content: center;
 }
 
-.buttons-container button {
+button {
     border-radius: 10rem;
     padding: 1rem 2rem;
     height: 3rem;
@@ -44,4 +44,57 @@
 .input {
     width: 90%;
     border-radius: 10rem !important;
+}
+
+.products-container {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 1rem 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    cursor: default;
+    transition: all 0.3s ease-in-out;
+}
+
+.product:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+img {
+    width: auto;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    margin-left: 2rem;
+}
+
+.product-info button {
+    margin-bottom: .5rem;
+    margin-right: .5rem;
+    font-size: 1rem;
+    background-color: #05828e;
+    color: white;
+}
+
+.product-info h3 {
+    font-size: 1.5rem;
+}
+
+.product-info p {
+    font-size: 1.2rem;
 }
