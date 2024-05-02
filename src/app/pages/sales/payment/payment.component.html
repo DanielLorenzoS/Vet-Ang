@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="left">
+        <div class="ticket-configuration">
+            <h2>Configuración del Ticket</h2>
+            <div class="form-ticket-container">
+                <form action="" class="form-ticket">
+                    <label for="ticket-name">Nombre del ticket</label>
+                    <input type="text" id="ticket-name" name="ticket-name">
+                    <label for="ticket-description">Descripción del ticket</label>
+                    <input type="text" id="ticket-description" name="ticket-description">
+                    <label for="ticket-quantity">Cantidad de tickets</label>
+                    <input type="number" id="ticket-quantity" name="ticket-quantity">
+                    <button mat-raised-button>Generar ticket</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="ticket">
+            <h2>Vista previa del Ticket</h2>
+            <div class="ticket-products">
+                <div class="ticket-product" *ngFor="let product of cart">
+                    <p>{{ product.name }}</p>
+                    <p class="price">{{ product.price | currency }}</p>
+                </div>
+                <div class="total">
+                    <p>Total:</p>
+                    <p>{{ total | currency }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -59,7 +59,17 @@
                 <p>Total:</p>
                 <p>{{ total | currency }}</p>
             </div>
-            <button mat-raised-button>Finalizar compra</button>
+            <div class="payment">
+                <button mat-raised-button class="payment-button" [ngClass]="{'payment-button-active': activePaymentButton === 1}" (click)="activePaymentButton = 1">
+                    <mat-icon>payments</mat-icon>
+                    <span>Efectivo</span>
+                </button>
+                <button mat-raised-button class="payment-button" [ngClass]="{'payment-button-active': activePaymentButton === 2}" (click)="activePaymentButton = 2">
+                    <mat-icon>credit_card</mat-icon>
+                    <span>Tarjeta</span>
+                </button>
+            </div>
+            <button class="finally" mat-raised-button (click)="goToPayment()">Ir al pago</button>
         </div>
     </div>
 </div>

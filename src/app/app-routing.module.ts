@@ -36,6 +36,7 @@ import { Recover3Component } from './pages/login/recover3/recover3.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { BillsComponent } from './pages/bills/bills.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PaymentComponent } from './pages/sales/payment/payment.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, canActivate: [authGuard],
     children: [
       { path: '', component: HomeComponent, canActivate: [authGuard], pathMatch: 'full' },
+      { path: 'payments', component: PaymentComponent, canActivate: [authGuard] },
       { path: 'clients', component: AllClientsComponent, canActivate: [authGuard] },
       { path: 'addClient', component: NewClientComponent, canActivate: [authGuard] },
       { path: 'client/:id', component: IndividualClientComponent, canActivate: [authGuard] },

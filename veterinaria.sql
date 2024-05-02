@@ -27,8 +27,8 @@ VALUES
 ('Hachi', 'Lore', 'Macho', '2018-05-15', 'Perro', 'Husky Siberiano', 'Blanco', 14, 'Grande', '2024-01-27', 3),
 ('Kira', 'Lore', 'Hembra', '2020-05-15', 'Cat', 'Raza Bonita', 'Blanca', 4.5, 'Mediano', '2024-03-26', 3),
 ('Nube', 'Lore', 'Hembra', '2020-05-15', 'Cat', 'Raza Tonta', 'Blanca', 3.5, 'Mediano', '2024-03-26', 1),
-('Luna', 'Lore', 'Hembra', '2020-05-15', 'Cat', 'Tuxedo', 'Blanco y negro', 3.5, 'Mediano', '2024-03-26', 3),
-('Luz', 'Lore', 'Hembra', '2022-05-15', 'Cat', 'Doméstico Europeo', 'Café', 3.5, 'Pequeña', '2024-03-26', 3);
+('Luna', 'Lore', 'Hembra', '2020-05-15', 'Cat', 'Tuxedo', 'Blanco y negro', 3.7, 'Mediano', '2024-03-26', 3),
+('Luz', 'Lore', 'Hembra', '2022-05-15', 'Cat', 'Doméstico Europeo', 'Café', 3.9, 'Pequeña', '2024-03-26', 3);
 
 
 INSERT INTO bills (bill_user_id, concept, invoice_number, created_at, expiration_date, total, payment_method, payment_status, discount)

@@ -72,7 +72,8 @@ import { BillsComponent } from './pages/bills/bills.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { HomeComponent } from './pages/home/home.component';
 import { TodayComponent } from './pages/today/today.component';
-import { PosComponent } from './pages/pos/pos.component';
+import { PaymentComponent } from './pages/sales/payment/payment.component';
+import { PosComponent } from './pages/sales/pos/pos.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { PosComponent } from './pages/pos/pos.component';
     DateFormatPipe,
     HomeComponent,
     TodayComponent,
-    PosComponent
+    PosComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

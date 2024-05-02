@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pos',
@@ -8,6 +10,7 @@ import { Component } from '@angular/core';
 export class PosComponent {
 
   activeButton = 1;
+  activePaymentButton = 1;
   products = [
     { id: 1, name: 'Product 1', description: "desc", price: 10 },
     { id: 2, name: 'Product 2', description: "desc", price: 20 },
@@ -30,5 +33,26 @@ export class PosComponent {
   ];
 
   total = 100;
+
+  constructor(
+    private router: Router
+  ) { }
+
+  goToPayment() {
+    Swal.fire({
+      title: 'Ir al pago',
+      text: '¿Seguro que no deseas agregar más productos?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, ir al pago',
+      cancelButtonText: 'No, seguir agregando productos',
+      cancelButtonColor: '#dd3333',
+      confirmButtonColor: '#05828e'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['dashboard/payments']);
+      }
+    });
+  }
   
 }
