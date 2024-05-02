@@ -1,7 +1,7 @@
 <div class="container">
     <div class="buttons-container">
-        <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Citas</button>
         <button mat-raised-button [ngClass]="{'active': activeButton === 2}" (click)="activeButton = 2">Punto de venta</button>
+        <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Citas</button>
     </div>
 
     <app-today *ngIf="activeButton === 1" style="width: 90%;"/>

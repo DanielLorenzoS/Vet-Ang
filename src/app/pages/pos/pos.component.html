@@ -1,40 +1,65 @@
 <div class="container">
-    <div class="buttons-container">
-        <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Servicios médicos</button>
-        <button mat-raised-button [ngClass]="{'active': activeButton === 2}" (click)="activeButton = 2">Medicamentos</button>
-        <button mat-raised-button [ngClass]="{'active': activeButton === 3}" (click)="activeButton = 3">Comida</button>
-        <button mat-raised-button [ngClass]="{'active': activeButton === 4}" (click)="activeButton = 4">Productos de limpieza</button>
-        <button mat-raised-button [ngClass]="{'active': activeButton === 5}" (click)="activeButton = 5">Servicios de estética</button>
-    </div>
-    <div class="input-container">
-        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 1">
-            <mat-label>Buscar servicio médico</mat-label>
-            <input matInput formControlName="search" placeholder="Buscar servicio médico">
-        </mat-form-field>
-        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 2">
-            <mat-label>Buscar medicamento</mat-label>
-            <input matInput formControlName="search" placeholder="Buscar medicamento">
-        </mat-form-field>
-        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 3">
-            <mat-label>Buscar comida</mat-label>
-            <input matInput formControlName="search" placeholder="Buscar comida">
-        </mat-form-field>
-        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 4">
-            <mat-label>Buscar producto de limpieza</mat-label>
-            <input matInput formControlName="search" placeholder="Buscar producto de limpieza">
-        </mat-form-field>
-        <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 5">
-            <mat-label>Buscar servicio de estética</mat-label>
-            <input matInput formControlName="search" placeholder="Buscar servicio de estética">
-        </mat-form-field>
-    </div>
-    <div class="products-container">
-        <div class="product" *ngFor="let product of products">
-            <img src="../../../assets/kira.jpeg" alt="product image">
-            <div class="product-info">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.price | currency }}</p>
-                <button mat-raised-button>Agregar</button>
+    <div class="left">
+        <div class="buttons-container">
+            <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Servicios
+                médicos</button>
+            <button mat-raised-button [ngClass]="{'active': activeButton === 2}"
+                (click)="activeButton = 2">Medicamentos</button>
+            <button mat-raised-button [ngClass]="{'active': activeButton === 3}"
+                (click)="activeButton = 3">Comida</button>
+            <button mat-raised-button [ngClass]="{'active': activeButton === 4}" (click)="activeButton = 4">Limpieza</button>
+            <button mat-raised-button [ngClass]="{'active': activeButton === 5}" (click)="activeButton = 5">Estética</button>
+        </div>
+        <div class="input-container">
+            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 1">
+                <mat-label>Buscar servicio médico</mat-label>
+                <input matInput formControlName="search" placeholder="Buscar servicio médico">
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 2">
+                <mat-label>Buscar medicamento</mat-label>
+                <input matInput formControlName="search" placeholder="Buscar medicamento">
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 3">
+                <mat-label>Buscar comida</mat-label>
+                <input matInput formControlName="search" placeholder="Buscar comida">
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 4">
+                <mat-label>Buscar producto de limpieza</mat-label>
+                <input matInput formControlName="search" placeholder="Buscar producto de limpieza">
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 5">
+                <mat-label>Buscar servicio de estética</mat-label>
+                <input matInput formControlName="search" placeholder="Buscar servicio de estética">
+            </mat-form-field>
+        </div>
+        <div class="products-container">
+            <div class="product" *ngFor="let product of products">
+                <img src="../../../assets/kira.jpeg" alt="product image">
+                <div class="product-info">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.price | currency }}</p>
+                    <button mat-raised-button>Agregar</button>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="right">
+        <div class="cart">
+            <h2>Carrito</h2>
+            <div class="cart-products">
+                <div class="cart-product" *ngFor="let product of cart">
+                    <p>{{ product.name }}</p>
+                    <p class="price">{{ product.price | currency }}</p>
+                    <button mat-raised-button>
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="total">
+                <p>Total:</p>
+                <p>{{ total | currency }}</p>
+            </div>
+            <button mat-raised-button>Finalizar compra</button>
+        </div>
+    </div>
 </div>
