@@ -23,6 +23,7 @@ export class ReportesComponent implements OnInit {
   lista11: any[] = [];
   listaPromociones: any[] = [];
   lista11Final: any[] = [];
+  lista0607Final: any[] = [];
   lista12: any[] = [];
   lista16: any[] = [];
   fechaDoc: Date = new Date();
@@ -108,13 +109,13 @@ export class ReportesComponent implements OnInit {
                 COLONIA: 'x',
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                ING_GOBIERNO: this.extraerFechaDocumento(documento['FEC_INI']),
-                ING_SEP: this.extraerFechaDocumento(documento['FEC_INI']),
-                ING_RAMA_SUBSISTEMA: this.extraerFechaDocumento(documento['FEC_INI']),
+                ING_GOBIERNO: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
+                ING_SEP: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
+                ING_RAMA_SUBSISTEMA: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
                 REINSTALACION_O_TRANSFERENCIA: 0,
                 CLAVE_DE_COBRO: documento['CPZA'],
                 NIVEL_SUELDO: 3,
-                FECHA_INICIO: this.extraerFechaDocumento(documento['FEC_INI']),
+                FECHA_INICIO: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
                 FECHA_FIN: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN']),
                 SINDICATO: 99999,
                 BANCO: 0,
@@ -149,7 +150,7 @@ export class ReportesComponent implements OnInit {
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: (!documento['FEC_FIN']) ? '99/99/9999' : this.extraerFechaDocumento(documento['FEC_FIN'].toString())
+                FECHA_INICIAL: (!documento['FEC_FIN']) ? lastDate : this.obtenerFechaSiguiente(this.extraerFechaDocumento(documento['FEC_FIN']))
               };
               this.lista0607.push(user);
             }
@@ -163,7 +164,7 @@ export class ReportesComponent implements OnInit {
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
                 FECHA_INICIAL: (!documento['FEC_INI']) ? '99/99/9999' : this.extraerFechaDocumento(documento['FEC_INI']),
-                FECHA_FINAL: (!documento['FEC_FIN']) ? '99/99/9999' : this.extraerFechaDocumento(documento['FEC_FIN'].toString())
+                FECHA_FINAL: (!documento['FEC_FIN']) ? '99/99/9999' : this.extraerFechaDocumento(documento['FEC_FIN'])
               };
               this.listaPromociones.push(user);
             }
@@ -177,7 +178,7 @@ export class ReportesComponent implements OnInit {
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
                 FECHA_INICIAL: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
-                FECHA_FINAL: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN'].toString())
+                FECHA_FINAL: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN'])
               };
               this.lista11.push(user);
             }
@@ -190,7 +191,7 @@ export class ReportesComponent implements OnInit {
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: (documento['FEC_INI'] === undefined) ? new Date('99/99/9999') : this.extraerFechaDocumento(documento['FEC_INI']),
+                FECHA_INICIAL: (!documento['FEC_INI']) ? lastDate : this.extraerFechaDocumento(documento['FEC_INI']),
               };
               this.lista12.push(user);
             }
@@ -203,7 +204,7 @@ export class ReportesComponent implements OnInit {
                 CENTRO_TRABAJO: documento['CCT'],
                 CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(3, 5),
-                FECHA_INICIAL: this.extraerFechaDocumento(documento['FEC_INI'].toString())
+                FECHA_INICIAL: this.extraerFechaDocumento(documento['FEC_INI'])
               };
               this.lista16.push(user);
             }
@@ -234,7 +235,7 @@ export class ReportesComponent implements OnInit {
                 MUNICIPIO: 'x',
                 LOCALIDAD: 'x',
                 COLONIA: 'x',
-                CLAVE_MOVIMIENTO: '01',
+                CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 ING_GOBIERNO: this.extraerFechaDocumento(documento['FEC_INI']),
                 ING_SEP: this.extraerFechaDocumento(documento['FEC_INI']),
@@ -253,6 +254,7 @@ export class ReportesComponent implements OnInit {
                 user['CLAVE_MOVIMIENTO'] = '02';
                 this.listaEspejoDoble.push(user);
               } else {
+                user['CLAVE_MOVIMIENTO'] = '01';
                 this.listaEspejo.push(user);
               }
               this.tempRFC = documento['RFC'];
@@ -264,21 +266,18 @@ export class ReportesComponent implements OnInit {
           }
           if (this.lista02.length > 0) {
             this.exportToExcel(this.lista02, '02');
-          }
-          if (this.lista0607.length > 0) {
-            this.exportToExcel(this.lista0607, '06-07');
-          }
-          if (this.lista12.length > 0) {
-            this.exportToExcel(this.lista12, '12');
-          }
-          if (this.lista16.length > 0) {
-            this.exportToExcel(this.lista16, '16');
-          }
-          this.obtenerPormociones(); */
+          } */
           if (this.listaEspejo.length > 0) {
             this.exportToExcelIngreso(this.listaEspejo, 'Espejo 01');
             this.exportToExcelIngreso(this.listaEspejoDoble, 'Espejo 02');
           }
+          /* if (this.lista12.length > 0) {
+            this.exportToExcel(this.lista12, '12');
+          }
+          if (this.lista16.length > 0) {
+            this.exportToExcel(this.lista16, '16');
+          } */
+          /* this.obtenerPromociones(); */ // Genera 0607, 11 y 10
         };
         reader.readAsBinaryString(datosExcel.target.files[0]);
       });
@@ -287,12 +286,12 @@ export class ReportesComponent implements OnInit {
     }
   }
 
-  obtenerPormociones() {
+  obtenerPromociones() {
     console.log(this.listaPromociones.length);
 
     this.lista11.forEach((documento: any) => {
       let encontrado = this.listaPromociones.some((promocion: any) =>
-      (promocion['RFC'] === documento['RFC']) && 
+        (promocion['RFC'] === documento['RFC']) &&
         (documento['MOTIVO_MOVIMIENTO'] === '42' || documento['MOTIVO_MOVIMIENTO'] === '52')
       );
 
@@ -303,11 +302,29 @@ export class ReportesComponent implements OnInit {
       }
     });
 
+    if (this.lista0607.length > 0) {
+      this.lista0607.forEach((documento: any) => {
+        let encontrado = this.listaPromociones.some((promocion: any) =>
+          (promocion['RFC'] === documento['RFC']) && (documento['MOTIVO_MOVIMIENTO'] === '37'));
+
+        if (encontrado) {
+          this.listaPromociones.push(documento);
+        } else {
+          this.lista0607Final.push(documento);
+        }
+      });
+    }
+
     if (this.listaPromociones.length > 0) {
       this.exportToExcel(this.listaPromociones, 'Promociones');
-      this.exportToExcel(this.lista11Final, '11');
     } else {
       console.log('No hay promociones');
+    }
+    if (this.lista11Final.length > 0) {
+      this.exportToExcel(this.lista11Final, '11');
+    }
+    if (this.lista0607Final.length > 0) {
+      this.exportToExcel(this.lista0607Final, '06-07');
     }
   }
 
@@ -413,11 +430,31 @@ export class ReportesComponent implements OnInit {
     this.spinner.hideLoadingIndicator();
   }
 
-  extraerFechaDocumento(fecha: string): string {
-    let fechaDocumento = fecha.split(' ');
-    let fechaDocumentoFinal = fechaDocumento[0].split('/');
-    return fechaDocumentoFinal[0] + '/' + fechaDocumentoFinal[1] + '/20' + fechaDocumentoFinal[2];
+  extraerFechaDocumento(fecha: any): string {
+    let finalDate = '';
+    if (typeof fecha === 'number') {
+      let newFecha = new Date((fecha - 25569) * 86400 * 1000); // Convertir número de serie de Excel a milisegundos
+      let dia = newFecha.getUTCDate().toString().padStart(2, '0');
+      let mes = (newFecha.getUTCMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript son 0-11
+      let año = newFecha.getUTCFullYear();
+      finalDate = `${dia}/${mes}/${año}`;
+    }
+    if (typeof fecha === 'string') {
+      let fechaDocumento = fecha.split(' ');
+      let fechaDocumentoFinal = fechaDocumento[0].split('/');
+      finalDate = fechaDocumentoFinal[0] + '/' + fechaDocumentoFinal[1] + '/20' + fechaDocumentoFinal[2];
+    }
+    return finalDate;
   }
+
+  convertirNumeroAFecha(numero: number): string {
+    let fecha = new Date((numero - 25569) * 86400 * 1000); // Convertir número de serie de Excel a milisegundos
+    let dia = fecha.getUTCDate();
+    let mes = fecha.getUTCMonth() + 1; // Los meses en JavaScript son 0-11
+    let año = fecha.getUTCFullYear();
+    return `${dia}/${mes}/${año}`;
+  }
+
 
   obtenerFechaSiguiente(fecha: string): string {
     let fechaDocumento = fecha.split('/');
