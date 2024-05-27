@@ -18,6 +18,7 @@ export class ReportesComponent implements OnInit {
   listaEspejo: any[] = [];
   listaEspejoDoble: any[] = [];
   listaEspejoDobleFinal: any[] = [];
+  listaEsppejo02: any[] = [];
   lista02: any[] = [];
   lista0607: any[] = [];
   lista11: any[] = [];
@@ -251,8 +252,23 @@ export class ReportesComponent implements OnInit {
                 FOLIO_RYS: 'x'
               };
               if (documento['RFC'] === this.tempRFC) {
+                let user2: any = {
+                  FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA'].toString()),
+                  SOSTENIMIENTO: 'FEDERAL',
+                  RFC: documento['RFC'],
+                  PLAZA: documento['CPZA'],
+                  CENTRO_TRABAJO: documento['CCT'],
+                  CLAVE_MOVIMIENTO: '02',
+                  MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
+                  FECHA_INICIO: this.extraerFechaDocumento(documento['FEC_INI']),
+                  FECHA_FIN: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN']),
+                  NIVEL_SUELDO: 3,
+                  FECHA_INGRESO_SUB: this.extraerFechaDocumento(documento['FEC_INI']),
+                  REINSTALACION_O_TRANSFERENCIA: 0
+                };
                 user['CLAVE_MOVIMIENTO'] = '02';
                 this.listaEspejoDoble.push(user);
+                this.listaEspejoDobleFinal.push(user2);
               } else {
                 user['CLAVE_MOVIMIENTO'] = '01';
                 this.listaEspejo.push(user);
@@ -261,23 +277,25 @@ export class ReportesComponent implements OnInit {
             }
           });
 
-          /* if (this.lista01.length > 0) {
+          if (this.lista01.length > 0) {
             this.exportToExcelIngreso(this.lista01, '01');
           }
           if (this.lista02.length > 0) {
             this.exportToExcel(this.lista02, '02');
-          } */
+          }
           if (this.listaEspejo.length > 0) {
             this.exportToExcelIngreso(this.listaEspejo, 'Espejo 01');
-            this.exportToExcelIngreso(this.listaEspejoDoble, 'Espejo 02');
           }
-          /* if (this.lista12.length > 0) {
+          if (this.listaEspejoDobleFinal.length > 0) {
+            this.exportToExcel(this.listaEspejoDobleFinal, 'Espejo 02');
+          }
+          if (this.lista12.length > 0) {
             this.exportToExcel(this.lista12, '12');
           }
           if (this.lista16.length > 0) {
             this.exportToExcel(this.lista16, '16');
-          } */
-          /* this.obtenerPromociones(); */ // Genera 0607, 11 y 10
+          }
+          this.obtenerPromociones();
         };
         reader.readAsBinaryString(datosExcel.target.files[0]);
       });
@@ -296,6 +314,7 @@ export class ReportesComponent implements OnInit {
       );
 
       if (encontrado) {
+        documento['CLAVE_MOVIMIENTO'] = '10';
         this.listaPromociones.push(documento);
       } else {
         this.lista11Final.push(documento);
@@ -305,9 +324,10 @@ export class ReportesComponent implements OnInit {
     if (this.lista0607.length > 0) {
       this.lista0607.forEach((documento: any) => {
         let encontrado = this.listaPromociones.some((promocion: any) =>
-          (promocion['RFC'] === documento['RFC']) && (documento['MOTIVO_MOVIMIENTO'] === '37'));
+          (promocion['RFC'] === documento['RFC']) && (documento['MOTIVO_MOVIMIENTO'] === '37' || documento['MOTIVO_MOVIMIENTO'] === '36'));
 
         if (encontrado) {
+          documento['CLAVE_MOVIMIENTO'] = '10';
           this.listaPromociones.push(documento);
         } else {
           this.lista0607Final.push(documento);
@@ -458,19 +478,26 @@ export class ReportesComponent implements OnInit {
 
   obtenerFechaSiguiente(fecha: string): string {
     let fechaDocumento = fecha.split('/');
-    if (fechaDocumento[1] === '12' && fechaDocumento[0] === '31') {
-      return '01/01/' + (parseInt(fechaDocumento[2]) + 1);
+    let dia = fechaDocumento[0];
+    let mes = fechaDocumento[1];
+    let anio = fechaDocumento[2];
+
+    if (mes === '12' && dia === '31') {
+      return '01/01/' + (parseInt(anio) + 1).toString().padStart(2, '0');
     }
-    if (fechaDocumento[0] === '31' && (fechaDocumento[1] === '01' || fechaDocumento[1] === '03' || fechaDocumento[1] === '05' || fechaDocumento[1] === '07' || fechaDocumento[1] === '08' || fechaDocumento[1] === '10')) {
-      return '01/' + (parseInt(fechaDocumento[1]) + 1) + '/' + fechaDocumento[2];
+    if (dia === '31' && (mes === '01' || mes === '03' || mes === '05' || mes === '07' || mes === '08' || mes === '10')) {
+      return '01/' + (parseInt(mes) + 1).toString().padStart(2, '0') + '/' + anio;
     }
-    if (fechaDocumento[0] === '30' && (fechaDocumento[1] === '04' || fechaDocumento[1] === '06' || fechaDocumento[1] === '09' || fechaDocumento[1] === '11')) {
-      return '01/' + (parseInt(fechaDocumento[1]) + 1) + '/' + fechaDocumento[2];
+    if (dia === '30' && (mes === '04' || mes === '06' || mes === '09' || mes === '11')) {
+      return '01/' + (parseInt(mes) + 1).toString().padStart(2, '0') + '/' + anio;
     }
-    if (fechaDocumento[0] === '28' && fechaDocumento[1] === '02') {
-      return '01/03/' + fechaDocumento[2];
+    if (dia === '28' && mes === '02') {
+      return '01/03/' + anio;
     }
-    return (parseInt(fechaDocumento[0]) + 1) + '/' + fechaDocumento[1] + '/' + fechaDocumento[2];
+
+    let nuevoDia = (parseInt(dia) + 1).toString().padStart(2, '0');
+    return nuevoDia + '/' + mes.padStart(2, '0') + '/' + anio;
   }
+
 
 }
