@@ -67,6 +67,11 @@
   margin-bottom: 1rem;
 }
 
+.accordion {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
 .toTop {
   margin-top: -7rem;
 }

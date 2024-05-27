@@ -4,12 +4,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #05828e;
 }
 
 .form {
     width: 30%;
     background-color: #fff;
-    box-shadow: 2px 2px 15px rgba(0, 9, 138, .5);
+    box-shadow: 5px 5px 15px #02626b;
     padding: 2rem 1rem;
     border-radius: 12px;
     font-weight: 200;  

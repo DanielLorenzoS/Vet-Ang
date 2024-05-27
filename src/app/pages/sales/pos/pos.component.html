@@ -1,46 +1,32 @@
 <div class="container">
     <div class="left">
-        <div class="buttons-container">
-            <button mat-raised-button [ngClass]="{'active': activeButton === 1}" (click)="activeButton = 1">Servicios
-                médicos</button>
-            <button mat-raised-button [ngClass]="{'active': activeButton === 2}"
-                (click)="activeButton = 2">Medicamentos</button>
-            <button mat-raised-button [ngClass]="{'active': activeButton === 3}"
-                (click)="activeButton = 3">Comida</button>
-            <button mat-raised-button [ngClass]="{'active': activeButton === 4}" (click)="activeButton = 4">Limpieza</button>
-            <button mat-raised-button [ngClass]="{'active': activeButton === 5}" (click)="activeButton = 5">Estética</button>
-        </div>
         <div class="input-container">
-            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 1">
-                <mat-label>Buscar servicio médico</mat-label>
+            <mat-form-field class="input" appearance="outline" color="accent">
+                <mat-label>Buscar</mat-label>
                 <input matInput formControlName="search" placeholder="Buscar servicio médico">
             </mat-form-field>
-            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 2">
-                <mat-label>Buscar medicamento</mat-label>
-                <input matInput formControlName="search" placeholder="Buscar medicamento">
-            </mat-form-field>
-            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 3">
-                <mat-label>Buscar comida</mat-label>
-                <input matInput formControlName="search" placeholder="Buscar comida">
-            </mat-form-field>
-            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 4">
-                <mat-label>Buscar producto de limpieza</mat-label>
-                <input matInput formControlName="search" placeholder="Buscar producto de limpieza">
-            </mat-form-field>
-            <mat-form-field class="input" appearance="outline" color="accent" *ngIf="activeButton === 5">
-                <mat-label>Buscar servicio de estética</mat-label>
-                <input matInput formControlName="search" placeholder="Buscar servicio de estética">
-            </mat-form-field>
+            <button mat-raised-button class="button-search active">
+                <mat-icon>search</mat-icon>
+            </button>
         </div>
-        <div class="products-container">
-            <div class="product" *ngFor="let product of products">
-                <img src="../../../assets/kira.jpeg" alt="product image">
-                <div class="product-info">
-                    <h3>{{ product.name }}</h3>
-                    <p>{{ product.price | currency }}</p>
-                    <button mat-raised-button>Agregar</button>
+        <div class="products-section">
+            <mat-accordion *ngIf="activeButton === 1" class="products-container">
+                <div class="individual-panel" *ngFor="let product of products">
+                    <mat-expansion-panel hideToggle="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <h3>{{ product.name }}</h3>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <p>{{ product.price | currency }}</p>
+                                <mat-icon>category</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <img src="../../../assets/kira.jpeg" alt="product image">
+                    </mat-expansion-panel>
+                    <button mat-raised-button class="active" style="font-size: 1rem; height: 90%;margin: auto;">Agregar</button>
                 </div>
-            </div>
+            </mat-accordion>
         </div>
     </div>
     <div class="right">
@@ -60,11 +46,13 @@
                 <p>{{ total | currency }}</p>
             </div>
             <div class="payment">
-                <button mat-raised-button class="payment-button" [ngClass]="{'payment-button-active': activePaymentButton === 1}" (click)="activePaymentButton = 1">
+                <button mat-raised-button class="payment-button"
+                    [ngClass]="{'payment-button-active': activePaymentButton === 1}" (click)="activePaymentButton = 1">
                     <mat-icon>payments</mat-icon>
                     <span>Efectivo</span>
                 </button>
-                <button mat-raised-button class="payment-button" [ngClass]="{'payment-button-active': activePaymentButton === 2}" (click)="activePaymentButton = 2">
+                <button mat-raised-button class="payment-button"
+                    [ngClass]="{'payment-button-active': activePaymentButton === 2}" (click)="activePaymentButton = 2">
                     <mat-icon>credit_card</mat-icon>
                     <span>Tarjeta</span>
                 </button>
