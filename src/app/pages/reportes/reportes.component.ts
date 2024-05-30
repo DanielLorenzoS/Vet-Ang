@@ -210,6 +210,16 @@ export class ReportesComponent implements OnInit {
               this.lista16.push(user);
             }
             if (documento['OPERACION'].toString().startsWith('22') || documento['OPERACION'].toString().startsWith('24') || documento['OPERACION'].toString().startsWith('25')) {
+              let initial;
+              if (documento['OPERACION'].toString().startsWith('22')) {
+                initial = '48';
+              }
+              if (documento['OPERACION'].toString().startsWith('24')) {
+                initial = '14';
+              }
+              if (documento['OPERACION'].toString().startsWith('25')) {
+                initial = '15';
+              }
               let user: any = {
                 FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA'].toString()),
                 SOSTENIMIENTO: 'FEDERAL',
@@ -236,13 +246,13 @@ export class ReportesComponent implements OnInit {
                 MUNICIPIO: 'x',
                 LOCALIDAD: 'x',
                 COLONIA: 'x',
-                CLAVE_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
+                CLAVE_MOVIMIENTO: '01',
                 MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
                 ING_GOBIERNO: this.extraerFechaDocumento(documento['FEC_INI']),
                 ING_SEP: this.extraerFechaDocumento(documento['FEC_INI']),
                 ING_RAMA_SUBSISTEMA: this.extraerFechaDocumento(documento['FEC_INI']),
                 REINSTALACION_O_TRANSFERENCIA: 0,
-                CLAVE_DE_COBRO: documento['CPZA'],
+                CLAVE_DE_COBRO: initial + documento['CPZA'].substring(2),
                 NIVEL_SUELDO: 3,
                 FECHA_INICIO: this.extraerFechaDocumento(documento['FEC_INI']),
                 FECHA_FIN: (!documento['FEC_FIN']) ? lastDate : this.extraerFechaDocumento(documento['FEC_FIN']),
@@ -256,7 +266,7 @@ export class ReportesComponent implements OnInit {
                   FECHA_DOCUMENTO: this.extraerFechaDocumento(documento['FECHA'].toString()),
                   SOSTENIMIENTO: 'FEDERAL',
                   RFC: documento['RFC'],
-                  PLAZA: documento['CPZA'],
+                  PLAZA: initial + documento['CPZA'].substring(2),
                   CENTRO_TRABAJO: documento['CCT'],
                   CLAVE_MOVIMIENTO: '02',
                   MOTIVO_MOVIMIENTO: documento['OPERACION'].toString().substring(0, 2),
@@ -277,7 +287,7 @@ export class ReportesComponent implements OnInit {
             }
           });
 
-          if (this.lista01.length > 0) {
+          /* if (this.lista01.length > 0) {
             this.exportToExcelIngreso(this.lista01, '01');
           }
           if (this.lista02.length > 0) {
@@ -295,7 +305,14 @@ export class ReportesComponent implements OnInit {
           if (this.lista16.length > 0) {
             this.exportToExcel(this.lista16, '16');
           }
-          this.obtenerPromociones();
+          this.obtenerPromociones(); */
+
+          if (this.listaEspejo.length > 0) {
+            this.exportToExcelIngreso(this.listaEspejo, 'Espejo 01');
+          }
+          if (this.listaEspejoDobleFinal.length > 0) {
+            this.exportToExcel(this.listaEspejoDobleFinal, 'Espejo 02');
+          }
         };
         reader.readAsBinaryString(datosExcel.target.files[0]);
       });
