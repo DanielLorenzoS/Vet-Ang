@@ -1,10 +1,34 @@
 <div class="container">
     <div class="form">
-        <div class="back" (click)="goBack()">
-            <span>Volver</span>
-        </div>
         <h1 class="title">Agregar cliente</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="newclientForm">
+
+            <div class="form-group">
+                <label for="username">Nombre(s) del cliente</label>
+                <input class="input" type="username" id="username" name="username" formControlName="username"
+                    placeholder="Nombre del cliente" required>
+                <mat-error
+                    *ngIf="newclientForm.get('username')?.touched && newclientForm.get('username')?.errors?.['required']">El
+                    usuario es requerido</mat-error>
+                <mat-error *ngIf="newclientForm.get('username')?.errors?.['minlength']">Ingresa más de 6
+                    caracteres</mat-error>
+                <mat-error *ngIf="newclientForm.get('username')?.errors?.['pattern']">No ingreses caracteres inválidos o
+                    espacios</mat-error>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname">Apellidos del cliente</label>
+                <input class="input" type="text" id="lastname" name="lastname" formControlName="lastname"
+                    placeholder="Apellido del cliente" required>
+                <mat-error
+                    *ngIf="newclientForm.get('lastname')?.touched && newclientForm.get('lastname')?.errors?.['required']">El
+                    apellido es requerido</mat-error>
+                <mat-error *ngIf="newclientForm.get('lastname')?.errors?.['minlength']">Ingresa más de 6
+                    caracteres</mat-error>
+                <mat-error *ngIf="newclientForm.get('lastname')?.errors?.['pattern']">No ingreses caracteres inválidos o
+                    espacios</mat-error>
+            </div>
+
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
                 <input class="input" type="email" id="email" name="email" formControlName="email"
@@ -58,18 +82,6 @@
                 <mat-error *ngIf="newclientForm.get('street')?.errors?.['pattern']">Ingresa una calle válida</mat-error>
             </div>
 
-            <div class="form-group">
-                <label for="username">Nombre del cliente</label>
-                <input class="input" type="username" id="username" name="username" formControlName="username"
-                    placeholder="Nombre del cliente" required>
-                <mat-error
-                    *ngIf="newclientForm.get('username')?.touched && newclientForm.get('username')?.errors?.['required']">El
-                    usuario es requerido</mat-error>
-                <mat-error *ngIf="newclientForm.get('username')?.errors?.['minlength']">Ingresa más de 6
-                    caracteres</mat-error>
-                <mat-error *ngIf="newclientForm.get('username')?.errors?.['pattern']">No ingreses caracteres inválidos o
-                    espacios</mat-error>
-            </div>
             <div class="btnContainer">
                 <button [disabled]="!newclientForm.valid"
                     [ngClass]="{'btnSubmit': newclientForm.valid, 'btnDisabled': !newclientForm.valid}"

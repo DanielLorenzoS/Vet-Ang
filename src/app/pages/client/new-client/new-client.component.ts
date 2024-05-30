@@ -46,6 +46,7 @@ export class NewClientComponent implements OnInit {
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/), Validators.minLength(6)]],
+      lastname: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]], // Corregido
       city: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]], // Corregido
       municipality: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]], // Corregido
       street: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]], // Corregido
@@ -162,7 +163,7 @@ export class NewClientComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['dashboard/client']);
+    this.router.navigate(['dashboard/clients']);
   }
 }
 

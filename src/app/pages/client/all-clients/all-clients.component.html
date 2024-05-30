@@ -14,12 +14,14 @@
                         <mat-option value="email">Correo electrónico</mat-option>
                         <mat-option value="phone">Celular</mat-option>
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
                 <div class="buttons">
                     <button mat-raised-button type="submit" color="primary" [disabled]="isSearchDisabled()"
-                        [ngClass]="isSearchDisabled() ? 'disabled' : 'submit'">Buscar cliente</button>
-                    <button mat-raised-button color="warn" [disabled]="isSearchDisabled()"
-                        class="reset" type="reset" (click)="resetForm()">Limpiar</button>
+                        (click)="searchClient()" [ngClass]="isSearchDisabled() ? 'disabled' : 'submit'">
+                        Buscar cliente
+                    </button>
+                    <button mat-raised-button color="warn" [disabled]="isSearchDisabled()" class="reset" type="reset"
+                        (click)="resetForm()">Limpiar</button>
                 </div>
             </form>
         </div>
@@ -66,7 +68,7 @@
                             <mat-icon class="sort-icon" (click)="sortData('municipality')">unfold_more</mat-icon>
                         </div>
                     </th>
-                    <td mat-cell *matCellDef="let usuario">{{ usuario.municipality }}, 
+                    <td mat-cell *matCellDef="let usuario">{{ usuario.municipality }},
                         {{ usuario.street }} {{ usuario.number }}</td>
                 </ng-container>
 

@@ -136,6 +136,7 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   searchClient() {
+    console.log(this.searchForm.value);
     this.getClients(this.params);
   }
 
