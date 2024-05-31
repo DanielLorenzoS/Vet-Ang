@@ -4,15 +4,15 @@
         <form (ngSubmit)="onSubmit()" [formGroup]="newclientForm">
 
             <div class="form-group">
-                <label for="username">Nombre(s) del cliente</label>
-                <input class="input" type="username" id="username" name="username" formControlName="username"
+                <label for="name">Nombre(s) del cliente</label>
+                <input class="input" type="name" id="name" name="name" formControlName="name"
                     placeholder="Nombre del cliente" required>
                 <mat-error
-                    *ngIf="newclientForm.get('username')?.touched && newclientForm.get('username')?.errors?.['required']">El
+                    *ngIf="newclientForm.get('name')?.touched && newclientForm.get('name')?.errors?.['required']">El
                     usuario es requerido</mat-error>
-                <mat-error *ngIf="newclientForm.get('username')?.errors?.['minlength']">Ingresa más de 6
+                <mat-error *ngIf="newclientForm.get('name')?.errors?.['minlength']">Ingresa más de 6
                     caracteres</mat-error>
-                <mat-error *ngIf="newclientForm.get('username')?.errors?.['pattern']">No ingreses caracteres inválidos o
+                <mat-error *ngIf="newclientForm.get('name')?.errors?.['pattern']">No ingreses caracteres inválidos o
                     espacios</mat-error>
             </div>
 
@@ -82,10 +82,20 @@
                 <mat-error *ngIf="newclientForm.get('street')?.errors?.['pattern']">Ingresa una calle válida</mat-error>
             </div>
 
+            <div class="form-group">
+                <label for="number">Número</label>
+                <input class="input" type="text" id="number" name="number" formControlName="number" placeholder="Número"
+                    required>
+                <mat-error
+                    *ngIf="newclientForm.get('number')?.touched && newclientForm.get('number')?.errors?.['required']">El
+                    número es requerido</mat-error>
+                <mat-error *ngIf="newclientForm.get('number')?.errors?.['pattern']">Ingresa un número válido</mat-error>
+            </div>
+
             <div class="btnContainer">
                 <button [disabled]="!newclientForm.valid"
                     [ngClass]="{'btnSubmit': newclientForm.valid, 'btnDisabled': !newclientForm.valid}"
-                    type="submit">Agregar cliente</button>
+                    type="submit" (click)="onSubmit()">Agregar cliente</button>
                 <button class="btnCancel" type="button" (click)="goBack()">Cancelar</button>
             </div>
         </form>

@@ -194,10 +194,6 @@ export class AllClientsComponent implements AfterViewInit, OnInit {
   }
 
   goNewClient() {
-    this.router.navigate(['dashboard/client'])
-  }
-
-  goBack() {
-    this.router.navigate(['dashboard']);
+    this.router.navigate(['dashboard/addClient'])
   }
 }

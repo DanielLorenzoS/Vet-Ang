@@ -21,7 +21,7 @@
 
 form {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 15%);
     grid-gap: 1rem;
     padding: 1rem;
 }
@@ -37,9 +37,13 @@ form {
 }
 
 .form-group:nth-child(5),
-.form-group:nth-child(6),
-.form-group:nth-child(7) {
+.form-group:nth-child(6) {
     grid-column: span 2;
+}
+
+.form-group:nth-child(7),
+.form-group:nth-child(8) {
+    grid-column: span 1;
 }
 
 
@@ -87,7 +91,7 @@ form {
     cursor: pointer;
     outline: none;
     transition: all 0.2s ease-in-out;
-    width: 25%;
+    width: 30%;
 }
 
 .btnSubmit {
@@ -126,7 +130,7 @@ form {
     cursor: pointer;
     outline: none;
     transition: all 0.2s ease-in-out;
-    width: 25%;
+    width: 30%;
 }
 
 

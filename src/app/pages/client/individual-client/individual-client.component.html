@@ -24,8 +24,8 @@
 
 
             <div class="table-container">
-                <h4 *ngIf="pets.length === 0">{{ user.name }} no tiene mascotas registradas</h4>
-                <div *ngIf="pets.length > 0">
+                <h4 *ngIf="pets === undefined">{{ user.name }} no tiene mascotas registradas</h4>
+                <div *ngIf="pets != undefined">
                     <table mat-table [dataSource]="pets" class="mat-elevation-z8">
                         <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -96,8 +96,8 @@
                 <div class="text lists">
                     <div class="container-lists">
                         <div class="table-container table-bills">
-                            <h4 *ngIf="bills.length === 0">{{ user.name }} no tiene facturas registradas</h4>
-                            <div *ngIf="bills.length > 0">
+                            <h4 *ngIf="bills === undefined">{{ user.name }} no tiene facturas registradas</h4>
+                            <div *ngIf="bills != undefined">
                                 <table mat-table [dataSource]="bills" class="mat-elevation-z8 table-bills">
                                     <ng-container matColumnDef="concept">
                                         <th mat-header-cell *matHeaderCellDef> Concepto </th>

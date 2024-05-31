@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from './login.service';
+import User from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -84,26 +85,14 @@ export class UserService {
     return this.http.get(`${this.url}/user/${id}`);
   }
 
-  createClient(user: any) {
+  createClient(user: User) {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    user.createdAt = `${day}-${month}-${year}`;
 
-    const currentDate = new Date();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = currentDate.getDate().toString().padStart(2, '0');
-    const year = currentDate.getFullYear();
-
-    let date: string = `${day}-${month}-${year}`;
-
-    const userData = {
-      email: user.email,
-      phone: user.phone,
-      direction: user.city + '  ' + user.municipality + '  ' + user.street,
-      username: user.username,
-      password: 'passwordClient',
-      createdAt: date,
-      roles: ["CLIENT"]
-    }
-
-    return this.http.post(`${this.url}/createuser`, userData, { headers: this.getHeadersViaCookie() });
+    return this.http.post(`${this.url}/user`, user);
   }
 
   updateUser(userData: any) {
