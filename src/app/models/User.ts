@@ -13,4 +13,5 @@ export default interface User {
     lastName: string;
     enabled: boolean;
     createdAt: string;
+    idRole: number
 }

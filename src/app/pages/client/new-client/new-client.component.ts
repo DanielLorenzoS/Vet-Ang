@@ -62,125 +62,48 @@ export class NewClientComponent implements OnInit {
     return `${day}-${month}-${year}`;
   }
 
-  async onSubmit(): Promise<void> {
-    const observables = [
-      this.verifyUsernameExists(),
-      this.verifyEmailExists(),
-      this.verifyPhoneExists()
-    ];
-
-    forkJoin(observables).subscribe(results => {
-      const [usernameExists, emailExists, phoneExists] = results;
-      if (usernameExists) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El usuario ya existe',
-          showConfirmButton: false,
-          timer: 2000
-        });
-      }
-      if (emailExists) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El correo ya existe',
-          showConfirmButton: false,
-          timer: 2000
-        });
-      }
-      if (phoneExists) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El teléfono ya existe',
-          showConfirmButton: false,
-          timer: 2000
-        });
-      }
-
-
-      if (!usernameExists && !emailExists && !phoneExists) {
-        this.loadingIndicatorService.showLoadingIndicator();
-        let user: User = {
-          email: this.newclientForm.value.email,
-          phone: this.newclientForm.value.phone,
-          name: this.newclientForm.value.name,
-          lastName: this.newclientForm.value.lastname,
-          city: this.newclientForm.value.city,
-          municipality: this.newclientForm.value.municipality,
-          street: this.newclientForm.value.street,
-          number: this.newclientForm.value.number,
-          password: '',
-          enabled: true,
-          createdAt: '',
-        };
-        this.userService.createClient(user).subscribe(
-          (response: any) => {
-            this.loadingIndicatorService.hideLoadingIndicator();
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Cliente agregado con éxito',
-              showConfirmButton: false,
-              timer: 3000
-            });
-            this.router.navigate(['/dashboard/client/' + response['id']]);
-          },
-          (error: any) => {
-            this.loadingIndicatorService.hideLoadingIndicator();
-            console.log('error ', error);
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'Error al agregar al cliente',
-              showConfirmButton: false,
-              timer: 2000
-            });
+  onSubmit(): void {
+    if (this.newclientForm.valid) {
+      this.loadingIndicatorService.showLoadingIndicator();
+      let user: User = {
+        email: this.newclientForm.value.email,
+        phone: this.newclientForm.value.phone,
+        name: this.newclientForm.value.name,
+        lastName: this.newclientForm.value.lastname,
+        city: this.newclientForm.value.city,
+        municipality: this.newclientForm.value.municipality,
+        street: this.newclientForm.value.street,
+        number: this.newclientForm.value.number,
+        password: '',
+        enabled: true,
+        createdAt: '',
+        idRole: 2
+      };
+      this.userService.createClient(user).subscribe(
+        (response: any) => {
+          this.loadingIndicatorService.hideLoadingIndicator();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cliente agregado con éxito',
+            showConfirmButton: false,
+            timer: 3000
           });
-      }
+          this.router.navigate(['/dashboard/client/' + response['id']]);
+        },
+        (error: any) => {
+          this.loadingIndicatorService.hideLoadingIndicator();
+          console.log('error ', error);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error al agregar al cliente',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        });
     }
-    );
-  }
 
-
-  verifyUsernameExists(): Observable<boolean> {
-    return this.userService.getUserByUsername(this.newclientForm.value.username).pipe(
-      map(response => {
-        console.log('username ' + response);
-        return response != null;
-      }),
-      catchError(error => {
-        console.log('error ', error);
-        return of(false);
-      })
-    );
-  }
-
-  verifyEmailExists(): Observable<boolean> {
-    return this.userService.getUserByEmail(this.newclientForm.value.email).pipe(
-      map(response => {
-        console.log('email ' + response);
-        return response != null;
-      }),
-      catchError(error => {
-        console.log('error ', error);
-        return of(false);
-      })
-    );
-  }
-
-  verifyPhoneExists(): Observable<boolean> {
-    return this.userService.getUserByPhone(this.newclientForm.value.phone).pipe(
-      map(response => {
-        console.log('phone ' + response);
-        return response != null;
-      }),
-      catchError(error => {
-        console.log('error ', error);
-        return of(false);
-      })
-    );
   }
 
   goBack() {
