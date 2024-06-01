@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, catchError, forkJoin, map, of } from 'rxjs';
+import User from 'src/app/models/User';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
@@ -18,10 +19,11 @@ export class EditClientComponent implements OnInit {
   usernameExists: boolean = false;
   emailExists: boolean = false;
   phoneExists: boolean = false;
+  clientToEdit!: User;
 
   constructor(
-    public dialogRef: MatDialogRef<EditClientComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EditClientComponent>,
     private router: Router,
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -40,20 +42,14 @@ export class EditClientComponent implements OnInit {
     this.spinner.showLoadingIndicator();
     this.editClientForm = this.initializeForm();
     this.getClientById();
-    console.log('data ', this.data.user.username);
+    this.dialogRef.updateSize('80%', '70%');
   }
 
   getClientById(): void {
     this.userService.getUserById(this.data.user.id).subscribe(
       (response: any) => {
-        console.log('response ', response);
+        this.clientToEdit = response;
         this.editClientForm.patchValue(response);
-        response.address = response.address.split('  ', 3);
-        this.editClientForm.patchValue({
-          city: response.address[0],
-          municipality: response.address[1],
-          street: response.address[2]
-        });
         this.spinner.hideLoadingIndicator();
       },
       (error: any) => {
@@ -69,7 +65,7 @@ export class EditClientComponent implements OnInit {
 
   initializeForm(): FormGroup {
     return this.formBuilder.group({
-      email: ['Cargando...', [Validators.required, Validators.email, Validators.pattern( /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
+      email: ['Cargando...', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]],
       phone: ['Cargando...', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       name: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
       lastName: ['Cargando...', [Validators.required, Validators.pattern(/^[a-zA-Z0-9áéíóúÁÉÍÓÚ\s]+$/)]],
@@ -80,121 +76,39 @@ export class EditClientComponent implements OnInit {
     });
   }
 
-  async onSubmit(): Promise<void> {
-    const observables = [
-      this.verifyUsernameExists(),
-      this.verifyEmailExists(),
-      this.verifyPhoneExists()
-    ];
+  onSubmit() {
+    if (this.editClientForm.valid) {
+      this.spinner.showLoadingIndicator();
 
-    let obs: boolean = false;
+      this.clientToEdit.name = this.editClientForm.value.name;
+      this.clientToEdit.lastName = this.editClientForm.value.lastName;
+      this.clientToEdit.email = this.editClientForm.value.email;
+      this.clientToEdit.phone = this.editClientForm.value.phone;
+      this.clientToEdit.municipality = this.editClientForm.value.municipality;
+      this.clientToEdit.city = this.editClientForm.value.city;
+      this.clientToEdit.street = this.editClientForm.value.street;
+      this.clientToEdit.number = this.editClientForm.value.number;
 
-    forkJoin(observables).subscribe(results => {
-      const [usernameExists, emailExists, phoneExists] = results;
-      if (usernameExists && this.editClientForm.value.username != this.data.user.username) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El usuario ya existe',
-          showConfirmButton: false,
-          timer: 2000
-        });
-        obs = true;
-      }
-      if (emailExists && this.editClientForm.value.email != this.data.user.email) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El correo ya existe',
-          showConfirmButton: false,
-          timer: 2000
-        });
-        obs = true;
-      }
-      if (phoneExists && this.editClientForm.value.phone != this.data.user.phone) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El teléfono ya existe',
-          showConfirmButton: false,
-          timer: 2000
-        });
-        obs = true;
-      }
-
-
-      if (!obs) {
-        console.log('editClientForm ', this.editClientForm.value);
-        this.spinner.showLoadingIndicator();
-        let userToEdit = {
-          id: this.data.user.id,
-          username: this.editClientForm.value.username,
-          email: this.editClientForm.value.email,
-          phone: this.editClientForm.value.phone,
-          address: this.editClientForm.value.city + '  ' + this.editClientForm.value.municipality + '  ' + this.editClientForm.value.street,
-        }
-        console.log(userToEdit);
-        this.userService.updateUser(userToEdit).subscribe(
-          (res: any) => {
-            this.spinner.hideLoadingIndicator();
-            console.log(res);
-            Swal.fire({
-              icon: 'success',
-              title: 'Cambios guardados',
-              showConfirmButton: false,
-              timer: 1000
-            })
-            this.dialogRef.close();
-            this.router.navigate([`/dashboard/indClient/${userToEdit.username}`]);
-          }
-        ), (err: any) => {
+      this.userService.updateUser(this.clientToEdit).subscribe(
+        (res: any) => {
           this.spinner.hideLoadingIndicator();
-          console.log('error al actualizar el usuario');
           Swal.fire({
-            icon: 'error',
-            text: 'No se pudieron guardar los cambios',
+            icon: 'success',
+            title: 'Cambios guardados',
+            showConfirmButton: false,
+            timer: 1000
           })
+          this.dialogRef.close();
         }
+      ), (err: any) => {
+        this.spinner.hideLoadingIndicator();
+        Swal.fire({
+          icon: 'error',
+          text: 'No se pudieron guardar los cambios',
+        })
+
       }
     }
-    );
-  }
-
-
-  verifyUsernameExists(): Observable<boolean> {
-    return this.userService.getUserByUsername(this.editClientForm.value.username).pipe(
-      map(response => {
-        return response != null;
-      }),
-      catchError(error => {
-        console.log('error ', error);
-        return of(false);
-      })
-    );
-  }
-
-  verifyEmailExists(): Observable<boolean> {
-    return this.userService.getUserByEmail(this.editClientForm.value.email).pipe(
-      map(response => {
-        return response != null;
-      }),
-      catchError(error => {
-        console.log('error ', error);
-        return of(false);
-      })
-    );
-  }
-
-  verifyPhoneExists(): Observable<boolean> {
-    return this.userService.getUserByPhone(this.editClientForm.value.phone).pipe(
-      map(response => {
-        return response != null;
-      }),
-      catchError(error => {
-        console.log('error ', error);
-        return of(false);
-      })
-    );
   }
 
 }

@@ -1,10 +1,37 @@
 <div class="container">
     <div class="form">
-        <div class="back" (click)="onCancelClick()">
+        <!-- <div class="back" (click)="onCancelClick()">
             <mat-icon>cancel</mat-icon>
-        </div>
+        </div> -->
         <h1 class="title">Editar cliente</h1>
         <form (ngSubmit)="onSubmit()" [formGroup]="editClientForm">
+
+            <div class="form-group">
+                <label for="name">Nombre(s) del cliente</label>
+                <input class="input" type="name" id="name" name="name" formControlName="name"
+                    placeholder="Nombre del cliente" required>
+                <mat-error
+                    *ngIf="editClientForm.get('name')?.touched && editClientForm.get('name')?.errors?.['required']">El
+                    usuario es requerido</mat-error>
+                <mat-error *ngIf="editClientForm.get('name')?.errors?.['minlength']">Ingresa más de 6
+                    caracteres</mat-error>
+                <mat-error *ngIf="editClientForm.get('name')?.errors?.['pattern']">No ingreses caracteres inválidos o
+                    espacios</mat-error>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Apellidos del cliente</label>
+                <input class="input" type="text" id="lastName" name="lastName" formControlName="lastName"
+                    placeholder="Apellido del cliente" required>
+                <mat-error
+                    *ngIf="editClientForm.get('lastName')?.touched && editClientForm.get('lastName')?.errors?.['required']">El
+                    apellido es requerido</mat-error>
+                <mat-error *ngIf="editClientForm.get('lastName')?.errors?.['minlength']">Ingresa más de 6
+                    caracteres</mat-error>
+                <mat-error *ngIf="editClientForm.get('lastName')?.errors?.['pattern']">No ingreses caracteres inválidos o
+                    espacios</mat-error>
+            </div>
+
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
                 <input class="input" type="email" id="email" name="email" formControlName="email"
@@ -26,16 +53,14 @@
                 <mat-error *ngIf="editClientForm.get('phone')?.errors?.['pattern']">Ingresa un número de teléfono
                     válido</mat-error>
                 <mat-error *ngIf="editClientForm.get('phone')?.errors?.['minlength']">Ingresa 10 dígitos</mat-error>
-                <mat-error *ngIf="editClientForm.get('phone')?.errors?.['maxlength']">Ingresa sólo 10
-                    dígitos</mat-error>
+                <mat-error *ngIf="editClientForm.get('phone')?.errors?.['maxlength']">Ingresa sólo 10 dígitos</mat-error>
             </div>
 
             <div class="form-group">
                 <label for="city">Ciudad</label>
                 <input class="input" type="text" id="city" name="city" formControlName="city" placeholder="Ciudad"
                     required>
-                <mat-error
-                    *ngIf="editClientForm.get('city')?.touched && editClientForm.get('city')?.errors?.['required']">La
+                <mat-error *ngIf="editClientForm.get('city')?.touched && editClientForm.get('city')?.errors?.['required']">La
                     ciudad es requerida</mat-error>
                 <mat-error *ngIf="editClientForm.get('city')?.errors?.['pattern']">Ingresa una ciudad válida</mat-error>
             </div>
@@ -47,8 +72,7 @@
                 <mat-error
                     *ngIf="editClientForm.get('municipality')?.touched && editClientForm.get('municipality')?.errors?.['required']">El
                     municipio es requerido</mat-error>
-                <mat-error *ngIf="editClientForm.get('municipality')?.errors?.['pattern']">Ingresa un municipio
-                    válido</mat-error>
+                <mat-error *ngIf="editClientForm.get('municipality')?.errors?.['pattern']">Ingresa un municipio válido</mat-error>
             </div>
 
             <div class="form-group calle">
@@ -58,51 +82,23 @@
                 <mat-error
                     *ngIf="editClientForm.get('street')?.touched && editClientForm.get('street')?.errors?.['required']">La
                     calle es requerida</mat-error>
-                <mat-error *ngIf="editClientForm.get('street')?.errors?.['pattern']">Ingresa una calle
-                    válida</mat-error>
+                <mat-error *ngIf="editClientForm.get('street')?.errors?.['pattern']">Ingresa una calle válida</mat-error>
             </div>
 
-            <div class="form-group numero">
+            <div class="form-group">
                 <label for="number">Número</label>
-                <input class="input" type="text" id="number" name="number" formControlName="number"
-                    placeholder="Número" required>
+                <input class="input" type="text" id="number" name="number" formControlName="number" placeholder="Número"
+                    required>
                 <mat-error
                     *ngIf="editClientForm.get('number')?.touched && editClientForm.get('number')?.errors?.['required']">El
                     número es requerido</mat-error>
-                <mat-error *ngIf="editClientForm.get('number')?.errors?.['pattern']">Ingresa un número
-                    válido</mat-error>
+                <mat-error *ngIf="editClientForm.get('number')?.errors?.['pattern']">Ingresa un número válido</mat-error>
             </div>
-
-            <div class="form-group">
-                <label for="name">Nombre del cliente</label>
-                <input class="input" type="name" id="name" name="name" formControlName="name"
-                    placeholder="Nombre del cliente" required>
-                <mat-error
-                    *ngIf="editClientForm.get('name')?.touched && editClientForm.get('name')?.errors?.['required']">El
-                    usuario es requerido</mat-error>
-                <mat-error *ngIf="editClientForm.get('name')?.errors?.['pattern']">No ingreses caracteres inválidos
-                    o
-                    espacios</mat-error>
-            </div>
-
-            <div class="form-group">
-                <label for="lastName">Apellidos del cliente</label>
-                <input class="input" type="lastName" id="lastName" name="lastName" formControlName="lastName"
-                    placeholder="Apellido del cliente" required>
-                <mat-error
-                    *ngIf="editClientForm.get('lastName')?.touched && editClientForm.get('lastName')?.errors?.['required']">El
-                    apellido es requerido</mat-error>
-                <mat-error *ngIf="editClientForm.get('lastName')?.errors?.['pattern']">No ingreses caracteres
-                    inválidos
-                    o
-                    espacios</mat-error>
-            </div>
-
 
             <div class="btnContainer">
                 <button [disabled]="!editClientForm.valid"
                     [ngClass]="{'btnSubmit': editClientForm.valid, 'btnDisabled': !editClientForm.valid}"
-                    type="submit">Actualizar</button>
+                    type="submit" (click)="onSubmit()">Actualizar</button>
                 <button class="btnCancel" type="button" (click)="onCancelClick()">Cancelar</button>
             </div>
         </form>
