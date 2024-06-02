@@ -74,6 +74,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { TodayComponent } from './pages/today/today.component';
 import { PaymentComponent } from './pages/sales/payment/payment.component';
 import { PosComponent } from './pages/sales/pos/pos.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import { PosComponent } from './pages/sales/pos/pos.component';
     MatDatepickerModule,
     MatDialogModule,
     MatExpansionModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   providers: [authInterceptorProviders, DatePipe, { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent]

@@ -61,28 +61,12 @@ export class UserService {
     return this.http.get(`${this.url}/user/filter`, { params: params });
   }
 
-  getUserByRole(role: string) {
-
-    return this.http.get(`${this.url}/roles/${role}`, { headers: this.getHeadersViaCookie() });
-  }
-
-  getUserByUsername(username: string) {
-
-    return this.http.get(`${this.url}/user/username/${username}`, { headers: this.getHeadersViaCookie() });
-  }
-
-  getUserByEmail(email: string) {
-
-    return this.http.get(`${this.url}/user/email/${email}`, { headers: this.getHeadersViaCookie() });
-  }
-
-  getUserByPhone(phone: string) {
-
-    return this.http.get(`${this.url}/user/phone/${phone}`, { headers: this.getHeadersViaCookie() });
-  }
-
   getUserById(id: number) {
     return this.http.get(`${this.url}/user/${id}`);
+  }
+
+  getAutoCompleteUsers(params: any) {
+    return this.http.get(`${this.url}/user/autocomplete`, { params: params });
   }
 
   createClient(user: User) {
@@ -101,6 +85,29 @@ export class UserService {
 
   deleteUser(id: number) {
     return this.http.delete(`${this.url}/user/${id}`);
+  }
+
+
+
+
+  getUserByRole(role: string) {
+
+    return this.http.get(`${this.url}/roles/${role}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getUserByUsername(username: string) {
+
+    return this.http.get(`${this.url}/user/username/${username}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getUserByEmail(email: string) {
+
+    return this.http.get(`${this.url}/user/email/${email}`, { headers: this.getHeadersViaCookie() });
+  }
+
+  getUserByPhone(phone: string) {
+
+    return this.http.get(`${this.url}/user/phone/${phone}`, { headers: this.getHeadersViaCookie() });
   }
 
   updateToEmployee(user: any) {

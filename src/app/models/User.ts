@@ -2,6 +2,7 @@ import { PetComponent } from "../pages/pet/pet/pet.component";
 import Bill from "./Bill";
 
 export default interface User {
+    id: number;
     email: string;
     phone: string;
     city: string;

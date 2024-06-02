@@ -66,6 +66,7 @@ export class NewClientComponent implements OnInit {
     if (this.newclientForm.valid) {
       this.loadingIndicatorService.showLoadingIndicator();
       let user: User = {
+        id: 0,
         email: this.newclientForm.value.email,
         phone: this.newclientForm.value.phone,
         name: this.newclientForm.value.name,

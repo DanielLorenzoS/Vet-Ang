@@ -1,6 +1,6 @@
 import User from "./User";
 
-interface Pet {
+export default interface Pet {
     id: number;
     name: string;
     lastName: string;
@@ -11,7 +11,7 @@ interface Pet {
     color: string;
     weight: number;
     size: string;
-    onRegister: Date;
-    user: User;
+    onRegister: string;
+    userId: User;
     healthRecords: any[];
 }
